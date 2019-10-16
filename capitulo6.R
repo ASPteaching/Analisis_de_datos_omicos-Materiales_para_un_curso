@@ -1,279 +1,337 @@
-### R code from vignette source 'capitulo6.rnw'
-### Encoding: UTF-8
+### R code from vignette source 'casoResuelto2.Rnw'
 
 ###################################################
-### code chunk number 1: losDatos (ACTUALIZADO)
+### code chunk number 1: getPackages
 ###################################################
-if (!require(BiocManager))  install.packages("BiocManager")
-if (!require(CCl4)) BiocManager::install("CCl4")
-if (!require(estrogen)) BiocManager::install("estrogen")
-if (!require(affy)) BiocManager::install("affy")
-if (!require(marray)) BiocManager::install("marray")
-if (!require(limma)) BiocManager::install("limma")
-
+if (!(require("estrogen", character.only=T))){
+    BiocManager::install("estrogen")
+    }
 
 
 ###################################################
-### code chunk number 2: leeDatos1colors
+### code chunk number 2: installBioC (eval = FALSE)
 ###################################################
+## source("http://bioconductor.org/biocLite.R")
+## biocLite("estrogen")
 
+
+###################################################
+### code chunk number 3: preparaDirectorios
+###################################################
+workingDir <-getwd()
+system("mkdir data")
+system("mkdir results")
+dataDir <-file.path(workingDir, "data")
+resultsDir <- file.path(workingDir, "results")
+setwd(workingDir)
+
+
+###################################################
+### code chunk number 4: fijaOpciones
+###################################################
+options(width=80)
+options(digits=5)
+
+
+###################################################
+### code chunk number 5: estrogenDir
+###################################################
 require(estrogen)
+estrogenDir <- system.file("extdata", package = "estrogen")
+print(estrogenDir)
+
+
+###################################################
+### code chunk number 6: copyData (eval = FALSE)
+###################################################
+## system(paste ("cp ", estrogenDir,"/* ./data", sep=""))
+
+
+###################################################
+### code chunk number 7: affybatch.create
+###################################################
+require(Biobase)
 require(affy)
-affyPath <- system.file("extdata", package = "estrogen")
-adfAffy = read.AnnotatedDataFrame("phenoData.txt", sep="",  path=affyPath)
-affyTargets = pData(adfAffy)
-affyTargets$filename = file.path(affyPath, row.names(affyTargets))
-affyRaw <- read.affybatch(affyTargets$filename, phenoData=adfAffy)
-# show(affyRaw)
-actualPath <- getwd()
-setwd(affyPath)
-allAffyRaw <- ReadAffy()
-setwd(actualPath)
+sampleInfo <- read.AnnotatedDataFrame(file.path(estrogenDir,"targLimma.txt"), 
+    header = TRUE, row.names = 1, sep="\t")
+fileNames <- pData(sampleInfo)$FileName
+rawData <- read.affybatch(filenames=file.path(estrogenDir,fileNames),
+                          phenoData=sampleInfo)
 
 
 ###################################################
-### code chunk number 3: leeDatos2colores
+### code chunk number 8: wrongaffybatch.create
 ###################################################
-require("limma")
-require("CCl4")
-dataPath = system.file("extdata", package="CCl4")
-adf = read.AnnotatedDataFrame("samplesInfo.txt", 
-    path=dataPath)
-#adf
-targets = pData(adf)
-targets$FileName = row.names(targets)
-RG <- read.maimages(targets, path=dataPath, source="genepix")
-attach(RG$targets)
-newNames <-paste(substr(Cy3,1,3),substr(Cy5,1,3),substr(FileName,10,12), sep="")
-colnames(RG$R)<-colnames(RG$G)<-colnames(RG$Rb)<-colnames(RG$Gb)<-rownames(RG$targets)<- newNames
-# show(RG)
+require(affy)
+setwd(estrogenDir)
+rawData.wrong <- ReadAffy()
+setwd(workingDir)
 
 
 ###################################################
-### code chunk number 4: plotHist
+### code chunk number 9: plotHist
 ###################################################
-affySampleNames <- rownames(pData(allAffyRaw))
-affyColores <- c(1,2,2,3,3,4,4,8,8)
-affyLineas <- c(1,2,2,2,2,3,3,3,3)
-hist(allAffyRaw, main="Signal distribution", col=affyColores, lty=affyLineas)
-legend (x="topright", legend=affySampleNames , col=affyColores, lty=affyLineas, cex=0.7)
+info <- data.frame(grupo=c(1,1,2,2,3,3,4,4))
+sampleNames <- pData(rawData)$Target
+hist(rawData, main="Signal distribution", col=info$grupo, lty=1:ncol(info))
+legend (x="topright", legend=sampleNames , col=info$grupo, lty=1:ncol(info))
 
 
 ###################################################
-### code chunk number 5: plotBoxplot
+### code chunk number 10: computeDeg
 ###################################################
-boxplot(allAffyRaw, main="Signal distribution", col=affyColores, las=2)
+deg<-AffyRNAdeg(rawData, log.it=T)
+summaryAffyRNAdeg(deg) 
+# plotAffyRNAdeg(deg)
+# legend (x="bottomright", legend=sampleNames, col=1:nrow(info), lty=1:nrow(info), cex=0.7)
 
 
 ###################################################
-### code chunk number 6: plotPCAdef
+### code chunk number 11: plotDeg (eval = FALSE)
 ###################################################
-plotPCA <- function ( X, labels=NULL, colors=NULL, dataDesc="", scale=FALSE)
-{
-  pcX<-prcomp(t(X), scale=scale) # o prcomp(t(X))
-  loads<- round(pcX$sdev^2/sum(pcX$sdev^2)*100,1)
-  xlab<-c(paste("PC1",loads[1],"%"))
-  ylab<-c(paste("PC2",loads[2],"%"))
-  if (is.null(colors)) colors=1
-  plot(pcX$x[,1:2],xlab=xlab,ylab=ylab, col=colors, 
-       xlim=c(min(pcX$x[,1])-10, max(pcX$x[,1])+10),
-       ylim=c(min(pcX$x[,2])-10, max(pcX$x[,2])+10),
-       )
-  text(pcX$x[,1],pcX$x[,2], labels, pos=3, cex=0.8)
-  title(paste("Plot of first 2 PCs for expressions in", dataDesc, sep=" "), cex=0.8)
-}
+## plotAffyRNAdeg(deg)
+## legend (x="bottomright", legend=sampleNames, col=1:nrow(info), lty=1:nrow(info), cex=0.7)
 
 
 ###################################################
-### code chunk number 7: tempNorm
+### code chunk number 12: boxPlot
 ###################################################
-if (!file.exists("allAffyNorm")){
-  allAffyNorm<- rma(allAffyRaw)
-  affyNorm <- rma(affyRaw)
-  save(allAffyNorm, affyNorm, file="affyNorm.Rda")
-}else{
-  load(file="affyNorm.Rda")
-}
+### boxplot
+boxplot(rawData, cex.axis=0.6, col=info$grupo, las=2, names=sampleNames)
 
 
 ###################################################
-### code chunk number 8: plotPCA2D
+### code chunk number 13: plotDendro
 ###################################################
-opt <- par(mfrow=c(2,1))
-plotPCA(exprs(allAffyNorm), labels=affySampleNames, dataDesc="PCA for all arrays\nincludes defective sample")
-plotPCA(exprs(affyNorm), labels=colnames(exprs(affyNorm)), dataDesc="PCA for all arrays")
-par(opt)
+### La muestras del mismo grupo deber\'ian agruparse juntas
+clust.euclid.average <- hclust(dist(t(exprs(rawData))),method="average")
+plclust(clust.euclid.average, labels=sampleNames, main="Hierarchical clustering of samples",  hang=-1)
+###
 
 
 ###################################################
-### code chunk number 9: plotDendro
+### code chunk number 14: affyQCReport (eval = FALSE)
 ###################################################
-clust.euclid.average <- hclust(dist(t(exprs(affyNorm))),method="average")
-plot(clust.euclid.average, labels=colnames(exprs(affyNorm)), main="Hierarchical clustering of samples",  hang=-1, cex=0.7)
+## stopifnot(require(affyQCReport))
+## QCReport(rawData,file=file.path(resultsDir,"QCReport.pdf"))
 
 
 ###################################################
-### code chunk number 10: plotDeg (ACTUALIZADO)
-###################################################
-
-### Esta opcion se ha desactivado, puesto que parece dar problemas.
-### El grafico de degradación ha caído en desuso porque los arrays modernos tienen sondas en todos o en la mayoría de los exones
-#
-# deg<-AffyRNAdeg(allAffyRaw, log.it=T)
-# colores<-c("red", rep("blue",8))
-# lineas <- c(1, rep(3,8))
-# plotAffyRNAdeg(deg, col=colores, lty=lineas)
-# legend (x="bottomleft", legend=rownames(pData(allAffyRaw)), col=colores, lty=lineas, cex=0.7)
-# 
-
-###################################################
-### code chunk number 11: affyPLM
+### code chunk number 15: affyPLM
 ###################################################
 stopifnot(require(affyPLM))
-Pset<- fitPLM(allAffyRaw)
+computePLM <- T
+if(computePLM){
+  Pset<- fitPLM(rawData)
+  save(Pset, file=file.path(dataDir,"PLM.Rda"))
+}else{
+  load (file=file.path(dataDir,"PLM.Rda"))
+}
 
 
 ###################################################
-### code chunk number 12: plotPLM (ACTUALIZADO)
+### code chunk number 16: plotRLE
 ###################################################
+RLE(Pset, main = "Relative Log Expression", names=sampleNames, las=2, col=info$grupo+1, cex.axis=0.6,ylim=c(-5,5))
 
-opt<- par(mfrow=c(2,1))
-RLE(Pset, main = "Relative Log Expression (RLE)", 
-    names=rownames(pData(allAffyRaw)), las=2, cex.axis=0.6)
-NUSE(Pset, main = "Normalized Unscaled Standard Errors (NUSE)",  
-     names=rownames(pData(allAffyRaw)), las=2, cex.axis=0.6)
+
+###################################################
+### code chunk number 17: plotNUSE
+###################################################
+NUSE(Pset, main = "Normalized Unscaled Standard Errors", las=2, names=sampleNames, las=2, col=info$grupo+1, cex.axis=0.6, ylim=c(0.5,1.5))
+
+
+###################################################
+### code chunk number 18: cleanTheHouse
+###################################################
+rm(Pset)
+gc()
+detach("package:affyPLM")
+
+
+###################################################
+### code chunk number 19: normalization.rma
+###################################################
+stopifnot(require(affy))
+normalize <- T
+if(normalize){
+  eset_rma <- rma(rawData)    
+  save(eset_rma, file=file.path(dataDir,"normalized.Rda"))
+}else{
+  load (file=file.path(dataDir,"normalized.Rda"))
+}
+
+
+###################################################
+### code chunk number 20: normBoxPlot
+###################################################
+boxplot(eset_rma,main="RMA", names=sampleNames, cex.axis=0.7, col=info$grupo+1,las=2)
+
+
+###################################################
+### code chunk number 21: compareNormalizations (eval = FALSE)
+###################################################
+## eset_mas5 <- mas5(rawData)  # Uses expresso (MAS 5.0 method) much slower than RMA!
+## stopifnot(require(gcrma))
+## eset_gcrma <- gcrma(rawData) # The 'library(gcrma)' needs to be loaded first.
+## stopifnot(require(plier))
+## eset_plier <- justPlier(rawData, normalize=T) # The 'library(plier)' needs to be loaded first.
+## compara <-data.frame(RMA=exprs(eset_rma)[,1], MAS5 =exprs(eset_mas5)[,1],
+##                     GCRMA=exprs(eset_gcrma)[,1], PLIER =exprs(eset_plier)[,1])
+## pairs(compara)
+
+
+###################################################
+### code chunk number 22: filtratge
+###################################################
+require(genefilter)
+filtrats <- nsFilter(eset_rma)
+class(filtrats)
+names(filtrats)
+dim(exprs(filtrats$eset))
+
+
+###################################################
+### code chunk number 23: matDesign1
+###################################################
+design.1<-matrix(
+c(1,1,0,0,0,0,0,0,
+  0,0,1,1,0,0,0,0,
+  0,0,0,0,1,1,0,0,
+  0,0,0,0,0,0,1,1),
+nrow=8,
+byrow=F)
+colnames(design.1)<-c("neg10h", "est10h", "neg48h", "est48h")
+rownames(design.1) <-  c("low10A", "low10B", "hi10A" , "hi10B",  "low48A", "low48B", "hi48A" , "hi48B") 
+print(design.1)
+
+
+###################################################
+### code chunk number 24: selectLimma
+###################################################
+require(Biobase)
+if (!exists("eset_rma"))  load(file.path(dataDir, "normalized.rda"))
+targets <- pData(eset_rma)
+stopifnot(require(limma))
+lev<-factor(targets$Target, levels=unique(targets$Target))
+design <-model.matrix(~0+lev)
+colnames(design)<-levels(lev)
+rownames(design) <-rownames(targets)
+print(design)
+
+
+###################################################
+### code chunk number 25: setContrasts
+###################################################
+cont.matrix <- makeContrasts (
+      Estro10=(est10h-neg10h),
+      Estro48=(est48h-neg48h),
+      Tiempo=(neg48h-neg10h),
+      levels=design)
+cont.matrix
+
+
+###################################################
+### code chunk number 26: linearmodelfit
+###################################################
+require(limma)
+fit<-lmFit(eset_rma, design)
+fit.main<-contrasts.fit(fit, cont.matrix)
+fit.main<-eBayes(fit.main)
+
+
+###################################################
+### code chunk number 27: casoResuelto2.Rnw:511-514
+###################################################
+topTabEstro10 <- topTable (fit.main, number=nrow(fit.main), coef="Estro10", adjust="fdr")
+topTabEstro48 <- topTable (fit.main, number=nrow(fit.main), coef="Estro48", adjust="fdr")
+topTabTiempo  <- topTable (fit.main, number=nrow(fit.main) , coef="Tiempo", adjust="fdr")
+
+
+###################################################
+### code chunk number 28: volcano1
+###################################################
+coefnum = 1
+opt <- par(cex.lab = 0.7)
+volcanoplot(fit.main, coef=coefnum, highlight=10, names=fit.main$ID, 
+            main=paste("Differentially expressed genes",colnames(cont.matrix)[coefnum], sep="\n"))
+abline(v=c(-1,1))
 par(opt)
 
-###############################################################
-### code chunk number 1: marrayPlots.Rnw:105-108 (ACTUALIZADO)
-###############################################################
 
-library(marray)
-data(swirl) 
-maPlate(swirl)<-maCompPlate(swirl,n=384) 
+###################################################
+### code chunk number 29: anota1
+###################################################
+require(hgu95av2.db)
+hgu95av2()
 
 
 ###################################################
-### code chunk number 2: marrayPlots.Rnw:128-131
+### code chunk number 30: genesEstro
 ###################################################
-
-Gcol<- maPalette(low="white", high="green",k=50) 
-Rcol<- maPalette(low="white", high="red", k=50) 
-RGcol<-maPalette(low="green", high="red", k=50) 
-
-
-###################################################
-### code chunk number 3: maImageGb
-###################################################
-
-tmp<-image(swirl[,3], xvar="maGb", subset=TRUE, col=Gcol,contours=FALSE, bar=FALSE) 
-
-
-###################################################
-### code chunk number 4: maImageRb
-###################################################
-tmp<-image(swirl[,3], xvar="maRb", subset=TRUE, col=Rcol, contours=FALSE, bar=FALSE) 
+top5 <-topTabEstro10$ID[1:5]
+cat("Usando mget\n")
+geneSymbol5.1 <- unlist(mget(top5, hgu95av2SYMBOL))
+geneSymbol5.1
+cat("Usando toTable\n")
+genesTable<- toTable(hgu95av2SYMBOL)
+rownames(genesTable) <-  genesTable$probe_id
+genesTable[top5, 2]
+cat("Usando getSYMBOL\n")
+require(annotate)
+geneSymbol5.3 <- getSYMBOL(top5, "hgu95av2.db")
+geneSymbol5.3
 
 
 ###################################################
-### code chunk number 5: maImageMraw1
+### code chunk number 31: decideTests.1
 ###################################################
-tmp<-image(swirl[,3], xvar="maM", bar=FALSE, main="Swirl array 93: image of pre--normalization M") 
-
-
-###################################################
-### code chunk number 6: maImageMraw2
-###################################################
-tmp<-image(swirl[,3], xvar="maM", subset=maTop(maM(swirl[,3]), h=0.10,
-l=0.10), col=RGcol, contours=FALSE, bar=FALSE,main="Swirl array 93:
-image of pre--normalization M for  10 %  tails")  
+stopifnot(require(annotate))
+anotPackage <- annotation(eset_rma)
+fit.Symbols <- getSYMBOL (rownames(fit.main), anotPackage)
+res<-decideTests(fit.main, method="separate", adjust.method="fdr", p.value=0.01)
 
 
 ###################################################
-### code chunk number 7: maImageSpotCol
+### code chunk number 32: resumeDecideTests
 ###################################################
-tmp<- image(swirl[,3], xvar="maSpotCol", bar=FALSE) 
-
-
-###################################################
-### code chunk number 8: maImagePrintTip
-###################################################
-tmp<- image(swirl[,3], xvar="maPrintTip", bar=FALSE) 
+sum.res.rows<-apply(abs(res),1,sum)
+res.selected<-res[sum.res.rows!=0,]
+print(summary(res))
 
 
 ###################################################
-### code chunk number 9: maImageControls
+### code chunk number 33: venn1
 ###################################################
-tmp<- image(swirl[,3], xvar="maControls",col=heat.colors(10),bar=FALSE) 
-
-
-###################################################
-### code chunk number 10: maImagePlate
-###################################################
-tmp<- image(swirl[,3], xvar="maPlate",bar=FALSE) 
+vennDiagram (res.selected[,1:3], main="Genes in common #1", cex=0.9)
 
 
 ###################################################
-### code chunk number 11: maBoxplot1pre
+### code chunk number 34: prepareData
 ###################################################
-boxplot(swirl[,3], xvar="maPrintTip", yvar="maM", main="Swirl array 93: pre--normalization") 
-
-
-###################################################
-### code chunk number 12: maBoxplot2pre
-###################################################
-boxplot(swirl, yvar="maM", main="Swirl arrays: pre--normalization") 
+probeNames<-rownames(res)
+probeNames.selected<-probeNames[sum.res.rows!=0]
+exprs2cluster <-exprs(eset_rma)[probeNames.selected,]
 
 
 ###################################################
-### code chunk number 13: marrayPlots.Rnw:343-344
+### code chunk number 35: plotHeatMap1
 ###################################################
-swirl.norm <- maNorm(swirl, norm="p")
-
-
-###################################################
-### code chunk number 14: maBoxplot1post
-###################################################
-boxplot(swirl.norm[,3], xvar="maPrintTip", yvar="maM",
-	main="Swirl array 93: post--normalization") 
-
-opt<- par(mfrow=c(1,2))
-boxplot(swirl, yvar="maM", main="Swirl arrays: pre--normalization") 
-boxplot(swirl.norm, yvar="maM", col="green", main="Swirl arrays: post--normalization")
-par(opt)
-
-###################################################
-### code chunk number 15: maBoxplot2post
-###################################################
-par(mfrow=c(1,1))
-boxplot(swirl.norm, yvar="maM", col="green", main="Swirl arrays: post--normalization") 
+color.map <- function(horas) { if (horas< 20) "yellow" else "red" }
+grupColors <- unlist(lapply(pData(eset_rma)$time.h, color.map))
+heatmap(exprs2cluster, col=rainbow(100), ColSideColors=grupColors, cexCol=0.9)
 
 
 ###################################################
-### code chunk number 16: maPlot1pre
+### code chunk number 36: plotHeatMap2
 ###################################################
-defs<-maDefaultPar(swirl[,3],x="maA",y="maM",z="maPrintTip")
+color.map <- function(horas) { if (horas< 20) "yellow" else "red" }
+grupColors <- unlist(lapply(pData(eset_rma)$time.h, color.map))
 
-# Function for plotting the legend
-legend.func<-do.call("maLegendLines",defs$def.legend)
-
-# Function for performing and plotting lowess fits
-lines.func<-do.call("maLowessLines",c(list(TRUE,f=0.3),defs$def.lines))
-
-plot(swirl[,3], xvar="maA", yvar="maM", zvar="maPrintTip",
-		      lines.func,
-		      text.func=maText(),
-		      legend.func,
-		      main="Swirl array 93: pre--normalization MA--plot") 
-
-
-###################################################
-### code chunk number 17: maPlot1post
-###################################################
-plot(swirl.norm[,3], xvar="maA", yvar="maM", zvar="maPrintTip",
-		      lines.func,
-		      text.func=maText(),
-		      legend.func,
-		      main="Swirl array 93: post--normalization MA--plot") 
+require("gplots")
+heatmap.2(exprs2cluster, 
+          col=bluered(75), scale="row",
+          ColSideColors=grupColors, key=TRUE, symkey=FALSE, 
+          density.info="none", trace="none", cexCol=1)
 
 
