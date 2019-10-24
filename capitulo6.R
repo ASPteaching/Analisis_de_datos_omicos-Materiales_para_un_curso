@@ -5,7 +5,11 @@
 ###################################################
 if (!(require("estrogen", character.only=T))){
     BiocManager::install("estrogen")
-    }
+}
+if (!(require("hgu95av2.db", character.only=T))){
+  BiocManager::install("hgu95av2.db")
+}
+
 
 
 ###################################################
@@ -82,8 +86,8 @@ legend (x="topright", legend=sampleNames , col=info$grupo, lty=1:ncol(info))
 ###################################################
 deg<-AffyRNAdeg(rawData, log.it=T)
 summaryAffyRNAdeg(deg) 
-# plotAffyRNAdeg(deg)
-# legend (x="bottomright", legend=sampleNames, col=1:nrow(info), lty=1:nrow(info), cex=0.7)
+plotAffyRNAdeg(deg)
+legend (x="bottomright", legend=sampleNames, col=1:nrow(info), lty=1:nrow(info), cex=0.7)
 
 
 ###################################################
@@ -185,6 +189,7 @@ boxplot(eset_rma,main="RMA", names=sampleNames, cex.axis=0.7, col=info$grupo+1,l
 ### code chunk number 22: filtratge
 ###################################################
 require(genefilter)
+require(hgu95av2.db)
 filtrats <- nsFilter(eset_rma)
 class(filtrats)
 names(filtrats)
