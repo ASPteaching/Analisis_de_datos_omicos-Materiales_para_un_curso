@@ -1,8 +1,8 @@
 ## ----loadValues----------------------------------------------------------
 require(Biobase)
 require(limma)
-load("celltypes-normalized.rma.Rda")
-load("celltypes-fit.main.Rda")
+load("datos/celltypes-normalized.rma.Rda")
+load("datos/celltypes-fit.main.Rda")
 topTab_LPS.in.AGED <- topTable (fit.main, number=nrow(fit.main), coef="LPS.in.AGED", adjust="fdr",lfc=2)
 topTab_LPS.in.YOUNG <- topTable (fit.main, number=nrow(fit.main), coef="LPS.in.YOUNG", adjust="fdr",lfc=2)
 topTab_AGE  <- topTable (fit.main, number=nrow(fit.main) , coef="AGE", adjust="fdr", lfc=2)
@@ -31,10 +31,11 @@ vennDiagram (res.selected[,1:3], main="Genes in common #1", cex=0.9)
 
 
 ## ----anota1, print=FALSE-------------------------------------------------
+if (!require(BiocManager)) install.packages("BiocManager")
 if (!(require(mouse4302.db))){
-        biocLite("mouse4302.db")
+        BiocManager::install("mouse4302.db")
       }
-require(mouse4302.db)
+library(mouse4302.db)
 anotData <- capture.output(mouse4302()) 
 print(anotData[1:15])
 cat ("... output continues until ", length(anotData), " lines.\n")
@@ -42,7 +43,7 @@ cat ("... output continues until ", length(anotData), " lines.\n")
 
 ## ----anota2, print=FALSE-------------------------------------------------
 if (!(require(org.Mm.eg.db))){
-        biocLite("org.Mm.eg.db")
+  BiocManager::install("org.Mm.eg.db")
       }
 require(org.Mm.eg.db)
 anotData <- capture.output(org.Mm.eg()) 
@@ -51,7 +52,7 @@ cat ("... output continues until ", length(anotData), " lines.\n")
 
 
 ## ----top5Genes-----------------------------------------------------------
-top5 <-topTab_LPS.in.AGED$ID[1:5]
+top5 <-rownames(topTab_LPS.in.AGED)[1:5]
 cat("Usando mget\n")
 geneSymbol5.1 <- unlist(mget(top5, mouse4302SYMBOL))
 geneSymbol5.1
@@ -109,7 +110,7 @@ heatmap.2(exprs2cluster,
 
 ## ----KEGGanots-----------------------------------------------------------
 require(annotate)
-top1 <-topTab_LPS.in.AGED$ID[1:1]
+top1 <-rownames(topTab_LPS.in.AGED)[1:1]
 geneSymbol1 <- getSYMBOL(top1, "mouse4302.db")
 GOAnots1 <- mget(top1, mouse4302GO)
 for (i in 1:length(GOAnots1)){

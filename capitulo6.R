@@ -258,7 +258,7 @@ topTabTiempo  <- topTable (fit.main, number=nrow(fit.main) , coef="Tiempo", adju
 ###################################################
 coefnum = 1
 opt <- par(cex.lab = 0.7)
-volcanoplot(fit.main, coef=coefnum, highlight=10, names=fit.main$ID, 
+volcanoplot(fit.main, coef=coefnum, highlight=10, names=rownames(fit.main), 
             main=paste("Differentially expressed genes",colnames(cont.matrix)[coefnum], sep="\n"))
 abline(v=c(-1,1))
 par(opt)
@@ -274,7 +274,7 @@ hgu95av2()
 ###################################################
 ### code chunk number 30: genesEstro
 ###################################################
-top5 <-topTabEstro10$ID[1:5]
+top5 <-rownames(topTabEstro10)[1:5]
 cat("Usando mget\n")
 geneSymbol5.1 <- unlist(mget(top5, hgu95av2SYMBOL))
 geneSymbol5.1
