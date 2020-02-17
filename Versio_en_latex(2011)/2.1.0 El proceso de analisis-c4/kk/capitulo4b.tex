@@ -1,0 +1,118 @@
+
+\chapter{Dise\~no de experimentos}
+
+El dise\~no de experimentos es el conjunto de t\'ecnicas que permiten  analizar los datos con diversas fuentes da variabilidad con el objetivo de  obtener  conclusiones de forma precisa.
+
+\section{Variabilidad sistem\'atica y aleatoria}
+El dise\~no de experimentos se ha  aplicado de forma extensa en  estudios de gen\'omica y en particular en estudios de microarrays para controlar las causas de variabilidad que se encuentran a lo largo del experimento. Podemos encontrar diversas causas variabilidad: biol\'ogica, intr\'inseca a todos los organismos o  t\'ecnica, que  se puede presentar en diferentes etapas  del desarrollo (extracci\'on, etiquetaje,  hibridaci\'on etapas. Desde un punto de vista estad,\'istico podemos caracterizar la variabilidad en dos tipos:
+\subsubsection{Errores sistem\'aticos}
+
+\begin {itemize}
+\item Tiene el mismo efecto en la mayor\'ia de las medidas.
+\item Se pueden estimar las correcciones  a partir de los datos.
+\item La calibraci\'on o la normalizaci\'on es el proceso general que se aplica para corregir la variabilidad sistem\'atica.
+\item Son ejemplos: a la cantidad de ARN en la biopsia , la eficacia de la t\'ecnica de laboratorio aplicada
+(extracci\'on de ARN, transcripci\'on inversa, etc.).
+\end{itemize}
+
+
+\subsubsection{Error aleatorio}
+En todo experimento existe tambi\'en una variabilidad  aleatoria, debida a m\'ultiples causas incontroladas.
+\begin{itemize}
+\item Para tratarlo se asumen modelos de error que permiten que el dise\~no experimental controle la acci\'on de este error aleatorio.
+\item En presencia de el error aleatorio se debe utilizar la inferencia estad\'istica para extraer conclusiones a partir del dise\~no experimental.
+\item Son ejemplos:el rendimiento de la PCR, la calidad del ADN,el tama\~no del \emph{spot},la hibridaci\'on inespec\'ifica, etc)
+\end{itemize}
+
+\section{Objetivos y elecci\'on del dise\~no del experimento}
+
+El experimento debe constar de un objetivo primario claro.
+\textA{}{Ejemplos son:
+\begin{itemize}
+ \item Identificar genes diferencialmente expresados
+\item Identificar patrones de expresi\'on de genes espec\'ificos
+\item Identificar subclases fenot\'ipicas
+\end{itemize}}
+
+La elecci\'on del dise\~no del experimento debe tener en cuenta el dise\~no del array y la ubicaci\'on de las muestras en los arrays.
+
+\textD{Figura \ref{c04b}}{ Dise\~no del array}
+
+\vspace{-0.5cm}
+\begin{figure}[!h]
+\titolfigura[0cm]{Figura \ref{c04b}.}
+\label{c04b}
+\fbox{\includegraphics[height=6cm,width=0.98\linewidth]{epsimages/c04b.eps}}
+\end{figure}
+
+\subsubsection{Dise\~no del array}
+En el dise\~no del array se deben tener en cuenta algunas cuestiones importantes:
+\begin{itemize}
+ \item Definir qu\'e secuencias se deben usar
+\begin{itemize}
+\item En arrays de ADNc determinar de qu\'e  librer\'ias se selecciona els ADN
+\item En arrays de Affymetrix se deber\'a determinar si se usan PM y MM
+\item Se debe decidir si se usan sondas control
+\end{itemize}
+\item Definir si debemos poner o no r\'eplicas
+\end{itemize}
+
+\section{Principales conceptos}
+
+\begin{itemize}
+
+\item \textbf{Unidad experimental}: Entidad f\'isica a la que se aplica un tratamiento, de forma independiente al resto de unidades. En cada unidad experimental se pueden realizar una medida o varias medidas, en este caso distinguiremos entre unidades experimetales y unidades observacionales. .
+\item \textbf{Factor}son las variables independientes que pueden influir en la variabilidad de la variable de inter\'es.
+\item \textbf{Factor tratamiento} es un factor del que interesa conocer su influencia en la respuesta.
+ \item \textbf{Factor bloque}: es un factor en el que no se est\'a interesado en conocer su influencia en la respuesta pero se supone que \'esta existe y se quiere controlar para disminuir la variabilidad residual.
+ \item \textbf{Niveles}: cada uno de los resultados de un factor. Seg\'un sean elegidos por el experimentador o elegidos al azar de una amplia población se denominan factores de efectos fijos o factores de efectos  aleatorios.
+ \item \textbf{Tratamiento}: es una combinaci\'on espec\'ifica de los niveles de los factores en estudio. Son, por tanto, las condiciones experimentales que se desean comparar en el experimento. En un dise\~no con un \'unico factor son los distintos niveles del factor y en un dise\~no con varios factores son las distintas combinaciones de niveles de los factores.
+ \item \textbf{Tama\~no del Experimento}: es el nº'umero total de observaciones recogidas en el dise\~no.
+ \end{itemize}
+ 
+ \section{Principios b\'asicos en el dise\~no del experimento}
+ Al planificar un experimento hay tres tres principios b\'asicos que se deben tener siempre en cuenta:
+ \begin{itemize}
+   \item El principio de aleatorizaci\'on.
+   \item El bloqueo.
+   \item La replicaci\'on
+ \end{itemize}
+     
+Los dos primeros (aleatorizar y bloquear) son estrategias eficientes para asignar los tratamientos a las unidades experimentales sin preocuparse de qué tratamientos considerar. Por el contrario, la replicaci\'on permite la realizaci\'on de un posterior an\'alisis estad\'istico.
+
+ \subsection{Aleatorizar}
+
+Es imprescindible aleatorizar todos los factores no controlados por el experimentador en el dise\~no experimental y que puden influir en los resultados, es decir  asignarlos al azar a las unidades experimentales.
+
+Las ventajas de aleatorizar los factores no controlados son:
+\begin{itemize}
+  \item Transforma la variabilidad sistem\'atica no planificada en variabilidad no planificada o ruido aleatorio. Dicho de otra forma, aleatorizar previene contra la introducci\'on de sesgos en el experimento.
+  \item Evita la dependencia entre observaciones al aleatorizar los instantes de recogida muestral.
+  \item Valida muchos de los procedimientos estad\'isticos m\'as comunes.
+\end{itemize}
+
+\subsection{Bloquear}
+
+Hace referencia a dividir o particionar las unidades experimentales en grupos llamados bloques de modo que las observaciones realizadas en cada bloque se realicen bajo condiciones experimentales lo m\'as parecidas posibles.
+A diferencia de lo que ocurre con los factores tratamiento, el experimentador no est\'a interesado en investigar las posibles diferencias de la respuesta entre los niveles de los factores bloque.
+
+Bloquear es una buena estrategia siempre y cuando sea posible dividir las unidades experimentales en grupos de unidades similares. La ventaja de bloquear un factor que se supone que tiene una clara influencia en la respuesta pero en el que no se est\'a interesado, es que convierte la variabilidad sistem\'atica no planificada en variabilidad sistem\'atica planificada.
+
+
+
+\subsection{ Replicar}
+Es importante para incrementar la precisi\'on, obtener suficiente potencia en los tests y como base para los procedimientos de inferencia. Existen dos tipos de r\'eplicas, las t\'ecnicas y las biol\'ogicas. Las r\'eplicas t\'ecnicas se consiguen haciendo duplicados de los \emph{spots} y realizando hibridaciones m\'ultiples de la misma muestra.
+
+
+\textD{Figura \ref{c04plot002}}{R\'eplicas biol\'ogicas vs t\'ecnicas}
+
+\vspace{-0.5cm}
+\begin{figure}[!h]
+\titolfigura[0cm]{Figura \ref{c04plot002}.}
+\label{c04plot002}
+\fbox{\includegraphics[height=6cm,width=0.98\linewidth]{epsimages/c04plot002.eps}}
+\end{figure}
+
+A veces el ARNm de diferentes muestras se combina para crear un \emph{pool}, aunque no es aconsejable cuando la informaci\'on individual es importante.
+
+

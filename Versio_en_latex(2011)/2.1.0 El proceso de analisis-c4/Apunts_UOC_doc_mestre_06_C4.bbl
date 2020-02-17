@@ -1,0 +1,82 @@
+\begin{thebibliography}{10}
+
+\bibitem{alizadeh:2000}
+A.~Alizadeh, M.B. Eisen, E.~Davis, C.~Ma, I.~Lossos, A.~Rosenwald, J.~Boldrick,
+  H.~Sabet, T.~Tran, X.~Yu, J.I. Powell, L.~Yang, G.E. Marti, J.~Hudson Jr,
+  L.~Lu, D.B. Lewis, R.~Tibshirani, G.~Sherlock, W.C. Chan, T.C. Greiner, D.D.
+  Weisenburger, J.O. Armitage, R.~Warnke, R.~Levy, W.~Wilson, M.R. Grever, J.C.
+  Byrd, D.~Botstein, P.O. Brown, and L.M. Staudt.
+\newblock Distinct types of diffuse large {B}--cell lymphoma identified by gene
+  expression profiling.
+\newblock {\em Nature}, 403:503--511, February 2000.
+
+\bibitem{Allison:2006a}
+David~B Allison, Xiangqin Cui, Grier~P Page, and Mahyar Sabripour.
+\newblock Microarray data analysis: from disarray to consolidation and
+  consensus.
+\newblock {\em Nat Rev Genet}, 7(1):55--65, January 2006.
+
+\bibitem{Chelvarajan:2006}
+R.L. Chelvarajan, Y.~Liu, D.~Popa, M.L. Getchell, T.V. Getchell, A.J.
+  Stromberg, and S.~Bondada.
+\newblock {Molecular basis of age-associated cytokine dysregulation in
+  LPS-stimulated macrophages}.
+\newblock {\em Journal of Leukocyte Biology}, 79(6):1314, 2006.
+
+\bibitem{Farmer:2005}
+Pierre Farmer, Herve Bonnefoi, Veronique Becette, Michele Tubiana-Hulin, Pierre
+  Fumoleau, Denis Larsimont, Gaetan Macgrogan, Jonas Bergh, David Cameron,
+  Darlene Goldstein, Stephan Duss, Anne-Laure Nicoulaz, Cathrin Brisken, Maryse
+  Fiche, Mauro Delorenzi, and Richard Iggo.
+\newblock Identification of molecular apocrine breast tumours by microarray
+  analysis.
+\newblock {\em Oncogene}, 24(29):4660--71, July 2005.
+
+\bibitem{Golub:1999}
+T.~R. Golub, D.~K. Slonim, P.~Tamayo, C.~Huard, M.~Gaasenbeek, J.~P. Mesirov,
+  H.~Coller, M.L. Loh, J.~R. Downing, M.~A. Caligiuri, C.~D. Bloomfield, and
+  E.~S. Lander.
+\newblock Molecular classification of cancer: {C}lass discovery and class
+  prediction by gene expression monitoring.
+\newblock {\em Science}, 286:531--537, 1999.
+
+\bibitem{Imbeaud:2005}
+Sandrine Imbeaud and Charles Auffray.
+\newblock {'The} 39 steps' in gene expression profiling: critical issues and
+  proposed best practices for microarray experiments.
+\newblock {\em Drug Discovery Today}, 10(17):1175--1182, September 2005.
+\newblock {PMID:} 16182210.
+
+\bibitem{Moore:2002}
+Shanna Moore, Julia Vrebalov, Paxton Payton, and Jim Giovannoni.
+\newblock Use of genomics tools to isolate key ripening genes and analyse fruit
+  maturation in tomato.
+\newblock {\em Journal of Experimental Botany}, 53(377):2023--2030, 2002.
+
+\bibitem{Scholtens:2004}
+Denise Scholtens, Alexander Miron, Faisal~M. Merchant, Arden Miller,
+  Penelope~L. Miron, J.~Dirk Iglehart, and Robert Gentleman.
+\newblock Analyzing factorial designed microarray experiments.
+\newblock {\em J. Multivar. Anal.}, 90(1):19--43, 2004.
+
+\bibitem{Simon:2003}
+Richard~M. Simon, Edward~L. Korn, Lisa~M. McShane, Michael~D. Radmacher,
+  George~W. Wright, and Yingdong Zhao.
+\newblock {\em Design and Analysis of DNA Microarray Investigations}.
+\newblock Springer-Verlag, 2003.
+
+\bibitem{vantveer:2002}
+Laura~J {van 't Veer}, Hongyue Dai, Marc~J {van de Vijver}, Yudong~D He,
+  Augustinus A~M Hart, Mao Mao, Hans~L Peterse, Karin {van der Kooy}, Matthew~J
+  Marton, Anke~T Witteveen, George~J Schreiber, Ron~M Kerkhoven, Chris Roberts,
+  Peter~S Linsley, Ren{\'e} Bernards, and Stephen~H Friend.
+\newblock Gene expression profiling predicts clinical outcome of breast cancer.
+\newblock {\em Nature}, 415(6871):530--6, January 2002.
+
+\bibitem{Zhu:2010}
+Qianqian Zhu, Jeffrey Miecznikowski, and Marc Halfon.
+\newblock Preferred analysis methods for affymetrix genechips. ii. an expanded,
+  balanced, wholly-defined spike-in dataset.
+\newblock {\em BMC Bioinformatics}, 11(1):285, 2010.
+
+\end{thebibliography}

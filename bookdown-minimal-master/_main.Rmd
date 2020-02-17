@@ -1,0 +1,37 @@
+---
+title: "Análisis de datos ómicos"
+author: "Alex Sánchez"
+site: bookdown::bookdown_site
+documentclass: book
+output:
+  bookdown::gitbook: default
+  #bookdown::pdf_book: default
+bibliography: ADOreferences.bib
+---
+
+```{r setup, include=FALSE}
+require(knitr)
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, 
+                      comment = NA, prompt = TRUE, tidy = FALSE, 
+                      fig.width = 7, fig.height = 7, fig_caption = TRUE,
+                      cache=FALSE)
+Sys.setlocale("LC_TIME", "C")
+```
+
+# Presentación
+
+Este documento es una versión actualizada -en varios sentidos- de unos materiales de análisis de microparrays que escribimos allá por 2010, usando LateX y Sweave, junto con la profesora M. Carme Ruíz de Villa para la asignatura "Análisis de Microarrays" del posgrado de Bioinformática de la Universitat Oberta de Catalunya .
+
+En estos años han cambiado muchas cosas. El posgrado es ahora un máster interuniversitario entre la UOC y la Universidad de Barcelona (UB); muchos estadísticos i/o bioinformáticos -entre los que me incluyo- han cambiado de Latex/Sweave a RStudio/RMarkdown y Github. Mi compañera de escritura, Mamen, se ha jubilado, y aunque sigue sin estar claro si los micrarrays también se jubilaran pronto, el campo de las ómicas ha crecido de forma explosiva. El "Análisis de datos ómicos", título de este nuevo documento ya no se centra en los microarrays. También trata de RNA-seq, Proteómica, Metagenómica, Metabolómica o Epigenómica por citar sólo algunos de los más populares.
+
+Es obvio que un curso de "Análisis de datos ómicos" no puede abarcar todas estas disciplinas, aunque también lo es que comparten muchos elementos comunes.
+
+El plan de desarrollo para esta nueva edición, que podra seguirse en el repositorio de Github (), tendrá dos fases:
+
+1. En una primera, actualizaré la versión original a RMarrkdown, eliminando aspectos desfasados y actualizando el código R a la version actual de R/Bioconductor.
+2. En una posteriora miraré de añadir capítulos que introduczcan nuevas tecnologías y muestren como analizar los datos que estas generan. Si logro engañar a algunos colegas para que escriban un capítulo también los añadiré a los autores.
+
+Previsiblemente este documento, con sus errores e imperfeccuiones se quedará como "open source" para uso de quien lo desee sin tener que pasar por el doloroso y enquilosante proceso de convertirlo en un libro, que, en este caso, empezaría a quedar obsoleto al minuto de estar acabado.
+
+<!--chapter:end:index.Rmd-->
+

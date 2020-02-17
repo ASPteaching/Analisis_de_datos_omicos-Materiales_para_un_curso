@@ -1,0 +1,55 @@
+---
+title: "Conversió d'arxius Latex a Rmarkdown"
+author: "Alex Sanchez"
+date: "9/2/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Conversió d'arxius de Latex a RMarkdown
+
+Els arxius de Latex es poden compilar amb Rmarkdown amb alguns canvis.
+
+- Alguns son imprescindibles per evitar errors
+- Altres són necessaris per aconseguir la mateixa funcionalitat
+
+# Relació de canvis imprescindibles
+
+## Accents
+
+- Si els accents estan en format "universal", és a dir "\' + lletra" el més senzill és fer cinc "Search and replace" canviant:
+
+"\' + a" --> "á"
+"\' + e" --> "é"
+
+i així successivament.
+
+També és possible preparar un script que faci tots els canvis emprant alguna expressió regular o la funció "str_repace"
+
+## Figures
+
+Les figures en Latex estan fetes emprant un environment
+
+\vspace{-0.5cm}
+\begin{figure}[!h]
+\titolfigura[0cm]{Figura \ref{c04analysisProcess}. Proceso de an\'alisis de microarrays}
+\label{c04analysisProcess}
+\fbox{\includegraphics[height=6cm,width=0.75\textwidth]{epsimages/c04analysisProcess.eps}}
+\end{figure}
+
+Això cal canviar-ho per un include
+
+```{r MDAProcess, fig.cap="Proceso de análisis de microarrays", echo=FALSE, eval=FALSE}
+knitr::include_graphics("figures/c04analysisProcess.eps")
+```
+
+COMPTE: "eval=FALSE" est+a posat per tal que no s'executi el chink. A la pràctica es treurà.
+
+## Citacions
+
+En principi només cal canviar "\cite{}" per "@"
+
+
