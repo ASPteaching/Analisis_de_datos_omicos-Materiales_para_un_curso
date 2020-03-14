@@ -1,6 +1,0 @@
-latex Apunts_UOC_doc_mestre_06_C4.tex
-bibtex Apunts_UOC_doc_mestre_06_C4
-latex Apunts_UOC_doc_mestre_06_C4.tex
-latex Apunts_UOC_doc_mestre_06_C4.tex
-dvipdfmx Apunts_UOC_doc_mestre_06_C4.dvi
-mv Apunts_UOC_doc_mestre_06_C4.pdf Analisis_de_microarrays_C4_El_proceso_de_Analisis.pdf

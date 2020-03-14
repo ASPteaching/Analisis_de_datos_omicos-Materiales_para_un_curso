@@ -108,18 +108,15 @@ Los datos puede desargarse desde la página del proyecto ``Yeast Cell Cycle Proj
 
 La tabla \ref{ejemplosEstudios} resume la lista de ejemplos que se utilizan en este manual indicando el nombre con que nos referiremos de aquí en adelante a cada conjunto de datos as\' como algunas de sus carcaterísticas.
 
-[!h]
-\titoltaula[0cm]{Tabla \ref{ejemplosEstudios}. Conjuntos de datos utilizados en este manual. Aparte del nombre (arbitrario y ``mnemotécnico'') se indica el tipo de microarrays, el número de muestras, y el tipo de problema para el que se utilizaron originalmente.}
-{|l|c|c|c|}
-\hline
-Nombre & Tipo & N. Muestras & Tipo de estudio  \\ \hline
-`celltypes` & Un color (Affy, Mouse 4302) & 12 & Comparativo \\ \hline
-`golub`     & Un color (Affy, HGU95A)  & 38  & Clasificación \\ \hline
-`estrogen`  & Un color (Affy, HGU95A)  & 8 & Comparativo \\ \hline
-`CCL4`     & Dos colores (Agilent, WG Rat Microarray)    & 16 & Comparativo \\ \hline
-`breastTum` & Un color  (Affy, HGU95A) & 49 & Clasificación \\ \hline
+ La tabla siguiente resume los "datasets" utilizados en este manual. Aparte del nombre (arbitrario y ``mnemotécnico'') se indica el tipo de microarrays, el número de muestras, y el tipo de problema para el que se utilizaron originalmente.
 
-\label{ejemplosEstudios}
+| Nombre       | Tipo (Modelo)                                      | N. Muestras | Tipo de estudio |
+|--------------|--------------------------------------------|--------------|-----------------|
+| `celltypes` | Un color (Affy, Mouse 4302)              | 12           | Comparativo     |
+| `golub`     | Un color (Affy, HGU95A)                  | 38           | Clasificación   |
+| `estrogen`  | Un color (Affy, HGU95A)                  | 8            | Comparativo     |
+| `CCL4`      | Dos colores (Agilent, WG Rat Microarray) | 16           | Comparativo     |
+| `breastTum` | Un color  (Affy, HGU95A)                 | 49           | Clasificación   |
 
 
 
