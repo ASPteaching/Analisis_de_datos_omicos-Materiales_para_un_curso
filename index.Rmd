@@ -8,6 +8,7 @@ site: bookdown::bookdown_site
 documentclass: book
 output:
   bookdown::gitbook: default
+  bookdown::html_document2: default
 bibliography: MDAreview.bib
 ---
 

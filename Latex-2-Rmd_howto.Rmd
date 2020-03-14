@@ -1,55 +1,80 @@
----
-title: "Conversió d'arxius Latex a Rmarkdown"
-author: "Alex Sanchez"
-date: "9/2/2020"
-output: html_document
----
+# Apéndice: Conversión de archivos Latex a RMarkdown
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
+La versión original de este documento se escribió en LateX utilizando un estilo específico de la UOC.
 
-# Conversió d'arxius de Latex a RMarkdown
+La versión actual está en Rmarkdon. Lamentablemente, dado que Latex permite hacer muchas más cosas que Rmarkdown, no hay un traductor de Laex a Rmarkdown, por lo que se, para hacer la conversión son precisos algunos ajustes manuales.
 
-Els arxius de Latex es poden compilar amb Rmarkdown amb alguns canvis.
+- Algunos son imprescindibles para evitar errors
+- Otros son aconsejables para conseguir un documento con características equivalentes al original.
 
-- Alguns son imprescindibles per evitar errors
-- Altres són necessaris per aconseguir la mateixa funcionalitat
+## Relación de cambios imprescindibles
 
-# Relació de canvis imprescindibles
+### Títulos y subtítulos
 
-## Accents
+Cambiaremos:
 
-- Si els accents estan en format "universal", és a dir "\' + lletra" el més senzill és fer cinc "Search and replace" canviant:
+\section por ##
+\subsection por ###
+\subsubsection por ####
+
+### Acentos
+
+- Si los acentos esta en formato universal en Latex, es decir: "\' + letra" se tienen que convertir a las letras acentuadas. Esto se puede hacer 
+
+- Con algunos "Search and replace" cambiando:
 
 "\' + a" --> "á"
 "\' + e" --> "é"
 
-i així successivament.
+i así sucesivamente
 
-També és possible preparar un script que faci tots els canvis emprant alguna expressió regular o la funció "str_repace"
+- También es posible preparar un script que haga todos los cambios utilizando alguna expresión regular o la función "str_replace"
 
-## Figures
+## Enumeraciones 
 
-Les figures en Latex estan fetes emprant un environment
+Las enumeraciones e itemizaciones se tienen que cambiar
+- Eliminando \begin{enumerate} ...\end{enumerate} o  \begin{itemize} ...\end{itemize}
+- Cambiando los \item por números (enumerate) o guienes (itemize)
 
-\vspace{-0.5cm}
+## Tablas
+
+Las tablas de latex pueden convertirse en tablas en Markdown con este conversor online: https://tableconvert.com/
+
+## Figuras
+
+Las figuras en latex se realizan mediante un *environment* llamado "figure"
+Entre \begin{figure} y \end{figure} se encuentra la instruccion de inclusión *includegraphics" pero también la etiqueta con la que se referencia la figura y el pie de figura o *caption*.
+
 \begin{figure}[!h]
-\titolfigura[0cm]{Figura \ref{c04analysisProcess}. Proceso de an\'alisis de microarrays}
+\caption{Proceso de an\'alisis de microarrays}
 \label{c04analysisProcess}
-\fbox{\includegraphics[height=6cm,width=0.75\textwidth]{epsimages/c04analysisProcess.eps}}
+\includegraphics[height=6cm,width=0.75\textwidth]{epsimages/c04analysisProcess.eps}
 \end{figure}
 
-Això cal canviar-ho per un include
+En Rmarkdown se cambiará:
 
-```{r MDAProcess, fig.cap="Proceso de análisis de microarrays", echo=FALSE, eval=FALSE}
+- el *\begin{figure}/\end{figure}* por 
+    + un *include_graphics*
+    + Un chunk de codigo para generar la imageno  el grafico
+- La etiqueta por el nombre del chunk
+- EL caption por el contenido de "fig.cap"
+
+```{r c04analysisProcess, fig.cap="Proceso de análisis de microarrays", echo=FALSE, eval=FALSE}
 knitr::include_graphics("figures/c04analysisProcess.eps")
 ```
 
-COMPTE: "eval=FALSE" est+a posat per tal que no s'executi el chink. A la pràctica es treurà.
+ATENCION: "eval=FALSE" está aquí para evitar que el código se ejecute. Normalmente estará a TRUE.
 
-## Citacions
+## Citaciones y referencias
 
-En principi només cal canviar "\cite{}" per "@"
+La versión corta es que debemos cambiar:
 
+- "\cite{}" per "@"
+- "\ref{}" por "\@ref()"
 
+La versión larga es consultar el libro de bookdown en las secciones de 
+
+- Bibliografies and citations: https://bookdown.org/yihui/rmarkdown-cookbook/bibliography.html
+
+- Cross references within documents
+https://bookdown.org/yihui/rmarkdown-cookbook/cross-ref.html
