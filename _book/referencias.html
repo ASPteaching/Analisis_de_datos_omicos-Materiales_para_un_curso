@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Capítulo 3 Referencias | Análisis de datos ómicos</title>
+  <meta name="description" content="Capítulo 3 Referencias | Análisis de datos ómicos" />
+  <meta name="generator" content="bookdown 0.17.2 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Capítulo 3 Referencias | Análisis de datos ómicos" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capítulo 3 Referencias | Análisis de datos ómicos" />
+  
+  
+  
+
+<meta name="author" content="Alex Sánchez-Pla^{1,2} y Ricardo Gonzalo Sanz^2" />
+<meta name="author" content="^1 Departament de Genètica, Microbiologia i Estadística. Universitat de Barcelona (UB)." />
+<meta name="author" content="^2 Unitat d’Estadística i Bioinformàtica. Vall d’Hebron Institut de Recerca (VHIR)." />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="el-proceso-de-análisis-de-microarrays.html"/>
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Presentación</a></li>
+<li class="chapter" data-level="2" data-path="el-proceso-de-análisis-de-microarrays.html"><a href="el-proceso-de-análisis-de-microarrays.html"><i class="fa fa-check"></i><b>2</b> El proceso de análisis de microarrays</a><ul>
+<li class="chapter" data-level="2.1" data-path="el-proceso-de-análisis-de-microarrays.html"><a href="el-proceso-de-análisis-de-microarrays.html#tipos-de-estudios"><i class="fa fa-check"></i><b>2.1</b> Tipos de estudios</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="el-proceso-de-análisis-de-microarrays.html"><a href="el-proceso-de-análisis-de-microarrays.html#comparación-de-grupos-o-class-comparison"><i class="fa fa-check"></i><b>2.1.1</b> Comparación de grupos o <em>Class comparison</em></a></li>
+<li class="chapter" data-level="2.1.2" data-path="el-proceso-de-análisis-de-microarrays.html"><a href="el-proceso-de-análisis-de-microarrays.html#predicción-de-clase-o-class-prediction"><i class="fa fa-check"></i><b>2.1.2</b> Predicción de clase o <em>Class prediction</em></a></li>
+<li class="chapter" data-level="2.1.3" data-path="el-proceso-de-análisis-de-microarrays.html"><a href="el-proceso-de-análisis-de-microarrays.html#descubrimiento-de-clases-o-class-discovery"><i class="fa fa-check"></i><b>2.1.3</b> Descubrimiento de clases o <em>Class discovery</em></a></li>
+<li class="chapter" data-level="2.1.4" data-path="el-proceso-de-análisis-de-microarrays.html"><a href="el-proceso-de-análisis-de-microarrays.html#otros-tipos-de-estudios"><i class="fa fa-check"></i><b>2.1.4</b> Otros tipos de estudios</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="el-proceso-de-análisis-de-microarrays.html"><a href="el-proceso-de-análisis-de-microarrays.html#algunos-ejemplos-concretos"><i class="fa fa-check"></i><b>2.2</b> Algunos ejemplos concretos </a><ul>
+<li class="chapter" data-level="2.2.1" data-path="el-proceso-de-análisis-de-microarrays.html"><a href="el-proceso-de-análisis-de-microarrays.html#estudio-de-procesos-regulados-por-citoquinas"><i class="fa fa-check"></i><b>2.2.1</b> Estudio de procesos regulados por citoquinas </a></li>
+<li class="chapter" data-level="2.2.2" data-path="el-proceso-de-análisis-de-microarrays.html"><a href="el-proceso-de-análisis-de-microarrays.html#clasificación-molecular-de-la-leucemialabelgolub"><i class="fa fa-check"></i><b>2.2.2</b> Clasificación molecular de la leucemia\label{golub]</a></li>
+<li class="chapter" data-level="2.2.3" data-path="el-proceso-de-análisis-de-microarrays.html"><a href="el-proceso-de-análisis-de-microarrays.html#efecto-del-estrogeno-y-el-tiempo-de-administraciónlabelestrogen"><i class="fa fa-check"></i><b>2.2.3</b> Efecto del estrogeno y el tiempo de administración\label{estrogen]</a></li>
+<li class="chapter" data-level="2.2.4" data-path="el-proceso-de-análisis-de-microarrays.html"><a href="el-proceso-de-análisis-de-microarrays.html#efecto-del-ccl4-en-la-expresión-génica"><i class="fa fa-check"></i><b>2.2.4</b> Efecto del CCL4 en la expresión génica</a></li>
+<li class="chapter" data-level="2.2.5" data-path="el-proceso-de-análisis-de-microarrays.html"><a href="el-proceso-de-análisis-de-microarrays.html#análisis-de-patrones-en-el-ciclo-celular"><i class="fa fa-check"></i><b>2.2.5</b> Análisis de patrones en el ciclo celular</a></li>
+<li class="chapter" data-level="2.2.6" data-path="el-proceso-de-análisis-de-microarrays.html"><a href="el-proceso-de-análisis-de-microarrays.html#recapitulación"><i class="fa fa-check"></i><b>2.2.6</b> Recapitulación</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="el-proceso-de-análisis-de-microarrays.html"><a href="el-proceso-de-análisis-de-microarrays.html#el-proceso-de-análisis-de-microarrays-1"><i class="fa fa-check"></i><b>2.3</b> El proceso de análisis de microarrays</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i><b>3</b> Referencias</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Análisis de datos ómicos</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="referencias" class="section level1">
+<h1><span class="header-section-number">Capítulo 3</span> Referencias</h1>
+
+<div id="refs" class="references">
+<div>
+<p>Alizadeh, A., M.B. Eisen, E. Davis, C. Ma, I. Lossos, A. Rosenwald, J. Boldrick, et al. 2000. “Distinct Types of Diffuse Large B–Cell Lymphoma Identified by Gene Expression Profiling.” <em>Nature</em> 403: 503–11.</p>
+</div>
+<div>
+<p>Allison, David B, Xiangqin Cui, Grier P Page, and Mahyar Sabripour. 2006. “Microarray Data Analysis: From Disarray to Consolidation and Consensus.” <em>Nat Rev Genet</em> 7 (1): 55–65.</p>
+</div>
+<div>
+<p>Golub, T. R., D. K. Slonim, P. Tamayo, C. Huard, M. Gaasenbeek, J. P. Mesirov, H. Coller, et al. 1999. “Molecular Classification of Cancer: Class Discovery and Class Prediction by Gene Expression Monitoring.” <em>Science</em> 286: 531–37.</p>
+</div>
+<div>
+<p>Moore, Shanna, Julia Vrebalov, Paxton Payton, and Jim Giovannoni. 2002. “Use of Genomics Tools to Isolate Key Ripening Genes and Analyse Fruit Maturation in Tomato.” <em>Journal of Experimental Botany</em> 53 (377): 2023–30. <a href="https://doi.org/10.1093/jxb/erf057">https://doi.org/10.1093/jxb/erf057</a>.</p>
+</div>
+<div>
+<p>Scholtens, Denise, Alexander Miron, Faisal M. Merchant, Arden Miller, Penelope L. Miron, J. Dirk Iglehart, and Robert Gentleman. 2004. “Analyzing Factorial Designed Microarray Experiments.” <em>J. Multivar. Anal.</em> 90 (1). Orlando, FL, USA: Academic Press, Inc.: 19–43. <a href="https://doi.org/http://dx.doi.org/10.1016/j.jmva.2004.02.004">https://doi.org/http://dx.doi.org/10.1016/j.jmva.2004.02.004</a>.</p>
+</div>
+<div>
+<p>Simon, Richard M., Edward L. Korn, Lisa M. McShane, Michael D. Radmacher, George W. Wright, and Yingdong Zhao. 2003. <em>Design and Analysis of Dna Microarray Investigations</em>. Springer-Verlag.</p>
+</div>
+<div>
+<p>van ’t Veer, Laura J, Hongyue Dai, Marc J van de Vijver, Yudong D He, Augustinus A M Hart, Mao Mao, Hans L Peterse, et al. 2002. “Gene Expression Profiling Predicts Clinical Outcome of Breast Cancer.” <em>Nature</em> 415 (6871): 530–6.</p>
+</div>
+<div>
+<p>Zhu, Qianqian, Jeffrey Miecznikowski, and Marc Halfon. 2010. “Preferred Analysis Methods for Affymetrix Genechips. II. An Expanded, Balanced, Wholly-Defined Spike-in Dataset.” <em>BMC Bioinformatics</em> 11 (1): 285. <a href="https://doi.org/10.1186/1471-2105-11-285">https://doi.org/10.1186/1471-2105-11-285</a>.</p>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="el-proceso-de-análisis-de-microarrays.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

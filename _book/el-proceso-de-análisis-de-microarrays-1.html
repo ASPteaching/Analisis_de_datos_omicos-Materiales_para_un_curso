@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Capítulo 5 El proceso de análisis de microarrays | Análisis de datos ómicos</title>
+  <meta name="description" content="Capítulo 5 El proceso de análisis de microarrays | Análisis de datos ómicos" />
+  <meta name="generator" content="bookdown 0.17.2 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Capítulo 5 El proceso de análisis de microarrays | Análisis de datos ómicos" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capítulo 5 El proceso de análisis de microarrays | Análisis de datos ómicos" />
+  
+  
+  
+
+<meta name="author" content="Alex Sánchez-Pla." />
+<meta name="author" content="Departament de Genètica, Microbiologia i Estadística. Universitat de Barcelona." />
+<meta name="author" content="Facultat de Biologia. Avda. Diagonal 643. 08028 Barcelona." />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="algunos-ejemplos-concretos.html"/>
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Presentación</a></li>
+<li class="chapter" data-level="2" data-path="el-proceso-de-análisis-de-microarrays.html"><a href="el-proceso-de-análisis-de-microarrays.html"><i class="fa fa-check"></i><b>2</b> El proceso de análisis de microarrays</a></li>
+<li class="chapter" data-level="3" data-path="tipos-de-estudios.html"><a href="tipos-de-estudios.html"><i class="fa fa-check"></i><b>3</b> Tipos de estudios</a><ul>
+<li class="chapter" data-level="3.1" data-path="tipos-de-estudios.html"><a href="tipos-de-estudios.html#comparación-de-grupos-o-class-comparison"><i class="fa fa-check"></i><b>3.1</b> Comparación de grupos o <em>Class comparison</em></a></li>
+<li class="chapter" data-level="3.2" data-path="tipos-de-estudios.html"><a href="tipos-de-estudios.html#predicción-de-clase-o-class-prediction"><i class="fa fa-check"></i><b>3.2</b> Predicción de clase o <em>Class prediction</em></a></li>
+<li class="chapter" data-level="3.3" data-path="tipos-de-estudios.html"><a href="tipos-de-estudios.html#descubrimiento-de-clases-o-class-discovery"><i class="fa fa-check"></i><b>3.3</b> Descubrimiento de clases o <em>Class discovery</em></a></li>
+<li class="chapter" data-level="3.4" data-path="tipos-de-estudios.html"><a href="tipos-de-estudios.html#otros-tipos-de-estudios"><i class="fa fa-check"></i><b>3.4</b> Otros tipos de estudios</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="algunos-ejemplos-concretos.html"><a href="algunos-ejemplos-concretos.html"><i class="fa fa-check"></i><b>4</b> Algunos ejemplos concretos </a><ul>
+<li class="chapter" data-level="4.1" data-path="algunos-ejemplos-concretos.html"><a href="algunos-ejemplos-concretos.html#estudio-de-procesos-regulados-por-citoquinas"><i class="fa fa-check"></i><b>4.1</b> Estudio de procesos regulados por citoquinas </a></li>
+<li class="chapter" data-level="4.2" data-path="algunos-ejemplos-concretos.html"><a href="algunos-ejemplos-concretos.html#clasificación-molecular-de-la-leucemia"><i class="fa fa-check"></i><b>4.2</b> Clasificación molecular de la leucemia</a></li>
+<li class="chapter" data-level="4.3" data-path="algunos-ejemplos-concretos.html"><a href="algunos-ejemplos-concretos.html#efecto-del-estrogeno-y-el-tiempo-de-administración"><i class="fa fa-check"></i><b>4.3</b> Efecto del estrogeno y el tiempo de administración</a></li>
+<li class="chapter" data-level="4.4" data-path="algunos-ejemplos-concretos.html"><a href="algunos-ejemplos-concretos.html#efecto-del-ccl4-en-la-expresión-génica"><i class="fa fa-check"></i><b>4.4</b> Efecto del CCL4 en la expresión génica</a></li>
+<li class="chapter" data-level="4.5" data-path="algunos-ejemplos-concretos.html"><a href="algunos-ejemplos-concretos.html#análisis-de-patrones-en-el-ciclo-celular"><i class="fa fa-check"></i><b>4.5</b> Análisis de patrones en el ciclo celular</a></li>
+<li class="chapter" data-level="4.6" data-path="algunos-ejemplos-concretos.html"><a href="algunos-ejemplos-concretos.html#recapitulación"><i class="fa fa-check"></i><b>4.6</b> Recapitulación</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="el-proceso-de-análisis-de-microarrays-1.html"><a href="el-proceso-de-análisis-de-microarrays-1.html"><i class="fa fa-check"></i><b>5</b> El proceso de análisis de microarrays</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Análisis de datos ómicos</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="el-proceso-de-análisis-de-microarrays-1" class="section level1">
+<h1><span class="header-section-number">Capítulo 5</span> El proceso de análisis de microarrays</h1>
+<p>Una vez descritos los tipos de análisis y algunos ejemplos podemos pasar a describir el proceso de análisis de microarrays que se resume brevemente en la figura ~.</p>
+<p>El análisis de microarrays, como la mayoría de análisis debe proceder de forma ordenada y siguiendo el método científico:</p>
+<ul>
+<li>La pregunta y su contexto nos servirán de guía para definir el <em>Dise~no experimental</em> adecuado.</li>
+<li>El experimento se deberá realizar siguiendo las pautas decididas en el <em>Dise~no experimental</em> y los datos obtenidos
+–que solemos denominar datos <code>crudos'' o</code>raw data’’– deberán someterse a los <em>Controles de calidad adecuados</em> antes de continuar con su análisis.</li>
+<li>Una vez decidido si la calidad de los datos es aceptable pasaremos a prepararlos para el análisis lo que puede incluir diversas formas
+de <em>preprocesado, o transformaciones</em> que a menudo se incluyen de forma general bajo el paraguas del término <em>normalización</em>, aunque, como veremos se trata de conceptos distintos.</li>
+<li>Los datos normalizados se utilizarán para los <em>análisis estadísticos</em> que hayamos decidido realizar durante el dise~no experimental.</li>
+<li>Finalmente los resultados de los análisis serán la base para una <em>interpretación biológica</em> de los resultados del experimento.</li>
+</ul>
+
+<div class="figure"><span id="fig:MDAProcess"></span>
+<img src="figures/c04analysisProcess.eps" alt="Proceso de análisis de microarrays"  />
+<p class="caption">
+Figure 5.1: Proceso de análisis de microarrays
+</p>
+</div>
+<p>El proceso descrito es básicamente una forma razonable de proceder en general.
+Los microarrays y otros datos genómicos son diferentes en su naturaleza de
+los datos clásicos alrededor de los que se han desarrollado la mayor parte de
+técnicas estadísticas. En consecuencia, en muchos casos ha sido necesario
+adaptar las técnicas existentes o desarrollar otras nuevas para adecuarse a las nuevas situaciones encontradas.
+Esto ha determinado que existan muchos métodos para cada una de los pasos descritos anteriormente lo que da lugar a una grandísima cantidad de
+posibilidades.</p>
+<p>En la práctica lo que suele hacerse es optar por utilizar algunos de los métodos en los que hay un cierto consenso acerca de su calidad y
+utilidad para cada problema. Allison () repasa los puntos principales de este consenso dando una lista de puntos a tener en
+cuenta en cualquier estudio que utilice microarrays. Imbeaud y Auffray () citan una lista de hasta 39 puntos que uno debe
+seguir en un experimento con microarrays para usar ``buenas prácticas’’.</p>
+<p>Finalmente Zhu y otros () utilizan un conjunto de
+arrays con valores de expresión conocidos para proponer los que, a su parecer, resultan los métodos más apropiados para cada etapa desde la
+corrección del backround hasta la selección de genes diferencialmente expresados.
+La figura ~ ilustra algunas de las opciones sugeridas por dichos autores.</p>
+<div class="figure"><span id="fig:dataset"></span>
+<img src="figures/c04preferredAnalysisMethods.eps" alt="Diseño de arrays"  />
+<p class="caption">
+Figure 5.2: Diseño de arrays
+</p>
+</div>
+<p>Los capítulos que siguen al presente proceden aproximadamente en el orden del proceso descrito en ~.
+Se empieza por tratar los principios del dise~no de experimentos.
+A continuación se describen algunos métodos para el control de calidad, el preprocesado y la normalización de los datos.
+Se sigue con los métodos de selección de genes –adaptados de los métodos descritos en el capítulo ~, y los métodos de
+clasificación, para concluir con una introducción a los métodos de análisis de la significación biológica de las listas de genes obtenidas
+de los procesos anteriores.</p>
+
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="algunos-ejemplos-concretos.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

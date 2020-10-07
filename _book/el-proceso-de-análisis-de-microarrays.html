@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Capítulo 2 El proceso de análisis de microarrays | Análisis de datos ómicos</title>
+  <meta name="description" content="Capítulo 2 El proceso de análisis de microarrays | Análisis de datos ómicos" />
+  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Capítulo 2 El proceso de análisis de microarrays | Análisis de datos ómicos" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capítulo 2 El proceso de análisis de microarrays | Análisis de datos ómicos" />
+  
+  
+  
+
+<meta name="author" content="Alex Sánchez-Pla^{1,2} y Ricardo Gonzalo Sanz^2" />
+<meta name="author" content="^1 Departament de Genètica, Microbiologia i Estadística. Universitat de Barcelona (UB)." />
+<meta name="author" content="^2 Unitat d’Estadística i Bioinformàtica. Vall d’Hebron Institut de Recerca (VHIR)." />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+<link rel="next" href="diseño-de-experimentos-de-microarrays.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Presentación</a></li>
+<li class="chapter" data-level="2" data-path="el-proceso-de-análisis-de-microarrays.html"><a href="el-proceso-de-análisis-de-microarrays.html"><i class="fa fa-check"></i><b>2</b> El proceso de análisis de microarrays</a><ul>
+<li class="chapter" data-level="2.1" data-path="el-proceso-de-análisis-de-microarrays.html"><a href="el-proceso-de-análisis-de-microarrays.html#tipos-de-estudios"><i class="fa fa-check"></i><b>2.1</b> Tipos de estudios</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="el-proceso-de-análisis-de-microarrays.html"><a href="el-proceso-de-análisis-de-microarrays.html#comparación-de-grupos-o-class-comparison"><i class="fa fa-check"></i><b>2.1.1</b> Comparación de grupos o <em>Class comparison</em></a></li>
+<li class="chapter" data-level="2.1.2" data-path="el-proceso-de-análisis-de-microarrays.html"><a href="el-proceso-de-análisis-de-microarrays.html#predicción-de-clase-o-class-prediction"><i class="fa fa-check"></i><b>2.1.2</b> Predicción de clase o <em>Class prediction</em></a></li>
+<li class="chapter" data-level="2.1.3" data-path="el-proceso-de-análisis-de-microarrays.html"><a href="el-proceso-de-análisis-de-microarrays.html#descubrimiento-de-clases-o-class-discovery"><i class="fa fa-check"></i><b>2.1.3</b> Descubrimiento de clases o <em>Class discovery</em></a></li>
+<li class="chapter" data-level="2.1.4" data-path="el-proceso-de-análisis-de-microarrays.html"><a href="el-proceso-de-análisis-de-microarrays.html#otros-tipos-de-estudios"><i class="fa fa-check"></i><b>2.1.4</b> Otros tipos de estudios</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="el-proceso-de-análisis-de-microarrays.html"><a href="el-proceso-de-análisis-de-microarrays.html#algunos-ejemplos-concretos"><i class="fa fa-check"></i><b>2.2</b> Algunos ejemplos concretos </a><ul>
+<li class="chapter" data-level="2.2.1" data-path="el-proceso-de-análisis-de-microarrays.html"><a href="el-proceso-de-análisis-de-microarrays.html#estudio-de-procesos-regulados-por-citoquinas"><i class="fa fa-check"></i><b>2.2.1</b> Estudio de procesos regulados por citoquinas </a></li>
+<li class="chapter" data-level="2.2.2" data-path="el-proceso-de-análisis-de-microarrays.html"><a href="el-proceso-de-análisis-de-microarrays.html#clasificación-molecular-de-la-leucemialabelgolub"><i class="fa fa-check"></i><b>2.2.2</b> Clasificación molecular de la leucemia\label{golub]</a></li>
+<li class="chapter" data-level="2.2.3" data-path="el-proceso-de-análisis-de-microarrays.html"><a href="el-proceso-de-análisis-de-microarrays.html#efecto-del-estrogeno-y-el-tiempo-de-administraciónlabelestrogen"><i class="fa fa-check"></i><b>2.2.3</b> Efecto del estrogeno y el tiempo de administración\label{estrogen]</a></li>
+<li class="chapter" data-level="2.2.4" data-path="el-proceso-de-análisis-de-microarrays.html"><a href="el-proceso-de-análisis-de-microarrays.html#efecto-del-ccl4-en-la-expresión-génica"><i class="fa fa-check"></i><b>2.2.4</b> Efecto del CCL4 en la expresión génica</a></li>
+<li class="chapter" data-level="2.2.5" data-path="el-proceso-de-análisis-de-microarrays.html"><a href="el-proceso-de-análisis-de-microarrays.html#análisis-de-patrones-en-el-ciclo-celular"><i class="fa fa-check"></i><b>2.2.5</b> Análisis de patrones en el ciclo celular</a></li>
+<li class="chapter" data-level="2.2.6" data-path="el-proceso-de-análisis-de-microarrays.html"><a href="el-proceso-de-análisis-de-microarrays.html#recapitulación"><i class="fa fa-check"></i><b>2.2.6</b> Recapitulación</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="el-proceso-de-análisis-de-microarrays.html"><a href="el-proceso-de-análisis-de-microarrays.html#el-proceso-de-análisis-de-microarrays-1"><i class="fa fa-check"></i><b>2.3</b> El proceso de análisis de microarrays</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="diseño-de-experimentos-de-microarrays.html"><a href="diseño-de-experimentos-de-microarrays.html"><i class="fa fa-check"></i><b>3</b> Diseño de experimentos de microarrays</a><ul>
+<li class="chapter" data-level="3.1" data-path="diseño-de-experimentos-de-microarrays.html"><a href="diseño-de-experimentos-de-microarrays.html#fuentes-de-variabilidad"><i class="fa fa-check"></i><b>3.1</b> Fuentes de variabilidad</a></li>
+<li class="chapter" data-level="3.2" data-path="diseño-de-experimentos-de-microarrays.html"><a href="diseño-de-experimentos-de-microarrays.html#tipos-de-variabilidad"><i class="fa fa-check"></i><b>3.2</b> Tipos de variabilidad</a></li>
+<li class="chapter" data-level="3.3" data-path="diseño-de-experimentos-de-microarrays.html"><a href="diseño-de-experimentos-de-microarrays.html#conceptos-básicos-de-diseño-de-experimentos"><i class="fa fa-check"></i><b>3.3</b> Conceptos básicos de diseño de Experimentos</a></li>
+<li class="chapter" data-level="3.4" data-path="diseño-de-experimentos-de-microarrays.html"><a href="diseño-de-experimentos-de-microarrays.html#principios-de-diseño-de-experimentos"><i class="fa fa-check"></i><b>3.4</b> Principios de diseño de experimentos</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="diseño-de-experimentos-de-microarrays.html"><a href="diseño-de-experimentos-de-microarrays.html#replicación"><i class="fa fa-check"></i><b>3.4.1</b> Replicación</a></li>
+<li class="chapter" data-level="3.4.2" data-path="diseño-de-experimentos-de-microarrays.html"><a href="diseño-de-experimentos-de-microarrays.html#aleatorización"><i class="fa fa-check"></i><b>3.4.2</b> Aleatorización</a></li>
+<li class="chapter" data-level="3.4.3" data-path="diseño-de-experimentos-de-microarrays.html"><a href="diseño-de-experimentos-de-microarrays.html#bloqueo-o-control-local"><i class="fa fa-check"></i><b>3.4.3</b> Bloqueo o control local</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><i class="fa fa-check"></i><b>4</b> Exploración de los datos, control de calidad y preprocesado</a><ul>
+<li class="chapter" data-level="4.1" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#introducción"><i class="fa fa-check"></i><b>4.1</b> Introducción</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#nivel-de-análisis-y-tipo-de-microarray"><i class="fa fa-check"></i><b>4.1.1</b> Nivel de análisis y tipo de microarray</a></li>
+<li class="chapter" data-level="4.1.2" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#datos-de-partida"><i class="fa fa-check"></i><b>4.1.2</b> Datos de partida</a></li>
+<li class="chapter" data-level="4.1.3" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#gráficos-de-diagnóstico-para-microarrays-de-dos-colores"><i class="fa fa-check"></i><b>4.1.3</b> Gráficos de diagnóstico para microarrays de dos colores</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#normalización-de-arrays-de-dos-colores"><i class="fa fa-check"></i><b>4.2</b> Normalización de arrays de dos colores</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#normalización-global"><i class="fa fa-check"></i><b>4.2.1</b> Normalización global</a></li>
+<li class="chapter" data-level="4.2.2" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#normalización-dependiente-de-la-intensidad"><i class="fa fa-check"></i><b>4.2.2</b> Normalización dependiente de la intensidad</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#resumen-y-normalización-de-microarrays-de-affymetrix"><i class="fa fa-check"></i><b>4.3</b> Resumen y normalización de microarrays de Affymetrix</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#métodos-originales-de-affymetrix"><i class="fa fa-check"></i><b>4.3.1</b> Métodos originales de Affymetrix</a></li>
+<li class="chapter" data-level="4.3.2" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#el-método-rma-robust-multi-array-average"><i class="fa fa-check"></i><b>4.3.2</b> El método RMA (Robust Multi-Array Average)</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#filtraje-no-específico"><i class="fa fa-check"></i><b>4.4</b> Filtraje no específico</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i><b>5</b> Referencias</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Análisis de datos ómicos</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="el-proceso-de-análisis-de-microarrays" class="section level1">
+<h1><span class="header-section-number">Capítulo 2</span> El proceso de análisis de microarrays</h1>
+<p>Este capítulo es una corta transición entre la primera parte del curso, en la que se han presentado los conceptos y herramientas básicos y la segunda en donde se presentan por separado y con mayor detalle los métodos de análisis de datos de microarrays.</p>
+<p>Su objetivo por tanto es ofrecer una visión <em>de conjunto</em> que sirva de guía (``roadmap’’) para los capítulos siguientes de forma que sin perder el detalle de cada uno de ellos tengamos conciencia de en que punto del proceso general nos encontramos.</p>
+<p>El capítulo se estructura en dos partes. En la primera se presentan brevemente algunos de los problemas que típicamente se puede querer estudiar con microarrays u otras técnicas similares de análisis de datos de alto rendimiento. A continuación se presenta lo que se ha llamdo aquí el <em>proceso de análisis de microarrays</em>. Finalmente se intoducen algunos casos reales que, a modo de ejemplo se utilizarán en los capítulos siguientes.</p>
+<div id="tipos-de-estudios" class="section level2">
+<h2><span class="header-section-number">2.1</span> Tipos de estudios</h2>
+<p>Los microarrays y otras tecnologías de alto rendimiento se han aplicado a multitud de investigaciones, de tipus muy diversos que van desde estudio del cancer (<span class="citation">Alizadeh et al. (2000)</span>, <span class="citation">Golub et al. (1999)</span>, <span class="citation">van ’t Veer et al. (2002)</span>) al de la germinación y la maduración del tomate (<span class="citation">Moore et al. (2002)</span>). A pesar de ello no resulta complicado clasificar los estudios realizados en algunos de los grandes bloques que se describen a continuación. La clasificación está basada en el excelente texto de Simon y colegas (<span class="citation">Simon et al. (2003)</span>) y aunque se origina en problemas de microarrays se puede aplicar fácilmente a estudios de genómica o ultrasecuenciación.</p>
+<div id="comparación-de-grupos-o-class-comparison" class="section level3">
+<h3><span class="header-section-number">2.1.1</span> Comparación de grupos o <em>Class comparison</em></h3>
+<p>El objetivo de los estudios comparativos es determinar si los perfiles de expresión génica difieren entre grupos previamente identificados. También se conoce estos estudios como de <em>selección de genes diferencialmente expresados</em> y son, sin duda los más habituales. Los grupos pueden representar una gran variedad de condiciones, desde distintos tejidos a distintos tratamientos o múltiples combinaciones de factores experimentales.</p>
+<p>El análisis de este tipo de experimentos, que se describe en el capítulo sobre selección de genes diferencialmente expresados utiliza herramientas estadísticas como las pruebas de comparación de grupos paramétricas (t de Student) o no (test de Mann-Whitney) o diversos métodos de análisis de la varianza.</p>
+<p>Entre los ejemplos de la sección @ref{c4examples} los casos @ref{celltypes}, @ref{estrogen} o @ref{CCL4} hacen referencia a estudios comparativos.</p>
+</div>
+<div id="predicción-de-clase-o-class-prediction" class="section level3">
+<h3><span class="header-section-number">2.1.2</span> Predicción de clase o <em>Class prediction</em></h3>
+<p>La predicción de clase puede confundirse con la selección de genes en tanto que disponemos de clases predefinidas pero su objetivo es distinto, ya que no pretende simplemente buscar genes cuya expresión sea distinta entre dichos grupos sino genes que puedan ser utilizados para identificar a que clase pertenece un <code>nuevo'' individuo dado cuya clase es</code>a priori’’ desconocida. El proceso de predicción suele empezar con una selección de genes informativos, que pueden ser, o no, los mismos que se obtendrían si aplicáramos los métodos del apartado anterior, seguida de la construcción de un modelo de predicción y, lo que es más importante, de la verificación o validación de dicho modelo con unos datos nuevos independientes de los utilizados para el desarrollo del modelo.</p>
+<p>Aunque el interés de la predicción de clase es muy alto se trata de un procedimiento mucho más complejo y con más posibilidades de error que la simple selección de genes diferencialmente expresados.</p>
+<p>Entre los ejemplos de la sección @ref{c4examples} el caso @ref{golub} trata de un problema de predicción, a la vez que uno de descubrimiento de clases.</p>
+</div>
+<div id="descubrimiento-de-clases-o-class-discovery" class="section level3">
+<h3><span class="header-section-number">2.1.3</span> Descubrimiento de clases o <em>Class discovery</em></h3>
+<p>Un problema distinto a los descritos se presenta cuando no se conoce las clases en que se agrupan los individuos. En este caso de lo que se trata es de encontrar grupos entre los datos que permitan reunir a los individuos más parecidos entre si y distintos de los de los demás grupos. Los métodos estadísticos que se emplearan en estos casos se conocen como <em>análisis de clusters</em> y no son tan complejos como los de predicción de clase aunque algunos aspectos como por ejemplo la definición del número de grupos no resulta tampoco sencillo.</p>
+<p>Entre los ejemplos de la sección  tanto el caso <code>golub</code>, en parte, como el @ref{breastTum} tratan problemas de descubrimiento de clases.</p>
+<p>Una curiosidad del campo de la estadística es que el término clasificación aparece usado de forma indistinta para referirse a problemas de predicicón de clase o de descubrimiento de clase.</p>
+</div>
+<div id="otros-tipos-de-estudios" class="section level3">
+<h3><span class="header-section-number">2.1.4</span> Otros tipos de estudios</h3>
+<p>Una vez identificados los principales tipos de estudios quedan muchos que no coinciden plenamente con ninguno de ellos. Sin entrar en detalles podemos señalar los estudios de evolución a lo largo del tiempo (<code>time course''), los de significación biológica (</code>Gene Enrichment Analysis’‘, <code>Gene Set Enrichment Analysis'', ...) , los que buscan relaciones entre los genes (</code>network analysis’’ o ``pathway analysis’’). De momento con conocer e identificar los tres grandes bloques mencionados resultará más que suficiente.</p>
+</div>
+</div>
+<div id="algunos-ejemplos-concretos" class="section level2">
+<h2><span class="header-section-number">2.2</span> Algunos ejemplos concretos </h2>
+<p>Una de las dificultades con que se encuentra la persona que comienza en el análisis de datos de microarrays es de donde obtener ejemplos concretos con los que prácticar las técnicas que está aprendiendo.</p>
+<p>No es difícil encontrar datos de microarrays en internet por lo que
+se han seleccionado algunos conjuntos de datos interesantes para
+utilizarlos de ejemplo a lo largo del curso. Algunos de éstos son
+``populares’’ en el sentido de que han sido utilizados en diversas
+ocasiones y por lo tanto se encuentran bien documentados. Otros se han
+escogido simplemente porque ilustran bien algunas de las ideas que se
+desea exponer o por su accesibilidad.</p>
+<p>Todos los datos corresponden a investigaciones publicadas por lo que no se describen exhaustivamente sinó que se expone brevemente el origen y objetivos del trabajo –incluyendo su clasificación según los grupos definidos en la sección anterior– y las características perinentes para el análisis como el tipo de microarrays, los grupos –si los hay– o como acceder a los datos.</p>
+<div id="estudio-de-procesos-regulados-por-citoquinas" class="section level3">
+<h3><span class="header-section-number">2.2.1</span> Estudio de procesos regulados por citoquinas </h3>
+
+<p>Este conjunto de datos, que se denominará ``celltypes’’, corresponde a un estudio realizado por Chelvarajan y sus colegas (<span class="citation">Chelvarajan et al. (2006)</span>) que analizaron el efecto de la estimulación con lipopolisacáridos en la regulación por parte de citoquinas de ciertos procesos biológicos relacionados con la inflamación.</p>
+<p>Este estudio es del tipo ``class comparison’’ es decir su principal objetivo es la obtención de genes diferencialmente expresados entre dos o más condiciones.</p>
+<p>Los datos se encuentran disponibles en la base de datos pública <code>caarray</code> mantenida por el <em>National Institute of Health (NIH)</em>, pero pueden descargarse de la página de materiales del curso para garantizar su disponibilidad.</p>
+</div>
+<div id="clasificación-molecular-de-la-leucemialabelgolub" class="section level3">
+<h3><span class="header-section-number">2.2.2</span> Clasificación molecular de la leucemia\label{golub]</h3>
+
+<p>A finales de los años 90, Todd Golub y sus colaboradores (<span class="citation">Golub et al. (1999)</span>) realizaron uno de los estudios más populares hasta el momento con datos de microarrays. En él utilizaron microarrays de oligonucleótidos para 6817 genes humanos para mirar de encontrar una forma de distinguir (clasificar) tumores de pacientes con leucemia linfoblástica aguda (ALL) de aquellos que sufrían de leucemia mieloide aguda (AML).
+Además se interesaba por la posibilidad de descubrir subgrupos de forma que pudieran definirse variantes de cada una de estas patologías a nivel molecular.</p>
+<p>La diversidad de objetivos del estudio lleva a clasificarlo tanto entre los del tipo de predicción de clase como entre los que buscan descubrir nuievas clases o grupos en los datos.</p>
+<p>Los datos de este estudio se encuentran disponibles en la web del instituto Broad, en donde se llevó a cabo (<a href="http://www.broadinstitute.org">http://www.broadinstitute.org</a>). También se encuentra disponible un paquete de <code>R</code> denominado <code>ALL</code> que permite utilizarlos directamente usando <code>R</code> y Bioconductor.</p>
+</div>
+<div id="efecto-del-estrogeno-y-el-tiempo-de-administraciónlabelestrogen" class="section level3">
+<h3><span class="header-section-number">2.2.3</span> Efecto del estrogeno y el tiempo de administración\label{estrogen]</h3>
+
+<p>Scholtens y colegas (<span class="citation">Scholtens et al. (2004)</span>) describen un estudio sobre el efecto de un tratamiento con estrógenos y del tiempo transcurrido desde el tratamiento en la expresión génica en pacientes de cáncer de mama. Los investigadores supusieron que los genes asociados con una respuesta temprana podrían considerarse dianas directas del tratamiento,
+mientras que los que tardaron más en hacerlo podrían considerarse objetivos secundarios correspondientes a dianas más alejadas en las
+vías metabólicas.</p>
+<p>Estos datos han sido utilizados multitud de veces en los cursos de análisis de microarrays realizados por el proyecto Bioconductor y se encuentran disponibles en forma de paquete de <code>R</code>, el paquete <code>estrogen</code>. Una cracaterística importante de este paquetes es el hecho de que en vez de los datos procesados proporciona los datos ``crudos’’en forma de archivos .CEL de Affymetrix. Esto permite una mayor flexibilidad a la hora de reutilizarlos lo que explica su popularidad.</p>
+</div>
+<div id="efecto-del-ccl4-en-la-expresión-génica" class="section level3">
+<h3><span class="header-section-number">2.2.4</span> Efecto del CCL4 en la expresión génica</h3>
+
+<p>Holger y colegas de la empresa LGC Ltd. en Teddington, Inglaterra realizaron unos expeimentos con microarrays de dos colores en los que trataron hepatocitos de ratón con tetraclorido de carbono (CCL4) o con dimetilsulfóxido (DMSO). El tetraclorido de carbono fue ampliamente utilizado en productos de limpieza o refrigeración para el hogar hasta que se detectó que podía tener efectos tóxicos e incluso cancerígenos. El DMSO es un solvente similar, sin efectos tóxicos conocidos, que se utilizó como control negativo.</p>
+<p>Los datos de este estudio no han sido publicados pero se encuentran disponibles en el paquete <code>CCL4</code> de bioconductor. Su interés reside por un lado en que se trata de datos de microarrays de dos colores de la marca Agilent –en un momento en que la mayoría de estudios se realizan con datos de un color. Aparte de esto cabe resaltar el hecho de que el paquete incluye, de forma similar al anterior, los datos <code>crudos'' en forma de archivos de tipo</code>Genepix’’ uno de los programas populares para escanear imágenes generadas con microarrays de dos colores.</p>
+<p>Este estudio es también un estudio de comparación de clases cuyo objetivo principal es la selección de genes cuya expresión se asocia al tratamiento con CCL4 o DMSO.</p>
+</div>
+<div id="análisis-de-patrones-en-el-ciclo-celular" class="section level3">
+<h3><span class="header-section-number">2.2.5</span> Análisis de patrones en el ciclo celular</h3>
+
+<p>Los datos de este ejemplo denominado <code>kidney</code> son datos ya normalizados referidos a la expresión de los genes en distintos momentos del ciclo delular de la levadura e decir desde que concluye la división celular hasta que se inicia la siguiente.</p>
+<p>Los datos puede desargarse desde la página del proyecto ``Yeast Cell Cycle Project’’ (Proyecto de estudio del ciclo celular de la levadura) en la dirección:\
+<a href="http://genome-www.stanford.edu/cellcycle/data/rawdata/">http://genome-www.stanford.edu/cellcycle/data/rawdata/</a>.</p>
+</div>
+<div id="recapitulación" class="section level3">
+<h3><span class="header-section-number">2.2.6</span> Recapitulación</h3>
+<p>La tabla  resume la lista de ejemplos que se utilizan en este manual indicando el nombre con que nos referiremos de aquí en adelante a cada conjunto de datos as' como algunas de sus carcaterísticas.</p>
+<p>La tabla siguiente resume los “datasets” utilizados en este manual. Aparte del nombre (arbitrario y ``mnemotécnico’’) se indica el tipo de microarrays, el número de muestras, y el tipo de problema para el que se utilizaron originalmente.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Nombre</th>
+<th>Tipo (Modelo)</th>
+<th>N. Muestras</th>
+<th>Tipo de estudio</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>celltypes</code></td>
+<td>Un color (Affy, Mouse 4302)</td>
+<td>12</td>
+<td>Comparativo</td>
+</tr>
+<tr class="even">
+<td><code>golub</code></td>
+<td>Un color (Affy, HGU95A)</td>
+<td>38</td>
+<td>Clasificación</td>
+</tr>
+<tr class="odd">
+<td><code>estrogen</code></td>
+<td>Un color (Affy, HGU95A)</td>
+<td>8</td>
+<td>Comparativo</td>
+</tr>
+<tr class="even">
+<td><code>CCL4</code></td>
+<td>Dos colores (Agilent, WG Rat Microarray)</td>
+<td>16</td>
+<td>Comparativo</td>
+</tr>
+<tr class="odd">
+<td><code>breastTum</code></td>
+<td>Un color (Affy, HGU95A)</td>
+<td>49</td>
+<td>Clasificación</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="el-proceso-de-análisis-de-microarrays-1" class="section level2">
+<h2><span class="header-section-number">2.3</span> El proceso de análisis de microarrays</h2>
+<p>Una vez descritos los tipos de análisis y algunos ejemplos podemos pasar a describir el proceso de análisis de microarrays que se resume brevemente en la figura @ref{c04analysisProcess}.</p>
+<p>El análisis de microarrays, como la mayoría de análisis debe proceder de forma ordenada y siguiendo el método científico:</p>
+<ul>
+<li>La pregunta y su contexto nos servirán de guía para definir el <em>Diseño experimental</em> adecuado.</li>
+<li>El experimento se deberá realizar siguiendo las pautas decididas en el <em>Diseño experimental</em> y los datos obtenidos
+–que solemos denominar datos <code>crudos'' o</code>raw data’’– deberán someterse a los <em>Controles de calidad adecuados</em> antes de continuar con su análisis.</li>
+<li>Una vez decidido si la calidad de los datos es aceptable pasaremos a prepararlos para el análisis lo que puede incluir diversas formas
+de <em>preprocesado, o transformaciones</em> que a menudo se incluyen de forma general bajo el paraguas del término <em>normalización</em>, aunque, como veremos se trata de conceptos distintos.</li>
+<li>Los datos normalizados se utilizarán para los <em>análisis estadísticos</em> que hayamos decidido realizar durante el diseño experimental.</li>
+<li>Finalmente los resultados de los análisis serán la base para una <em>interpretación biológica</em> de los resultados del experimento.</li>
+</ul>
+<p>Tal como ilustra la figura @ref(c04analysisProcess&gt;) el análisis de microarrays puede ser fácilmente visualizado como un proceso que empieza por una
+pregunta biológica y concluye con una interpretación de los resultados de los análisis que, de alguna forma,
+confiamos nos acerque un poco a la respuesta de la pregunta inicial.</p>
+<div class="figure"><span id="fig:c04analysisProcess"></span>
+<img src="figures/c04analysisProcess.png" alt="Proceso de análisis de microarrays" width="640" />
+<p class="caption">
+Figure 2.1: Proceso de análisis de microarrays
+</p>
+</div>
+<p>El proceso descrito es básicamente una forma razonable de proceder en general.
+Los microarrays y otros datos genómicos son diferentes en su naturaleza de
+los datos clásicos alrededor de los que se han desarrollado la mayor parte de
+técnicas estadísticas. En consecuencia, en muchos casos ha sido necesario
+adaptar las técnicas existentes o desarrollar otras nuevas para adecuarse a las nuevas situaciones encontradas.
+Esto ha determinado que existan muchos métodos para cada una de los pasos descritos anteriormente lo que da lugar a una grandísima cantidad de
+posibilidades.</p>
+<p>En la práctica lo que suele hacerse es optar por utilizar algunos de los métodos en los que hay un cierto consenso acerca de su calidad y
+utilidad para cada problema. Allison (<span class="citation">Allison et al. (2006)</span>) repasa los puntos principales de este consenso dando una lista de puntos a tener en
+cuenta en cualquier estudio que utilice microarrays. Imbeaud y Auffray (<span class="citation">Imbeaud and Auffray (2005)</span>) citan una lista de hasta 39 puntos que uno debe
+seguir en un experimento con microarrays para usar ``buenas prácticas’’.</p>
+<p>Finalmente Zhu y otros (<span class="citation">Zhu, Miecznikowski, and Halfon (2010)</span>) utilizan un conjunto de
+arrays con valores de expresión conocidos para proponer los que, a su parecer, resultan los métodos más apropiados para cada etapa desde la
+corrección del backround hasta la selección de genes diferencialmente expresados.
+La figura <a href="el-proceso-de-análisis-de-microarrays.html#fig:c04preferredAnalysisMethods">2.2</a> ilustra algunas de las opciones sugeridas por dichos autores.</p>
+<div class="figure"><span id="fig:c04preferredAnalysisMethods"></span>
+<img src="figures/c04preferredAnalysisMethods.png" alt="Diseño de arrays" width="439" />
+<p class="caption">
+Figure 2.2: Diseño de arrays
+</p>
+</div>
+<p>Los capítulos que siguen al presente proceden aproximadamente en el orden del proceso descrito en <a href="el-proceso-de-análisis-de-microarrays.html#fig:c04analysisProcess">2.1</a>.</p>
+<ul>
+<li>Se empieza por tratar los principios del diseño de experimentos.</li>
+<li>A continuación se describen algunos métodos para el control de calidad, el preprocesado y la normalización de los datos.</li>
+<li>Se sigue con los métodos de selección de genes, que tratan aproximaciones básicas como el t-test y otras más sofisticadas como los modelos lineles para microarrays.</li>
+<li>La parte de selección de genes finaliza con una introducción a los métodos de análisis de la significación biológica de las listas de genes obtenidas
+de los procesos anteriores.</li>
+<li>Un último bloque aborda los métods de clasificación supervisada y no supervisada, que han tenido y siguen teniendo gran aplicabilidad en el análisis de todo tipo de datos ómicos.</li>
+</ul>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="diseño-de-experimentos-de-microarrays.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
