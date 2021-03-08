@@ -1,13 +1,13 @@
-# Diseño de experimentos de microarrays
+# Diseño de experimentos de microarrays {#MDAExpDesign}
 
 En este capítulo se examinan unas componentes clave del análisis de microarrays el diseño de experimentos que, no tan solo es
 crucial para una buena recogida de información, sino que marca todo el proceso desde el preprocesado al análisis final.
 
 ## Fuentes de variabilidad
 
-Los datos genómicos son muy variables. La figura siguiente, tomada de (geschwind:2002) ilustra algunas posibles fuentes de variabilidad, desde que se inicia el experimento hasta que se lee la información con el escáner. Sin tener que entrar en cómo influye cada una de estas fuents o cuan grande es su influencia lo que muestra esta figura es que este tipo de experimentos se enfrenta a múltiples fuentes de error, por lo que puede beneficiarse de un correcto diseño de experimentos.
+Los datos genómicos son muy variables. La figura \@ref(fig:c04variabilitySources), tomada de @geschwind:2002 ilustra algunas posibles fuentes de variabilidad, desde que se inicia el experimento hasta que se lee la información con el escáner. Sin tener que entrar en cómo influye cada una de estas fuents o cuan grande es su influencia lo que muestra esta figura es que este tipo de experimentos se enfrenta a múltiples fuentes de error, por lo que puede beneficiarse de un correcto diseño de experimentos.
 
-```{r c04variabilitySources, fig.cap="Proceso de análisis de microarrays", echo=FALSE, eval=TRUE}
+```{r c04variabilitySources, fig.cap="Proceso de análisis de microarrays", echo=FALSE}
 knitr::include_graphics("figures/c04variabilitySources.png")
 ```
 
@@ -68,61 +68,31 @@ La utilización de replicas es importante para incrementar la precisión, obtene
 
 La replicación técnica permite la estimación del error a nivel de medida, mientras que la replicación biológica permite estimar la variabilidad a nivel de población.
 
-```{r c04replicas, fig.cap="Replicas biológicas vs réplicas técnicas", echo=FALSE, eval=TRUE}
+```{r c04replicas, fig.cap="Replicas biológicas vs réplicas técnicas", echo=FALSE}
 knitr::include_graphics("figures/c04replicas.png")
 ```
 
 #### Potencia y tamaño de la muestra
 
-Sorprendentemente, los primeros experimentos de microarrays utilizaban pocas o
-ninguna replica biológica. La principal explicación para este hecho -además
-de la falta de conocimiento estadístico- fue el alto coste de cada microarray.
+Sorprendentemente, los primeros experimentos de microarrays utilizaban pocas o ninguna replica biológica. La principal explicación para este hecho, además de la falta de conocimiento estadístico, fue el alto coste de cada microarray.
 
-En pocos años, la necesidad de las réplicas ha llegado a ser indiscutible, y al
-mismo tiempo, el coste de los chips ha disminuido considerablemente. Actualmente,
-es normal la utilización de, al menos, tres a cinco replicas por condición
-experimental, aunque a este consenso se ha llegado más por razones empíricas que
-por la disponibilidad de modelos apropiados para el análisis de la potencia y
-tamaño de la muestra.
+En pocos años, la necesidad de las réplicas ha llegado a ser indiscutible, y al mismo tiempo, el coste de los chips ha disminuido considerablemente. Actualmente, es normal la utilización de, al menos, tres a cinco replicas por condición experimental, aunque a este consenso se ha llegado más por razones empíricas que por la disponibilidad de modelos apropiados para el análisis de la potencia y tamaño de la muestra.
 
-Recientemente, se ha producido una importante afluencia de artículos describiendo
-métodos para el análisis de la potencia y tamaño de la muestra. A pesar de su
-variedad, ningún método aparece como candidato claro para ser utilizado en
-situaciones prácticas. Esto se debe, probablemente, a la complejidad de los
-datos de microarrays, básicamente por que los genes no son independientes. Por
-tanto, estas estructuras de correlación existen en los datos, pero la mayor parte
-de las dependencias son desconocidas por lo que la estimación de estas estructuras
-es muy complicada.
+Recientemente, se ha producido una importante afluencia de artículos describiendo métodos para el análisis de la potencia y tamaño de la muestra. A pesar de su variedad, ningún método aparece como candidato claro para ser utilizado en situaciones prácticas. Esto se debe, probablemente, a la complejidad de los datos de microarrays, básicamente por que los genes no son independientes. Por tanto, estas estructuras de correlación existen en los datos, pero la mayor parte de las dependencias son desconocidas por lo que la estimación de estas estructuras es muy complicada.
 
-Como indicaba Allison ( Allison:2006a) aunque no hay consenso sobre que
-procedimiento es mejor para determinar el tamaño de las muestras, sí que lo hay
-sobre la conveniencia de realizar el análisis de la potencia, y, por supuesto,
-sobre el hecho de que un mayor número de replicas generalmente proporcionan
-una mayor potencia.
+Como indicaba Allison @Allison:2006a, aunque no hay consenso sobre que
+procedimiento es mejor para determinar el tamaño de las muestras, sí que lo hay sobre la conveniencia de realizar el análisis de la potencia, y, por supuesto, sobre el hecho de que un mayor número de replicas generalmente proporcionan una mayor potencia.
 
-#### Pooling
+#### _Pooling_
 
-En el contexto de los microarrays, llamamos "pooling" a la combinación del RNA
-de diferentes casos en una única muestra. 
+En el contexto de los microarrays, llamamos "pooling" a la combinación del RNA de diferentes casos en una única muestra. 
 
-Hay dos razones a favor de ello, una,
-es que, a veces, no hay suficiente ARN disponible y esta es la única forma de
-conseguir suficiente material para construir los arrays, otra, más controvertida,
+Hay dos razones a favor de ello, una,  es que, a veces, no hay suficiente ARN disponible y esta es la única forma de conseguir suficiente material para construir los arrays, otra, más controvertida,
 es la creencia que la variabilidad entre arrays puede reducirse por "pooling".
-La justificación es que combinar muestras equivale a promediar expresiones, y
-como ya se conoce, el promedio es menos variable que los valores individuales. A
-pesar de la debilidad de este argumento, es verdad que en ciertas situaciones el
-pooling puede ser apropiado y, recientemente, muchos estadísticos han dedicado
-sus esfuerzos para tratar de responder la pregunta "to pool or not to pool"
-( Kerr:2001a). Por ejemplo, si la variabilidad biológica está altamente
-relacionada con el error en las medidas, y las muestras biológicas tienen un
-coste mínimo en comparación con el de los arrays, una apropiada estrategia de
-"pooling" puede ser claramente eficiente en costes.
+La justificación es que combinar muestras equivale a promediar expresiones, y como ya se conoce, el promedio es menos variable que los valores individuales. A pesar de la debilidad de este argumento, es verdad que en ciertas situaciones el _pooling_ puede ser apropiado y, recientemente, muchos estadísticos han dedicado sus esfuerzos para tratar de responder la pregunta "to pool or not to pool" [@Kerr:2001a]. Por ejemplo, si la variabilidad biológica está altamente relacionada con el error en las medidas, y las muestras biológicas tienen un coste mínimo en comparación con el de los arrays, una apropiada estrategia de "pooling" puede ser claramente eficiente en costes.
 
-De todos modos, el "pooling" no se debería usar en cualquier tipo de estudios.
-Si el objetivo es comparar expresiones medias (ver más adelante " comparación
-de clases"), puede funcionar adecuadamente, pero se debería claramente evitar
-cuando el objetivo del experimento es construir predictores que se basen en
+De todos modos, el "pooling" no se debería usar en cualquier tipo de estudios. 
+Si el objetivo es comparar expresiones medias (ver más adelante " comparación de clases"), puede funcionar adecuadamente, pero se debería claramente evitar cuando el objetivo del experimento es construir predictores que se basen en
 características individuales.
 
 
@@ -144,7 +114,7 @@ A diferencia de lo que ocurre con los factores tratamiento, el experimentador _n
 Bloquear es una buena estrategia siempre y cuando sea posible dividir las unidades experimentales en grupos de unidades similares. La ventaja de bloquear un factor que se supone que tiene una clara influencia en la respuesta, pero en el que no se está interesado, es que convierte la variabilidad sistemática no planificada en variabilidad sistemática planificada.
 
 
-# Diseños experimentales para microarrays de dos colores
+## Diseños experimentales para microarrays de dos colores
 
 En arrays de dos colores, se aplican dos condiciones experimentales a cada array.
 Esto permite la estimación del efecto del array, como el efecto de bloqueo.
@@ -166,7 +136,7 @@ diferente intensidad. La forma normal de manejar este problema es
  dye-swapping que consiste en utilizar para una misma comparación dos
 arrays con dyes cambiados, es decir, si en el primer array la muestra 1 se marca
 con Cy3 y la muestra 2 con Cy5, con las muestras del segundo array se hace al
-revés (ver figura c04dyelabels).
+revés (ver figura \@ref(fig:c04dyelabels).
 
 
 ```{r c04dyelabels, fig.cap="Representación simplificada de dos diseños", echo=FALSE, eval=TRUE}
@@ -181,8 +151,7 @@ estudiado de forma exhaustiva.
 
 El diseño utilizado más comúnmente en la comunidad biológica es el
  diseño de referencia en el que cada condición de interés se compara
- con muestras tomadas de alguna referencia estándar común a todos las arrays.
-(ver figura c04referencevsloop (a)).
+ con muestras tomadas de alguna referencia estándar común a todos las arrays, (ver figura \@ref(fig:c04referencevsloop), imagen  (a)).
 
 ```{r c04referencevsloop, fig.cap="(a) diseño de referencia.  (b) diseño en loop.", echo=FALSE, eval=TRUE}
 knitr::include_graphics("figures/c04referencevsloop.png")

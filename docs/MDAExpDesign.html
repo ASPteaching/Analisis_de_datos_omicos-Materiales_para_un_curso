@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Capítulo 4 Diseño de experimentos de microarrays | Analisis de datos omicos</title>
+  <meta name="description" content="Capítulo 4 Diseño de experimentos de microarrays | Analisis de datos omicos" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Capítulo 4 Diseño de experimentos de microarrays | Analisis de datos omicos" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capítulo 4 Diseño de experimentos de microarrays | Analisis de datos omicos" />
+  
+  
+  
+
+<meta name="author" content="Alex Sánchez-Pla^{1,2} y Ricardo Gonzalo Sanz^2" />
+<meta name="author" content="^1 Departament de Genètica, Microbiologia i Estadística. Universitat de Barcelona (UB)." />
+<meta name="author" content="^2 Unitat d’Estadística i Bioinformàtica. Vall d’Hebron Institut de Recerca (VHIR)." />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="MDAProcess.html"/>
+<link rel="next" href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"/>
+<script src="libs/header-attrs-2.7/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Presentación</a></li>
+<li class="chapter" data-level="2" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><i class="fa fa-check"></i><b>2</b> Introduccion a los microarrays y otras tecnologías omicas</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#antecedentes-históricos"><i class="fa fa-check"></i><b>2.1</b> Antecedentes históricos</a></li>
+<li class="chapter" data-level="2.2" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#los-microarrays"><i class="fa fa-check"></i><b>2.2</b> Los microarrays</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#aplicaciones-de-los-microarrays"><i class="fa fa-check"></i><b>2.2.1</b> Aplicaciones de los microarrays</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#cómo-funcionan-los-microarrays"><i class="fa fa-check"></i><b>2.3</b> Cómo funcionan los microarrays</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#microarrays-de-dos-colores"><i class="fa fa-check"></i><b>2.3.1</b> Microarrays de dos colores</a></li>
+<li class="chapter" data-level="2.3.2" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#microarrays-de-un-color"><i class="fa fa-check"></i><b>2.3.2</b> Microarrays de un color</a></li>
+<li class="chapter" data-level="2.3.3" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#realización-de-un-experimento-de-microarrays"><i class="fa fa-check"></i><b>2.3.3</b> Realización de un experimento de microarrays</a></li>
+<li class="chapter" data-level="2.3.4" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#como-se-mide-la-expresión"><i class="fa fa-check"></i><b>2.3.4</b> Como se mide la expresión</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#bioinformática-de-microarrays"><i class="fa fa-check"></i><b>2.4</b> Bioinformática de Microarrays<a name="Bioinformática"></a></a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#software-para-el-análisis-de-datos-de-microarrays"><i class="fa fa-check"></i><b>2.4.1</b> Software para el análisis de datos de microarrays</a></li>
+<li class="chapter" data-level="2.4.2" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#bases-de-datos-de-microarrays"><i class="fa fa-check"></i><b>2.4.2</b> Bases de datos de Microarrays</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#extensiones-1-otros-tipos-de-microarrays"><i class="fa fa-check"></i><b>2.5</b> Extensiones (1): Otros tipos de microarrays<a name="extensions"></a></a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#otros-microarrays-de-adn"><i class="fa fa-check"></i><b>2.5.1</b> Otros microarrays de ADN</a></li>
+<li class="chapter" data-level="2.5.2" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#otros-tipos-de-microarrays-proteínas-o-carbohidratos"><i class="fa fa-check"></i><b>2.5.2</b> Otros tipos de microarrays: Proteínas o carbohidratos</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#extensiones-2-ngs-nextnow-generation-sequencing"><i class="fa fa-check"></i><b>2.6</b> Extensiones (2): <em>NGS: Next(Now) Generation Sequencing</em></a>
+<ul>
+<li class="chapter" data-level="2.6.1" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#visión-global-de-las-tecnologías-de-secuenciación"><i class="fa fa-check"></i><b>2.6.1</b> Visión global de las tecnologías de secuenciación</a></li>
+<li class="chapter" data-level="2.6.2" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#de-la-secuenciación-sanger-a-la-ultrasecuenciación"><i class="fa fa-check"></i><b>2.6.2</b> De la secuenciación Sanger a la ultrasecuenciación</a></li>
+<li class="chapter" data-level="2.6.3" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#tecnologías-de-ultrasecuenciación"><i class="fa fa-check"></i><b>2.6.3</b> Tecnologías de ultrasecuenciación</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="MDAProcess.html"><a href="MDAProcess.html"><i class="fa fa-check"></i><b>3</b> El proceso de análisis de microarrays</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="MDAProcess.html"><a href="MDAProcess.html#tipos-de-estudios"><i class="fa fa-check"></i><b>3.1</b> Tipos de estudios</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="MDAProcess.html"><a href="MDAProcess.html#comparación-de-grupos-o-class-comparison"><i class="fa fa-check"></i><b>3.1.1</b> Comparación de grupos o “Class comparison”</a></li>
+<li class="chapter" data-level="3.1.2" data-path="MDAProcess.html"><a href="MDAProcess.html#predicción-de-clase-o-class-prediction"><i class="fa fa-check"></i><b>3.1.2</b> Predicción de clase o “Class prediction”</a></li>
+<li class="chapter" data-level="3.1.3" data-path="MDAProcess.html"><a href="MDAProcess.html#descubrimiento-de-clases-o-class-discovery"><i class="fa fa-check"></i><b>3.1.3</b> Descubrimiento de clases o “Class discovery”</a></li>
+<li class="chapter" data-level="3.1.4" data-path="MDAProcess.html"><a href="MDAProcess.html#otros-tipos-de-estudios"><i class="fa fa-check"></i><b>3.1.4</b> Otros tipos de estudios</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="MDAProcess.html"><a href="MDAProcess.html#c4examples"><i class="fa fa-check"></i><b>3.2</b> Algunos ejemplos concretos</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="MDAProcess.html"><a href="MDAProcess.html#celltypes"><i class="fa fa-check"></i><b>3.2.1</b> Estudio de procesos regulados por citoquinas</a></li>
+<li class="chapter" data-level="3.2.2" data-path="MDAProcess.html"><a href="MDAProcess.html#golub"><i class="fa fa-check"></i><b>3.2.2</b> Clasificación molecular de la leucemia</a></li>
+<li class="chapter" data-level="3.2.3" data-path="MDAProcess.html"><a href="MDAProcess.html#efecto-del-estrogeno-y-el-tiempo-de-administración-estrogen"><i class="fa fa-check"></i><b>3.2.3</b> Efecto del estrogeno y el tiempo de administración {#estrogen]</a></li>
+<li class="chapter" data-level="3.2.4" data-path="MDAProcess.html"><a href="MDAProcess.html#CCL4"><i class="fa fa-check"></i><b>3.2.4</b> Efecto del CCL4 en la expresión génica</a></li>
+<li class="chapter" data-level="3.2.5" data-path="MDAProcess.html"><a href="MDAProcess.html#yeast"><i class="fa fa-check"></i><b>3.2.5</b> Análisis de patrones en el ciclo celular</a></li>
+<li class="chapter" data-level="3.2.6" data-path="MDAProcess.html"><a href="MDAProcess.html#recapitulación"><i class="fa fa-check"></i><b>3.2.6</b> Recapitulación</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="MDAProcess.html"><a href="MDAProcess.html#el-proceso-de-análisis-de-microarrays"><i class="fa fa-check"></i><b>3.3</b> El proceso de análisis de microarrays</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="MDAExpDesign.html"><a href="MDAExpDesign.html"><i class="fa fa-check"></i><b>4</b> Diseño de experimentos de microarrays</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="MDAExpDesign.html"><a href="MDAExpDesign.html#fuentes-de-variabilidad"><i class="fa fa-check"></i><b>4.1</b> Fuentes de variabilidad</a></li>
+<li class="chapter" data-level="4.2" data-path="MDAExpDesign.html"><a href="MDAExpDesign.html#tipos-de-variabilidad"><i class="fa fa-check"></i><b>4.2</b> Tipos de variabilidad</a></li>
+<li class="chapter" data-level="4.3" data-path="MDAExpDesign.html"><a href="MDAExpDesign.html#conceptos-básicos-de-diseño-de-experimentos"><i class="fa fa-check"></i><b>4.3</b> Conceptos básicos de diseño de Experimentos</a></li>
+<li class="chapter" data-level="4.4" data-path="MDAExpDesign.html"><a href="MDAExpDesign.html#principios-de-diseño-de-experimentos"><i class="fa fa-check"></i><b>4.4</b> Principios de diseño de experimentos</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="MDAExpDesign.html"><a href="MDAExpDesign.html#replicación"><i class="fa fa-check"></i><b>4.4.1</b> Replicación</a></li>
+<li class="chapter" data-level="4.4.2" data-path="MDAExpDesign.html"><a href="MDAExpDesign.html#aleatorización"><i class="fa fa-check"></i><b>4.4.2</b> Aleatorización</a></li>
+<li class="chapter" data-level="4.4.3" data-path="MDAExpDesign.html"><a href="MDAExpDesign.html#bloqueo-o-control-local"><i class="fa fa-check"></i><b>4.4.3</b> Bloqueo o control local</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="MDAExpDesign.html"><a href="MDAExpDesign.html#diseños-experimentales-para-microarrays-de-dos-colores"><i class="fa fa-check"></i><b>4.5</b> Diseños experimentales para microarrays de dos colores</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><i class="fa fa-check"></i><b>5</b> Exploración de los datos, control de calidad y preprocesado</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#introducción"><i class="fa fa-check"></i><b>5.1</b> Introducción</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#nivel-de-análisis-y-tipo-de-microarray"><i class="fa fa-check"></i><b>5.1.1</b> Nivel de análisis y tipo de microarray</a></li>
+<li class="chapter" data-level="5.1.2" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#datos-de-partida"><i class="fa fa-check"></i><b>5.1.2</b> Datos de partida</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#exploración-y-control-de-calidad"><i class="fa fa-check"></i><b>5.2</b> Exploración y control de calidad</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#control-de-calidad-con-gráficos-estadísticos-generales"><i class="fa fa-check"></i><b>5.2.1</b> Control de calidad con gráficos estadísticos generales</a></li>
+<li class="chapter" data-level="5.2.2" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#gráficos-de-diagnóstico-para-microarrays-de-dos-colores"><i class="fa fa-check"></i><b>5.2.2</b> Gráficos de diagnóstico para microarrays de dos colores</a></li>
+<li class="chapter" data-level="5.2.3" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#gráficos-de-diagnóstico-para-microarrays-de-un-color"><i class="fa fa-check"></i><b>5.2.3</b> Gráficos de diagnóstico para microarrays de un color</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#normalización-de-arrays-de-dos-colores"><i class="fa fa-check"></i><b>5.3</b> Normalización de arrays de dos colores</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#normalización-global"><i class="fa fa-check"></i><b>5.3.1</b> Normalización global</a></li>
+<li class="chapter" data-level="5.3.2" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#normalización-dependiente-de-la-intensidad"><i class="fa fa-check"></i><b>5.3.2</b> Normalización dependiente de la intensidad</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#resumen-y-normalización-de-microarrays-de-affymetrix"><i class="fa fa-check"></i><b>5.4</b> Resumen y normalización de microarrays de Affymetrix</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#métodos-originales-de-affymetrix"><i class="fa fa-check"></i><b>5.4.1</b> Métodos originales de Affymetrix</a></li>
+<li class="chapter" data-level="5.4.2" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#el-método-rma-robust-multi-array-average"><i class="fa fa-check"></i><b>5.4.2</b> El método RMA (Robust Multi-Array Average)</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#filtraje-no-específico"><i class="fa fa-check"></i><b>5.5</b> Filtraje no específico</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="selección-de-genes-diferencialmente-expresados-chapdeg.html"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html"><i class="fa fa-check"></i><b>6</b> Selección de genes diferencialmente expresados {# chapDEG}</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="selección-de-genes-diferencialmente-expresados-chapdeg.html"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#introducción-1"><i class="fa fa-check"></i><b>6.1</b> Introducción</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="selección-de-genes-diferencialmente-expresados-chapdeg.html"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#medidas-naturales-para-comparar-dos-muestras"><i class="fa fa-check"></i><b>6.1.1</b> Medidas <em>naturales</em> para comparar dos muestras</a></li>
+<li class="chapter" data-level="6.1.2" data-path="selección-de-genes-diferencialmente-expresados-chapdeg.html"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#selección-de-genes-diferencialmente-expresados"><i class="fa fa-check"></i><b>6.1.2</b> Selección de genes diferencialmente expresados</a></li>
+<li class="chapter" data-level="6.1.3" data-path="selección-de-genes-diferencialmente-expresados-chapdeg.html"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#potencia-y-tamaño-muestral"><i class="fa fa-check"></i><b>6.1.3</b> Potencia y tamaño muestral</a></li>
+<li class="chapter" data-level="6.1.4" data-path="selección-de-genes-diferencialmente-expresados-chapdeg.html"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#el-problema-de-la-múltiplicidad-de-tests-multiple-testing"><i class="fa fa-check"></i><b>6.1.4</b> El problema de la múltiplicidad de tests (“multiple testing”</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="selección-de-genes-diferencialmente-expresados-chapdeg.html"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#modelos-lineales-para-la-selección-de-genes-limma"><i class="fa fa-check"></i><b>6.2</b> Modelos lineales para la selección de genes: <tt>limma </tt></a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="selección-de-genes-diferencialmente-expresados-chapdeg.html"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#el-modelo-lineal-general"><i class="fa fa-check"></i><b>6.2.1</b> El modelo lineal general</a></li>
+<li class="chapter" data-level="6.2.2" data-path="selección-de-genes-diferencialmente-expresados-chapdeg.html"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#ejemplos-de-situaciones-modelizables-linealmente"><i class="fa fa-check"></i><b>6.2.2</b> Ejemplos de situaciones <em>modelizables linealmente</em></a></li>
+<li class="chapter" data-level="6.2.3" data-path="selección-de-genes-diferencialmente-expresados-chapdeg.html"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#ejemplo-2-comparación-de-tres-grupos"><i class="fa fa-check"></i><b>6.2.3</b> Ejemplo 2: Comparación de tres grupos</a></li>
+<li class="chapter" data-level="6.2.4" data-path="selección-de-genes-diferencialmente-expresados-chapdeg.html"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#estimación-e-inferencia-con-el-modelo-lineal"><i class="fa fa-check"></i><b>6.2.4</b> Estimación e inferencia con el modelo lineal</a></li>
+<li class="chapter" data-level="6.2.5" data-path="selección-de-genes-diferencialmente-expresados-chapdeg.html"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#modelos-lineales-para-microarrays"><i class="fa fa-check"></i><b>6.2.5</b> Modelos lineales para Microarrays</a></li>
+<li class="chapter" data-level="6.2.6" data-path="selección-de-genes-diferencialmente-expresados-chapdeg.html"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#implementación-y-ejemplos"><i class="fa fa-check"></i><b>6.2.6</b> Implementación y ejemplos</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i><b>7</b> Referencias</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Analisis de datos omicos</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="MDAExpDesign" class="section level1" number="4">
+<h1><span class="header-section-number">Capítulo 4</span> Diseño de experimentos de microarrays</h1>
+<p>En este capítulo se examinan unas componentes clave del análisis de microarrays el diseño de experimentos que, no tan solo es
+crucial para una buena recogida de información, sino que marca todo el proceso desde el preprocesado al análisis final.</p>
+<div id="fuentes-de-variabilidad" class="section level2" number="4.1">
+<h2><span class="header-section-number">4.1</span> Fuentes de variabilidad</h2>
+<p>Los datos genómicos son muy variables. La figura <a href="MDAExpDesign.html#fig:c04variabilitySources">4.1</a>, tomada de <span class="citation">(<span class="citeproc-not-found" data-reference-id="geschwind:2002"><strong>???</strong></span>)</span> ilustra algunas posibles fuentes de variabilidad, desde que se inicia el experimento hasta que se lee la información con el escáner. Sin tener que entrar en cómo influye cada una de estas fuents o cuan grande es su influencia lo que muestra esta figura es que este tipo de experimentos se enfrenta a múltiples fuentes de error, por lo que puede beneficiarse de un correcto diseño de experimentos.</p>
+<div class="figure"><span id="fig:c04variabilitySources"></span>
+<img src="figures/c04variabilitySources.png" alt="Proceso de análisis de microarrays" width="500" />
+<p class="caption">
+Figure 4.1: Proceso de análisis de microarrays
+</p>
+</div>
+</div>
+<div id="tipos-de-variabilidad" class="section level2" number="4.2">
+<h2><span class="header-section-number">4.2</span> Tipos de variabilidad</h2>
+<p>Habitualmente, en la mayor parte de situaciones experimentales, podemos
+distinguir entre variabilidad <em>sistemática</em> y variabilidad <em>aleatoria</em>.</p>
+<p>La variabilidad sistemática es principalmente debida a procesos técnicos
+mientras que la variabilidad aleatoria es atribuible tanto a razones técnicas
+como biológicas. Podemos encontrar ejemplos de variabilidad sistemática en la
+extracción del ARN, marcaje o foto detección. La variabilidad aleatoria puede
+estar relacionada con muchos factores tales como la calidad del ADN o las
+características biológicas de las muestras.</p>
+<p>La manera natural de manejar la variabilidad aleatoria es, por supuesto, la
+utilización de un diseño experimental apropiado y el apoyo para obtener
+conclusiones de unas herramientas estadísticas adecuadas. Los problemas
+relacionados con el c de los experimentos los discutiremos en esta sección
+y los relacionados con la aplicación de métodos estadísticos serán tratados
+en la sección métodos estadísticos.</p>
+<p>Tradicionalmente, se estiman las correcciones de la variabilidad sistemática
+a partir de los datos, en lo que se llama genéricamente “calibrado”. En este
+contexto, hablaremos de “normalización”, que se tratará más adelante, en el capítulo dedicado al preprocesado de los datos.</p>
+</div>
+<div id="conceptos-básicos-de-diseño-de-experimentos" class="section level2" number="4.3">
+<h2><span class="header-section-number">4.3</span> Conceptos básicos de diseño de Experimentos</h2>
+<p>Empezaremos por definir conceptos que aparecen de forma usual cuando se plantea un diseño:</p>
+<ul>
+<li><em>Unidad experimental</em>: Entidad física a la que se aplica un tratamiento, de forma independiente al resto de unidades. En cada unidad experimental se pueden realizar una medida o varias medidas, en este caso distinguiremos entre unidades experimentales y unidades observacionales.</li>
+<li><em>Factor</em>: son las variables independientes que pueden influir en la variabilidad de la variable de interés.
+<ul>
+<li><em>Factor tratamiento</em>: es un factor del que interesa conocer su influencia en la respuesta.</li>
+<li><em>Factor bloque</em>: es un factor en el que no se está interesado en conocer su influencia en la respuesta, pero se supone que esta existe y se quiere controlar para disminuir la variabilidad residual.</li>
+</ul></li>
+<li><em>Niveles</em> : cada uno de los resultados de un factor. según sean elegidos por el experimentador o elegidos al azar de una amplia población se denominan factores de efectos fijos o factores de efectos aleatorios.</li>
+<li><em>Tratamiento</em> : es una combinación especifica de los niveles de los factores en estudio. Son, por tanto, las condiciones experimentales que se desean comparar en el experimento. En un diseño con un único factor son los distintos niveles del factor y en un diseño con varios factores son las distintas combinaciones de niveles de los factores.</li>
+<li><em>Tamaño del Experimento</em>: es el número total de observaciones recogidas en el diseño.</li>
+</ul>
+</div>
+<div id="principios-de-diseño-de-experimentos" class="section level2" number="4.4">
+<h2><span class="header-section-number">4.4</span> Principios de diseño de experimentos</h2>
+<p>Al planificar un experimento hay tres principios básicos que se deben tener siempre en cuenta:
+<strong>La replicación</strong>, el <strong>control local</strong> o “bloqueo” y la <strong>aleatorización</strong>.</p>
+<p>Aplicados correctamente dichos principios garantizan diseños experimentales eficientes.</p>
+<div id="replicación" class="section level3" number="4.4.1">
+<h3><span class="header-section-number">4.4.1</span> Replicación</h3>
+<p>La replicación o repetición de un experimento de forma idéntica en un número determinado de unidades, es la que permite la realización de un posterior análisis estadístico.</p>
+<p>La utilización de replicas es importante para incrementar la precisión, obtener suficiente potencia en los tests y como base para los procedimientos de inferencia. Normalmente, distinguimos dos tipos de replicas en el análisis de microarrays:</p>
+<ul>
+<li><p>La replicación <strong>técnica</strong> se utiliza cuando estamos tratando réplicas del mismo material biológico. Puede ser tanto la replicación de spots en el mismo chip como la de diferentes alícuotas de la misma muestra hibridadas en diferentes microarrays.</p></li>
+<li><p>La replicación <em>biológica</em> se da cuando se toman medidas sobre muestras independientes, normalmente sobre individuos diferentes.</p></li>
+</ul>
+<p>La replicación técnica permite la estimación del error a nivel de medida, mientras que la replicación biológica permite estimar la variabilidad a nivel de población.</p>
+<div class="figure"><span id="fig:c04replicas"></span>
+<img src="figures/c04replicas.png" alt="Replicas biológicas vs réplicas técnicas" width="641" />
+<p class="caption">
+Figure 4.2: Replicas biológicas vs réplicas técnicas
+</p>
+</div>
+<div id="potencia-y-tamaño-de-la-muestra" class="section level4" number="4.4.1.1">
+<h4><span class="header-section-number">4.4.1.1</span> Potencia y tamaño de la muestra</h4>
+<p>Sorprendentemente, los primeros experimentos de microarrays utilizaban pocas o ninguna replica biológica. La principal explicación para este hecho, además de la falta de conocimiento estadístico, fue el alto coste de cada microarray.</p>
+<p>En pocos años, la necesidad de las réplicas ha llegado a ser indiscutible, y al mismo tiempo, el coste de los chips ha disminuido considerablemente. Actualmente, es normal la utilización de, al menos, tres a cinco replicas por condición experimental, aunque a este consenso se ha llegado más por razones empíricas que por la disponibilidad de modelos apropiados para el análisis de la potencia y tamaño de la muestra.</p>
+<p>Recientemente, se ha producido una importante afluencia de artículos describiendo métodos para el análisis de la potencia y tamaño de la muestra. A pesar de su variedad, ningún método aparece como candidato claro para ser utilizado en situaciones prácticas. Esto se debe, probablemente, a la complejidad de los datos de microarrays, básicamente por que los genes no son independientes. Por tanto, estas estructuras de correlación existen en los datos, pero la mayor parte de las dependencias son desconocidas por lo que la estimación de estas estructuras es muy complicada.</p>
+<p>Como indicaba Allison <span class="citation">Allison et al. (2006)</span>, aunque no hay consenso sobre que
+procedimiento es mejor para determinar el tamaño de las muestras, sí que lo hay sobre la conveniencia de realizar el análisis de la potencia, y, por supuesto, sobre el hecho de que un mayor número de replicas generalmente proporcionan una mayor potencia.</p>
+</div>
+<div id="pooling" class="section level4" number="4.4.1.2">
+<h4><span class="header-section-number">4.4.1.2</span> <em>Pooling</em></h4>
+<p>En el contexto de los microarrays, llamamos “pooling” a la combinación del RNA de diferentes casos en una única muestra.</p>
+<p>Hay dos razones a favor de ello, una, es que, a veces, no hay suficiente ARN disponible y esta es la única forma de conseguir suficiente material para construir los arrays, otra, más controvertida,
+es la creencia que la variabilidad entre arrays puede reducirse por “pooling”.
+La justificación es que combinar muestras equivale a promediar expresiones, y como ya se conoce, el promedio es menos variable que los valores individuales. A pesar de la debilidad de este argumento, es verdad que en ciertas situaciones el <em>pooling</em> puede ser apropiado y, recientemente, muchos estadísticos han dedicado sus esfuerzos para tratar de responder la pregunta “to pool or not to pool” <span class="citation">(Kerr and Churchill 2001)</span>. Por ejemplo, si la variabilidad biológica está altamente relacionada con el error en las medidas, y las muestras biológicas tienen un coste mínimo en comparación con el de los arrays, una apropiada estrategia de “pooling” puede ser claramente eficiente en costes.</p>
+<p>De todos modos, el “pooling” no se debería usar en cualquier tipo de estudios.
+Si el objetivo es comparar expresiones medias (ver más adelante " comparación de clases"), puede funcionar adecuadamente, pero se debería claramente evitar cuando el objetivo del experimento es construir predictores que se basen en
+características individuales.</p>
+</div>
+</div>
+<div id="aleatorización" class="section level3" number="4.4.2">
+<h3><span class="header-section-number">4.4.2</span> Aleatorización</h3>
+<p>Se entiende por aleatorizar la asignación de todos los factores al azar a las unidades experimentales. Co ello se consigue disminuir el efecto de los factores no controlados por el experimentador en el diseño experimental y que podrían influir en los resultados.</p>
+<p>Las ventajas de aleatorizar los factores no controlados son:</p>
+<ul>
+<li>Transforma la variabilidad sistemática no planificada en variabilidad no planificada o ruido aleatorio. Dicho de otra forma, aleatorizar previene contra la introducción de sesgos en el experimento.</li>
+<li>Evita la dependencia entre observaciones al aleatorizar los instantes de recogida muestral.</li>
+<li>Valida muchos de los procedimientos estadísticos más comunes.</li>
+</ul>
+</div>
+<div id="bloqueo-o-control-local" class="section level3" number="4.4.3">
+<h3><span class="header-section-number">4.4.3</span> Bloqueo o control local</h3>
+<p>Hace referencia a dividir o particionar las unidades experimentales en grupos llamados <em>bloques</em> de modo que las observaciones realizadas en cada bloque se realicen bajo condiciones experimentales lo más parecidas posibles.
+A diferencia de lo que ocurre con los factores tratamiento, el experimentador <em>no está interesado en investigar las posibles diferencias de la respuesta entre los niveles de los factores bloque</em>.</p>
+<p>Bloquear es una buena estrategia siempre y cuando sea posible dividir las unidades experimentales en grupos de unidades similares. La ventaja de bloquear un factor que se supone que tiene una clara influencia en la respuesta, pero en el que no se está interesado, es que convierte la variabilidad sistemática no planificada en variabilidad sistemática planificada.</p>
+</div>
+</div>
+<div id="diseños-experimentales-para-microarrays-de-dos-colores" class="section level2" number="4.5">
+<h2><span class="header-section-number">4.5</span> Diseños experimentales para microarrays de dos colores</h2>
+<p>En arrays de dos colores, se aplican dos condiciones experimentales a cada array.
+Esto permite la estimación del efecto del array, como el efecto de bloqueo.
+En Affymetrix u otro array de un canal, cada condición se aplica a un
+chip separado, imposibilitando la estimación del efecto de los microarrays, lo
+cual, por otra parte, se considera que tiene una relación muy pequeña en el
+tratamiento de los efectos debido al proceso industrial utilizado para fabricar
+estos chips.</p>
+<p>Como consecuencia de lo anterior, los experimentos que usan arrays de un canal
+se consideran “estándar”, por lo que se les pueden aplicar los conceptos y técnicas tradicionales de
+diseño de experimentos .</p>
+<p>Los arrays de dos canales presentan una situación más complicada. Por una parte, los
+“dos colores” no son simétricos, es decir, con la misma cantidad de material,
+un array hibridado con uno u otro color sea Cy5 o Cy3, emitirá señales con
+diferente intensidad. La forma normal de manejar este problema es
+dye-swapping que consiste en utilizar para una misma comparación dos
+arrays con dyes cambiados, es decir, si en el primer array la muestra 1 se marca
+con Cy3 y la muestra 2 con Cy5, con las muestras del segundo array se hace al
+revés (ver figura <a href="MDAExpDesign.html#fig:c04dyelabels">4.3</a>.</p>
+<div class="figure"><span id="fig:c04dyelabels"></span>
+<img src="figures/c04dyelabels.png" alt="Representación simplificada de dos diseños" width="500" />
+<p class="caption">
+Figure 4.3: Representación simplificada de dos diseños
+</p>
+</div>
+<p>Por otra parte, el hecho de que solo se puedan aplicar dos condiciones a cada array complica el diseño, ya sea porque normalmente hay más de dos condiciones, o porque no es recomendable hibridar directamente dos muestras en un array,
+creando pares artificiales.</p>
+<p>El problema de la asignación eficiente de muestras a microarrays, dado un numero de condiciones a comparar y un número fijo de arrays disponibles, ha sido
+estudiado de forma exhaustiva.</p>
+<p>El diseño utilizado más comúnmente en la comunidad biológica es el
+diseño de referencia en el que cada condición de interés se compara
+con muestras tomadas de alguna referencia estándar común a todos las arrays, (ver figura <a href="MDAExpDesign.html#fig:c04referencevsloop">4.4</a>, imagen (a)).</p>
+<div class="figure"><span id="fig:c04referencevsloop"></span>
+<img src="figures/c04referencevsloop.png" alt="(a) diseño de referencia.  (b) diseño en loop." width="500" />
+<p class="caption">
+Figure 4.4: (a) diseño de referencia. (b) diseño en loop.
+</p>
+</div>
+<p>Los diseños de referencia permiten hacer comparaciones indirectas entre
+condiciones de interés. La crítica más importante a esta aproximación es que el 50 de las fuentes de hibridación se utilizan para producir la señal del grupo control, de un interés no intrínseco para los biólogos.
+En contraste, un diseño en loop compara dos condiciones a través de otra cadena de condiciones, por lo que elimina la necesidad de una muestra de referencia.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="MDAProcess.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

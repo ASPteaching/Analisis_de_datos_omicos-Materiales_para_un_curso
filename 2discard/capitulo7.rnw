@@ -1,0 +1,1150 @@
+\SweaveOpts{prefix.string=epsimages/c07, keep.source=TRUE, eps=TRUE, pdf=FALSE} \setkeys{Gin}{width=.5\textwidth}
+
+\chapter{Selecci\'on de genes diferencialmente expresados}
+\label{chapDEG}
+
+%\textNotaBreu{La primera part s'ha redactat pero falta completar el tema dels tests de significacio i els p-valors}
+
+%\textNotaBreu{La segona part (limma) s'ha tret d'una presentacio ``beamer''. Potser convindria reduir-la?}
+
+
+\section{Introducci\'on}
+El motivo m\'as habitual para el que se suelen utilizar microarrays es la b\'usqueda de genes cuya expresi\'on cambia entre
+dos o m\'as condiciones experimentales, por ejemplo a consecuencia de un tratamiento, una enfermedad u otras causas
+(distintos tiempos, distintas lineas celulares, ...).
+
+El problema consiste en identificar estos genes y suele denominarse \emph{selecci\'on de genes diferencialmente expresados
+(``DEG'')} o bien comparaci\'on de clases.
+
+El problema de seleccionar genes diferencialmente expresados se traduce de manera casi inmediata al problema estad\'istico
+de comparar variables y, en a\~nos recientes, se han desarrollado un gran n\'umero de m\'etodos estad\'isticos para resolverlo.
+La mayor\'ia son extensiones de los m\'etodos estad\'isticos cl\'asicos --pruebas-t o an\'alisis de la varianza-- adaptados en uno
+u otro sentido para tener en cuenta las peculiaridades de los microarrays.
+
+Aunque el problema de la selecci\'on de genes diferencialmente expresados puede relacionarse directamente con la
+realizaci\'on de pruebas estad\'isticas, en el caso de los microarrays, el hecho de que haya dos tecnolog\'ias que miden la expresi\'on de dos formas distintas hace que se deba diferenciar la metodolog\'ia a emplear en cada caso. Los arrays de dos colores combinan dos muestras en un chip y generan una medida de expresi\'on relativa. Esto hace que para
+comparar dos muestras de un mismo individuo sean la opci\'on naturalmente m\'as apropiada
+
+En el caso de querer comparar muestras independientes de diferentes individuos  los arrays de un color son la mejor opci\'on. Evidentemente, lo m'as com\'un ser\'a disponer de una sola t\'ecnica y tener que adaptar los an\'aliaisis estad\'isticos a la misma.
+
+Vamos a plantear un posible esquema de trabajo, para situar la mejor opci\'on en cada caso:
+\begin{itemize}
+  \item Situaci\'on 1: experimento con 5 individuos diab\'eticos y 5 no diab\'eticos, independientes entre si (muestras independientes)
+      \begin{itemize}
+        \item Caso 1: Arrays de cDNA (2 colores): Utilizar\'iamos 5 arrays  Diab\'etico/Referencia y 5 arrays No diab\'etico/Referencia
+        \item Caso 2: Arays de Affymetrix (1 color): Utilizar\'iamos 5 arrays de  Diab\'etico y 5 arrays de No diab\'etico
+      \end{itemize}
+  \item Situaci\'on 2: experimento con 6 individuos de los que se ha tomado una muestra de tejido sano y otra de tejido tumoral (muestras apareadas o dependientes)
+      \begin{itemize}
+        \item Caso 3: Arrays de cDNA (2 colores): Utilizar\'iamos 6 arrays, uno por individuo, y en cada uno se realizar\'ia la comparaci'on Tejido Tumoral/Tejido sano.
+        \item Caso 4: Arays de Affymetrix (1 color): Utilizar\'iamos 12 arrays, 2 por individuo, 6 con muestras de Tejido Tumoral y 6 con muestras de Tejido sano.
+      \end{itemize}
+\end{itemize}
+
+
+\subsection{Medidas \emph{naturales} para comparar dos muestras}
+
+Recordemos que una vez se han hecho los experimentos con microarrays y
+obtenida la señal, los datos que se disponen son los logaritmos del
+valor detectado por el escaner.Esto hace que algunas operaciones que
+se realicen tengan en cuenta esta caracter\'istica. Segun si la
+comparaci\'on a realizar se llevar\'a a cabo con datos
+\emph{independientes} (2 muestras, casos 1 y 2) o con datos
+\emph{dependientes} (muestras apareadas, casos 3, 4) algunas medidas
+\emph{naturales} o razonables para la comparaci\'on de expresiones son
+las siguientes:
+
+\begin{itemize}
+\item Para comparaciones directas, con expresiones relativas entre muestras apareadas o bien diferencias apareadas de
+expresiones absolutas:
+\begin{itemize}
+\item log ratio promedio\textNotaBreu{Al ``ratio'' o raz\'on de expresiones se suele denominar tambi\'en {}``Fold Change (FC)''
+porque en arrays de dos colores representaba cuantas veces m\'as expresado est\'a el gen en una (R) que en otra condici\'on (G).
+Al \emph{logRatio} tambi\'en se le llama \emph{logFC} y por extensi\'on a la diferencia de medias en escala logar\'itmica tambien
+se la denomina \emph{logFC} dado que se realiza de forma impl\'icita la aproximaci\'on siguiente:
+\par
+$\overline{X}_1-\overline{X}_2 = \overline{\log Y}_1-\overline{\log Y}_2 \simeq
+\log(\overline{Y}_1)-\log(\overline{Y}_2) = \log(\frac{Y_1}{Y_2})$}: $\overline{R}=\frac 1n \sum_{i=1} R_i$
+\item t--test de una muestra $\frac{\overline{R}}{SE}$, donde \emph{SE} estima el error est\'andar del \emph{log ratio} promedio
+\item t--test robusto: Substituir en el anterior medidas robustas del error est\'andar
+\end{itemize}
+\item Para comparaciones indirectas entre muestras independientes de expresiones relativas o absolutas:
+\begin{itemize}
+\item Diferencia media $\overline{R}_1-\overline{R}_2= \frac 1n_1 \sum_{i=1} ^{n_1}R_i- \frac 1n_2 \sum_{j=1}
+^{n_2}R_j$
+\item t-test (cl\'asico) de dos muestras $\frac{\overline{R}_1-\overline{R}_2} {SE_{12}\sqrt{\frac 1n_1 +\frac 1n_2 }}$
+\item t-test robusto de dos muestras: Substituir en el anterior medidas robustas del error est\'andar
+\end{itemize}
+\end{itemize}
+
+\subsubsection{Un primer ejemplo}
+
+Consideremos la tabla siguiente que representa una matriz de expresi\'on simplificada que contiene las expresiones
+relativas (por ejemplo entre tejido tumoral y sano del mismo individuo) de 5 genes en 6 muestras.
+
+%\begin{figure}[htp]
+%\centering
+%\includegraphics[width=15.808cm,height=3.207cm]{Selecciondegenesdiferencialmenteexpresados-img001.eps}
+%\end{figure}
+
+\begin{table}[htbp]
+\begin{tabular}{|ccccccc|}
+\hline
+Gen & R1 & R2 & R3 & R4 & R5 & R6 \\ \hline
+A & 2.50 & 2.70 & 2.50 & 2.80 & 3.20 & 2.00 \\
+B & 0.01 & 0.05 & -0.05 & 0.01 & 0.00 & 0.00 \\
+C & 2.50 & 2.70 & 2.50 & 1.80 & 20.00 & 1.00 \\
+D & 0.50 & 0.00 & 0.20 & 0.10 & -0.30 & 0.30 \\
+E & 0.10 & 0.11 & 0.10 & 0.10 & 0.11 & 0.09 \\ \hline
+\end{tabular}
+\label{}
+\end{table}
+
+Podemos calcular las medidas descritas para el caso de una muestra para decidir si un gen est\'a expresado o no lo est\'a.
+Se discutir\'a m\'as adelante como precisar esto pero de momento nos quedaremos con la idea de que si la medida escogida es
+(cercana a) cero el gen no est\'a diferencialmente expresado y si es mayor o menor que cero si que lo est\'a. Nos referimos
+a ``cero'' porque estamos hablando de logaritmos de razones: si la expresi\'on es la misma en ambas condiciones el
+cociente es uno y su logaritmo es cero.
+
+Vale la pena insistir en el concepto de expresi\'on diferencial: no nos preocupa cual es la expresi\'on del gen en una u
+otra muestra sin\'o si son distintas.
+
+%\begin{figure}[htp]
+%\centering
+%\includegraphics[width=9.033cm,height=3.207cm]{Selecciondegenesdiferencialmenteexpresados-img002.eps}
+%\end{figure}
+
+\begin{table}[htbp]
+\begin{tabular}{|cccc|}
+\hline
+Gen & Promedio & Err. Std & T-test \\ \hline
+A & 2.617 & 0.397 & 14.735 \\
+B & 0.003 & 0.032 & 0.233 \\
+C & 5.083 & 7.335 & 1.550 \\
+D & 0.133 & 0.273 & 1.091 \\
+E & 0.102 & 0.008 & 30.200 \\ \hline
+\end{tabular}
+\label{}
+\end{table}
+
+La tabla anterior sugiere que podr\'ia considerarse el gen A est\'a diferencialmente expresado (promedio y t--test altos)
+mientras que el gen B o el D no lo est\'an (promedio y test-t pr\'oximos a cero). Los genes C y D pueden llevar a
+conclusiones contradictoria seg\'un nos basemos en el promedio o el test t.
+
+Si se observan los valores del test t del gen C se concluye que el gen no aparenta estar diferencialmente expresado. Si
+en cambio se observa su promedio parece que si que lo est\'e.
+
+En el gen E pasa exctamente lo opuesto. La explicaci\'on de  estas aparentes contradicciones se halla en el error
+est\'andar. En el gen C es muy elevado, debido a que el valor  (20) es probablemente un ``outlier''. En el gen D el
+error est\'andar es muy bajo por lo que, al encontrarse en el denominador  del t--test aumenta artificialmente su valor.
+
+\subsection{Selecci\'on de genes diferencialmente expresados}
+
+Vamos a plantear la forma como se aborda este problema en el estudio de datos de microarrays. Dadas las caracter\'isticas propias de este tipo de 
+datos se consideran otras formas de estimar el error est\'andar que no sean tan sensibles a valores extremos o muy bajos.
+
+Consideremos el gen $g$.  Si llamamos:
+\begin{itemize}
+\item $R_g$  log-ratio medio observado.
+\item $SE_g$  error est\'andar de $R_g$  estimado a partir de los datos en el gen $g$ .
+\item $SE$  error est\'andar de  $R_g$  estimado a partir de los datos con la informaci\'on de todos los genes.
+\end{itemize}
+
+Podemos considerar dos variantes para el test--\emph{t}:
+
+\begin{itemize}
+\item \emph{Test-t global}: se calcula en base a un \'unico estimador de SE para todos los genes:
+$$t=R_g/SE,$$
+\item \emph{Test-t espec\'ifico}: Utiliza un estimador distinto del error estandar para cada gen: $$t=R_g/SE_g.$$
+\end{itemize}
+Cada aproximaci\'on tiene sus pros y sus contras como muestra la tabla siguiente:
+\begin{center}
+\begin{tabular}[h]{|l|c|c|}
+  \hline
+\textbf{Test} & \textbf{Pros} & \textbf{Contras} \\ \hline
+Test-t Global & Estimador estable de $\sigma$ & Asume homocedasticidad \\
+Test-t espec\'ifico & Robusto a heterocedasticidad  & Estimador de $\sigma$ no estable \\
+\hline
+\end{tabular}
+\end{center}
+
+En la pr\'actica muchos m\'etodos de selecci\'on de genes
+diferencialmente expresados han acabado buscando un compromiso entre
+ambas aproximaciones para lo que proponen o derivan f\'ormulas que de
+alguna forma ponderan o combinan dos estimaciones del error
+est\'andar: una basada en todos los genes y otra espec\'ifica de cada
+gen. La tabla siguiente ilustra como algunos de los m\'etodos m\'as
+utilizados en la bibliograf\'ia incorporan esta idea.
+
+\begin{center}
+\begin{tabular}[h]{||l|c||}\hline
+M\'etodo (Referencia) & F\'ormula \\ \hline \hline
+SAM (Tibshirani et al 2001) & $S = \frac{{{R_g}}}{{c + S{E_g}}}$
+%La constante c se calcula utilizando informaci\'on de todos los genes,
+\\ \hline
+Cyber-T (Baldi et al, 2001) &
+$t = \frac{R_g} {\sqrt {\frac{{{v_0}S{E^2} + (n - 1)SE_g^2}}{{{v_0} + n - 2}}} }$
+%  &
+\\ \hline
+T-moderado (Smyth, 2003) &
+$ t  =  \frac{R_g} {\sqrt {\frac{{{d_0} \cdot SE_0^2 + d \cdot SE_g^2}}{{{d_0} + d}}} }$
+%&
+\\ \hline
+\end{tabular}
+\end{center}
+
+Al hecho de incluir un coeficiente que tenga en cuenta la variabilidad
+de todos los genes en el array para estimar el error est\'andar de
+cada gen se le denomina moderaci\'on de la varianza (``variance
+shrinkage'') y es una de las aproximaciones en que existe cierto
+consenso (\cite{Allison:2006a}) acerca de que sirven para mejorar la
+selecci\'on de genes diferencialmente expresados.
+
+
+\subsubsection{Ejemplo de utilizaci\'on del test--\emph{t}}
+
+Como ejemplo utilizaremos el conjunto de datos \texttt{celltypes} y supondremos que disponemos ya de los datos normalizados y filtrados almacenados en un objetoo \texttt{expressionSet}. 
+
+Si consideramos que el campo \emph{treat} del objeto contiene la informaci\'on de los grupos a comparar (ratones estimulados con LPS frente
+a los que no han sido tratados),  podemos realizar un primer análisis utilizando el  test--\emph{t}. Para ello utilizaremos el la funci\'on 
+\texttt{rowttests} del paquete \texttt{genefilter}  que realiza un test $t$ sobre cada una de las filas (genes) de una matriz de expresi\'on.
+
+<<c7codec01, eval=T>>=
+stopifnot(require(Biobase)) 
+load ("celltypes-normalized.rma.Rda")
+my.eset <- eset_rma_filtered
+grupo_1 <- as.factor(pData(my.eset)$treat)
+stopifnot(require(genefilter))
+teststat <-rowttests(my.eset, "treat")
+print(teststat[1:5,])
+@
+
+Cuanto mayor sea el valor absoluto del estad\'istico $t$  mayor es la probabilidad de que el gen est\'e diferencialmente expresado. 
+
+\subsubsection{Genes diferencialmente expresados estad\'isticamente significativos}
+
+Como hemos visto en la secci\'on anterior dos medidas naturales para
+la selecci\'on de genes son el promedio de ``log-ratios'' --o la
+diferencia de promedios en el caso de muestras independientes-- o el valor del estad\'istico de test ($t$-test) de una o dos muestras seg\'un si se trata de
+muestras apareadas o independientes respectivamente. Los primeros
+estudios de microarrays eran muy costosos y se hac\'ian con pocas o
+incluso ninguna r\'eplica por condici\'on experimental. En estas
+situaciones la \'unica forma fiable de detectar una diferencia de
+expresi\'on era a traves del ``log-ratio'' o su diferencias.
+
+R\'apidamente se puso en evidencia que para poder obtener los genes
+que estaban realmente diferencialmente expresados era preciso disponer
+de un soporte estad\'istico que permitiera tener en cuenta la
+variaci\'on aleatoria existente entre muestras.
+
+En la pr\'actica esto se reduce a afirmar que si, adem\'as de la
+diferencia de expresi\'on entre las condiciones experimentales, se
+lleva a cabo un test estad\'istico dispondremos de una medida
+objetiva, el p--valor que nos servir\'a para decidir qu\'e genes se
+declaran diferencialmente expresados, a saber, aquellos en los que el
+p--valor del test sea inferior a un cierto umbral como 0.05 o 0.01.
+
+Tal como se ha indicado en el cap\'itulo ~\ref{chapFund.Est}, un test
+estad\'istico procede decidiendo rechazar la hip\'otesis nula si el
+p--valor es m\'as peque\~no que el nivel de significaci\'on del test.
+
+
+Siguiendo con el ejemplo anterior podemos ordenar los resultados de los tests en base a los p--valores:
+
+<<sortBypvals, eval=T>>=
+ranked <-teststat[order(teststat$p.value),]
+print(ranked[1:5,])
+@
+
+Ahora podr\'iamos seleccionar, por ejemplo los genes cuyo p--valor fuera inferior a 0.01
+
+<<selectedGenes>>=
+selectedTeststat <- ranked[ranked$p.value < 0.01,]
+@ 
+
+Esto deja un total de \Sexpr{dim(selectedTeststat)} con un p--valor inferior a 0.01
+
+\subsubsection{``Volcano plots''}
+
+Si se opta por computar los valores de significaci\'on (p--valores) de los genes,
+resulta interesante comparar el tama\~no del cambio del nivel de significaci\'on estad\'istico.
+El  ``volcano plot'' es una representaci\'on gr\'afica que permite ordenar los genes a lo largo de dos dimensiones,
+la  biol\'ogica, representada por el ``fold change''  y la estad\'istica representada por el logaritmo negativo del p--valor.
+
+En la escala horizontal se representa el cambio entre los dos grupos (en escala logar\'itmica,
+de manera que la regulaci\'on positiva o negativa se representa de forma sim\'etrica). En la escala vertical se
+representa el p--valor del test en una escala logar\'itmica negativa,
+de forma que los p--valores m\'as peque\~nos aparecen mayores.
+
+As\'i pues puede considerarse que el primer eje indica impacto biol\'ogico del cambio (a m\'as efecto biol\'ogico mayor ``fold-change'') y
+el segundo muestra la evidencia estad\'istica, o la fiabilidad del cambio.
+
+La figura \ref{fig:volcano1} muestra un ``volcano--plot'' para ejemplo de los ``celltypes''.
+
+\textD{Figura \ref{fig:volcano1}}{Ejemplo de Volcano plot que muestra los genes candidatos a considerarse como diferencialmente expresados en la comparaci\'on  ``LPS'' frente a  ``Medium''}
+
+\vspace{-0.5cm}
+\begin{figure}[!h]
+\titolfigura[0cm]{Figura \ref{fig:volcano1}. Volcano plot}
+\label{fig:volcano1}
+\fbox{\includegraphics[keepaspectratio=T, width=0.75\textwidth]{epsimages/c06-volcanoPlot.eps}}
+\end{figure}
+
+
+\subsection{Potencia y tama\~no muestral}
+
+Tal como se ha indicado m\'as arriba, para realizar un \emph{buen
+  test} suele controlarse la probabilidad de error de tipo I (de
+falsos positivos) y buscar, de entre los tests candidatos, aquellos
+que tengan una menor probabilidad de error de tipo II, o
+equivalentemente una mayor potencia. A partir de este planteamiento
+existe, en el contexto estad\'istico est\'andar, multitud de formas de
+determinar cual debe ser el tama\~no muestral necesario para obtener
+una potencia dada fijados el tam\~no de efecto (``fold-change'') y la
+probabilidad de error de tipo I.
+
+En el caso de los microarrays se han desarrollado diversas f\'ormulas
+para realizar c\'alculos de este tipo, pero la compleja estructura de
+los datos microarrays hace que sean relativamente \emph{discutibles}.
+
+Simon (\cite{Simon:2003}) sugiere la f\'ormula siguiente que es una
+generalizaci\'on de las f\'ormulas cl\'asicas para problemas de dos
+muestras:
+
+El tama\~no total requerido para detectar genes diferencialmente expresados en al menos una diferencia $\delta$  con una
+probabilidad de error de tipo I (FP), $\alpha$ y una probabilidad de error de tipo II (FN) $1-\beta$ se calcula:
+$$
+n=\frac{4(z_{\alpha/2}+z_\beta)^2}{(\delta/\sigma)^2},
+$$
+donde $z_\alpha$ y $z_\beta$ son los percentiles 100$\alpha/2$ y 100$\beta$ de la distribuci\'on Normal $N(0,1)$ y $\sigma$ es la
+desviaci\'on estandar de un gen dentro de una clase (de un grupo). Obviamente \emph{$\sigma$ es siempre desconocida} por lo que,
+sin una muestra piloto con que estimarla el calculo e m\'as imaginativo que realista.
+
+Adem\'as de esto, el n\'umero de arrays usualmente recomendado queda
+lejos de la cantidad asequible para la mayor parte de los experimentos
+(\cite{lee:2002,Tibshirani:2006}). Lo que muchos usuarios hacen a la
+pr\'actica, es buscar un equilibrio entre los costes y la
+reproducibilidad y, de hecho, tienden a usar una cantidad fija de
+arrays tal como 3 o 5 sin consideraciones adicionales.
+
+Por ejemplo si ponemos $\alpha=0.001$, $1-\beta=0.95$, $\delta=1$ y
+estimamos $\sigma$ entre todas las muestras el n\'umero de r\'eplicas
+biol\'ogicas que necesitaremos ser\'a de 35.8.
+
+\subsection{El problema de la m\'ultiplicidad de tests (``multiple testing''}
+
+El an\'alisis de microarrays se realiza en base gen a gen e involucra
+m\'ultiples tests, miles probablemente. Esto significa que, a medida
+que crece el n\'umero de genes, la probabilidad de declarar
+erroneamente al menos un gen diferencialmente expresado va en aumento,
+y si no se realiza alg\'un tipo de ajuste el n\'umero de falsos
+positivos ser\'a tanto m\'as alto cuantos m\'as genes estemos
+analizando.
+
+Hay muchas formas de intentar controlar estas probabilidades de error y puede verse un excelente revisi\'on en Dudoit \cite{Dudoit:2003}).
+
+De forma simplificada consideramos las dos aproximaciones m\'as utilizadas.
+
+Una posibilidad es mirar de controlar la probabilidad de obtener
+\emph{al menos un falso positivo} o ``Family-wise-error-rate
+(FWER)''. El m\'as popular de estos m\'etodos de control es la
+correcci\'on de Bonferroni, consistente en multiplicar el p--valor por
+el n\'umero de tests realizados. La misma Dudoit y muchos otros
+autores han desarrollado variantes de los m\'etodos cl\'asicos de
+ajuste FWER usando por ejemplo tests de permutaciones.
+
+El criterio FWER es quiz\'as demasiado restrictivo dado que el control
+de los falsos positivos implica un considerable incremento de falsos
+negativos. En la pr\'actica, sin embargo, muchos bi\'ologos parecen
+estar dispuestos a aceptar que se produzcan algunos errores, siempre y
+cuando esto permita realizar descubrimientos. Por ejemplo un
+investigador debe considerar aceptable cierta peque\~na proporci\'on
+de errores (digamos del 10 al 20\%) entre sus descubrimientos. En este
+caso, el investigador est\'a expresando inter\'es en controlar el
+porcentaje de falsos descubrimientos (FDR), es decir lo que es la
+proporci\'on de falsos positivos sobre el total de genes inicialmente
+identificados como expresados diferencialmente.  A diferencia del
+nivel de significaci\'on que queda determinado antes de examinar los
+datos, la FDR es una medida de confianza a posteriori ya que emplea
+informaci\'on disponible en los datos para estimar las proporciones de
+falsos positivos que han tenido lugar. Si se obtiene una lista de los
+genes expresados diferencialmente en los que el FDR se controla hasta,
+digamos, el 20\%, cabe esperar que el 20\% de estos genes representen
+falsos positivos. Lo cual supone un enfoque menos restrictivo que
+controlar el FWER.
+
+La decisi\'on de controlar el FDR o el FWER depende de los objetivos
+del experimento. Si, por ejemplo, el objetivo es la \emph{captura de
+  genes} es razonable permitir cierta cantidad de falsos positivos y
+es preferible seleccionar FDR.  Si por el contrario se trabaja con una
+lista de un tama\~no menor al deseado para verificar la expresi\'on de
+ciertos genes espec\'ificos, entonces el FWER es el criterio
+apropiado.
+
+El ejemplo siguiente muestra como se realiza el ajuste de p--valores
+usando el paquete \texttt{multtest} de Bioconductor para ajustar por
+los m\'etodos de Bonferroni (FWER), Benjamini \& Hochberg (FDR) o
+Benjamini \& Yekutieli (BY, FDR). 
+
+<<adjustPvals>>=
+stopifnot(require(multtest))
+procs <- c("Bonferroni","BH", "BY")
+adjPvalues <- mt.rawp2adjp(teststat$p.value, procs)
+names(adjPvalues)
+ranked.adjusted<-cbind(ranked, adjPvalues$adjp)
+head(ranked.adjusted)
+@ 
+
+Si seleccionamos los genes en base a su p--valor ajustado por ejemplo por le m\'etodo de Banjamini y Yekutieli se obtienen los siguientes genes
+
+<<selectAdjusted>>=
+selectedAdjusted<-ranked.adjusted[ranked.adjusted$BY<0.001,]
+nrow(selectedAdjusted)
+@ 
+
+
+\section{Modelos lineales para la selecci\'on de genes: \texttt{limma} }
+
+En la secci\'on anterior se ha discutido el uso del test $t$ y sus extensiones para la selecci\'on de genes diferencialmente expresados
+en situaciones relativamente sencillas, es decir cuando s\'olo hay dos grupos.
+
+En muchos estudios el n\'umero de grupos a considerar es m\'as de dos y las fuentes de variabilidad pueden ser m\'as de una, por
+ejemplo una puede ser el tratamiento pero otra puede ser la edad de los individuos o cualquier otra condici\'on fijada por el
+investigador o derivadad de la heterogeneidad de las muestras.
+
+En estas situaciones una aproximaci\'on razonable en problemas con \emph{una variable respuesta} es el an\'alisis de la varianza,
+discutido en el cap\'itulo \ref{chap:03}. En esta secci\'on se presenta una aproximaci\'on equivalente que de forma general se
+denomina \emph{el modelo lineal}. Este m\'etodo -que engloba el an\'alisis d la varianza y la regresi\'on- es uno de los m\'as
+usados en estad\'istica y ha sido popularizado en el campo de microarrays gracias a los trabajos de Gordon Smyth quien ha creado
+el paquete \texttt{limma} que se ha convertido en la herramiente m\'as utilizada para el an\'alisis de microarrays.
+
+\subsection{El modelo lineal general}
+El modelo lineal (ver por ejemplo Faraway, ~\cite{Faraway:2004}) es un marco general para la modelizaci\'on y el an\'alisis de
+datos estad\'istica.
+
+EL m\'etodo consiste en asumir una relaci\'on lineal entre los valores observados de una variable \emph{respuesta} y las
+condiciones experimentales. A partir de aqu\'i se obtienen estimadores para los par\'ametros del modelo y de sus errores
+est\'andar, y (con algunas condiciones extra) es posible hacer inferencia acerca del experimento.
+
+La aplicaci\'on de modelos lineales puede ser visto como un proceso secuencial, con los siguientes pasos:
+\begin{enumerate}
+ \item  Especificar el dise\~no del experimento: qu\'e muestras se asignan a qu\'e condiciones.
+\item (Re-)Escribir un modelo lineal para este dise\~no en forma de $\mathbf{Y=X\beta+\varepsilon}$, donde $\mathbf{X}$ se
+denomina \emph{la matriz de dise\~no}.
+\item Una vez que el modelo se ha especificado aplicar la teor\'ia general de estimar los par\'ametros y los contrastes
+(comparaciones entre los valores de los par\'ametros).
+\item Si se cumplen ciertas condiciones de validez para el modelo es posible realizar inferencia sobre los par\'ametros del
+modelo, es decir se pueden contrastar hip\'otesis sobre dichos par\'ametros.
+\end{enumerate}
+
+El esquema anterior se puede aplicar a casi cualquier tipo de situaci\'on experimental. En la secci\'on siguiente se presentan
+un par de ellas.
+
+\subsection{Ejemplos de situaciones \emph{modelizables} linealmente}
+\subsubsection{Ejemplo 1: Experimento ``Swirl--Zebrafish``}
+
+Swirl es una mutaci\'on puntual que provoca defectos en la organizaci\'on del embri\'on en desarrollo a lo largo de su eje
+dorsal-ventral. Como resultado, algunos tipos celulares se reducen y otros se expanden. Un objetivo de este trabajo fue
+identificar los genes con expresi\'on alterada en el mutante Swirl en comparaci\'on con ''wild zebrafish``.
+
+\begin{enumerate}
+\item El dise\~no experimental para este estudio fue el siguiente:
+\begin{center}
+  \begin{tabular}{|c|c|c|}
+    \hline
+
+    \text{Slide} & \text{Cy3} & \text{Cy5} \\
+    \hline
+    1 & W & M \\
+    2 & M & W \\
+    3 & W & M \\
+    4 & M & W \\
+    \hline
+  \end{tabular}
+\end{center}
+\begin{itemize}
+\item Cada microarray conten\'ia 8848 sondas de cDNA (genes o sequencias EST).
+\item Cuatro r\'eplicas por array (slide): 2 juegos de pares de intercambio de color
+\item El cDNA del mutante swirl ($S$) se marca con Cy5 o Cy3 y el cDNA del ''wild type'' se marca con el otro
+\end{itemize}
+
+\item El modelo lineal derivado del dise\~no anterior fue:
+\begin{itemize}
+\item El par\'ametro de inter\'es es: $\alpha=
+\mathbf{E}\left (log\frac{S}{W}\right )$ .
+\item Las muestras 1 y 3 estan marcadas con : S (Verde=``Green'') y W (Rojo=``Red''), y las muestras 2 y 4 son ``dye-swapped''.
+\item El modelo, $\mathbf{y=X\alpha+\varepsilon}$, es:
+\begin{equation}
+\begin{array}{ccccc}
+y_1 &=&\alpha&+&\varepsilon _1 \\
+y_2 &=&-\alpha&+&\varepsilon _2 \\
+y_3 &=&\alpha&+&\varepsilon _3 \\
+y_4 &=&-\alpha&+&\varepsilon _4\\
+\end{array}
+%\right.
+\Longrightarrow
+%\left.
+\left(
+\begin{array}{r}
+y_1 \\
+y_2 \\
+y_3\\
+y_4
+\end{array}
+\right) = \underbrace{\left(
+\begin{array}{r}
+1 \\
+-1 \\
+1\\
+-1
+\end{array}
+\right)}_{\text{Matriz de Dise\~no}, \mathbf{X}} \alpha + \left(
+\begin{array}{r}
+\varepsilon_1 \\
+\varepsilon_2 \\
+\varepsilon_3\\
+\varepsilon_4
+\end{array}
+\right)
+\end{equation}
+\end{itemize}
+\end{enumerate}
+
+\subsection{Ejemplo 2: Comparaci\'on de tres grupos}
+
+Los pl\'asmidos IncHI codifican genes de resistencia m\'ultiple a los antibi\'oticos en \emph{S. enterica}.
+
+El pl\'asmido R27 de la cepa salvaje es termosensible al transferirse.
+
+Algunos fenotipos mutantes relacionados con \emph{hha} y \emph{hns} cromos\'omicos participan en diferentes
+procesos metab\'olicos de inter\'es en la conjugaci\'on termoregulada.
+
+El objetivo del experimento es encontrar qu\'e genes se expresean diferencialmente en tres tipos de
+mutantes diferentes, $M_1$, $M_2$ y $M_3$.
+
+\paragraph{Posibles estrategias de dise\~no}
+
+Este experimento debe ser planteado de forma diferente seg\'un el tipo de arrays (uno o dos colores) y qu\'e
+comparaciones son las de mayor inter\'es.
+\begin{itemize}
+ \item Array de dos colores
+\begin{itemize}
+\item A \emph{dise\~no de referencia}: Hibridar cada Mutante ($M_i$) vs. Salvaje (``Wild type'') ($W$).
+\item A \emph{dise\~no loop}: Hibridar cada mutante el uno al otro en un doble ``loop'' que incluye (``dye-swapping'').
+\end{itemize}
+\item Array de un color: hibridar mutantes y ``wild types'' separadamente.
+\end{itemize}
+
+\paragraph{Representaci\'on del dise\~no de referencia}
+\figcen{\includegraphics[keepaspectratio=true, width=5cm]{epsimages/EColiRef}}
+
+\begin{itemize}
+\item Permite la comparaci\'on directa de Mutantes vs ``Wild''.
+\item N\'umero de par\'ametros a estimar es 3, relaci\'on intuitiva
+entre el n\'umero de par\'ametros y mutantes.
+\item Las comparaciones de Mutante vs Mutante son menos eficientes.
+\end{itemize}
+
+\paragraph{Representaci\'on del dise\~no de ``loop'' (bucle)}
+%\includegraphics{images/EColiLoop}
+\figcen{\includegraphics[keepaspectratio=true, width=5cm]{epsimages/EColiLoop}}
+
+\begin{itemize}
+\item Permite la comparaci\'on directa de Mutantes vs Mutantes.
+\item El n\'umero de par\'ametros a estimar es 2. Menos intuitivo.
+\item Las comparaciones Mutante vs Mutante son m\'as eficientes.
+\end{itemize}
+
+\paragraph{Representaci\'on del dise\~no del array de un color}
+%\includegraphics{images/EColiAffy}
+\figcen{\includegraphics[keepaspectratio=true, width=5cm]{epsimages/EColiAffy}}
+
+\begin{itemize}
+\item Permite la comparaci\'on directa de
+\begin{itemize}
+\item Mutante vs ``Wild''
+\item Mutante vs Mutante
+\end{itemize}
+\item El n\'umero de par\'ametros a estimar es 4.
+\item Todas las comparaciones se pueden hacer de forma eficiente.
+\end{itemize}
+
+\paragraph{Modelo lineal para el dise\~no de referencia}
+Modelo, $\mathbf{y=X\alpha+\varepsilon}$,
+y contrastes $\mathbf{C'\beta}$
+\begin{itemize}
+\item Par\'ametros del modelo:
+$$\alpha_1= \mathbf{E}\left (log\frac{M_1}{W}\right ),\
+\alpha_2= \mathbf{E}\left (log\frac{M_2}{W}\right ),\
+\alpha_3=\mathbf{E}\left (log\frac{M_3}{W}\right ).$$
+\item \emph{Contrastes}: Comparaciones interesantes.
+\begin{eqnarray*}
+\beta_1 &=& \alpha_1-\alpha_2,\\
+\beta_2 &=& \alpha_1-\alpha_3,\\
+\beta_3 &=& \alpha_2-\alpha_3.
+\end{eqnarray*}
+\end{itemize}
+
+\begin{equation}
+\left(
+\begin{array}{r}
+y_1 \\
+y_2 \\
+y_3 \\
+y_4 \\
+y_5 \\
+y_6
+\end{array}
+\right) = \underbrace{\left(
+\begin{array}{rrr}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & 1 \\
+-1 & 0 & 0 \\
+0 & -1 & 0 \\
+0 & 0 & -1
+\end{array}
+\right)}_{\text{Matriz de Dise\~no}, \mathbf{X}} \left(
+\begin{array}{c}
+\alpha_1 \\
+\alpha_2 \\
+\alpha_3
+\end{array}
+\right)
+ + \left(
+\begin{array}{r}
+\varepsilon_1 \\
+\varepsilon_2 \\
+\varepsilon_3\\
+\varepsilon_4 \\
+\varepsilon_5\\
+\varepsilon_6
+\end{array}
+\right)
+\end{equation}
+\begin{equation}
+\left(
+\begin{array}{r}
+\beta_1 \\
+\beta_2 \\
+\beta_3
+\end{array}
+\right) = \underbrace{\left(
+\begin{array}{rrr}
+1 & -1 & 0 \\
+1 & 0 & -1 \\
+0 & 1 & -1
+\end{array}
+\right)}_{\text{Matriz de Contraste}, \mathbf{C}} \left(
+\begin{array}{c}
+\alpha_1 \\
+\alpha_2 \\
+\alpha_3
+\end{array}
+\right).
+\end{equation}
+
+\paragraph{Modelo lineal para el dise\~no de ``loop''}
+Modelo,
+$\mathbf{y=X\alpha+\varepsilon}$, y contrastes $\mathbf{C'\beta}$
+
+\begin{itemize}
+\item Par\'ametros del modelo:
+$$
+\alpha_1= \mathbf{E}\left (log\frac{M_1}{M_2}\right ),\
+\alpha_2= \mathbf{E}\left (log\frac{M_2}{M_3}\right ).
+$$
+$\alpha_3$ no es necesaria: $\log \left( \frac{M_1}{M_3}\right
+)=\log\left(\frac{M_1}{M_2}\right
+)-\log\left(\frac{M_2}{M_3}\right)$.
+
+\item \emph{Contrastes}: Algunas de las comparaciones deseadas son precisamente los par\'ametros.
+\begin{eqnarray*}
+\beta_1 &=& \alpha_1,\\
+\beta_2 &=& \alpha_2,\\
+\beta_3 & =& \alpha_1+\alpha_2.
+\end{eqnarray*}
+\end{itemize}
+
+\begin{equation}
+\left(
+\begin{array}{r}
+y_1 \\
+y_2 \\
+y_3 \\
+y_4 \\
+y_5 \\
+y_6
+\end{array}
+\right) = \underbrace{\left(
+\begin{array}{rr}
+1 & 0  \\
+0 & 1  \\
+1 & -1  \\
+-1 & 0 \\
+0 & -1 \\
+-1 & 1
+\end{array}
+\right)}_{\text{Matriz de Dise\~no}, \mathbf{X}} \left(
+\begin{array}{c}
+\alpha_1 \\
+\alpha_2 \\
+\end{array}
+\right)
+ + \left(
+\begin{array}{r}
+\varepsilon_1 \\
+\varepsilon_2 \\
+\varepsilon_3\\
+\varepsilon_4 \\
+\varepsilon_5\\
+\varepsilon_6
+\end{array}
+\right)
+\end{equation}
+
+\begin{equation}
+\left(
+\begin{array}{r}
+\beta_1 \\
+\beta_2 \\
+\beta_3
+\end{array}
+\right) = \underbrace{\left(
+\begin{array}{rrr}
+1 & 0 \\
+0 & 1 \\
+1 & +1
+\end{array}
+\right)}_{\text{Matriz de Contraste}, \mathbf{C}} \left(
+\begin{array}{c}
+\alpha_1 \\
+\alpha_2
+\end{array}
+\right).
+\end{equation}
+
+\paragraph{Modelo lineal para el dise\~no del array de un color}
+Modelo,
+$\mathbf{y=X\alpha+\varepsilon}$, y contrastes
+$\mathbf{C^{1'}\beta}$, $\mathbf{C^{2'}\beta}$
+
+\begin{itemize}
+\item Par\'ametros del modelo:
+$$\alpha_1= \mathbf{E} (log{M_1} ),\
+\alpha_2= \mathbf{E} (log{M_2} ),\ \alpha_3=\mathbf{E} (log{M_3} ),
+\alpha_4=\mathbf{E} (log{W} ).
+$$
+\item \emph{Contrastes}: Dos posibles conjuntos de comparaciones interesantes.
+\begin{enumerate}
+\item Comparaci\'on entre tipo de mutantes $(\mathbf{C^{1'}\beta})$
+\begin{eqnarray*}
+\beta_1^1 &=& \alpha_1-\alpha_2,\\
+\beta_2^1 &=& \alpha_3-\alpha_2,\\
+\beta_3^1 &=& \alpha_2-\alpha_3.
+\end{eqnarray*}
+\item Comparaci\'on entre cada mutantes y el wild type $(\mathbf{C^{2'}\beta})$
+\begin{eqnarray*}
+\beta_1^2 &=& \alpha_4-\alpha_1,\\
+\beta_2^2 &=& \alpha_3-\alpha_1,\\
+\beta_3^2 &=& \alpha_2-\alpha_1.
+\end{eqnarray*}
+\end{enumerate}
+\end{itemize}
+
+\begin{equation}
+\left(
+\begin{array}{r}
+y_1 \\
+y_2 \\
+y_3 \\
+y_4 \\
+y_5 \\
+y_6 \\
+y_7 \\
+y_8
+\end{array}
+\right) = \underbrace{\left(
+\begin{array}{rrrr}
+1 & 0 & 0 & 0\\
+1 & 0 & 0 & 0\\
+0 & 1 & 0 & 0 \\
+0 & 1 & 0 & 0 \\
+0 & 0 & 1 & 0 \\
+0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 1 \\
+0 & 0 & 0 & 1
+\end{array}
+\right)}_{\text{Matriz de Dise\~no}, \mathbf{X}} \left(
+\begin{array}{c}
+\alpha_1 \\
+\alpha_2 \\
+\alpha_3 \\
+\alpha_4
+\end{array}
+\right)
+ + \left(
+\begin{array}{r}
+\varepsilon_1 \\
+\varepsilon_2 \\
+\varepsilon_3\\
+\varepsilon_4 \\
+\varepsilon_5\\
+\varepsilon_6\\
+\varepsilon_7\\
+\varepsilon_8
+\end{array}
+\right)
+\end{equation}
+
+\begin{equation}
+\left(
+\begin{array}{r}
+\beta_1^1 \\
+\beta_2^1 \\
+\beta_3^1
+\end{array}
+\right) = \underbrace{\left(
+\begin{array}{rrrr}
+1 & -1 & 0 & 0\\
+1 & 0 & -1 & 0\\
+0 & 1 & -1& 0
+\end{array}
+\right)}_{\text{Matriz de Contraste}, \mathbf{C^1}} \left(
+\begin{array}{c}
+\alpha_1 \\
+\alpha_2 \\
+\alpha_3 \\
+\alpha_4
+\end{array}
+\right).
+\end{equation}
+
+\begin{equation}
+\left(
+\begin{array}{r}
+\beta_1^2 \\
+\beta_2^2 \\
+\beta_3^2
+\end{array}
+\right) = \underbrace{\left(
+\begin{array}{rrrr}
+1 & 0 & 0 & -1\\
+0 & 1 & 0 & -1\\
+0 & 0 & 1 & -1
+\end{array}
+\right)}_{\text{Matriz de Contraste}, \mathbf{C^2}} \left(
+\begin{array}{c}
+\alpha_1 \\
+\alpha_2 \\
+\alpha_3 \\
+\alpha_4
+\end{array}
+\right).
+\end{equation}
+
+\subsubsection{Ejemplo 3: Estudio de la influencia de las citoquinas en ratones \emph{viejos}}
+
+
+El objetivo de este experimento es estudiar el efecto de las citoquinas sobre la estimulaci\'on de una sustancia (LPS) y ver como esta relaci\'on se ve afectada por la edad.
+
+Se trata de un modelo de un un factor (tratamiento, asignable por el individuo) y un
+bloque (edad, no asignable, prefijada en cada rat\'on). En la pr\'actica el modelo equivale al del an\'alisis de la varianza de dos factores.
+\begin{enumerate}
+\item El dise\~no experimental para este estudio fue el siguiente:
+\begin{center}
+\begin{tabular}{|c|c|c|}
+    \hline
+    % after \\: \hline or \cline{col1-col2} \cline{col3-col4} ...
+    \text{Array} & \text{Tratamiento} & \text{Edad} \\
+    \hline
+    1 & LPS & Viejo \\
+    2 & LPS & Joven \\
+    3 & Medio & Viejo \\
+    4 & Medio & Joven \\
+    5 & LPS & Viejo \\
+    6 & LPS & Joven \\
+    7 & Medio & Viejo \\
+    8 & Medio & Joven \\
+    9 & LPS & Viejo \\
+   10 & LPS & Joven \\
+   11 & Medio & Viejo \\
+   12 & Medio & Joven \\
+    \hline
+  \end{tabular}
+\end{center}
+
+\begin{itemize}
+\item Se utiliz\'aron microarrays de un color (Affymetrix).
+\item Cada condici\'on se replic\'o tres veces.
+\item Las preguntas espec\'ificas a responder:
+\begin{itemize}
+\item ?`Cual es el efecto del tratamiento en ratones viejos?
+\item ?`Cual es el efecto del tratamiento en ratones jovenes?
+\item ?`En que genes el efecto es diferente?.
+\end{itemize}
+\end{itemize}
+
+\item En este caso se pueden considerar distintos modelo lineales derivados del hecho de que este experimento admite diferente parametrizaciones:
+\begin{itemize}
+\item Factores separados con 2 niveles cada uno para tratamiento (LPS/Med), Edad (Joven/Viejo) y su interacci\'on:
+$$Y_{ijk}=\underbrace{\alpha_{i}}_{\text{Trat}}+\underbrace{\beta_{j}}_{\text{Edad}}+\underbrace{\gamma_{ij}}_{\text{Interacci\'on}}+\varepsilon_{ijk},\,
+i=1,2,\, j=1,2,\, k=1,2,3$$
+Esta primera parametrizaci\'on parece natural pero es m\'as complicado confiar en ella para responder las preguntas propuestas.
+\item Un factor combinado con 4 niveles \\
+(\emph{LPS.Aged, Med.Aged, LPS.Young, Med.Young})
+$$
+Y_{ij}=\alpha{i} +\varepsilon_{ij}, \quad i=1,...,4,\, j=1,2,3 .
+$$
+Esta parametrizaci\'on parece m\'as r\'igida pero se adapta mejor para responder a las preguntas planteadas.
+\end{itemize}
+
+Aqu\'i se adopta la segunda parametrizaci\'on.
+\begin{itemize}
+\item Par\'ametros del modelo:
+\begin{eqnarray*}
+\alpha_1&=&  \mathbf{E} (log{LPS.Aged} ),\
+\alpha_2= \mathbf{E} (log{Med.Aged} ),\\
+\alpha_3&=&\mathbf{E} (log{LPS.Young} ),\,
+\alpha_4=\mathbf{E} (log{Med.Young} ).
+\end{eqnarray*}
+\item \emph{Contrastes}: Preguntas que interesa responder:
+\begin{eqnarray*}
+\beta_1^1 &=& \alpha_3-\alpha_1,\quad \mbox{Efecto del tratamiento en ratones viejos} \\
+\beta_2^1 &=& \alpha_4-\alpha_2,\quad \mbox{Efecto del tratamiento en ratones j\'ovenes} \\
+\beta_3^1 &=& (\alpha_3-\alpha_1)- (\alpha_2-\alpha_4),\quad \mbox{Interacci\'on: diferencia entre efectos}
+\end{eqnarray*}
+
+\item Modelo lineal:
+
+Modelo, $\mathbf{y=X\alpha+\varepsilon}$, y
+contrastes $\mathbf{C'\beta}$
+
+\begin{equation}
+\left(
+\begin{array}{r}
+y_1 \\
+y_2 \\
+y_3 \\
+y_4 \\
+y_5 \\
+y_6 \\
+y_7 \\
+y_8 \\
+y_9 \\
+y_{10} \\
+y_{11} \\
+y_{12}
+
+
+\end{array}
+\right) = \underbrace{\left(
+\begin{array}{rrrr}
+1 & 0 & 0 & 0\\
+1 & 0 & 0 & 0\\
+1 & 0 & 0 & 0\\
+0 & 1 & 0 & 0 \\
+0 & 1 & 0 & 0 \\
+0 & 1 & 0 & 0 \\
+0 & 0 & 1 & 0 \\
+0 & 0 & 1 & 0 \\
+0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 1 \\
+0 & 0 & 0 & 1 \\
+0 & 0 & 0 & 1
+\end{array}
+\right)}_{\text{Matriz de Dise\~no}, \mathbf{X}} \left(
+\begin{array}{c}
+\alpha_1 \\
+\alpha_2 \\
+\alpha_3 \\
+\alpha_4
+\end{array}
+\right)
+ + \left(
+\begin{array}{r}
+\varepsilon_1 \\
+\varepsilon_2 \\
+\varepsilon_3\\
+\varepsilon_4 \\
+\varepsilon_5\\
+\varepsilon_6\\
+\varepsilon_7\\
+\varepsilon_8
+\end{array}
+\right)
+\end{equation}
+
+\begin{equation}
+ \left(
+\begin{array}{r}
+\beta_1^1 \\
+\beta_2^1 \\
+\beta_3^1
+\end{array}
+\right) = \underbrace{\left(
+\begin{array}{rrrr}
+-1 & 0 & 1 & 0\\
+0 & -1 & 0 & 1\\
+-1 & 1 & 1 & -1
+\end{array}
+\right)}_{\text{Matriz de Contraste}, \mathbf{C}} \left(
+\begin{array}{c}
+\alpha_1 \\
+\alpha_2 \\
+\alpha_3 \\
+\alpha_4
+\end{array}
+\right)
+\end{equation}
+
+\end{itemize}
+\end{enumerate}
+
+
+\subsection{Estimaci\'on e inferencia con el modelo lineal}
+
+Una vez se ha expresado el experimento como un modelo lineal:
+\begin{equation}
+\mathbf{E(y_g)=X\alpha_g},\quad \text{var}(y_g)=W_g\sigma_g,
+\end{equation}
+es posible usar \emph{la teor\'ia est\'andar del modelo lineal} (ver \cite{Faraway:2004})
+para obtener:
+\begin{itemize}
+\item Estimaci\'on de los par\'ametros: $\hat \alpha_g( \approx \mathbf{\alpha})$.
+\item Desviaci\'on est\'andar de las estimaciones: $\hat \sigma_g=s_g( \approx
+\sigma)$.
+\item Error est\'andar de las estimaciones:$\widehat {\text{var}\hat \alpha_g}=V_g\,s_g^2$.
+\end{itemize}
+Estas estimaciones son la base para realizar inferencia sobre $\alpha$ i.e. test $H_0:\ \alpha
+=0?$, basado en el hecho que:
+\begin{equation}
+t_{gj}=\frac{\alpha_{gj}}{s_g\sqrt{v_{gj}}}\sim \text{Distribuci\'on de Student}.
+\end{equation}
+De forma an\'aloga pueden derivarse f\'ormulas para $\alpha_1-\alpha_2$, es decir para decidir acerca de las comparaciones.
+
+Los procedimientos de estimaci\'on y de inferencia no dependen de qu\'e
+parametrizaci\'on se ha adoptado, a pesar de que distintas parametrizaciones piedan dar lugar a distintos valores num\'ericos..
+
+\subsubsection{Fortaleza y debilidades del modelo lineal}
+
+El enfoque del modelo lineal es flexible y potente:
+\begin{itemize}
+\item Se puede adaptar a situaciones diferentes y complejas.
+\item Siempre produce buenas estimaciones (``BLUE'').
+\item Si las suposiciones son ciertas proporciona una base para la inferencia.
+\end{itemize}
+
+Por otro lado hay que tener en cuenta que, si las suposiciones no se cumplen, entonces las conclusiones deben tomarse con precauci\'on.
+
+Y lo que es peor, a\'un siendo v\'alidas las suposiciones del modelo los resultados pueden verse afectados por el tama\~no de la muestra de forma que, en muestras peque\~nas donde pueden haber variaciones m\'as grandes es f\'acil que se obtengan valores $t$ no significativos o, por el contrario, excesivamente significativos (si la variaci\'on es muy reducida).
+
+La metodolog\'ia desarrollada por Smyth (\cite{Smyth:2005}) basada en los resultados de L\"onsted \& Speed (\cite{Speed:2003}) est\'a dirigida a abordar c\'omo hacer frente a estas debilidades.
+
+\subsection{Modelos lineales para Microarrays}
+
+Smyth (\cite{Smyth:2005}) considera el problema de la identificaci\'on de genes que se expresan diferencialmente en las condiciones
+especificadas en el dise\~no de experimentos de microarrays. Como hemos dicho repet\'idamente la variabilidad de los valores
+de expresi\'on difiere entre genes, pero la naturaleza paralela de la inferencia en microarrays sugiere la posibilidad de usar
+la informaci\'on \emph{de todos los genes a la vez} para mejorar la estimaci\'on de los par\'ametros, lo que puede llevar a
+una inferencia m\'as fiable.
+
+B\'asicamente lo que propone Smyth (\cite{Smyth:2005}) es una soluci\'on en tres pasos:
+\begin{itemize}
+\item Se plantea el problema como un model lineal con una componente bayesiana ya que se supone que los mismos par\'ametros a
+estimar son variables (no constantes) con distribuciones \emph{prior} que se estimaran a partir de la informaci\'on de todos los
+genes.
+\item A continuaci\'on se obtienen las estimaciones de los par\'ametros del modelo. La aproximaci\'on utilizada garantiza que
+estos estimadores tienen un comportamiento robusto incluso para peque\~no n\'umero de arrays.
+\item Finalmente se calcula un ``odd-ratio'' que viene a ser la probabilidad de que un gen est\'e diferencialmente expresado
+frente a la de que no lo est\'e y se asocia este valor denominado estad\'istico $B$ con un estad\'istico $t$ moderado y su
+p--valor.
+$$
+ B=\log \frac{P[\text{Afectado}|M_{ij}]}{P[\text{No
+ Afectado}|M_{ij}]},
+$$
+gen=i $(i=1...N)$, r\'eplica=j $(j=1,...,n)$.
+
+El hecho de trabajar con logaritmos permite poner el punto de corte en el cero: A mayor valor positivo m\'as probable es que el
+gen est\'e diferencialmente expresado. A mayor valor negativo, m\'as probable es que no lo est\'e
+\end{itemize}
+
+\subsection{Implementaci\'on y ejemplos}
+
+El paquete de \emph{Bioconductor} \texttt{limma} al que hemos hecho referencia en los p\'arrafos anteriores implementa el m\'etodo de Smyth para la regularizaci\'on de la varianza lo que lo ha convertido en muy popular entre los usuarios de microarrays
+
+El c\'odigo siguiente muestra como se crea la matriz del dise\~no y los contrastes para realizar el an\'alisis mediante modelos lineales;
+
+<<selectLimma, echo=F>>=
+require(Biobase)
+require(limma)
+load ("celltypes-normalized.rma.Rda")
+my.eset <- eset_rma_filtered
+targets <- pData(my.eset)
+age.treat<- paste(targets$age,targets$treat, sep=".")
+lev<-factor(age.treat, levels=unique(age.treat))
+design <-model.matrix(~0+lev)
+colnames(design)<-levels(lev)
+rownames(design) <-rownames(targets)
+print(design)
+@
+
+<<setContrasts>>=
+require(limma)
+cont.matrix <- makeContrasts (
+      LPS.in.AGED=(Aged.LPS-Aged.MED),
+      LPS.in.YOUNG=(Young.LPS-Young.MED),
+      AGE=(Aged.MED-Young.MED),
+      levels=design)
+cont.matrix
+@
+
+Una vez definida la matriz de diseño y los contrastes podemos pasar a
+estimar el modelo, estimar los contrastes y realizar las pruebas de
+significación que nos indiquen, para cada gen y cada comparación, si
+puede considerarse diferencialmente expresado.
+
+<<linearmodelfit,echo=F>>=
+require(limma)
+fit<-lmFit(my.eset, design)
+fit.main<-contrasts.fit(fit, cont.matrix)
+fit.main<-eBayes(fit.main)
+save(fit.main, file="celltypes-fit.main.Rda")
+@
+
+La pen\'ultima instrucci\'on ejecuta el proceso de regularizaci\'on de
+la varianza utilizando modelos de Bayes empíricos para combinar la
+información de toda la matriz de datos y de cada gen individual y
+obtener estimaciones de error mejoradas.
+
+El análisis proporciona los estadísticos de test habituales como
+\texttt{Fold--change} $t$-moderados o $p$-valores ajustados que se
+utilizan para ordenar los genes de mas a menos diferencialmente
+expresados.
+
+A fin de controlar el porcentaje de falsos positivos que puedan resultar del alto numero de contrastes realizados simultaneamente
+los p--valores se ajustan de forma que tengamos control sobre la tasa de falsos positivos utilizando el metodo 
+de Benjamini y Hochberg (\cite{Benjamini&Hochberg95}). 
+
+La funcion \texttt{topTable} genera para cada contraste una lista de genes 
+ordenados de mas a menos diferencialmente expresados.
+
+<<print=FALSE, echo=TRUE>>=
+topTab_LPS.in.AGED <- topTable (fit.main, number=nrow(fit.main), coef="LPS.in.AGED", adjust="fdr")
+topTab_LPS.in.YOUNG <- topTable (fit.main, number=nrow(fit.main), coef="LPS.in.YOUNG", adjust="fdr")
+topTab_AGE  <- topTable (fit.main, number=nrow(fit.main) , coef="AGE", adjust="fdr")
+@
+
+Se puede visualizar los resultados  mediante un \texttt{volcano plot} que, en este caso, representa en abscisas los cambios de expresión en escala logarítmica
+y en ordenadas el estadístico $B$ en vez de el ``menos logaritmo'' del p-valor.
+<<volcano1,fig=T,echo=F, fig=T>>=
+coefnum = 1
+opt <- par(cex.lab = 0.7)
+volcanoplot(fit.main, coef=coefnum, highlight=10, names=fit.main$ID, 
+            main=paste("Differentially expressed genes",colnames(cont.matrix)[coefnum], sep="\n"))
+abline(v=c(-1,1))
+par(opt)
+@
+
+
+

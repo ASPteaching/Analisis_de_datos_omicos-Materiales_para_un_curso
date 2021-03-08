@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Capítulo 6 Referencias | Analisis de datos omicos" />
+<meta property="og:type" content="book" />
+
+
+
+
+
+<meta name="author" content="Alex Sánchez-Pla^{1,2} y Ricardo Gonzalo Sanz^2" />
+<meta name="author" content="^1 Departament de Genètica, Microbiologia i Estadística. Universitat de Barcelona (UB)." />
+<meta name="author" content="^2 Unitat d’Estadística i Bioinformàtica. Vall d’Hebron Institut de Recerca (VHIR)." />
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" type="text/javascript"></script>
+
+<meta name="description" content="Capítulo 6 Referencias | Analisis de datos omicos">
+
+<title>Capítulo 6 Referencias | Analisis de datos omicos</title>
+
+<script src="libs/header-attrs-2.7/header-attrs.js"></script>
+<script src="libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="libs/navigation-1.1/tabsets.js"></script>
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container-fluid main-container">
+
+
+<div class="row">
+<div class="col-sm-12">
+<div id="TOC">
+<ul>
+<li><a href="index.html#presentación"><span class="toc-section-number">1</span> Presentación</a></li>
+<li><a href="2-introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#introduccion-a-los-microarrays-y-otras-tecnologías-omicas"><span class="toc-section-number">2</span> Introduccion a los microarrays y otras tecnologías omicas</a>
+<ul>
+<li><a href="2-1-antecedentes-históricos.html#antecedentes-históricos"><span class="toc-section-number">2.1</span> Antecedentes históricos</a></li>
+<li><a href="2-2-los-microarrays.html#los-microarrays"><span class="toc-section-number">2.2</span> Los microarrays</a>
+<ul>
+<li><a href="2-2-los-microarrays.html#aplicaciones-de-los-microarrays"><span class="toc-section-number">2.2.1</span> Aplicaciones de los microarrays</a></li>
+</ul></li>
+<li><a href="2-3-cómo-funcionan-los-microarrays.html#cómo-funcionan-los-microarrays"><span class="toc-section-number">2.3</span> Cómo funcionan los microarrays</a>
+<ul>
+<li><a href="2-3-cómo-funcionan-los-microarrays.html#microarrays-de-dos-colores"><span class="toc-section-number">2.3.1</span> Microarrays de dos colores</a></li>
+<li><a href="2-3-cómo-funcionan-los-microarrays.html#microarrays-de-un-color"><span class="toc-section-number">2.3.2</span> Microarrays de un color</a></li>
+<li><a href="2-3-cómo-funcionan-los-microarrays.html#realización-de-un-experimento-de-microarrays"><span class="toc-section-number">2.3.3</span> Realización de un experimento de microarrays</a></li>
+<li><a href="2-3-cómo-funcionan-los-microarrays.html#como-se-mide-la-expresión"><span class="toc-section-number">2.3.4</span> Como se mide la expresión</a></li>
+</ul></li>
+<li><a href="2-4-bioinformática-de-microarrays.html#bioinformática-de-microarrays"><span class="toc-section-number">2.4</span> Bioinformática de Microarrays<a name="Bioinformática"></a></a>
+<ul>
+<li><a href="2-4-bioinformática-de-microarrays.html#software-para-el-análisis-de-datos-de-microarrays"><span class="toc-section-number">2.4.1</span> Software para el análisis de datos de microarrays</a></li>
+<li><a href="2-4-bioinformática-de-microarrays.html#bases-de-datos-de-microarrays"><span class="toc-section-number">2.4.2</span> Bases de datos de Microarrays</a></li>
+</ul></li>
+<li><a href="2-5-extensiones-1-otros-tipos-de-microarrays.html#extensiones-1-otros-tipos-de-microarrays"><span class="toc-section-number">2.5</span> Extensiones (1): Otros tipos de microarrays<a name="extensions"></a></a>
+<ul>
+<li><a href="2-5-extensiones-1-otros-tipos-de-microarrays.html#otros-microarrays-de-adn"><span class="toc-section-number">2.5.1</span> Otros microarrays de ADN</a></li>
+<li><a href="2-5-extensiones-1-otros-tipos-de-microarrays.html#otros-tipos-de-microarrays-proteínas-o-carbohidratos"><span class="toc-section-number">2.5.2</span> Otros tipos de microarrays: Proteínas o carbohidratos</a></li>
+</ul></li>
+<li><a href="2-6-extensiones-2-ngs-nextnow-generation-sequencing.html#extensiones-2-ngs-nextnow-generation-sequencing"><span class="toc-section-number">2.6</span> Extensiones (2): <em>NGS: Next(Now) Generation Sequencing</em></a>
+<ul>
+<li><a href="2-6-extensiones-2-ngs-nextnow-generation-sequencing.html#visión-global-de-las-tecnologías-de-secuenciación"><span class="toc-section-number">2.6.1</span> Visión global de las tecnologías de secuenciación</a></li>
+<li><a href="2-6-extensiones-2-ngs-nextnow-generation-sequencing.html#de-la-secuenciación-sanger-a-la-ultrasecuenciación"><span class="toc-section-number">2.6.2</span> De la secuenciación Sanger a la ultrasecuenciación</a></li>
+<li><a href="2-6-extensiones-2-ngs-nextnow-generation-sequencing.html#tecnologías-de-ultrasecuenciación"><span class="toc-section-number">2.6.3</span> Tecnologías de ultrasecuenciación</a></li>
+</ul></li>
+</ul></li>
+<li><a href="3-MDAProcess.html#MDAProcess"><span class="toc-section-number">3</span> El proceso de análisis de microarrays</a>
+<ul>
+<li><a href="3-1-tipos-de-estudios.html#tipos-de-estudios"><span class="toc-section-number">3.1</span> Tipos de estudios</a>
+<ul>
+<li><a href="3-1-tipos-de-estudios.html#comparación-de-grupos-o-class-comparison"><span class="toc-section-number">3.1.1</span> Comparación de grupos o “Class comparison”</a></li>
+<li><a href="3-1-tipos-de-estudios.html#predicción-de-clase-o-class-prediction"><span class="toc-section-number">3.1.2</span> Predicción de clase o “Class prediction”</a></li>
+<li><a href="3-1-tipos-de-estudios.html#descubrimiento-de-clases-o-class-discovery"><span class="toc-section-number">3.1.3</span> Descubrimiento de clases o “Class discovery”</a></li>
+<li><a href="3-1-tipos-de-estudios.html#otros-tipos-de-estudios"><span class="toc-section-number">3.1.4</span> Otros tipos de estudios</a></li>
+</ul></li>
+<li><a href="3-2-c4examples.html#c4examples"><span class="toc-section-number">3.2</span> Algunos ejemplos concretos</a>
+<ul>
+<li><a href="3-2-c4examples.html#celltypes"><span class="toc-section-number">3.2.1</span> Estudio de procesos regulados por citoquinas</a></li>
+<li><a href="3-2-c4examples.html#golub"><span class="toc-section-number">3.2.2</span> Clasificación molecular de la leucemia</a></li>
+<li><a href="3-2-c4examples.html#efecto-del-estrogeno-y-el-tiempo-de-administración-estrogen"><span class="toc-section-number">3.2.3</span> Efecto del estrogeno y el tiempo de administración {#estrogen]</a></li>
+<li><a href="3-2-c4examples.html#CCL4"><span class="toc-section-number">3.2.4</span> Efecto del CCL4 en la expresión génica</a></li>
+<li><a href="3-2-c4examples.html#yeast"><span class="toc-section-number">3.2.5</span> Análisis de patrones en el ciclo celular</a></li>
+<li><a href="3-2-c4examples.html#recapitulación"><span class="toc-section-number">3.2.6</span> Recapitulación</a></li>
+</ul></li>
+<li><a href="3-3-el-proceso-de-análisis-de-microarrays.html#el-proceso-de-análisis-de-microarrays"><span class="toc-section-number">3.3</span> El proceso de análisis de microarrays</a></li>
+</ul></li>
+<li><a href="4-MDAExpDesign.html#MDAExpDesign"><span class="toc-section-number">4</span> Diseño de experimentos de microarrays</a>
+<ul>
+<li><a href="4-1-fuentes-de-variabilidad.html#fuentes-de-variabilidad"><span class="toc-section-number">4.1</span> Fuentes de variabilidad</a></li>
+<li><a href="4-2-tipos-de-variabilidad.html#tipos-de-variabilidad"><span class="toc-section-number">4.2</span> Tipos de variabilidad</a></li>
+<li><a href="4-3-conceptos-básicos-de-diseño-de-experimentos.html#conceptos-básicos-de-diseño-de-experimentos"><span class="toc-section-number">4.3</span> Conceptos básicos de diseño de Experimentos</a></li>
+<li><a href="4-4-principios-de-diseño-de-experimentos.html#principios-de-diseño-de-experimentos"><span class="toc-section-number">4.4</span> Principios de diseño de experimentos</a>
+<ul>
+<li><a href="4-4-principios-de-diseño-de-experimentos.html#replicación"><span class="toc-section-number">4.4.1</span> Replicación</a></li>
+<li><a href="4-4-principios-de-diseño-de-experimentos.html#aleatorización"><span class="toc-section-number">4.4.2</span> Aleatorización</a></li>
+<li><a href="4-4-principios-de-diseño-de-experimentos.html#bloqueo-o-control-local"><span class="toc-section-number">4.4.3</span> Bloqueo o control local</a></li>
+</ul></li>
+<li><a href="4-5-diseños-experimentales-para-microarrays-de-dos-colores.html#diseños-experimentales-para-microarrays-de-dos-colores"><span class="toc-section-number">4.5</span> Diseños experimentales para microarrays de dos colores</a></li>
+</ul></li>
+<li><a href="5-exploración-de-los-datos-control-de-calidad-y-preprocesado.html#exploración-de-los-datos-control-de-calidad-y-preprocesado"><span class="toc-section-number">5</span> Exploración de los datos, control de calidad y preprocesado</a>
+<ul>
+<li><a href="5-1-introducción.html#introducción"><span class="toc-section-number">5.1</span> Introducción</a>
+<ul>
+<li><a href="5-1-introducción.html#nivel-de-análisis-y-tipo-de-microarray"><span class="toc-section-number">5.1.1</span> Nivel de análisis y tipo de microarray</a></li>
+<li><a href="5-1-introducción.html#datos-de-partida"><span class="toc-section-number">5.1.2</span> Datos de partida</a></li>
+</ul></li>
+<li><a href="5-2-exploración-y-control-de-calidad.html#exploración-y-control-de-calidad"><span class="toc-section-number">5.2</span> Exploración y control de calidad</a>
+<ul>
+<li><a href="5-2-exploración-y-control-de-calidad.html#control-de-calidad-con-gráficos-estadísticos-generales"><span class="toc-section-number">5.2.1</span> Control de calidad con gráficos estadísticos generales</a></li>
+<li><a href="5-2-exploración-y-control-de-calidad.html#gráficos-de-diagnóstico-para-microarrays-de-dos-colores"><span class="toc-section-number">5.2.2</span> Gráficos de diagnóstico para microarrays de dos colores</a></li>
+<li><a href="5-2-exploración-y-control-de-calidad.html#gráficos-de-diagnóstico-para-microarrays-de-un-color"><span class="toc-section-number">5.2.3</span> Gráficos de diagnóstico para microarrays de un color</a></li>
+</ul></li>
+<li><a href="5-3-normalización-de-arrays-de-dos-colores.html#normalización-de-arrays-de-dos-colores"><span class="toc-section-number">5.3</span> Normalización de arrays de dos colores</a>
+<ul>
+<li><a href="5-3-normalización-de-arrays-de-dos-colores.html#normalización-global"><span class="toc-section-number">5.3.1</span> Normalización global</a></li>
+<li><a href="5-3-normalización-de-arrays-de-dos-colores.html#normalización-dependiente-de-la-intensidad"><span class="toc-section-number">5.3.2</span> Normalización dependiente de la intensidad</a></li>
+</ul></li>
+<li><a href="5-4-resumen-y-normalización-de-microarrays-de-affymetrix.html#resumen-y-normalización-de-microarrays-de-affymetrix"><span class="toc-section-number">5.4</span> Resumen y normalización de microarrays de Affymetrix</a>
+<ul>
+<li><a href="5-4-resumen-y-normalización-de-microarrays-de-affymetrix.html#métodos-originales-de-affymetrix"><span class="toc-section-number">5.4.1</span> Métodos originales de Affymetrix</a></li>
+<li><a href="5-4-resumen-y-normalización-de-microarrays-de-affymetrix.html#el-método-rma-robust-multi-array-average"><span class="toc-section-number">5.4.2</span> El método RMA (Robust Multi-Array Average)</a></li>
+</ul></li>
+<li><a href="5-5-filtraje-no-específico.html#filtraje-no-específico"><span class="toc-section-number">5.5</span> Filtraje no específico</a></li>
+</ul></li>
+<li><a href="6-referencias.html#referencias"><span class="toc-section-number">6</span> Referencias</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12">
+<div id="referencias" class="section level1" number="6">
+<h1><span class="header-section-number">Capítulo 6</span> Referencias</h1>
+
+<div id="refs" class="references hanging-indent">
+<div>
+<p>Alizadeh, A., M. B. Eisen, E. Davis, C. Ma, I. Lossos, A. Rosenwald, J. Boldrick, et al. 2000. “Distinct Types of Diffuse Large B–Cell Lymphoma Identified by Gene Expression Profiling.” <em>Nature</em> 403: 503–11.</p>
+</div>
+<div>
+<p>Allison, David B, Xiangqin Cui, Grier P Page, and Mahyar Sabripour. 2006. “Microarray Data Analysis: From Disarray to Consolidation and Consensus.” <em>Nat Rev Genet</em> 7 (1): 55–65.</p>
+</div>
+<div>
+<p>Barrier, Alain, Pierre-Yves Boelle, Antoinette Lemoine, Antoine Flahault, Sandrine Dudoit, and Michel Huguier. 2007. “[Gene Expression Profiling in Colon Cancer].” <em>Bull Acad Natl Med</em> 191 (6): 1091–1; discussion 1102–3.</p>
+</div>
+<div>
+<p>Callow, M. J., S. Dudoit, E. L. Gong, T. P. Speed, and E. M. Rubin. 2000. “Microarray Expression Profiling Identifies Genes with Altered Expression in HDL-Deficient Mice.” <em>Genome Research</em>.</p>
+</div>
+<div>
+<p>Chelvarajan, R. L., Y. Liu, D. Popa, M. L. Getchell, T. V. Getchell, A. J. Stromberg, and S. Bondada. 2006. “Molecular basis of age-associated cytokine dysregulation in LPS-stimulated macrophages.” <em>Journal of Leukocyte Biology</em> 79 (6): 1314.</p>
+</div>
+<div>
+<p>Dyrskjøt, L., T. Thykjaer, M. Kruhøffer, J. L. Jensen, N. Marcussen, S. Hamilton-Dutoit, H. Wolf, and T. F. Ørntoft. 2002. “Identifying distinct classes of bladder carcinoma using microarrays.” <em>Nature Genetics</em> 33: 90–96.</p>
+</div>
+<div>
+<p>Golub, T. R., D. K. Slonim, P. Tamayo, C. Huard, M. Gaasenbeek, J. P. Mesirov, H. Coller, et al. 1999. “Molecular Classification of Cancer: Class Discovery and Class Prediction by Gene Expression Monitoring.” <em>Science</em> 286: 531–37.</p>
+</div>
+<div>
+<p>Hedenfalk, I. A., M. Ringnér, J. M. Trent, and A. Borg. 2002. “Gene Expression in Inherited Breast Cancer.” <em>Adv Cancer Res</em> 84: 1–34. <a href="http://view.ncbi.nlm.nih.gov/pubmed/11883525">http://view.ncbi.nlm.nih.gov/pubmed/11883525</a>.</p>
+</div>
+<div>
+<p>Imbeaud, Sandrine, and Charles Auffray. 2005. “’The 39 Steps’ in Gene Expression Profiling: Critical Issues and Proposed Best Practices for Microarray Experiments.” <em>Drug Discovery Today</em> 10 (17): 1175–82. <a href="https://doi.org/10.1016/S1359-6446(05)03565-8">https://doi.org/10.1016/S1359-6446(05)03565-8</a>.</p>
+</div>
+<div>
+<p>Kerr, M K, and G A Churchill. 2001. “Experimental Design for Gene Expression Microarrays.” <em>Biostatistics</em>.</p>
+</div>
+<div>
+<p>Kupin, Isabelle Lesur. 2005. “Study of the Transcriptome of the Prematurely Aging <em>Dna-2</em> Yeast Mutant Using a New System Allowing Comparative Dna Microarray Analysis.” PhD thesis, Universite Bordeaux I.</p>
+</div>
+<div>
+<p>Lin, Simon M, Jyothi Devakumar, and Warren A Kibbe. 2006. “Improved Prediction of Treatment Response Using Microarrays and Existing Biological Knowledge.” <em>Pharmacogenomics</em> 7 (3): 495–501. <a href="https://doi.org/10.2217/14622416.7.3.495">https://doi.org/10.2217/14622416.7.3.495</a>.</p>
+</div>
+<div>
+<p>Moore, Shanna, Julia Vrebalov, Paxton Payton, and Jim Giovannoni. 2002. “Use of Genomics Tools to Isolate Key Ripening Genes and Analyse Fruit Maturation in Tomato.” <em>Journal of Experimental Botany</em> 53 (377): 2023–30. <a href="https://doi.org/10.1093/jxb/erf057">https://doi.org/10.1093/jxb/erf057</a>.</p>
+</div>
+<div>
+<p>Quackenbush, J. 2002. “Microarray Data Normalization and Transformation.” <em>Nature Genet.</em> 32: 496–501.</p>
+</div>
+<div>
+<p>Schena, M. 1999. <em>Microarray Analysis.</em> J. Wiley &amp; Sons, Hoboken, NJ.</p>
+</div>
+<div>
+<p>Scholtens, Denise, Alexander Miron, Faisal M. Merchant, Arden Miller, Penelope L. Miron, J. Dirk Iglehart, and Robert Gentleman. 2004. “Analyzing Factorial Designed Microarray Experiments.” <em>J. Multivar. Anal.</em> 90 (1): 19–43. <a href="https://doi.org/http://dx.doi.org/10.1016/j.jmva.2004.02.004">https://doi.org/http://dx.doi.org/10.1016/j.jmva.2004.02.004</a>.</p>
+</div>
+<div>
+<p>Simon, Richard M., Edward L. Korn, Lisa M. McShane, Michael D. Radmacher, George W. Wright, and Yingdong Zhao. 2003. <em>Design and Analysis of Dna Microarray Investigations</em>. Springer-Verlag.</p>
+</div>
+<div>
+<p>van ’t Veer, Laura J, Hongyue Dai, Marc J van de Vijver, Yudong D He, Augustinus A M Hart, Mao Mao, Hans L Peterse, et al. 2002. “Gene Expression Profiling Predicts Clinical Outcome of Breast Cancer.” <em>Nature</em> 415 (6871): 530–6.</p>
+</div>
+<div>
+<p>Wang, Zhong, Mark Gerstein, and Michael Snyder. 2009. “RNA-Seq: A Revolutionary Tool for Transcriptomics.” <em>Nat Rev Genet</em> 10 (1): 57–63. <a href="https://doi.org/10.1038/nrg2484">https://doi.org/10.1038/nrg2484</a>.</p>
+</div>
+<div>
+<p>Yang, Y. H., M. J. Buckley, S. Dudoit, and T. P. Speed. 2002. “Comparison of Methods for Image Analysis on cDNA Microarray Data.” <em>Journal of Computational and Graphical Statistic</em> 11 (1).</p>
+</div>
+<div>
+<p>Zhu, Qianqian, Jeffrey Miecznikowski, and Marc Halfon. 2010. “Preferred Analysis Methods for Affymetrix Genechips. II. An Expanded, Balanced, Wholly-Defined Spike-in Dataset.” <em>BMC Bioinformatics</em> 11 (1): 285. <a href="https://doi.org/10.1186/1471-2105-11-285">https://doi.org/10.1186/1471-2105-11-285</a>.</p>
+</div>
+</div>
+</div>
+<p style="text-align: center;">
+<a href="5-5-filtraje-no-específico.html"><button class="btn btn-default">Previous</button></a>
+</p>
+</div>
+</div>
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+$(document).ready(function () {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+});
+
+</script>
+
+</body>
+</html>

@@ -1,6 +1,6 @@
-book_filename: "Análisis de datos ómicos"
+book_filename: "Analisis de Datos de Microarrays y otras Omicas"
 language:
   ui:
     chapter_name: "Capítulo "
 delete_merged_file: true
-rmd_files: ["index.Rmd","01-El_Proceso_de_Analisis.Rmd","02-El_Disenyo_de_Experimentos.Rmd", "03-El_preprocesadoo_de_los_datos.Rmd", "09-Referencias.Rmd"]
+output_dir: "docs"

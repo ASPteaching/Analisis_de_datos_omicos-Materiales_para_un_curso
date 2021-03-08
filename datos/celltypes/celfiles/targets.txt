@@ -1,0 +1,13 @@
+filename	age	treat	grupo
+Aged LPS 80L.CEL	Aged	LPS	1
+Aged LPS 86L.CEL	Aged	LPS	1
+Aged LPS 88L.CEL	Aged	LPS	1
+Aged Medium 81m.CEL	Aged	MED	2
+Aged Medium 82m.CEL	Aged	MED	2
+Aged Medium 84m.CEL	Aged	MED	2
+Young LPS 75L.CEL	Young	LPS	3
+Young LPS 76L.CEL	Young	LPS	3
+Young LPS 77L.CEL	Young	LPS	3
+Young Medium 71m.CEL	Young	MED	4
+Young Medium 72m.CEL	Young	MED	4
+Young Medium 73m.CEL	Young	MED	4

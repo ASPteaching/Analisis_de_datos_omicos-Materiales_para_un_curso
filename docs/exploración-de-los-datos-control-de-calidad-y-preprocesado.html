@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Capítulo 5 Exploración de los datos, control de calidad y preprocesado | Analisis de datos omicos</title>
+  <meta name="description" content="Capítulo 5 Exploración de los datos, control de calidad y preprocesado | Analisis de datos omicos" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Capítulo 5 Exploración de los datos, control de calidad y preprocesado | Analisis de datos omicos" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capítulo 5 Exploración de los datos, control de calidad y preprocesado | Analisis de datos omicos" />
+  
+  
+  
+
+<meta name="author" content="Alex Sánchez-Pla^{1,2} y Ricardo Gonzalo Sanz^2" />
+<meta name="author" content="^1 Departament de Genètica, Microbiologia i Estadística. Universitat de Barcelona (UB)." />
+<meta name="author" content="^2 Unitat d’Estadística i Bioinformàtica. Vall d’Hebron Institut de Recerca (VHIR)." />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="MDAExpDesign.html"/>
+<link rel="next" href="selección-de-genes-diferencialmente-expresados-chapdeg.html"/>
+<script src="libs/header-attrs-2.7/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Presentación</a></li>
+<li class="chapter" data-level="2" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><i class="fa fa-check"></i><b>2</b> Introduccion a los microarrays y otras tecnologías omicas</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#antecedentes-históricos"><i class="fa fa-check"></i><b>2.1</b> Antecedentes históricos</a></li>
+<li class="chapter" data-level="2.2" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#los-microarrays"><i class="fa fa-check"></i><b>2.2</b> Los microarrays</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#aplicaciones-de-los-microarrays"><i class="fa fa-check"></i><b>2.2.1</b> Aplicaciones de los microarrays</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#cómo-funcionan-los-microarrays"><i class="fa fa-check"></i><b>2.3</b> Cómo funcionan los microarrays</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#microarrays-de-dos-colores"><i class="fa fa-check"></i><b>2.3.1</b> Microarrays de dos colores</a></li>
+<li class="chapter" data-level="2.3.2" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#microarrays-de-un-color"><i class="fa fa-check"></i><b>2.3.2</b> Microarrays de un color</a></li>
+<li class="chapter" data-level="2.3.3" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#realización-de-un-experimento-de-microarrays"><i class="fa fa-check"></i><b>2.3.3</b> Realización de un experimento de microarrays</a></li>
+<li class="chapter" data-level="2.3.4" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#como-se-mide-la-expresión"><i class="fa fa-check"></i><b>2.3.4</b> Como se mide la expresión</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#bioinformática-de-microarrays"><i class="fa fa-check"></i><b>2.4</b> Bioinformática de Microarrays<a name="Bioinformática"></a></a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#software-para-el-análisis-de-datos-de-microarrays"><i class="fa fa-check"></i><b>2.4.1</b> Software para el análisis de datos de microarrays</a></li>
+<li class="chapter" data-level="2.4.2" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#bases-de-datos-de-microarrays"><i class="fa fa-check"></i><b>2.4.2</b> Bases de datos de Microarrays</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#extensiones-1-otros-tipos-de-microarrays"><i class="fa fa-check"></i><b>2.5</b> Extensiones (1): Otros tipos de microarrays<a name="extensions"></a></a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#otros-microarrays-de-adn"><i class="fa fa-check"></i><b>2.5.1</b> Otros microarrays de ADN</a></li>
+<li class="chapter" data-level="2.5.2" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#otros-tipos-de-microarrays-proteínas-o-carbohidratos"><i class="fa fa-check"></i><b>2.5.2</b> Otros tipos de microarrays: Proteínas o carbohidratos</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#extensiones-2-ngs-nextnow-generation-sequencing"><i class="fa fa-check"></i><b>2.6</b> Extensiones (2): <em>NGS: Next(Now) Generation Sequencing</em></a>
+<ul>
+<li class="chapter" data-level="2.6.1" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#visión-global-de-las-tecnologías-de-secuenciación"><i class="fa fa-check"></i><b>2.6.1</b> Visión global de las tecnologías de secuenciación</a></li>
+<li class="chapter" data-level="2.6.2" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#de-la-secuenciación-sanger-a-la-ultrasecuenciación"><i class="fa fa-check"></i><b>2.6.2</b> De la secuenciación Sanger a la ultrasecuenciación</a></li>
+<li class="chapter" data-level="2.6.3" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#tecnologías-de-ultrasecuenciación"><i class="fa fa-check"></i><b>2.6.3</b> Tecnologías de ultrasecuenciación</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="MDAProcess.html"><a href="MDAProcess.html"><i class="fa fa-check"></i><b>3</b> El proceso de análisis de microarrays</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="MDAProcess.html"><a href="MDAProcess.html#tipos-de-estudios"><i class="fa fa-check"></i><b>3.1</b> Tipos de estudios</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="MDAProcess.html"><a href="MDAProcess.html#comparación-de-grupos-o-class-comparison"><i class="fa fa-check"></i><b>3.1.1</b> Comparación de grupos o “Class comparison”</a></li>
+<li class="chapter" data-level="3.1.2" data-path="MDAProcess.html"><a href="MDAProcess.html#predicción-de-clase-o-class-prediction"><i class="fa fa-check"></i><b>3.1.2</b> Predicción de clase o “Class prediction”</a></li>
+<li class="chapter" data-level="3.1.3" data-path="MDAProcess.html"><a href="MDAProcess.html#descubrimiento-de-clases-o-class-discovery"><i class="fa fa-check"></i><b>3.1.3</b> Descubrimiento de clases o “Class discovery”</a></li>
+<li class="chapter" data-level="3.1.4" data-path="MDAProcess.html"><a href="MDAProcess.html#otros-tipos-de-estudios"><i class="fa fa-check"></i><b>3.1.4</b> Otros tipos de estudios</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="MDAProcess.html"><a href="MDAProcess.html#c4examples"><i class="fa fa-check"></i><b>3.2</b> Algunos ejemplos concretos</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="MDAProcess.html"><a href="MDAProcess.html#celltypes"><i class="fa fa-check"></i><b>3.2.1</b> Estudio de procesos regulados por citoquinas</a></li>
+<li class="chapter" data-level="3.2.2" data-path="MDAProcess.html"><a href="MDAProcess.html#golub"><i class="fa fa-check"></i><b>3.2.2</b> Clasificación molecular de la leucemia</a></li>
+<li class="chapter" data-level="3.2.3" data-path="MDAProcess.html"><a href="MDAProcess.html#efecto-del-estrogeno-y-el-tiempo-de-administración-estrogen"><i class="fa fa-check"></i><b>3.2.3</b> Efecto del estrogeno y el tiempo de administración {#estrogen]</a></li>
+<li class="chapter" data-level="3.2.4" data-path="MDAProcess.html"><a href="MDAProcess.html#CCL4"><i class="fa fa-check"></i><b>3.2.4</b> Efecto del CCL4 en la expresión génica</a></li>
+<li class="chapter" data-level="3.2.5" data-path="MDAProcess.html"><a href="MDAProcess.html#yeast"><i class="fa fa-check"></i><b>3.2.5</b> Análisis de patrones en el ciclo celular</a></li>
+<li class="chapter" data-level="3.2.6" data-path="MDAProcess.html"><a href="MDAProcess.html#recapitulación"><i class="fa fa-check"></i><b>3.2.6</b> Recapitulación</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="MDAProcess.html"><a href="MDAProcess.html#el-proceso-de-análisis-de-microarrays"><i class="fa fa-check"></i><b>3.3</b> El proceso de análisis de microarrays</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="MDAExpDesign.html"><a href="MDAExpDesign.html"><i class="fa fa-check"></i><b>4</b> Diseño de experimentos de microarrays</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="MDAExpDesign.html"><a href="MDAExpDesign.html#fuentes-de-variabilidad"><i class="fa fa-check"></i><b>4.1</b> Fuentes de variabilidad</a></li>
+<li class="chapter" data-level="4.2" data-path="MDAExpDesign.html"><a href="MDAExpDesign.html#tipos-de-variabilidad"><i class="fa fa-check"></i><b>4.2</b> Tipos de variabilidad</a></li>
+<li class="chapter" data-level="4.3" data-path="MDAExpDesign.html"><a href="MDAExpDesign.html#conceptos-básicos-de-diseño-de-experimentos"><i class="fa fa-check"></i><b>4.3</b> Conceptos básicos de diseño de Experimentos</a></li>
+<li class="chapter" data-level="4.4" data-path="MDAExpDesign.html"><a href="MDAExpDesign.html#principios-de-diseño-de-experimentos"><i class="fa fa-check"></i><b>4.4</b> Principios de diseño de experimentos</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="MDAExpDesign.html"><a href="MDAExpDesign.html#replicación"><i class="fa fa-check"></i><b>4.4.1</b> Replicación</a></li>
+<li class="chapter" data-level="4.4.2" data-path="MDAExpDesign.html"><a href="MDAExpDesign.html#aleatorización"><i class="fa fa-check"></i><b>4.4.2</b> Aleatorización</a></li>
+<li class="chapter" data-level="4.4.3" data-path="MDAExpDesign.html"><a href="MDAExpDesign.html#bloqueo-o-control-local"><i class="fa fa-check"></i><b>4.4.3</b> Bloqueo o control local</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="MDAExpDesign.html"><a href="MDAExpDesign.html#diseños-experimentales-para-microarrays-de-dos-colores"><i class="fa fa-check"></i><b>4.5</b> Diseños experimentales para microarrays de dos colores</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><i class="fa fa-check"></i><b>5</b> Exploración de los datos, control de calidad y preprocesado</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#introducción"><i class="fa fa-check"></i><b>5.1</b> Introducción</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#nivel-de-análisis-y-tipo-de-microarray"><i class="fa fa-check"></i><b>5.1.1</b> Nivel de análisis y tipo de microarray</a></li>
+<li class="chapter" data-level="5.1.2" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#datos-de-partida"><i class="fa fa-check"></i><b>5.1.2</b> Datos de partida</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#exploración-y-control-de-calidad"><i class="fa fa-check"></i><b>5.2</b> Exploración y control de calidad</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#control-de-calidad-con-gráficos-estadísticos-generales"><i class="fa fa-check"></i><b>5.2.1</b> Control de calidad con gráficos estadísticos generales</a></li>
+<li class="chapter" data-level="5.2.2" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#gráficos-de-diagnóstico-para-microarrays-de-dos-colores"><i class="fa fa-check"></i><b>5.2.2</b> Gráficos de diagnóstico para microarrays de dos colores</a></li>
+<li class="chapter" data-level="5.2.3" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#gráficos-de-diagnóstico-para-microarrays-de-un-color"><i class="fa fa-check"></i><b>5.2.3</b> Gráficos de diagnóstico para microarrays de un color</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#normalización-de-arrays-de-dos-colores"><i class="fa fa-check"></i><b>5.3</b> Normalización de arrays de dos colores</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#normalización-global"><i class="fa fa-check"></i><b>5.3.1</b> Normalización global</a></li>
+<li class="chapter" data-level="5.3.2" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#normalización-dependiente-de-la-intensidad"><i class="fa fa-check"></i><b>5.3.2</b> Normalización dependiente de la intensidad</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#resumen-y-normalización-de-microarrays-de-affymetrix"><i class="fa fa-check"></i><b>5.4</b> Resumen y normalización de microarrays de Affymetrix</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#métodos-originales-de-affymetrix"><i class="fa fa-check"></i><b>5.4.1</b> Métodos originales de Affymetrix</a></li>
+<li class="chapter" data-level="5.4.2" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#el-método-rma-robust-multi-array-average"><i class="fa fa-check"></i><b>5.4.2</b> El método RMA (Robust Multi-Array Average)</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#filtraje-no-específico"><i class="fa fa-check"></i><b>5.5</b> Filtraje no específico</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="selección-de-genes-diferencialmente-expresados-chapdeg.html"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html"><i class="fa fa-check"></i><b>6</b> Selección de genes diferencialmente expresados {# chapDEG}</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="selección-de-genes-diferencialmente-expresados-chapdeg.html"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#introducción-1"><i class="fa fa-check"></i><b>6.1</b> Introducción</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="selección-de-genes-diferencialmente-expresados-chapdeg.html"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#medidas-naturales-para-comparar-dos-muestras"><i class="fa fa-check"></i><b>6.1.1</b> Medidas <em>naturales</em> para comparar dos muestras</a></li>
+<li class="chapter" data-level="6.1.2" data-path="selección-de-genes-diferencialmente-expresados-chapdeg.html"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#selección-de-genes-diferencialmente-expresados"><i class="fa fa-check"></i><b>6.1.2</b> Selección de genes diferencialmente expresados</a></li>
+<li class="chapter" data-level="6.1.3" data-path="selección-de-genes-diferencialmente-expresados-chapdeg.html"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#potencia-y-tamaño-muestral"><i class="fa fa-check"></i><b>6.1.3</b> Potencia y tamaño muestral</a></li>
+<li class="chapter" data-level="6.1.4" data-path="selección-de-genes-diferencialmente-expresados-chapdeg.html"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#el-problema-de-la-múltiplicidad-de-tests-multiple-testing"><i class="fa fa-check"></i><b>6.1.4</b> El problema de la múltiplicidad de tests (“multiple testing”</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="selección-de-genes-diferencialmente-expresados-chapdeg.html"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#modelos-lineales-para-la-selección-de-genes-limma"><i class="fa fa-check"></i><b>6.2</b> Modelos lineales para la selección de genes: <tt>limma </tt></a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="selección-de-genes-diferencialmente-expresados-chapdeg.html"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#el-modelo-lineal-general"><i class="fa fa-check"></i><b>6.2.1</b> El modelo lineal general</a></li>
+<li class="chapter" data-level="6.2.2" data-path="selección-de-genes-diferencialmente-expresados-chapdeg.html"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#ejemplos-de-situaciones-modelizables-linealmente"><i class="fa fa-check"></i><b>6.2.2</b> Ejemplos de situaciones <em>modelizables linealmente</em></a></li>
+<li class="chapter" data-level="6.2.3" data-path="selección-de-genes-diferencialmente-expresados-chapdeg.html"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#ejemplo-2-comparación-de-tres-grupos"><i class="fa fa-check"></i><b>6.2.3</b> Ejemplo 2: Comparación de tres grupos</a></li>
+<li class="chapter" data-level="6.2.4" data-path="selección-de-genes-diferencialmente-expresados-chapdeg.html"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#estimación-e-inferencia-con-el-modelo-lineal"><i class="fa fa-check"></i><b>6.2.4</b> Estimación e inferencia con el modelo lineal</a></li>
+<li class="chapter" data-level="6.2.5" data-path="selección-de-genes-diferencialmente-expresados-chapdeg.html"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#modelos-lineales-para-microarrays"><i class="fa fa-check"></i><b>6.2.5</b> Modelos lineales para Microarrays</a></li>
+<li class="chapter" data-level="6.2.6" data-path="selección-de-genes-diferencialmente-expresados-chapdeg.html"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#implementación-y-ejemplos"><i class="fa fa-check"></i><b>6.2.6</b> Implementación y ejemplos</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i><b>7</b> Referencias</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Analisis de datos omicos</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="exploración-de-los-datos-control-de-calidad-y-preprocesado" class="section level1" number="5">
+<h1><span class="header-section-number">Capítulo 5</span> Exploración de los datos, control de calidad y preprocesado</h1>
+<div id="introducción" class="section level2" number="5.1">
+<h2><span class="header-section-number">5.1</span> Introducción</h2>
+<p>Los estudios realizados con microarrays, sea cual sea la tecnología en que se basan, tienen una característica común: generan grandes cantidades de datos a través de una serie de procesos, que hacen que su significado no siempre sea completamente intuitivo.</p>
+<p>Como en todo tipo de análisis, antes de empezar a trabajar con los datos, debemos de asegurarnos de que éstos son fiables y completos y de que se encuentran en la escala apropiada para proporcionar la información que pretendemos obtener de ellos.</p>
+<p>En el caso de los microarrays solemos distinguir dos fases previas al análisis de los datos:</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>Exploración y control de calidad</strong> Mediante gráficos
+y/o resúmenes numéricos estudiamos la estructura de los datos
+con el fin de decidir si parecen correctos o presentan anomalías
+que deben ser corregidas.</p></li>
+<li><p><strong>Preprocesado</strong> Incluso si son correctos, los datos “crudos” no sirven para el análisis sino que necesitan preprocesados, lo que puede interpretarse como uno o más de los procesos siguientes:</p></li>
+</ol>
+<ul>
+<li>“Limpiados”, para eliminar la parte de la señal no atribuible a la expresión, llamada “background” o ruído.</li>
+<li>“Normalizados” para hacerlos comparables entre muestras y eliminar posibles sesgos técnicos.</li>
+<li>Resumidos o “sumarizados” de forma que se tenga un sólo valor por gen.</li>
+<li>“Transformados” de forma que la escala sea razonable y facilite el análisis.</li>
+</ul>
+<p>A menudo -por un cierto abuso de lenguaje- se denomina “normalización” al preprocesado descrito en las etapas anteriores.</p>
+<div id="nivel-de-análisis-y-tipo-de-microarray" class="section level3" number="5.1.1">
+<h3><span class="header-section-number">5.1.1</span> Nivel de análisis y tipo de microarray</h3>
+<p>Desde la generalización del uso de los microarrays se han
+desarrollado muchas formas para visualizar los datos y decidir acerca
+de su calidad. Algunas trabajan sobre los datos obtenidos del
+escáner, otras lo hacen con los datos normalizados. Algunas sirven
+tanto para arrays de dos colores como arrays de un color. Otras son
+específicas de la tecnología. Con el fin de organizar esta
+multitud de opciones podemos diferenciar:</p>
+<ul>
+<li>Datos de bajo nivel Son los datos proporcionados por el escáner contenidos por ejemplo en archivos .gpr (dos colores) o .cel (un color). Estos últimos son binarios por lo que no es posible ni tan sólo visualizarlos sin programas específicos.</li>
+<li>Datos de alto nivel Son los datos resultantes del (pre)procesado de los datos de bajo nivel. Básicamente se corresponden con los datos de expresión ya resumidos (“sumarizados”), normalizados o no.</li>
+</ul>
+<p>La exploración y el control de calidad pueden basarse en datos de bajo o de alto nivel. En cada caso se pueden aplicar ya sean tácnicas generales de visualización de datos, como histogramas, diagramas de caja o visualización en dimensiones reducidas (PCA u otras), o bien técnicas “ad-hoc” para cada tipo de datos como el MA-Plot u otras que se discuten a continuación.</p>
+</div>
+<div id="datos-de-partida" class="section level3" number="5.1.2">
+<h3><span class="header-section-number">5.1.2</span> Datos de partida</h3>
+<p>La estructura de los datos de microarrays de un color o de dos colores difiere considerablemente, tanto a nivel físico (los chips y las imágenes que de ellos se obtiene) como informático, es decir en la forma en que se representan.</p>
+<div id="arrays-de-dos-colores-o-de-cdna" class="section level4" number="5.1.2.1">
+<h4><span class="header-section-number">5.1.2.1</span> Arrays de dos colores (o de “cDNA”)</h4>
+<p>Tradicionalmente los arrays de dos colores o de cDNA se realizaban de forma menos automatizada que los de un color o de Affymetrix.
+Esto implica que, tras obtener la imagen, el escaneado del archivo “.TIFF”
+resultante pudiera ser llevado a cabo mediante un software independiente
+como <em>Genepix</em>, un programa que convierte las imágenes en números y genera un archivo de información (con extensión “.gpr”) a partir del cual pueden calcularse las expresiones relativas, así como valores de calidad para cada “spot” o punto escaneado en la imagen.</p>
+<p>Para cada imagen (o sea para cada microarray) hay un archivo “.gpr” que contiene una fila por gen y varias columnas con distintos valores, por ejemplo:</p>
+<ul>
+<li>la intensidad para cada canal,</li>
+<li>valores resumen de las intensidades y</li>
+<li>resultados de controles de calidad (“FLAGS”).</li>
+</ul>
+<p>La tabla siguiente muestra lo que serían las primeras filas y columnas de un archivo “.gpr” obtenido mediante el programa <em>Genepix</em>.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Gen</th>
+<th>Señal</th>
+<th>Fondo</th>
+<th>Señal</th>
+<th>Fondo</th>
+<th>“Flag”</th>
+<th>Otros</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td>Cy5 (R)</td>
+<td>Cy5 (Rb)</td>
+<td>Cy3 (G)</td>
+<td>Cy3 (Gb)</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>gen-1</td>
+<td>3.7547</td>
+<td>1.8128</td>
+<td>5.0672</td>
+<td>1.8496</td>
+<td>1</td>
+<td>…</td>
+</tr>
+<tr class="odd">
+<td>gen-2</td>
+<td>0.8331</td>
+<td>0.9175</td>
+<td>1.1536</td>
+<td>0.9995</td>
+<td>0</td>
+<td>…</td>
+</tr>
+<tr class="even">
+<td>gen-3</td>
+<td>9.8254</td>
+<td>0.2781</td>
+<td>0.6921</td>
+<td>0.5430</td>
+<td>1</td>
+<td>…</td>
+</tr>
+<tr class="odd">
+<td>gen-4</td>
+<td>9.1539</td>
+<td>0.1918</td>
+<td>3.8290</td>
+<td>0.0014</td>
+<td>0</td>
+<td>…</td>
+</tr>
+<tr class="even">
+<td>gen-5</td>
+<td>4.8603</td>
+<td>0.2377</td>
+<td>0.5338</td>
+<td>0.3335</td>
+<td>0</td>
+<td>…</td>
+</tr>
+<tr class="odd">
+<td>gen-6</td>
+<td>7.8567</td>
+<td>1.3941</td>
+<td>1.3050</td>
+<td>1.4876</td>
+<td>1</td>
+<td>…</td>
+</tr>
+<tr class="even">
+<td>gen-7</td>
+<td>2.7619</td>
+<td>0.8108</td>
+<td>8.4916</td>
+<td>1.6518</td>
+<td>0</td>
+<td>…</td>
+</tr>
+<tr class="odd">
+<td>gen-8</td>
+<td>3.6618</td>
+<td>0.1918</td>
+<td>0.3770</td>
+<td>1.1842</td>
+<td>0</td>
+<td>…</td>
+</tr>
+<tr class="even">
+<td>gen-9</td>
+<td>4.4300</td>
+<td>0.5888</td>
+<td>2.8161</td>
+<td>0.8707</td>
+<td>1</td>
+<td>…</td>
+</tr>
+<tr class="odd">
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+</tr>
+</tbody>
+</table>
+<p>Los valores de intensidad se convierten en una única <em>matriz de expresión</em> que contiene una columna por chip con los valores de intensidad relativa obtenidas por ejemplo con una “sumarización” del tipo:
+<span class="math display">\[
+\log\frac{R-Rb}{G-Gb},
+\]</span>
+y una fila por gen (mismas filas que archivos “.gpr”).</p>
+<p>La tabla siguiente muestra lo que sería una matriz de expresión derivada de cuatro archivos “.gpr” como los de la tabla anterior.</p>
+<table>
+<thead>
+<tr class="header">
+<th>gen</th>
+<th>Array-1</th>
+<th>Array-2</th>
+<th>Array-3</th>
+<th>Array-4</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>gen-1</td>
+<td>1.65695</td>
+<td>-0.10820</td>
+<td>1.69515</td>
+<td>8.25137</td>
+</tr>
+<tr class="even">
+<td>gen-2</td>
+<td>-1.82305</td>
+<td>0.11350</td>
+<td>1.58807</td>
+<td>0.95676</td>
+</tr>
+<tr class="odd">
+<td>gen-3</td>
+<td>0.01561</td>
+<td>0.47682</td>
+<td>-27.88036</td>
+<td>-1.39078</td>
+</tr>
+<tr class="even">
+<td>gen-4</td>
+<td>0.42709</td>
+<td>4.29319</td>
+<td>-4.31366</td>
+<td>30.96866</td>
+</tr>
+<tr class="odd">
+<td>gen-5</td>
+<td>0.04332</td>
+<td>0.24126</td>
+<td>-10.27675</td>
+<td>0.26680</td>
+</tr>
+<tr class="even">
+<td>gen-6</td>
+<td>-0.02825</td>
+<td>0.68408</td>
+<td>2.04163</td>
+<td>0.99554</td>
+</tr>
+<tr class="odd">
+<td>gen-7</td>
+<td>3.50549</td>
+<td>-8.04635</td>
+<td>0.18286</td>
+<td>0.22647</td>
+</tr>
+<tr class="even">
+<td>gen-8</td>
+<td>-0.23261</td>
+<td>-1.08477</td>
+<td>0.19582</td>
+<td>1.11561</td>
+</tr>
+<tr class="odd">
+<td>gen-9</td>
+<td>0.50643</td>
+<td>1.52147</td>
+<td>0.99092</td>
+<td>0.23441</td>
+</tr>
+<tr class="even">
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="arrays-de-un-color-affymetrix" class="section level4" number="5.1.2.2">
+<h4><span class="header-section-number">5.1.2.2</span> Arrays de un color (Affymetrix)</h4>
+<p>El resultado de escanear la imagen de un array de affymetrix es un archivo de extensión “.CEL” que, a diferencia de los arrays de dos colores, está en formato binario es decir que solo puede ser leído con programas específicos para ello.</p>
+<p>De forma similar a los arrays de dos colores, existe un archivo “.CEL” por cada microarray.</p>
+<p>A partir de las intensidades de los archivos “.CEL” se genera la matriz de expresión, que contiene una columna por chip con los valores de intensidad absoluta, y una fila por grupo de sondas. En el caso de arrays de affymetrix existe una gran variedad de algoritmos de “sumarización” y, según cual se utilice, se obtendrá unos u otros valores de expresión. Ahora bien, éstos serán siempre medidas absolutas, es decir independientes del resto de muestras y en una escala arbitraria.</p>
+<p>La tabla siguiente muestra las primeras filas de una matriz de expresión sumarizada correspondiente a los primeros genes de uno de los casos resueltos.</p>
+<table>
+<thead>
+<tr class="header">
+<th><strong>ID_REF</strong></th>
+<th><strong>GSM188013</strong></th>
+<th><strong>GSM188014</strong></th>
+<th><strong>GSM188016</strong></th>
+<th><strong>GSM188018</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1007_s_at</td>
+<td>15630.2</td>
+<td>17048.8</td>
+<td>13667.5</td>
+<td>15138.8</td>
+</tr>
+<tr class="even">
+<td>1053_at</td>
+<td>3614.4</td>
+<td>3563.22</td>
+<td>2604.65</td>
+<td>1945.71</td>
+</tr>
+<tr class="odd">
+<td>117_at</td>
+<td>1032.67</td>
+<td>1164.15</td>
+<td>510.692</td>
+<td>5061.2</td>
+</tr>
+<tr class="even">
+<td>121_at</td>
+<td>5917.8</td>
+<td>6826.67</td>
+<td>4562.44</td>
+<td>5870.13</td>
+</tr>
+<tr class="odd">
+<td>1255_g_at</td>
+<td>224.525</td>
+<td>395.025</td>
+<td>207.087</td>
+<td>164.835</td>
+</tr>
+<tr class="even">
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="datos-de-ejemplo" class="section level4" number="5.1.2.3">
+<h4><span class="header-section-number">5.1.2.3</span> Datos de ejemplo</h4>
+<p>Los ejemplos de este capítulo se basarán en dos de los conjuntos de datos descritos en el capítulo <a href="MDAProcess.html#MDAProcess">3</a>.</p>
+<ul>
+<li>Por un lado, trabajaremos con los datos del conjunto  referidos al efecto del tratamiento con estrógenos en cancer de mama descrito en @ref{estrogen}. La exploración se basará en los datos normalizados pero también en los datos “crudos”, de bajo nivel, contenidos en los archivos “.cel”. Estos datos pueden obtenerse directamente del paquete de Bioconductor . Un aspecto interesante de este conjunto de datos es que, junto con 8 muestras “buenas” se proporciona un array defectuoso, denominado “” que facilita el ver como aparecen ciertos gráficos cuando hay problemas.</li>
+<li>Por otro lado, usaremos los datos del conjunto , relativos al efecto del tratamiento con CCL4 en la expresión de los hepatocitos. Los datos resultan accesibles al instalar el paquete .</li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb3-1"></a><span class="cf">if</span>(<span class="op">!</span><span class="kw">require</span>(BiocManager)) <span class="kw">install.packages</span>(<span class="st">&quot;BiocManager&quot;</span>)</span>
+<span id="cb3-2"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb3-2"></a><span class="cf">if</span> (<span class="op">!</span>(<span class="kw">require</span>(CCl4))){</span>
+<span id="cb3-3"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb3-3"></a> BiocManager<span class="op">::</span><span class="kw">install</span>(<span class="st">&quot;CCl4&quot;</span>)</span>
+<span id="cb3-4"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb3-4"></a>}</span>
+<span id="cb3-5"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb3-5"></a><span class="cf">if</span> (<span class="op">!</span>(<span class="kw">require</span>(estrogen))){</span>
+<span id="cb3-6"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb3-6"></a> BiocManager<span class="op">::</span><span class="kw">install</span>(<span class="st">&quot;estrogen&quot;</span>)</span>
+<span id="cb3-7"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb3-7"></a>}</span>
+<span id="cb3-8"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb3-8"></a><span class="cf">if</span> (<span class="op">!</span>(<span class="kw">require</span>(affy))){</span>
+<span id="cb3-9"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb3-9"></a> BiocManager<span class="op">::</span><span class="kw">install</span>(<span class="st">&quot;affy&quot;</span>)</span>
+<span id="cb3-10"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb3-10"></a>}</span>
+<span id="cb3-11"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb3-11"></a><span class="cf">if</span> (<span class="op">!</span>(<span class="kw">require</span>(affyPLM))){</span>
+<span id="cb3-12"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb3-12"></a> BiocManager<span class="op">::</span><span class="kw">install</span>(<span class="st">&quot;affyPLM&quot;</span>)</span>
+<span id="cb3-13"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb3-13"></a>}</span></code></pre></div>
+<p>Aunque, en la actualidad (año 2021) el paquete más utilizado para arrays de este tipo es el paquete <code>oligo</code> este ejemplo utiliza el paquete <code>affy</code>.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb4-1"></a><span class="kw">library</span>(estrogen)</span>
+<span id="cb4-2"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb4-2"></a><span class="kw">library</span>(affy)</span>
+<span id="cb4-3"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb4-3"></a>affyPath &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;estrogen&quot;</span>)</span>
+<span id="cb4-4"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb4-4"></a>adfAffy =<span class="st"> </span><span class="kw">read.AnnotatedDataFrame</span>(<span class="st">&quot;phenoData.txt&quot;</span>, <span class="dt">sep=</span><span class="st">&quot;&quot;</span>,  <span class="dt">path=</span>affyPath)</span>
+<span id="cb4-5"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb4-5"></a>affyTargets =<span class="st"> </span><span class="kw">pData</span>(adfAffy)</span>
+<span id="cb4-6"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb4-6"></a>affyTargets<span class="op">$</span>filename =<span class="st"> </span><span class="kw">file.path</span>(affyPath, <span class="kw">row.names</span>(affyTargets))</span>
+<span id="cb4-7"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb4-7"></a>affyRaw &lt;-<span class="st"> </span><span class="kw">read.affybatch</span>(affyTargets<span class="op">$</span>filename, <span class="dt">phenoData=</span>adfAffy)</span>
+<span id="cb4-8"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb4-8"></a><span class="co"># show(affyRaw)</span></span>
+<span id="cb4-9"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb4-9"></a>actualPath &lt;-<span class="st"> </span><span class="kw">getwd</span>()</span>
+<span id="cb4-10"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb4-10"></a><span class="kw">setwd</span>(affyPath)</span>
+<span id="cb4-11"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb4-11"></a>allAffyRaw &lt;-<span class="st"> </span><span class="kw">ReadAffy</span>()</span>
+<span id="cb4-12"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb4-12"></a><span class="kw">setwd</span>(actualPath)</span></code></pre></div>
+<p>El resultado de la lectura es un objeto “affyraw” de clase “affyBatch”:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb5-1"></a><span class="kw">class</span>(affyRaw)</span></code></pre></div>
+<pre><code>## [1] &quot;AffyBatch&quot;
+## attr(,&quot;package&quot;)
+## [1] &quot;affy&quot;</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb7-1"></a><span class="kw">print</span>(affyRaw)</span></code></pre></div>
+<pre><code>## AffyBatch object
+## size of arrays=640x640 features (22 kb)
+## cdf=HG_U95Av2 (12625 affyids)
+## number of samples=8
+## number of genes=12625
+## annotation=hgu95av2
+## notes=</code></pre>
+<p>El paquete <code>limma</code> es conocido como paquete para la selección de genes diferencialmente expresados pero también incluye algunas funciones para la lectura y preprocesado de arrays de dos colores.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb9-1"></a><span class="kw">library</span>(<span class="st">&quot;limma&quot;</span>)</span>
+<span id="cb9-2"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb9-2"></a><span class="kw">library</span>(<span class="st">&quot;CCl4&quot;</span>)</span>
+<span id="cb9-3"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb9-3"></a>dataPath =<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="dt">package=</span><span class="st">&quot;CCl4&quot;</span>)</span>
+<span id="cb9-4"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb9-4"></a>adf =<span class="st"> </span><span class="kw">read.AnnotatedDataFrame</span>(<span class="st">&quot;samplesInfo.txt&quot;</span>, </span>
+<span id="cb9-5"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb9-5"></a>    <span class="dt">path=</span>dataPath)</span>
+<span id="cb9-6"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb9-6"></a><span class="co">#adf</span></span>
+<span id="cb9-7"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb9-7"></a>targets =<span class="st"> </span><span class="kw">pData</span>(adf)</span>
+<span id="cb9-8"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb9-8"></a>targets<span class="op">$</span>FileName =<span class="st"> </span><span class="kw">row.names</span>(targets)</span>
+<span id="cb9-9"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb9-9"></a>RG &lt;-<span class="st"> </span><span class="kw">read.maimages</span>(targets, <span class="dt">path=</span>dataPath, <span class="dt">source=</span><span class="st">&quot;genepix&quot;</span>)</span>
+<span id="cb9-10"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb9-10"></a><span class="kw">attach</span>(RG<span class="op">$</span>targets)</span>
+<span id="cb9-11"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb9-11"></a>newNames &lt;-<span class="kw">paste</span>(<span class="kw">substr</span>(Cy3,<span class="dv">1</span>,<span class="dv">3</span>),<span class="kw">substr</span>(Cy5,<span class="dv">1</span>,<span class="dv">3</span>),<span class="kw">substr</span>(FileName,<span class="dv">10</span>,<span class="dv">12</span>), <span class="dt">sep=</span><span class="st">&quot;&quot;</span>)</span>
+<span id="cb9-12"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb9-12"></a><span class="kw">colnames</span>(RG<span class="op">$</span>R)&lt;-<span class="kw">colnames</span>(RG<span class="op">$</span>G)&lt;-<span class="kw">colnames</span>(RG<span class="op">$</span>Rb)&lt;-<span class="kw">colnames</span>(RG<span class="op">$</span>Gb)&lt;-<span class="kw">rownames</span>(RG<span class="op">$</span>targets)&lt;-<span class="st"> </span>newNames</span>
+<span id="cb9-13"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb9-13"></a><span class="co"># show(RG)</span></span></code></pre></div>
+<p>El resultado de la lectura es un objeto de classe “RGlist”.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb10-1"></a><span class="kw">class</span>(RG)</span></code></pre></div>
+<pre><code>## [1] &quot;RGList&quot;
+## attr(,&quot;package&quot;)
+## [1] &quot;limma&quot;</code></pre>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb12-1"></a><span class="kw">print</span>(RG)</span></code></pre></div>
+<pre><code>## An object of class &quot;RGList&quot;
+## $R
+##      DMSCCl319 DMSCCl320 DMSCCl321 DMSCCl329 CClDMS330 CClDMS331 CClDMS332
+## [1,]        47        46        40        59        56        40        45
+## [2,]      1095        46        39        54        56        40        47
+## [3,]        47        46        41        55        52        39        46
+## [4,]        46        45        41        56        54        43        47
+## [5,]        55        53        45        61        71        47        63
+##      DMSCCl333 CClDMS379 CClDMS380 CClDMS381 DMSCCl382 DMSCCl384 DMSCCl389
+## [1,]        70        46        65        43        59        46        63
+## [2,]        69        45        61        43        62        48        68
+## [3,]        81        44        57        41        58        50        63
+## [4,]        78        44        60        42        59        48        62
+## [5,]        91        51        83        56        71        52        69
+##      DMSCCl390 CClDMS391 CClDMS393 CClDMS394
+## [1,]        77        40        91        32
+## [2,]        71        41        85        32
+## [3,]        70        40        39        32
+## [4,]        81        41        51        32
+## [5,]        81        57        95        37
+## 44285 more rows ...
+## 
+## $G
+##      DMSCCl319 DMSCCl320 DMSCCl321 DMSCCl329 CClDMS330 CClDMS331 CClDMS332
+## [1,]        77        78        45        45        87        65       128
+## [2,]      4558        79        44        47        81        66       131
+## [3,]        79        75        46        47        84        66       122
+## [4,]        78        82        44        71        86        63       135
+## [5,]        93        95        92        57        86        66       132
+##      DMSCCl333 CClDMS379 CClDMS380 CClDMS381 DMSCCl382 DMSCCl384 DMSCCl389
+## [1,]       107        57        90        99        84        56        68
+## [2,]       110        54        89        96       168        54        72
+## [3,]       114        54        84        93        78        55        71
+## [4,]       113       118        84        97        83        56        75
+## [5,]       133        59        95        99       102        64        84
+##      DMSCCl390 CClDMS391 CClDMS393 CClDMS394
+## [1,]        71        74        83        59
+## [2,]        71        75        81        60
+## [3,]        73        78        62        59
+## [4,]        79        77        70        61
+## [5,]        99        83        92        63
+## 44285 more rows ...
+## 
+## $Rb
+##      DMSCCl319 DMSCCl320 DMSCCl321 DMSCCl329 CClDMS330 CClDMS331 CClDMS332
+## [1,]        41        39        35        47        44        36        40
+## [2,]        43        39        35        46        44        36        39
+## [3,]        41        40        35        48        44        35        39
+## [4,]        40        40        35        49        43        35        39
+## [5,]        41        40        36        48        44        35        39
+##      DMSCCl333 CClDMS379 CClDMS380 CClDMS381 DMSCCl382 DMSCCl384 DMSCCl389
+## [1,]        55        39        49        37        46        42        50
+## [2,]        55        37        50        37        46        41        52
+## [3,]        59        39        47        37        46        41        52
+## [4,]        63        39        48        36        46        41        52
+## [5,]        60        39        47        37        46        41        52
+##      DMSCCl390 CClDMS391 CClDMS393 CClDMS394
+## [1,]        60        36        34        30
+## [2,]        59        36        35        31
+## [3,]        55        35        35        30
+## [4,]        58        36        34        30
+## [5,]        56        36        35        30
+## 44285 more rows ...
+## 
+## $Gb
+##      DMSCCl319 DMSCCl320 DMSCCl321 DMSCCl329 CClDMS330 CClDMS331 CClDMS332
+## [1,]        44        44        32        34        40        39        48
+## [2,]        46        43        32        35        41        38        48
+## [3,]        43        43        32        35        40        38        49
+## [4,]        43        43        32        35        41        38        49
+## [5,]        43        42        32        35        41        38        48
+##      DMSCCl333 CClDMS379 CClDMS380 CClDMS381 DMSCCl382 DMSCCl384 DMSCCl389
+## [1,]        47        35        50        50        45        37        38
+## [2,]        48        35        50        49        45        37        38
+## [3,]        48        35        51        49        45        37        38
+## [4,]        49        35        51        49        46        37        37
+## [5,]        49        35        50        49        45        37        38
+##      DMSCCl390 CClDMS391 CClDMS393 CClDMS394
+## [1,]        38        40        37        36
+## [2,]        38        40        37        36
+## [3,]        39        40        37        36
+## [4,]        38        40        37        36
+## [5,]        39        40        37        36
+## 44285 more rows ...
+## 
+## $targets
+##            Cy3  Cy5 RIN.Cy3 RIN.Cy5                      FileName
+## DMSCCl319 DMSO CCl4     9.0     9.7 251316214319_auto_479-628.gpr
+## DMSCCl320 DMSO CCl4     9.0     5.0 251316214320_auto_478-629.gpr
+## DMSCCl321 DMSO CCl4     9.0     2.5 251316214321_auto_410-592.gpr
+## DMSCCl329 DMSO CCl4     9.0     2.5 251316214329_auto_429-673.gpr
+## CClDMS330 CCl4 DMSO     9.7     9.0 251316214330_auto_457-658.gpr
+## 13 more rows ...
+## 
+## $genes
+##   Block Row Column           ID            Name
+## 1     1   1      1 BrightCorner    BrightCorner
+## 2     1   1      2 BrightCorner    BrightCorner
+## 3     1   1      3    (-)3xSLv1 NegativeControl
+## 4     1   1      4 A_44_P317301        AW523361
+## 5     1   1      5 A_44_P386163    NM_001007719
+## 44285 more rows ...
+## 
+## $source
+## [1] &quot;genepix&quot;
+## 
+## $printer
+## $ngrid.r
+## [1] 1
+## 
+## $ngrid.c
+## [1] 1
+## 
+## $nspot.r
+## [1] 430
+## 
+## $nspot.c
+## [1] 103</code></pre>
+</div>
+</div>
+</div>
+<div id="exploración-y-control-de-calidad" class="section level2" number="5.2">
+<h2><span class="header-section-number">5.2</span> Exploración y control de calidad</h2>
+<p>Los gráficos son útiles para comprobar la calidad de los datos de microarrays,
+obtener información sobre cómo se deben preprocesar los datos y comprobar, finalmente, que el preprocesado se haya realizado correctamente.</p>
+<p>Siguiendo el esquema presentado en la tabla @ref{tab:tablaDiagnosticos} se presentan a continuación los distintos gráficos utilizados con una breve descripción de lo que representa cada uno y como interpretarlos adecuadamente. El código para generarlos se presenta al final del capítulo como un apéndice.</p>
+<div id="control-de-calidad-con-gráficos-estadísticos-generales" class="section level3" number="5.2.1">
+<h3><span class="header-section-number">5.2.1</span> Control de calidad con gráficos estadísticos generales</h3>
+<div id="histogramas-y-gráficos-de-densidad" class="section level4" number="5.2.1.1">
+<h4><span class="header-section-number">5.2.1.1</span> Histogramas y gráficos de densidad</h4>
+<p>Estos gráficos permite hacerse una idea de si las distribuciones de los distintos arrays son similares en forma y posición. La figura <a href="#fig:plotAffyHist"><strong>??</strong></a> muestra los histogramas correspondientes a los 9 arrays del conjunto de datos .</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb14-1"></a>affySampleNames &lt;-<span class="st"> </span><span class="kw">rownames</span>(<span class="kw">pData</span>(allAffyRaw))</span>
+<span id="cb14-2"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb14-2"></a>affyColores &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">8</span>,<span class="dv">8</span>)</span>
+<span id="cb14-3"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb14-3"></a>affyLineas &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">3</span>)</span>
+<span id="cb14-4"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb14-4"></a><span class="kw">hist</span>(allAffyRaw, <span class="dt">main=</span><span class="st">&quot;Signal distribution&quot;</span>, <span class="dt">col=</span>affyColores, <span class="dt">lty=</span>affyLineas)</span>
+<span id="cb14-5"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb14-5"></a><span class="kw">legend</span> (<span class="dt">x=</span><span class="st">&quot;topright&quot;</span>, <span class="dt">legend=</span>affySampleNames , <span class="dt">col=</span>affyColores, <span class="dt">lty=</span>affyLineas, <span class="dt">cex=</span><span class="fl">0.7</span>)</span></code></pre></div>
+<p><img src="Analisis-de-Datos-de-Microarrays-y-otras-Omicas_files/figure-html/plotAffyHist-1.png" width="672" /></p>
+</div>
+<div id="diagramas-de-caja-o-boxplots" class="section level4" number="5.2.1.2">
+<h4><span class="header-section-number">5.2.1.2</span> Diagramas de caja o “boxplots”</h4>
+<p>Como los histogramas los diagramas de caja –basados en los distintos cuantiles de las valores– dan una idea de la distribución de las intensidades. La figura <a href="#fig:plotAffyBoxplot"><strong>??</strong></a> muestra los diagramas de caja correspondientes a los 9 arrays del conjunto de datos .</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb15-1"></a><span class="kw">boxplot</span>(allAffyRaw, <span class="dt">main=</span><span class="st">&quot;Signal distribution&quot;</span>, <span class="dt">col=</span>affyColores, <span class="dt">las=</span><span class="dv">2</span>)</span></code></pre></div>
+<p><img src="Analisis-de-Datos-de-Microarrays-y-otras-Omicas_files/figure-html/plotAffyBoxplot-1.png" width="672" /></p>
+</div>
+<div id="gráficos-de-componentes-principales" class="section level4" number="5.2.1.3">
+<h4><span class="header-section-number">5.2.1.3</span> Gráficos de componentes principales</h4>
+<p>El análisis de componentes principales puede servir para detectar si las muestras se agrupan de forma “natural” es decir con otras muestras provenientes del mismo grupo o si no hay correspondencia clara entre grupos experimentales y proximidad en este gráfico. Cuando esto sucede no significa necesariamente que haya un problema pero puede ser indicativo de efectos técnicos -como el conocido efecto “batch”- que podría ser necesario corregir.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb16-1"></a>plotPCA &lt;-<span class="st"> </span><span class="cf">function</span> ( X, <span class="dt">labels=</span><span class="ot">NULL</span>, <span class="dt">colors=</span><span class="ot">NULL</span>, <span class="dt">dataDesc=</span><span class="st">&quot;&quot;</span>, <span class="dt">scale=</span><span class="ot">FALSE</span>)</span>
+<span id="cb16-2"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb16-2"></a>{</span>
+<span id="cb16-3"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb16-3"></a>  pcX&lt;-<span class="kw">prcomp</span>(<span class="kw">t</span>(X), <span class="dt">scale=</span>scale) <span class="co"># o prcomp(t(X))</span></span>
+<span id="cb16-4"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb16-4"></a>  loads&lt;-<span class="st"> </span><span class="kw">round</span>(pcX<span class="op">$</span>sdev<span class="op">^</span><span class="dv">2</span><span class="op">/</span><span class="kw">sum</span>(pcX<span class="op">$</span>sdev<span class="op">^</span><span class="dv">2</span>)<span class="op">*</span><span class="dv">100</span>,<span class="dv">1</span>)</span>
+<span id="cb16-5"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb16-5"></a>  xlab&lt;-<span class="kw">c</span>(<span class="kw">paste</span>(<span class="st">&quot;PC1&quot;</span>,loads[<span class="dv">1</span>],<span class="st">&quot;%&quot;</span>))</span>
+<span id="cb16-6"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb16-6"></a>  ylab&lt;-<span class="kw">c</span>(<span class="kw">paste</span>(<span class="st">&quot;PC2&quot;</span>,loads[<span class="dv">2</span>],<span class="st">&quot;%&quot;</span>))</span>
+<span id="cb16-7"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb16-7"></a>  <span class="cf">if</span> (<span class="kw">is.null</span>(colors)) colors=<span class="dv">1</span></span>
+<span id="cb16-8"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb16-8"></a>  <span class="kw">plot</span>(pcX<span class="op">$</span>x[,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>],<span class="dt">xlab=</span>xlab,<span class="dt">ylab=</span>ylab, <span class="dt">col=</span>colors, </span>
+<span id="cb16-9"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb16-9"></a>       <span class="dt">xlim=</span><span class="kw">c</span>(<span class="kw">min</span>(pcX<span class="op">$</span>x[,<span class="dv">1</span>])<span class="op">-</span><span class="dv">10</span>, <span class="kw">max</span>(pcX<span class="op">$</span>x[,<span class="dv">1</span>])<span class="op">+</span><span class="dv">10</span>),</span>
+<span id="cb16-10"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb16-10"></a>       <span class="dt">ylim=</span><span class="kw">c</span>(<span class="kw">min</span>(pcX<span class="op">$</span>x[,<span class="dv">2</span>])<span class="op">-</span><span class="dv">10</span>, <span class="kw">max</span>(pcX<span class="op">$</span>x[,<span class="dv">2</span>])<span class="op">+</span><span class="dv">10</span>),</span>
+<span id="cb16-11"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb16-11"></a>       )</span>
+<span id="cb16-12"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb16-12"></a>  <span class="kw">text</span>(pcX<span class="op">$</span>x[,<span class="dv">1</span>],pcX<span class="op">$</span>x[,<span class="dv">2</span>], labels, <span class="dt">pos=</span><span class="dv">3</span>, <span class="dt">cex=</span><span class="fl">0.8</span>)</span>
+<span id="cb16-13"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb16-13"></a>  <span class="kw">title</span>(<span class="kw">paste</span>(<span class="st">&quot;Plot of first 2 PCs for expressions in&quot;</span>, dataDesc, <span class="dt">sep=</span><span class="st">&quot; &quot;</span>), <span class="dt">cex=</span><span class="fl">0.8</span>)</span>
+<span id="cb16-14"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb16-14"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb17-1"></a><span class="cf">if</span> (<span class="op">!</span><span class="kw">file.exists</span>(<span class="st">&quot;allAffyNorm&quot;</span>)){</span>
+<span id="cb17-2"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb17-2"></a>  allAffyNorm&lt;-<span class="st"> </span><span class="kw">rma</span>(allAffyRaw)</span>
+<span id="cb17-3"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb17-3"></a>  affyNorm &lt;-<span class="st"> </span><span class="kw">rma</span>(affyRaw)</span>
+<span id="cb17-4"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb17-4"></a>  <span class="kw">save</span>(allAffyNorm, affyNorm, <span class="dt">file=</span><span class="st">&quot;affyNorm.Rda&quot;</span>)</span>
+<span id="cb17-5"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb17-5"></a>}<span class="cf">else</span>{</span>
+<span id="cb17-6"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb17-6"></a>  <span class="kw">load</span>(<span class="dt">file=</span><span class="st">&quot;affyNorm.Rda&quot;</span>)</span>
+<span id="cb17-7"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb17-7"></a>}</span></code></pre></div>
+<p>La figura <a href="#fig:plotPCA2D"><strong>??</strong></a> muestra dos diagramas de compnentes principales realizados a partir de los datos normalizados del conjunto de datos . El gráfico de la parte superior que incluye el array defectuoso ilustra que la principal fuente de variabilidad es la diferencia de este array con el resto. Cuando se repite el análisis omitiendo esta muestra puede verse como la principal fuente de variación (eje X) se asocia con el tiempo de exposición (alto a la derecha, bajo (10h) a la izquierda, mientras que la segunda fuente de variación se asocia con la exposición a los estrógenos (alto arriba, bajo abajo).</p>
+<p>El gráfico de la parte inferior en el que este array se ha eliminado antes de calcular las componentes principales muestra dos agrupaciones claras de arrays “derecha e izquierda” y “arriba y abajo” de la figura. El hecho de que los grupos no se correspondan con los tratamientos sugiere que puede haber alguna fuente adicional de variación que ha de tenerse en cuenta.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb18-1"></a>opt &lt;-<span class="st"> </span><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">1</span>))</span>
+<span id="cb18-2"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb18-2"></a><span class="kw">plotPCA</span>(<span class="kw">exprs</span>(allAffyNorm), <span class="dt">labels=</span>affySampleNames, <span class="dt">dataDesc=</span><span class="st">&quot;PCA for all arrays</span><span class="ch">\n</span><span class="st">includes defective sample&quot;</span>)</span>
+<span id="cb18-3"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb18-3"></a><span class="kw">plotPCA</span>(<span class="kw">exprs</span>(affyNorm), <span class="dt">labels=</span><span class="kw">colnames</span>(<span class="kw">exprs</span>(affyNorm)), <span class="dt">dataDesc=</span><span class="st">&quot;PCA for all arrays&quot;</span>)</span></code></pre></div>
+<p><img src="Analisis-de-Datos-de-Microarrays-y-otras-Omicas_files/figure-html/plotPCA2D-1.png" width="672" /></p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb19-1"></a><span class="kw">par</span>(opt)</span></code></pre></div>
+</div>
+<div id="imagen-del-chip" class="section level4" number="5.2.1.4">
+<h4><span class="header-section-number">5.2.1.4</span> Imagen del chip</h4>
+<p>Otra forma de ver si las muestras se agrupan según los grupos experimentales, o mediante otros criterios es usando un cluster jerárquico que realiza una agrupación básica de las muestras por grado de similaridad según la distancia que se utilice.</p>
+<p>Como en el caso de las componentes principales si las muestras se agrupan según las condiciones experimentales es una buena señal pero si no es así puede deberse a la presencia de otra fuente de variación o bien al hecho de que se trata de un gráfico basado en todo los datos y las condiciones experimentales pueden haber afectado un pequeño número de genes.</p>
+<p>La figura <a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#fig:plotDendro">5.1</a> muestra como se agrupan los datos del conjunto  en base a un cluster jerárquico. Como en el caso de las componentes principales tras eliminar el array defectuoso las muestras se separan, primero por el tiempo de exposición y luego por niveles de estrógeno suministrado.</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb20-1"></a>clust.euclid.average &lt;-<span class="st"> </span><span class="kw">hclust</span>(<span class="kw">dist</span>(<span class="kw">t</span>(<span class="kw">exprs</span>(affyNorm))),<span class="dt">method=</span><span class="st">&quot;average&quot;</span>)</span>
+<span id="cb20-2"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb20-2"></a><span class="kw">plot</span>(clust.euclid.average, <span class="dt">labels=</span><span class="kw">colnames</span>(<span class="kw">exprs</span>(affyNorm)), <span class="dt">main=</span><span class="st">&quot;Hierarchical clustering of samples&quot;</span>,  <span class="dt">hang=</span><span class="op">-</span><span class="dv">1</span>, <span class="dt">cex=</span><span class="fl">0.7</span>)</span></code></pre></div>
+<div class="figure"><span id="fig:plotDendro"></span>
+<img src="Analisis-de-Datos-de-Microarrays-y-otras-Omicas_files/figure-html/plotDendro-1.png" alt="Un cluster jerárquico sirve para determinar si las muestras se agrupan de forma natural según los grupos experimentales o si lo hacen de otra forma" width="672" />
+<p class="caption">
+Figure 5.1: Un cluster jerárquico sirve para determinar si las muestras se agrupan de forma natural según los grupos experimentales o si lo hacen de otra forma
+</p>
+</div>
+</div>
+</div>
+<div id="gráficos-de-diagnóstico-para-microarrays-de-dos-colores" class="section level3" number="5.2.2">
+<h3><span class="header-section-number">5.2.2</span> Gráficos de diagnóstico para microarrays de dos colores</h3>
+<p>El diagnóstico de arrays de dos canales se basa principalmente
+en la imagen y en diferentes tipos de gráficos.</p>
+<div id="diagramas-de-dispersión-y-ma-plots" class="section level4" number="5.2.2.1">
+<h4><span class="header-section-number">5.2.2.1</span> Diagramas de dispersión y “MA-plots”</h4>
+<p>La normalización discutida en este mismo capítulo es un punto
+clave en el proceso de análisis de microarrays y se ha dedicado un
+gran esfuerzo a desarrollar y probar diferentes métodos
+(<span class="citation">Quackenbush (2002)</span>,<span class="citation">Yang et al. (2002)</span>). Una razón para ello es que
+hay diferentes artefactos técnicos que deben ser corregidos para
+poder ser utilizados, y no cualquier método puede funcionar con
+todos ellos.</p>
+<p>En general, los métodos de normalización se basan en el siguiente
+principio: .</p>
+<p>Esto da una idea de como debería ser un gráfico de
+intensidades. Por ejemplo, si no hubiese artefactos técnicos, en
+arrays de dos canales, una gráfica de dispersión de intensidad del
+rojo frente al verde debería dejar la mayor parte de los puntos
+alrededor de una diagonal. Cualquier desviación de esta situación
+debería ser atribuible a razones técnicas, no biológicas, y por
+tanto, debería ser eliminada. Esto ha conducido a un método de
+normalización muy popular consistente en estimar la transformación
+a aplicar, como una función de las intensidades utilizando el
+método  en la representación transformada de la
+gráfica de dispersión conocida como el .</p>
+<p>La figura <a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#fig:c05normScatterMA">5.2</a> muestra, en su parte izquierda (a) un gráfico de dispersión del canal
+rojo frente al verde en un array de dos colores. El hecho de que los
+datos no estén centrados alrededor de la diagonal sugiere la necesidad de
+normalización.</p>
+<p>Una representación muy popular que ayuda a visualizar mejor esta
+asimetría es lo que se conoce como “”, que aparece en la parte derecha (b) de la figura<a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#fig:c05normScatterMA">5.2</a>. Geométricamente representa una rotación del gráfico de dispersión, en la que el significado de los nuevos ejes es:</p>
+<ul>
+<li><span class="math inline">\(A=\displaystyle \frac{1}{2}(\log_2 (R*G))\)</span>: El logaritmo de la
+intensidad media de los dos canales,</li>
+<li><span class="math inline">\(M=\log_2 \displaystyle \frac{R}{G}\)</span>: El logaritmo de la expresión relativa entre
+ambos canales (normalmente conocido como “log–ratio”).</li>
+</ul>
+<div class="figure"><span id="fig:c05normScatterMA"></span>
+<img src="figures/c05normScatterMA.png" alt="(a) Gráfico de  un canal frente al otro  (b) MA-plot (intensidad frente log-ratio)" width="1502" />
+<p class="caption">
+Figure 5.2: (a) Gráfico de un canal frente al otro (b) MA-plot (intensidad frente log-ratio)
+</p>
+</div>
+</div>
+<div id="imagen-del-array" class="section level4" number="5.2.2.2">
+<h4><span class="header-section-number">5.2.2.2</span> Imagen del array</h4>
+<p>La imagen del chip (véase la figura <a href="#c05signalNoise"><strong>??</strong></a>,
+izquierda) ofrece una visión rápida de la calidad del array,
+proporcionando información acerca del balance del color, la
+uniformidad en la hibridación y en los , de si el
+background es mayor del normal y dela existencia de artefactos como el
+polvo o pequeñas marcas (rasguños).</p>
+</div>
+<div id="histogramas-de-señales-y-de-la-relación-señalruído" class="section level4" number="5.2.2.3">
+<h4><span class="header-section-number">5.2.2.3</span> Histogramas de señales y de la relación señal–ruído</h4>
+<p>Estos gráficos (véase la figura <a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#fig:c05signalNoise">5.3</a>, derecha) son útiles para detectar posibles anormalidades o un background excesivamente alto .</p>
+<div class="figure"><span id="fig:c05signalNoise"></span>
+<img src="figures/c05signalNoise.png" alt="La relación señal ruido sirve para detectar posibles anormalidades o un background excesivamente alto como medida de calidad" width="660" />
+<p class="caption">
+Figure 5.3: La relación señal ruido sirve para detectar posibles anormalidades o un background excesivamente alto como medida de calidad
+</p>
+</div>
+</div>
+<div id="boxplots" class="section level4" number="5.2.2.4">
+<h4><span class="header-section-number">5.2.2.4</span> Boxplots</h4>
+<p>Un gráfico muy utilizado es el diagrama de cajas o “boxplot”
+múltiple con una caja por cada chip. Del alineamiento (o falta de
+él) y la semejanza (o disparidad) entre las cajas, se deduce si hace
+falta, o no, normalizar entre arrays.</p>
+<p>En el caso de arrays de dos colores pueden utilizarse diagrams de
+cajas “dentro de arrays” (entre distintos sectores del mismo chip) y
+“entre arrays”.</p>
+</div>
+</div>
+<div id="gráficos-de-diagnóstico-para-microarrays-de-un-color" class="section level3" number="5.2.3">
+<h3><span class="header-section-number">5.2.3</span> Gráficos de diagnóstico para microarrays de un color</h3>
+<div id="imagen-del-chip-1" class="section level4" number="5.2.3.1">
+<h4><span class="header-section-number">5.2.3.1</span> Imagen del chip</h4>
+<p>Los arrays de affymetrix contienen millones de sondas por lo que no pueden examinarse a simple vista. A pesar de ello hay diversas formas de obtener una imagen que, en caso de presentar irregularidades pueden indicar algún tipo de problemas como burbujas, arañazos, etc. La figura @ref(c06plotAffy} muestra algunas de las imágenes</p>
+<p>La imagen del array de Affymetrix sólo es útil para evidenciar grandes problemas como burbujas, arañazos, etc. En este ejemplo los dos arrays de la izquierda se considerarían aceptables y los de la derecha defectuosos.</p>
+<div class="figure"><span id="fig:c05plotAffy"></span>
+<img src="figures/c05plotAffy.png" alt="Imágenes de cuatro microarrays de Affymetrix" width="819" />
+<p class="caption">
+Figure 5.4: Imágenes de cuatro microarrays de Affymetrix
+</p>
+</div>
+</div>
+<div id="gráfico-m-a" class="section level4" number="5.2.3.2">
+<h4><span class="header-section-number">5.2.3.2</span> Gráfico “M-A”</h4>
+<p>En los chips de dos colores el MA–plot se utliza para comparar los dos canales en cada array (rojo y verde). En cambio, en los chips de Affymetrics, en que sólo hay un canal en cada array, la única forma de definir M (el log ratio) es a partir de la comparación entre pares de de valores, ya sea los arrays dos a dos o bien cada array respecto un valor de referencia que puede ser la mediana, punto a punto, de todos los arrays (véase por ejemplo la figure ).</p>
+<div class="figure"><span id="fig:c05MAPlotAffy"></span>
+<img src="figures/c05MAPlotAffy.png" alt="En los chips de Affymetrix la única forma de definir M (el log ratio) es comparar entre diferentes arrays" width="774" />
+<p class="caption">
+Figure 5.5: En los chips de Affymetrix la única forma de definir M (el log ratio) es comparar entre diferentes arrays
+</p>
+</div>
+<p><span class="math inline">\(M=\log_2(I_1) - \log_2(I_2)\)</span>: log ratio
+<span class="math inline">\(A=\displaystyle \frac{1}{2}(\log_2 (I_1)+\log_2(I_2))\)</span>: log de intensidades
+Donde <span class="math inline">\(I_1\)</span> es la intensidad del array de estudio, e <span class="math inline">\(I_2\)</span> es la intensidad media de arrays.
+Por lo general, se espera que la distribución en el gráfico se concentre a lo largo del eje M = 0.</p>
+</div>
+<div id="modelos-de-bajo-nivel-probe-level-models-o-plm" class="section level4" number="5.2.3.3">
+<h4><span class="header-section-number">5.2.3.3</span> Modelos de bajo nivel (“Probe-Level-Models” o PLM)</h4>
+<p>Los modelos de bajo nivel (“Probe-Level-Models” o PLM) ajustan a los valores de intensidad –a nivel de sondas, no de valores totalizados de gen– un modelo explicativo. Los valores estimados por este modelo se comparan con los valores reales y se obtienen los errores o “residuos” del ajuste. El análisis de dichos residuos procede de forma similar a lo que se realiza al analizar un modelo de regresión:
+Si los errores no presentan ningún patrón especial supondremos que el modelo se ajusta relativamente bien.
+Si, en cambio, observamos desviaciones de esta presunta aleatoriedad querrá decir que el modelo no explica bien las observaciones, lo cual se atribuirá a la existencia de algún problema con los datos.</p>
+<p>Con los valores ajustados del modelo se calculan dos medidas:</p>
+<ul>
+<li>La expresión relativa en escala logarítmica " Relative Log Expression" (RLE) es una medida estandarizada de la expresión.
+No es de gran utilidad pero debería presentar una distribución similar en todos los arrays.</li>
+<li>El error no estandarizado y normalizado o “NUSE” es el más informativo ya que representa la distribucián de los residuos a la que
+hacíamos referencia más arriba.
+Si un array es problemático la caja correspondiente en el boxplot aparece desplazada hacia arriba o abajo de las demás.</li>
+</ul>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb21-1"></a><span class="kw">stopifnot</span>(<span class="kw">require</span>(affyPLM))</span>
+<span id="cb21-2"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb21-2"></a>Pset&lt;-<span class="st"> </span><span class="kw">fitPLM</span>(allAffyRaw)</span></code></pre></div>
+<p>La figura <a href="#c06plotAffy5"><strong>??</strong></a> muestra los gráficos RLE y NUSE para el conjunto de datos estrogen. En ambos gráficos puede verse como el array defectuoso “” queda claramente diferenciado del resto.</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb22-1"></a>opt&lt;-<span class="st"> </span><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">1</span>))</span>
+<span id="cb22-2"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb22-2"></a><span class="kw">RLE</span>(Pset, <span class="dt">main =</span> <span class="st">&quot;Relative Log Expression (RLE)&quot;</span>, </span>
+<span id="cb22-3"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb22-3"></a>    <span class="dt">names=</span><span class="kw">rownames</span>(<span class="kw">pData</span>(allAffyRaw)), <span class="dt">las=</span><span class="dv">2</span>, <span class="dt">cex.axis=</span><span class="fl">0.6</span>)</span>
+<span id="cb22-4"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb22-4"></a><span class="kw">NUSE</span>(Pset, <span class="dt">main =</span> <span class="st">&quot;Normalized Unscaled Standard Errors (NUSE)&quot;</span>, <span class="dt">las=</span><span class="dv">2</span>, </span>
+<span id="cb22-5"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb22-5"></a>     <span class="dt">names=</span><span class="kw">rownames</span>(<span class="kw">pData</span>(allAffyRaw)), <span class="dt">las=</span><span class="dv">2</span>, <span class="dt">cex.axis=</span><span class="fl">0.6</span>)</span></code></pre></div>
+<div class="figure">
+<img src="Analisis-de-Datos-de-Microarrays-y-otras-Omicas_files/figure-html/plotPLM%20-1.png" alt="Graficos de diagnóstico calculados a nivel de sondas PLM" width="672" />
+<p class="caption">
+(#fig:plotPLM )Graficos de diagnóstico calculados a nivel de sondas PLM
+</p>
+</div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb23-1"></a><span class="kw">par</span>(opt)</span></code></pre></div>
+</div>
+</div>
+</div>
+<div id="normalización-de-arrays-de-dos-colores" class="section level2" number="5.3">
+<h2><span class="header-section-number">5.3</span> Normalización de arrays de dos colores</h2>
+<p>La palabra  describe las técnicas utilizadas para transformar adecuadamente los datos antes de que sean analizados.
+El objetivo es corregir diferencias sistemáticas entre muestras, en la misma o entre imágenes, lo que no representa
+una verdadera variación entre las muestras biológicas.</p>
+<p>Estas diferencias sistemáticas pueden deberse, entre otras, a:</p>
+<ul>
+<li>Cambios en la tinción que producen sesgos la intensidad del .</li>
+<li>La ubicación en el array que puede afectar el proceso de lectura.</li>
+<li>Un problem en la placa de origen.</li>
+<li>La existencia de diferencias en la calidad de la impresión: pueden presentarse variaciones en los pins y el tiempo de impresión</li>
+<li>Camio en los parámetros de la digitalización (escaneo).</li>
+</ul>
+<p>A veces puede ser difícil detectar estos problemas , aunque existen algunas formas de saber si es necesaria realizar una normalización. Aqui destacamos dos posibilidades:</p>
+<ol style="list-style-type: decimal">
+<li>Realizar una auto-hibridación. Si hibridamos una muestra con
+ella misma, las intensidades deberían ser las mismas en ambos
+canales. Cualquier desviación de esta igualdad, significa que hay
+un sesgo sistemático.</li>
+<li>Detectar artefactos espaciales en la imagen o en la tinción de
+los gráficos de diagnóstico</li>
+</ol>
+<div id="normalización-global" class="section level3" number="5.3.1">
+<h3><span class="header-section-number">5.3.1</span> Normalización global</h3>
+<p>Este método esta basado en un ajuste global, es decir en modificar todos los valores una cantidad , estimada de acuerdo a algún criterio.
+<span class="math display">\[\begin{equation}
+ \log_2 R/G \rightarrow \log_2 R/G-c=\log_2 R/(Gk)
+\end{equation}\]</span>
+opciones para <span class="math inline">\(k\)</span> o <span class="math inline">\(c= \log_2k\)</span> son</p>
+<p><span class="math inline">\(c\)</span>= mediana o media de log ratio para un conjunto concreto de genes o genes control o genes housekeeping.</p>
+<p>La intensidad total de la normalización</p>
+<p><span class="math inline">\(k=\sum R_i/\sum G_i\)</span></p>
+</div>
+<div id="normalización-dependiente-de-la-intensidad" class="section level3" number="5.3.2">
+<h3><span class="header-section-number">5.3.2</span> Normalización dependiente de la intensidad</h3>
+<p>En este caso se realiza una modificación específica para cada valor. Esta modificación se obtiene como una función de la intensidad total del gen (<span class="math inline">\(c=c(A)\)</span>).
+<span class="math display">\[\begin{equation}
+ \log_2 R/G \rightarrow \log_2 R/G-c(A)=\log_2 R/(Gk(A))
+\end{equation}\]</span></p>
+<p>Una posible estimación de esta función puede hacerse utilizando la función  (LOcally WEighted Scatterplot Smoothing).</p>
+</div>
+</div>
+<div id="resumen-y-normalización-de-microarrays-de-affymetrix" class="section level2" number="5.4">
+<h2><span class="header-section-number">5.4</span> Resumen y normalización de microarrays de Affymetrix</h2>
+<p>En los arrays de Affymetrix, como en todos los tipos de microarrays, tras escanear la imagen se obtiene una serie de valores de
+intensidad de cada elemento del chip.
+En el caso de estos arrays sabemos que cada valor no corresponde a la expresión de un gen:</p>
+<ul>
+<li>Hay múltiples valores (sondas o “probes”) por cada gen, que originan un .</li>
+<li>Cada grupo de sondas consiste en múltiples pares de sondas, donde cada puede tener dos elementos:
+Un “perfect match” que coincide exactamente con el fragmento del gen al que corresponde la sonda
+Un “mismatch” que que coincide con el anterior salvo por el valor central que se ha sustituído por el nucleótido complementario.
+Estos "mismatches’ se introdujeron en los primeros arrays de affymetrix para tener una medida de hibridación no específica pero en las versiones más recientes se han abandonado.</li>
+</ul>
+<p>El proceso que convierte las señales individuales en valores de expresión normalizados para cada gen consta de tres etapas:</p>
+<ol style="list-style-type: decimal">
+<li>Corrección del ruido de fondo o “background”</li>
+<li>Normalización para hacer los valores comparables</li>
+<li>“Sumarización”(Resumen) o concentración de los valores de cada grupo de sondas en un único valor de expresión absoluto normalizado
+para cada gen.</li>
+</ol>
+<p>A menudo los tres pasos se denominan genérica -y erróneamente- “normalización”.</p>
+<p>A diferencia de los chips de ADNc, aquí las medidas de expresión son absolutas (no se compara una condición contra otra)
+dado que cada chip se hibrida con un única muestra.</p>
+<p>Hay muchos métodos para estimar la expresión (más de 30 publicados).
+Cada método contempla de forma explícita o implícita las tres formas de preprocesado: corrección del fondo,
+normalización y resumen.</p>
+<p>Los principales métodos que consideraremos son:</p>
+<ul>
+<li>Microarray Suite (MAS). Método oficial de Affymetrix. Versiones 4.0 y 5.0</li>
+<li>dChip: Li and Wong. Método basado en modelos multichip.</li>
+<li>RMA (Bioconductor). Actualmente es el método “estándar”.</li>
+</ul>
+<div id="métodos-originales-de-affymetrix" class="section level3" number="5.4.1">
+<h3><span class="header-section-number">5.4.1</span> Métodos originales de Affymetrix</h3>
+<div id="m.a.s.-4.0" class="section level4" number="5.4.1.1">
+<h4><span class="header-section-number">5.4.1.1</span> M.A.S. 4.0</h4>
+<p>Es el primer método introducida por Affymetrix.
+La corrección del fondo se realiza restando el “perfect match” del “mismatch”
+<span class="math display">\[\begin{equation}
+ E_j=PM_j-MM_j
+\end{equation}\]</span>
+La normalización se realiza de forma global haciendo transformaciones de forma que la media de todo el chip sea la misma y
+la sumarización se basa en calcular el promedio de las diferencias absolutas ignorando los pares que se desvían más de <span class="math inline">\(3\sigma\)</span> de <span class="math inline">\(\mu\)</span>.
+<span class="math display">\[\begin{equation}
+ Dif. Media=\frac{1}{|A|}\sum_{j \in A}(PM_j-MM_j)
+\end{equation}\]</span>
+Los problemas que presenta estemétodo son:</p>
+<ul>
+<li>1/3 de los MM son mayores que los PM</li>
+<li>Pueden aparecer valores MM negativos</li>
+<li>El uso de los MM añade ruido</li>
+</ul>
+</div>
+<div id="m.a.s.-5.0" class="section level4" number="5.4.1.2">
+<h4><span class="header-section-number">5.4.1.2</span> M.A.S. 5.0</h4>
+<p>Los problemas que presentaba el método M.A.S. 4.0 llevaron a
+sustituirlo por otra variante, el M.A.S 5.0, llamado así por venir
+implementado en el software de affymetrix llamado “MicroArray Suite
+5.0”.</p>
+<p>Este método utiliza un estadístico robusto, , para corregir y ponderar el fondo y calcular (estimar) la
+señal. El biweight de Tukey <span class="math inline">\(T_{bi}\)</span> pondera los valores por su
+distancia a la mediana, es decir, mide la tendencia central pero
+realiza un ajuste de outliers.</p>
+<p>La lógica de este método reside en pensar que el valor de MM no siempre tiene sentido, (p.ej si MM <span class="math inline">\(&gt;\)</span> PM).
+Dado que esto sucede en ocasiones se realiza el cambio siguiente:</p>
+<ol style="list-style-type: decimal">
+<li>Se introduce el background específico de un conjunto de pruebas <span class="math inline">\(i\)</span> de tamaño <span class="math inline">\(n\)</span> basado en los pares de pruebas <span class="math inline">\(j\)</span>:
+<span class="math display">\[\begin{equation}
+ SB_i=T_{bi}(\log(PM_{i,j})-\log(MM_{i,j})): j= 1,\ldots,n
+\end{equation}\]</span></li>
+<li>SB se utiliza para decidir como se ajusta el background</li>
+</ol>
+<ul>
+<li>Si es grande los datos suelen ser fiables</li>
+<li>Si es pequeño mejor basarse tan solo en PM</li>
+</ul>
+<p>Este método no tan solo corrige el background sino que también permite normalizar y sumarizar.
+Para ello se introduce el “Mismatch Idealizado” (IM) que permite corregir la intensidad de las pruebas individuales.
+Este método también ha sido muy criticado:</p>
+<ul>
+<li>Se considera que no tiene mucho sentido promediar las pruebas entre arrays, pues éstos pueden tener características
+de hibridación intrínsecamente distintas.</li>
+<li>El método no mejora “aprendiendo” del funcionamiento entre arrays de las pruebas individuales.</li>
+</ul>
+</div>
+</div>
+<div id="el-método-rma-robust-multi-array-average" class="section level3" number="5.4.2">
+<h3><span class="header-section-number">5.4.2</span> El método RMA (Robust Multi-Array Average)</h3>
+<p>Para compensar algunas deficiencias de los primeros métodos de
+resumen y normalización de arrays de Affymetrix, Irizarry y sus
+colegas introdujeron en 2003 (~) un método basado en la modelización de las intensidades de las sondas que, en vez de basarse en las distintas sondas de un gen dentro de un mismo array se basa en los distintos valores de la misma sonda entre todos los arrays disponibles,</p>
+<p>Esquemáticamente los pasos que realiza este método son:</p>
+<ol style="list-style-type: decimal">
+<li>Ajusta el ruído de fondo (background) basándose solo en los
+valores PM y utilizando un modelo estadístico complejo en el que
+combina la modelización de la señal mediante una distribución exponencial con la del ruído mediante una distribución normal.</li>
+<li>Toma logaritmos base 2 de cada intensidad ajustada por el background.</li>
+<li>Realiza una  de los valores del paso 2 consistente en substituir cada valor individual por el que tendría la misma posición en la distribución empírica estimada sobre todas las muestras, es decir los promedios de las distribuciones de los valores ordenados de cada array (véase figura )</li>
+<li>Estima las intensidades de cada gen separadamente para cada conjunto de sondas. Para ello realiza una técnica similar
+a una regresión robusta denominada “pulido de medianas” (median polish) sobre una matriz de datos que tiene los arrays en filas y los grupos
+de sondas en columnas.</li>
+</ol>
+<p>Como resultado final de todos los pasos anteriores se obtiene la matriz con los datos sumarizados y normalizados. A pesar de no estar exento de críticas como la que afirma que este procedimiento “compacta” los valores reduciendo su variabilidad natural, este método se ha convertido en el estándar “de facto” actualmente por muchos usuarios de Bioconductor.</p>
+<div class="figure"><span id="fig:c06quantilNorm"></span>
+<img src="figures/c06quantilNorm.png" alt="El método RMA incluye una normalización por cuantiles como la representada esquemáticamente en esta figura" width="534" />
+<p class="caption">
+Figure 5.6: El método RMA incluye una normalización por cuantiles como la representada esquemáticamente en esta figura
+</p>
+</div>
+</div>
+</div>
+<div id="filtraje-no-específico" class="section level2" number="5.5">
+<h2><span class="header-section-number">5.5</span> Filtraje no específico</h2>
+<p>El filtraje no específico es recomendable para eliminar el ruido de fondo y limitar los ajustes posteriores a los necesarios.
+Los principales procesos de filtrado son:</p>
+<ul>
+<li>Eliminanción de los spots marcados como erróneos mediante flags y que son debidos a problemas en la hibridación o en el escaneo.</li>
+<li>Eliminanción de spots con señales muy bajas debido a problemas en el  o a que no ha habido hibridación en ese spot (Filtraje pr ).</li>
+<li>Eliminación de genes que no presenten una variación significativa en su señal, entre distintas condiciones experimentales (Filtraje por variabilidad).
+Ante la duda,</li>
+</ul>
+<p>El objetivo del filtraje es eliminar aquellos spots cuyas imágenes o señales sean erróneas por diferentes motivos, disminuyendo el ruido
+de fondo. Aunque existe controversia a su uso, prefiriendo el no filtrado a eliminar de forma no intencionado spots informativos.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="MDAExpDesign.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="selección-de-genes-diferencialmente-expresados-chapdeg.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

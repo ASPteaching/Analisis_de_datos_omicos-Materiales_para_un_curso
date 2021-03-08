@@ -1,0 +1,855 @@
+\documentclass[a4paper]{article}
+
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{underscore}
+
+\newcommand{\R}{{\it R}}
+\newcommand{\Rpackage}[1]{{\texttt{#1}}}
+
+\title{Examples of Microarray Data Analysis with \R\ and Bioconductor}
+
+\author{Alex S\'anchez \& M. Carme Ruiz de Villa\\
+Statistics and Bioinformatics Research Group\\
+Departament d'Estad\'istica. Universitat de Barcelona}
+
+\bibliographystyle{plain}
+
+\begin{document}
+\SweaveOpts{concordance=TRUE}
+
+\setkeys{Gin}{width=0.7\textwidth} % Sets default width for R-Sweave generated figures
+
+\maketitle
+
+\tableofcontents
+
+\section{Introduction}
+
+Microarray data analysis, as explained in the paper, usually goes through a
+series of steps depicted in figure \ref{fig:pipeline}.
+
+\begin{figure}[htbp]\begin{center}
+%\includegraphics[width=9cm]{images/analysisProcess}\\
+  \caption{The Microarray Analysis Process}\label{fig:pipeline}
+\end{center}
+\end{figure}
+
+This document intends to show --in a simplified, but realistic
+manner-- how to do a complete analysis from image files to lists of
+genes using \R\ and some Bioconductor packages.
+
+\subsection{A case study: Efect of LPS stimulation in aged mice}
+
+This example will rely on a real study published in the
+\emph{Journal of Leukocyte Biology} (2006;79:1314-1327). Briefly the
+goal of the experiment which generated the data was to understand
+the molecular basis of processes regulated by a molecule (cytokine)
+in aged mouse. To do this a microarray analysis was performed on RNA
+from resting and lipopolysaccharide (LPS)--stimulated mice using the
+Affymetrix Mouse Genome 430 2.0 gene chip Information on all the
+characteristics of the dataset and the experiment can be found
+following the link above.
+
+\subsection{Data for the examples}
+
+Usually microarray data analysis can begin at two different levels,
+which roughly correspond to two types of data:
+\begin{itemize}
+\item Numerical data ('Expression matrices') corresponding to summarized values
+(usually one value per gene and array).
+\item Numerical data obtained from the scanner ('Image files'). These must be
+converted into expression matrices as the first step of the analysis.
+\end{itemize}
+In general its is much better to start from image files because their
+low--level analysis can provide insights into data quality that cannot be obtained
+from summarized expression values.
+
+The examples will illustrate the use of the first types of data. The
+``celltypes`'' example starts in image files ('.CEL'). These files
+were obtained from a public Cancer database
+(\href{https://caarraydb.nci.nih.gov/caarray}
+{https://caarraydb.nci.nih.gov/caarray}).
+This database is not maintained anymore so the files can be downloaded from: \href{http://www.ub.edu/stat/docencia/bioinformatica/microarrays/ADM/data/LPS_STUDY/datos.celltypes.zip}{http://www.ub.edu/stat/docencia/bioinformatica/microarrays/ADM/data/LPS_STUDY/datos.celltypes.zip}.
+
+
+Along the example we assume that the reader has downloaded the dataset and uncompressed it into a directory named \texttt{datos.celltypes}. You can, of course change the name of the file, but you must adapt the forecoming R code to the new name. 
+
+
+\subsection{Bioconductor}
+
+The Bioconductor project (see \href{http://bioconductor.org}{http://bioconductor.org}) 
+is an international open source effort created to develop and support many aspects 
+of genomic data analysis providing, not only 
+function libraries which implement state--of--the--art analysis methods and up--to--date annotations,
+but also some data structures to easily store these data.
+
+A tutorial in Bioconductor exceeds the scope of this paper. 
+There are plenty of materials in the web and particularly in the Bioconductor web site.
+Along the examples concepts will be introduced as needed.
+
+Bioconductor can be installed in a system from within \R\ with the following instructions:
+\begin{verbatim}
+> source("http://www.bioconductor.org/biocLite.R")
+> biocLite()
+\end{verbatim}
+This will install the basic packages needed for usual analyses. 
+The packages needed at each step must be loaded previously to their using the command \texttt{library}.
+
+Bioconductor packages contain short tutorials or ``vignettes'' which can be accessed after loading the package with the instruction:
+\begin{verbatim}
+> openVignette()
+\end{verbatim}
+
+Although many analyses are performed on data stored in numerical
+matrices there are some data structures available to facilitate the
+representation of the different types of information. These consist of
+lists or (S4 classes) which besides the data can store informations
+such as the covariates, the annotation, prob-level information and
+many more.
+
+Figure \ref{fig:BiocOverview} depicts a general view of packages
+available in Biocnductor 1.8 jointly with what they can be used for.
+
+\begin{figure}[htbp]\begin{center}
+%\includegraphics[width=9cm]{images/BiocOverview}\\
+  \caption{General overview of Bioconductor classes, packages and functionalities}\label{fig:BiocOverview}
+\end{center}
+\end{figure}
+
+<<loadPackages>>=
+installPackages=TRUE
+if(installPackages){
+  source("http://bioconductor.org/biocLite.R")
+  if (!(require(Biobase))) biocLite("Biobase")
+  if (!(require(affy))) biocLite("affy")
+  if (!(require(arrayQualityMetrics))) biocLite("arrayQualityMetrics")
+  if (!(require("mouse4302.db"))) biocLite("mouse4302.db")
+  if (!(require("multtest"))) biocLite("multtest")
+  if (!(require("limma"))) biocLite("limma")
+  if (!(require("GOstats"))) biocLite("GOstats")
+}else{
+  require(Biobase) 
+  require(affy)
+  require(arrayQualityMetrics)
+  require("mouse4302.db") 
+  require("multtest")
+  require("limma")
+  require("GOstats")
+}
+@ 
+
+%The information about an experiment is contained in an object of class
+%\texttt{ExpressionSet}.  This class is designed to combine several
+%different sources of information into a single convenient structure.
+%The data in an ExpressionSet is formed (at least) by two components:
+%\begin{itemize}
+%\item The expression matrix, contained in an object of class \texttt{assayData}
+%5\item Covariate information, {\it i.e.} information relative the hybridization experiments, contained in an object of class \Rclass{phenoData}.
+%\end{itemize}
+%Besides these, other components can exist containing additional
+%information, such as the \texttt{featureData} describing the features
+%on the chip or a flexible structure to describe the experiment
+%\texttt{experimentData}.
+
+An \texttt{ExpressionSet} can be created directly by reading image
+files or ``manually'' combining the necessary components.
+
+\subsection{Creation of data structures for the examples}
+
+When data are read from .CEL files, an object of class \texttt{AffyBatch} is automatically created.
+This class is a \emph{descendant} from class \texttt{ExpressionSet}, which means that it \emph{inherits} its properties and, at the same time, it has its own properties.
+
+
+\section{Data entry}
+
+The data for this example are available (can be downloade) as image
+files ('.CEL').  We will use a set of packages developed to read and
+process affymetrix data to load them into memory, check their quality
+and summarize them into an expression matrix which will be the input
+for the statistical analysis.
+
+Along this example we assume that the image files are located in a
+directory called \texttt{data.celltypes} which is a subdirectory of
+the current directory. An easy way to handle these data is to use,
+besides the image files, a ``targets'' file which is simply a file
+containing information about covariates. In the following we assume
+this file exists and is located in the same directory as the image
+files.
+
+The process of reading the data may seem a bit awkward at first sight
+but the idea is simple: first we create a some data structures
+containing information about the variables and --optionally-- about
+the annotations and the experiment and then we rely on these
+structures to read the data and create the main objects that will be
+used for the analysis.
+
+<<celltypesCreate>>=
+workingDir<-getwd()
+dataDir <-file.path(workingDir, 'data')
+resultsDir <- file.path(workingDir,'results' )
+require(Biobase)
+require(affy)
+sampleInfo <- read.AnnotatedDataFrame(file.path(dataDir,"targets.txt"), 
+    header = TRUE, row.names = 1, sep="\t")
+celltypes.experimentInfo <- new("MIAME", name="LPS_Experiment",
+          lab="National Cancer Institute",
+          contact="Lakshman Chelvaraja",
+          title="Molecular basis of age associated cytokine dysregulation in LPS stimulated macrophages ",
+          url="http://www.jleukbio.org/cgi/content/abstract/79/6/1314")
+info <- pData(sampleInfo)
+fileNames <-rownames(info)
+sampleNames <- unlist(strsplit(fileNames,"\\."))[seq(1,23, by=2)]
+rawData <- read.affybatch(filenames=file.path(dataDir,fileNames),
+                          phenoData=sampleInfo, 
+                          description=celltypes.experimentInfo)
+save(info, sampleInfo, rawData, file=file.path(dataDir,"rawData.Rda"))
+@
+
+\section{Exploration, Quality Control and Normalization}
+
+Once data have been read they have to be \emph{preprocessed}.
+Although it can be interpreted in different ways this phase usually consists of
+\begin{ enumerate}
+\item Make some plots data to get an idea of the experiment's performance.
+\item Perform a more formal quality control.
+\item Normalize and summarize expression values.
+\end{ numerate}
+
+\subsection{Data Exploration and Visualization}
+
+Exploration can be performed by creating separate plots or using
+specific packages such as \Rpackage{arrayQualitymetrics} which
+performs a series of plots and creates an automatic report.
+
+We start by creating simple plots:
+
+<<plotHist,echo=F>>=
+hist(rawData, main="Signal distribution", col=info$grupo, lty=1:ncol(info))
+legend (x="topright", legend=sampleNames, col=info$grupo, lty=1:ncol(info))
+@
+
+<<plotDeg,echo=F>>=
+deg<-AffyRNAdeg(rawData, log.it=T)
+summaryAffyRNAdeg(deg) 
+plotAffyRNAdeg(deg,col=1:nrow(info))
+legend (x="bottomright", legend=sampleNames, col=1:nrow(info), lty=1:nrow(info), cex=0.7)
+@
+
+<<plotBox,echo=F>>=
+### boxplot
+boxplot(rawData, cex.axis=0.6, col=info$grupo, las=2, names=sampleNames)
+@
+
+<<plotDendro, echo=F>>=
+### La muestras del mismo grupo deber?an agruparse juntas
+clust.euclid.average <- hclust(dist(t(exprs(rawData))),method="average")
+plot(clust.euclid.average, labels=sampleNames, main="Hierarchical clustering of samples",  hang=-1)
+###
+@
+
+<<plotPCA, echo=F>>=
+## ----funPCA--------------------------------------------------------------
+#Definici?n de la funci?n de PCA-2d
+#vigilar los "ylim". Habr?a que definirlos en cada caso
+plotPCA <- function ( X, labels=NULL, colors=NULL, var = "", dataDesc="", 
+                     scale=FALSE, formapunts=NULL, myCex=NULL,...)
+{
+  pcX<-prcomp(t(X))
+  loads<- round(pcX$sdev^2/sum(pcX$sdev^2)*100,1)
+  xlab<-c(paste("PC1",loads[1],"%"))
+  ylab<-c(paste("PC2",loads[2],"%"))
+ if (is.null(colors)) colors=colores
+  plot(pcX$x[,1:2],xlab=xlab,ylab=ylab,
+       #xlim=c(min(pcX$x[,1])-5,max(pcX$x[,1])+5),
+       #ylim=c(-35,50),
+       pch=formapunts, col=colors)
+        text(pcX$x[,1],pcX$x[,2],labels,pos=3,cex=myCex, col=colors)
+  title(dataDesc, cex=0.2)
+}
+plotPCA(X=exprs(rawData), labels=sampleNames, dataDesc="Principal Components (Raw Data)", 
+        var = "info$grupo", myCex=0.6, colors = info$grupo, formapunts=info$grupo)
+@ 
+
+Overall these plots suggest that the experiment has performed well and that the samples group naturally by treatment and age,as expected (or, at least as desired).
+
+\subsection{Quality Control}
+
+Initial Data Analysis is a way to check data quality. Other standard approaches to QC are:
+\begin{itemize}
+\item Standard affymetrix quality controls as described in the \Rpackage{simpleaffy} package.
+\item Probe-level models based measures,  described in the  \Rpackage{affyPLM} package.
+\end{itemize}
+
+Package \Rpackage{arrayQualityMetricst} encapsulates the analysis performed by other packages.
+<<arrayQM1, eval=FALSE>>=
+require(arrayQualityMetrics)
+arrayQualitymetrics(rawData)
+@
+
+\subsection{Normalization and Filtering}
+
+Once the data has been checked and accepted (or partially discarded) one can go proceed the real preprocessing. Essentially one can distinguish two aspects of microarray data preprocessing:
+\begin{itemize}
+\item The first step is generally described as \emph{normalization}
+  but this may include several steps. For instance when dealing with
+  affymetrix data we may distinguish up-to-three different processes:
+\begin{itemize}
+\item Background correction
+\item Normalization
+\item Summarization of probe level values into a unique expression measure for each probeset.
+\end{itemize}
+\item A last, not universally accepted step, may be to perform some
+  kind of non-specific filtering to try to eliminate noise and to
+  reduce the number of values that have to be adjusted for multiple
+  testing.
+\end{itemize}
+
+\subsubsection{Affymetrix data normalizatron}
+
+Data normalization is best performed from ``raw data'', that is data
+obtained directly from the sacnner and stored in ``.CEL'' files.
+
+<<readData3>>=
+stopifnot(require(affy))
+if (!exists("rawData")) load(file=file.path (dataDir, "rawData.Rda"))
+@
+
+
+There are many normalization methods available.  \texttt{RMA, GCRMA,
+  PLIER} and also \texttt{MAS5} are the most commonly used with
+affymetrix data.  In this example we only consider RMA. The
+application of other methods is straightforward applying the
+unexecuted instructions below.
+
+<<normalization.rma>>=
+stopifnot(require(affy))
+normalize <- T
+if(normalize){
+  eset_rma <- rma(rawData)    # Creates expression values using RMA method. 
+  save(eset_rma, file=file.path(dataDir,"normalized.Rda"))
+}else{
+  load (file=file.path(dataDir,"normalized.rma.Rda"))
+}
+@
+
+Normalization makes data comparable between arrays although each
+method scales values into a different range of values.  The boxplot of
+normalized values shows a nice uniformity, but it is more due to the
+fact that the normalization step has equated quantiles for all arrays
+while using the default quantile normalization method.
+
+<<normBoxPlot>>=
+boxplot(eset_rma,main="RMA", names=sampleNames, cex.axis=0.7, col=info$grupo+1,las=2)
+@
+
+To apply and compare other normalization methods use the following
+unevaluated code.  In any case it is not expected that different
+methods yield the same results, so the lack of similarity in
+scatterplots should not be of great concern.
+
+<<compareNormalizations, echo=T, eval=F>>=
+eset_mas5 <- mas5(rawData)  # Uses expresso (MAS 5.0 method) much slower than RMA!
+stopifnot(require(gcrma))
+eset_gcrma <- gcrma(rawData) # The 'library(gcrma)' needs to be loaded first.
+stopifnot(require(plier))
+eset_plier <- justPlier(rawData, normalize=T) # The 'library(plier)' needs to be loaded first.
+compara <-data.frame(RMA=exprs(eset_rma)[,1], MAS5 =exprs(eset_mas5)[,1],
+                    GCRMA=exprs(eset_gcrma)[,1], PLIER =exprs(eset_plier)[,1])
+pairs(compara)
+@
+
+\subsubsection{Exploring normalized data: Are there any (unexpected) groups}
+
+Once the data are summarized it may be interesting to visualize them
+again to see if there appear any soubgroups in the samples which might
+be attributed to unpredicted technical reasons, or perhaps related
+with known factors such as day or lab technician.
+
+<<relativeImportance, echo=F>>=
+plotPCA(X=exprs(eset_rma), labels=sampleNames, dataDesc="Principal Components (Normalized data)", 
+        var = "info$grupo", myCex=0.6, colors = info$grupo, formapunts=info$grupo)
+@
+
+\subsubsection{Non-specific Filtering}
+
+There are many genes on a chip and most of them do not show any
+differential expression, simply adding noise to data.
+
+A common strategy adopted is to try to filter out noisy probes in
+order to increase sensitivity.  This is known as \emph{non--specific}
+filtering in contraposition with \emph{specific filtering} which is
+used to refer to methods for detecting differentially expressed genes.
+
+Any filtering process risks to leave out genes that have changed
+significantlty. However if filtering is not used the great number of
+probes would imply that other genes that were truly changed could not
+be detected.In consequence it seems reasonable to look for a
+compromise between filtering too much and having too many false
+negatives.
+
+Filtering can be done in several different ways, most of them empirically justified.
+\begin{itemize}
+\item A typical bioconductor vignette-example is to select genes that
+  are expressed above 200 (or other threshold) in at least half the
+  samples.
+\item Also one can keep only those with a minimum variability between
+  \emph{all the arrays}, defined as those whose standard deviation, or
+  other mesure of variation, is greater than a certain percentile of
+  all standard deviations.
+\item and so on...
+\end{itemize}
+
+We illustrate both filtering approaches using the RMA-normalized
+dataset.  The \Rpackage{genefilter} package allows to apply different
+filters (or to combine them) in a unified approach:
+
+There are three steps that must be performed.
+\begin{enumerate}
+\item Create the filters function(s).
+\item Assemble them into a filtering function.
+\item Apply the filtering function to the expression matrix.
+\end{enumerate}
+
+
+<<filter1>>=
+library(genefilter)
+log_intensity_threshold <-10
+numsamples <- nrow(pData(eset_rma))/2
+f1 <- kOverA(numsamples, log_intensity_threshold)
+ffun1 <- filterfun(f1)
+which1 <- genefilter(exprs(eset_rma), ffun1)
+sum(which1)
+@
+
+<<filter2>>=
+ sds<- apply(exprs(eset_rma), 1, sd)
+ variability_threshold <- quantile (sds,0.9)
+ f2 <-function (x) if (sd(x)< variability_threshold) return(FALSE) else return(TRUE)
+ ffun2<-filterfun(f2)
+ which2 <- genefilter(exprs(eset_rma), ffun2)
+ sum (which2)
+@
+
+Both methods yield a similar number of genes, but the number of genes in common is moderate
+<<commongenes>>=
+probes <-rownames(exprs(eset_rma))
+length(intersect(probes[which1],probes[which2]))
+@
+
+In short, \textbf{filtering must be applied carefully and wisely}.
+
+An alternative way to filtering is to use function  \texttt{nsFilter} which automates previous steps in a black--box manner. It also allows removing unnanotated genes. To include this option an annotation package must be available.
+
+<<filtering3>>=
+require(genefilter)
+require(mouse4302.db)
+annotation(eset_rma)<-"mouse4302.db"
+filtered <- nsFilter(eset_rma, require.entrez=TRUE,
+         remove.dupEntrez=TRUE, var.func=IQR,
+         var.cutoff=0.5, var.filter=TRUE,
+         filterByQuantile=TRUE, feature.exclude="^AFFX")
+@ 
+
+Function \texttt{nsFilter} returns filtered objects in a list which contains an \texttt{expressionSet} with filtered values and a report describing how many genes have been excluded by each filtering step.
+
+<<filtrado>>=
+names(filtered)
+class(filtered$eset)
+print(filtered$filter.log)
+eset_filtered <-filtered$eset
+dim(exprs(eset_filtered))
+@ 
+
+<<storeData,echo=F, results='hide'>>=
+save(eset_rma, eset_filtered,
+      file=file.path(dataDir, "normalized.filtered.Rda"))
+@
+
+
+\section{Finding differentially expressed genes}
+
+This section introduces two different approaches to find differentially expressed genes. 
+\begin{itemize}
+\item The first one is based on the \texttt{multtest} package and is
+  similar to the ``typical'' two-sample tests.  It consists of first
+  performing the t-test and then adjusting p-values so that we can
+  select genes as differentially expressed based on these p-values.
+\item The second one is based on the package \texttt{limma} and uses a
+  more general approach based on fitting a linear model for each gene.
+  This fit is used to calculate a test statistic, called ``B'' for
+  empirical Bayes, as well as adjusted p-values.  This approach is
+  less intuitive than the first one, but much more flexible, because
+  it allows to perform tests with more than two classes (e.g. three
+  tempratures) or more than one-effect in consideration (e.g. three
+  treatments and 2 temperatures).
+\end{itemize}
+
+The analysis will be based on the data that have been previously
+normalized and stored in the binary file \texttt{eset_rma} which
+contains an exprSet object with the RMA normalized expression values
+and the covariates in the \texttt{phenoData} field. It also contains a
+smaller exprSet whose values have been filtered by variability
+criteria, keeping only those genes whose overall (gene-wise) standard
+deviation exceeds the 90\% of all standard deviations.
+
+The first part of the analysis is based only on ``Aged'' individuals, so that after 
+loading from file the data is subsetted and only aged individuals are kept.
+
+<<loadAgedData>>=
+stopifnot(require(Biobase)) #library(Biobase)
+load(file=file.path(dataDir, "normalized.filtered.Rda"))
+my.eset <- eset_filtered[,pData(eset_filtered)$age=="Aged"]
+@
+
+\subsection{Class comparisons using standard $t$--tests and multiple testing adjustments }
+
+From now on we assume that data are contained in an expression set
+object called ``my.eset''.  We wish to compare genes whose expression
+changes when receiving LPS stimulation in aged mice.
+
+\subsubsection{Computation of test statistics and p-values}
+
+A na?f approach to this analysis could consist of computing t.test
+statistics using the function t.test in a loop.
+
+Instead we will use the function \texttt{rowttests} form the
+\Rpackage{genefilter} library, which computes test statistics for each
+row of data frame.  Type \texttt{? rowttests} to see which options
+there are available.
+
+
+<<teststat>>=
+stopifnot(require(genefilter))
+# we need a class vector made of 0 qand 1s
+teststat <-rowttests(my.eset, "treat")
+@
+
+This gives a list formed by \texttt{t-}statistics, \texttt{p-}values,
+fold changes and degrees of freedom (one per gene) which can be used
+to select which genes are called differentially expressed.
+
+<<showTeststat, echo=F>>=
+print(teststat[1:10,])
+@
+
+This computation is based on a series of assumptions, such as the
+normality of the data for each gene.  This assumption is very hard to
+verify given small sample sizes.  The distribution of the test
+statistics can be explored using a histogram.
+
+\begin{figure}[htbp]
+\begin{center}
+  
+<<hist2>>=
+hist(teststat$statistic)
+@
+\caption{Histogram of t-statistics.}
+\end{center}
+\end{figure}
+
+Also, \texttt{t-}values can be explored graphically using QQ-plots.
+QQ plots are informative about the aproximate normality (or
+``studentity'') of the values of the test statistic.  Also they also
+informally correct for the large number of comparisons and the points
+which deviate markedly from an otherwise linear relationship are
+likely to correspond to those genes whose expression levels differ
+between the control and treatment groups.
+
+\begin{figure}[htbp]
+  \begin{center}
+<<qqnorm1>>=
+qqnorm(teststat$statistic) 
+qqline(teststat$statistic)
+@
+\caption{QQ plot of tests statistics.}
+\end{center}
+\end{figure}
+
+A better approach may be to calculate permutation--based p--values,
+which do not make distributional assumptions.  This can be done using
+the \texttt{maxT} function included in the \texttt{multtest} package.
+Type \texttt{? mt.maxT} to learn more about this function.
+
+For this dataset this approximation is not reliable because the number
+of columns is too small and vert few permutations are possible.
+
+From the preceeding computations we have obtained a large number of
+genes with a large-t/small-p values.  How can we decide which of these
+correspond to \emph{real} differentially expressed genes?
+
+These are several problems, some of which will not be considered
+directly.
+\begin{itemize}
+\item How can we select the genes that we wish to call
+  ``differentially expressed''?
+\item How can we set a cut-off that warrants a similar control of type
+  I error than in traditional statistical analyses?
+\item Can we at least obtain decent estimates of the percentages of
+  false positives and false negatives?
+\end{itemize}
+
+\subsubsection{Selection [top most] differentially expressed genes}
+
+The distributional assumptions are difficult to verify on small
+samples We wish to know how many t-values are significative.  This is
+not an easy task because the distributional assumptions under which
+the students t-test will be valid (such as normality) are difficult to
+verify with so few data points group.
+
+We can sort the genes by their p-values and look at the top members of
+the list.  Note that this means that we ``believe'' that the
+underlying assumptions are true.
+
+<<sortStatistics>>=
+anotPackage="mouse4302.db"
+require(anotPackage, character.only = T)
+require(annotate)
+probenames <- rownames(exprs(my.eset))
+geneNames <-unlist(getSYMBOL(probenames, anotPackage))
+topDown<-order(teststat$p.value)
+ranked<-data.frame(gene=geneNames[topDown], t=teststat$statistic[topDown], 
+  foldChg =teststat$dm[topDown] , pvalue=teststat$p.value[topDown])
+print(top25<-ranked[1:10,])
+@
+
+Notice that some genes have high absolute t-value but the foldChg
+(difference in means) is small (see the Volcano Plot below) This means
+that in this case the high t-value is due to a very small standard
+deviation and these genes should be considered carefully.
+ 
+<<volcanoPlot, echo=F>>=
+x <-ranked$foldChg
+y <- -log(ranked$pvalue)
+plot(x, y, xlab="Fold Change", ylab ="-log(p-value", main="Volcano Plot")
+abline(v=-2);abline(v=2);
+text (x[1:25], y[1:25],ranked$gene[1:25],cex=0.7)
+@
+
+
+%\paragraph{Tiny standard deviations may be misleading}
+%
+%Notice that some genes have a large-t / small p, but the mean
+%difference is low.  This may be due to an ``?nflating'' effect that
+%arises if the values in each group are very similar, what makes the
+%satndard difference of the means very small.
+%
+%<<tinySdevs>>=
+%x1<-exprs(my.eset)["1419627_s_at",]
+%x2<-exprs(my.eset)["1457644_s_at",]
+%t1<-t.test(x1[1:3],x1[4:6])
+%print(c(t1$statistic, t1$p.value, t1$estimate))
+%t2<-t.test(x2[1:3],x2[4:6])
+%print(c(t2$statistic, t2$p.value, t2$estimate))
+%print(c(sd(x1[1:3]),sd(x1[4:6])))
+%print(c(sd(x2[1:3]),sd(x2[4:6])))
+%@
+
+\paragraph{Selection by an arbitrary cutoff}
+
+The top genes in the list seem to be clear candidates to being differentially expressed genes.
+We could set a threshold of 0.001 for selecting differentially expressed genes.
+
+<<selectNaif>>=
+selectedNaif <-ranked[ranked$pvalue<0.001,]
+nrow(selectedNaif)
+@
+
+However the fact that we are doing thousands of tests simultaneously
+can be misleading.  One possibility is to adjust p-values in such a
+way that the new ones give some type of \emph{control} of the global
+error rate.  Another, not excluding possibility, is to estimate the
+percentage of false positives between those genes called
+differentially expressed, i.e. the FDR or False Discovery Rate.
+
+\subsubsection{Multiple testing adjustments}
+
+Adjusting for multiple testing means computing adjusted p-values in
+such a way that we obtain control of some a global error rate such as
+the \emph{Femiliy Wise Error Rate} or the \emph{False Discovery Rate},
+that is the expected percentage of false positives between the genes
+which are called differentially expressed (i.e. the ``positives'').
+
+That is if we select the genes whose adjusted p-values ($p^*$) are
+below a given threshold, say $p^*<\alpha$, it means that instead of
+doing the tests with a type I error of $\alpha$\% we do them with an
+expected FDR (or FWER) equal or less than $\alpha$\%.
+
+There are many methods for adjusting p-values. The \Rpackage{multtest}
+gives a straightforward way to adjust them for different methods.
+
+<<adjustPvalues>>=
+stopifnot(require(multtest))
+#procs <- c("Bonferroni","Holm","Hochberg","SidakSS","SidakSD","BH", "BY")
+procs <- c("Bonferroni","BH", "BY")
+adjPvalues <- mt.rawp2adjp(ranked$pvalue, procs)
+names(adjPvalues)
+ranked.adjusted<-cbind(ranked[,c(1,4)], adjPvalues$adjp[,-1])
+ranked.adjusted[1:10,]
+@
+
+The number of genes selected if we set the same threshold is much
+lower
+
+<<selectedAdjusted>>=
+selectedAdjusted<-ranked.adjusted[ranked.adjusted$BY<0.01,]
+nrow(selectedAdjusted)
+@
+
+Notice that adjusting p--values ``per se'' does not correct the
+problems of having small p's due to small standard deviations.  To
+solve this problem a different statistical model for computing
+p-values is needed.
+
+\subsection{The linear model approach}
+
+A different, but sometimes equivalent way, to select differentially
+expressed genes is to take what is called a \emph{linear model
+  approach}.
+
+Essentially it consists of building a \emph{linear model} for each
+gene whose parameters may be the ``true'' log ratios.  This approach
+has the advantage that it can easily go further than simple two-sample
+tests, allowing to model and to analyze k-sample or factorial
+experiments.  All calculations can be done using the bioconductor
+package \texttt{limma}.  The excellent ``User's guide'' is the best
+way to learn how to use the package.
+
+
+In the next steps we describe how to do the previous analysis using
+the \Rpackage{limma} and how to easily extend it if we wish to account
+for more than one simple factor.
+
+
+\subsubsection{Linear model fitting}
+
+The first step in fitting a linear model is to define a \emph{design
+  matrix}.
+
+It can be can be obtained straightforward from the phenoData object or created manually.
+
+<<selectLimma, echo=F>>=
+stopifnot(require(limma))
+lev<-as.factor(pData(my.eset)$treat)
+design <-model.matrix(~0+lev)
+colnames(design)<-paste("Grp",as.character(unique(lev)),sep="")
+rownames(design) <-rownames(pData(my.eset))
+print(design)
+@
+
+The comparisons to be performed based on the design matrix are described by a contrast matrix.
+This step is unnecessary when one has two groups but it is shown for coherency with the general setup.
+
+<<setContrasts>>=
+cont.matrix <- makeContrasts (LPSvsMED=(GrpLPS-GrpMED), levels=design)
+cont.matrix
+@
+
+Once a design and contrast matrix is available we can proceed to fit a linear model for each gene.
+
+<<linearmodelfit,echo=F>>=
+fit<-lmFit(my.eset, design)
+fit.main<-contrasts.fit(fit, cont.matrix)
+fit.main<-eBayes(fit.main)
+@
+
+\subsubsection{Gene selection based on moderated-t end EB adjustment}
+
+The method implemented in \Rpackage{limma} extends traditional linear
+model analysis using empirical Bayes methods to combine information
+from the whole array and every individual gene in order to obtain
+improved error estimates which are very useful in microarray data
+analysis where sample sizes are often small what can lead to erratic
+error estimates and, in consequence, to untrustful p-values.
+
+The analysis yields standard tests statistics such as fold changes,
+(moderated)-$t$ or p--values which can be used to rank the genes from
+most to least differentially expressed.
+
+In order to deal with the multiple testing issues derived from the
+fact that many tests (one per gene) are performed simultaneously,
+p--values can be adjusted to obtain strong control over the false
+discovery rate using the Benjamini and Hochberg method
+(\cite{Benjamini&Hochberg95}).
+
+A table containing the most differentially expressed genes can be
+built using the \texttt{topTable} function.
+
+<<topTabs1>>=
+topTab<-topTable(fit.main, number=nrow(fit.main), adjust="fdr")
+geneNames <-getSYMBOL(rownames(topTab), anotPackage)
+topTab<-cbind(gene=geneNames, topTab)
+topTab.selected<-topTab[topTab$B>10,]
+print(topTab.selected[1:10,])
+write.table(topTab.selected$ID, file="ProbesList.txt")
+write.table(topTab.selected, file="topTab.selected.txt", sep="\t")
+@
+
+A volcano plot can be used to highlight differentially expressed
+genes. Extreme values (topmost and left or rightmost) correspond to
+the most differentially expressed genes.
+<<volcano2>>=
+coefnum = 1
+opt <- par(cex.lab = 0.7)
+symbols.main<-geneNames[unlist(fit.main$genes)]
+volcanoplot(fit.main, coef=coefnum, highlight=10, names=symbols.main)
+abline(v=c(-1,1))
+par(opt)
+@
+
+
+\subsubsection{Comparison between lists of selected genes}
+
+<<commonGenes>>=
+c1000<- length(intersect(topTab$ID, rownames(ranked)[1:1000]))
+c100 <- length(intersect(topTab$ID[1:100], rownames(ranked)[1:100]))
+c25 <- length(intersect(topTab$ID[1:25], rownames(ranked)[1:25]))
+@
+
+Now the obvious question is: how different are the two lists that we
+have obtained using these different methods?  
+
+If we compare the list of selected genes that was obtained using
+\texttt{rowttests} with the one obtained with limma we find
+\Sexpr{c25} genes in common in the top 25 genes, \Sexpr{c100} in
+common in the top 100 and \Sexpr{c1000} common genes in the top 1000.
+
+It is easy to see that whereas some genes appear in topmost positions
+in both lists some which were present in the first one obtained using
+standard t--test are not present in the second list anymore. These
+genes have very small variance which leads to suspect that they may be
+artifacts of the technique which are not selected when variance
+regularization is used.
+
+\subsection{Automating the analysis}
+
+As the number of contrast increases it is worth the pity to write a function that can perform several related steps together.
+
+<<loadAllData>>=
+stopifnot(require(Biobase)) #library(Biobase)
+load(file=file.path(dataDir, "normalized.filtered.Rda"))
+my.eset <- eset_filtered
+@
+
+A typical complete analysis would perform as follows
+
+<<analyzeAll1>>=
+stopifnot(require(limma))
+#designMatrix
+lev<-as.factor(paste(pData(my.eset)$treat, pData(my.eset)$age, sep="."))
+design <-model.matrix(~0+lev)
+colnames(design)<-as.character(unique(lev))
+rownames(design) <-rownames(pData(my.eset))
+print(design)
+#contrastsMatrix
+cont.matrix <- makeContrasts (LPSvsMED.Aged=LPS.Aged-MED.Aged,
+                              LPSvsMED.Young=LPS.Young-MED.Young,
+                              AgedvsYoung.MED = MED.Aged-MED.Young,
+                              levels=design)
+cont.matrix
+
+@
+
+
+\end{document}

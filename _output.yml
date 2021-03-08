@@ -1,0 +1,15 @@
+bookdown::gitbook:
+  css: style.css
+  config:
+    toc:
+      before: |
+        <li><a href="./">Analisi de datos de minimal microarrays</a></li>
+      after: |
+        <li><a href="https://github.com/rstudio/bookdown" target="blank">Publicado con bookdown</a></li>
+    download: ["pdf", "epub"]
+    toolbar:
+      position: static
+  lib_dir: assets
+  split_by: section
+bookdown::html_book:
+  css: style.css
