@@ -281,9 +281,9 @@ Así pues puede considerarse que el primer eje indica impacto biológico del cam
 
 Como veremos más adelante en esta sección, el paquete `limma` permite realizar volcano-plots de forma sencilla a partir de los resultados de un anàlisis, pero para hacer un volcano plot tan sólo se necesita una lista de p-valores y los efectos ("fold-change") asociados.
 
-La figura siguiente muestra un volcano-plot hecho a partir del objeto `ranked` generado en el ejemplo anterior. Para representar el volcano-plot se puede hacer una representación simple:
+La figura  @ref(fig:volcano0) muestra un "volcano-plot" para este ejemplo de los "celltypes" para la comparación  "LPS" frente a  "Medium". 
 
-```{r}
+```{r volcano0}
 FC <- teststat$statistic
 pVal<-teststat$p.value
 Y <- -log(pVal)
@@ -291,7 +291,7 @@ plot(Y~FC)
 ```
 
 También podemos adaptar alguna función "ad-hoc" como la siguiente, tomada de :[]()
-```{r}
+```{r, eval=FALSE}
 library(ggrepel)
 # plot adding up all layers we have seen so far
 volcanoP<- function (de,log2FoldChange,  pvalue, 
@@ -304,15 +304,12 @@ volcanoP<- function (de,log2FoldChange,  pvalue,
         geom_vline(xintercept=c(-0.6, 0.6), col="red") +
         geom_hline(yintercept=-log10(0.05), col="red")
 }
-diffexpressed <- ifelse(abs(teststat$statistic)>2, TRUE, FALSE)
+diffexpressed <- ifelse(abs(teststat$statistic)>10, TRUE, FALSE)
 label <- rep(NA, length(diffexpressed))
 label[diffexpressed] <- rownames(teststat)[diffexpressed]
 volcanoP (de=teststat, log2FoldChange=teststat$statistic,  pvalue=teststat$p.value,
           diffexpressed = diffexpressed, delabel = label)
 ```
-
-
-La figura  @ref(fig:volcano1) muestra un "volcano-plot" para este ejemplo de los "celltypes" para la comparación  "LPS" frente a  "Medium".
 
 
 ### Potencia y tamaño muestral
@@ -1157,7 +1154,8 @@ topTab_AGE  <- topTable (fit.main, number=nrow(fit.main) , coef="AGE", adjust="f
 
 Se puede visualizar los resultados  mediante un <tt>volcano plot</tt> que, en este caso, representa en abscisas los cambios de expresión en escala logarítmica
 y en ordenadas el estadístico $B$ en vez de el "menos logaritmo" del p-valor.
-```{r volcano1,fig=T,echo=F, fig=T}
+
+```{r volcano1}
 coefnum = 1
 opt <- par(cex.lab = 0.7)
 volcanoplot(fit.main, coef=coefnum, highlight=10, names=fit.main$ID,

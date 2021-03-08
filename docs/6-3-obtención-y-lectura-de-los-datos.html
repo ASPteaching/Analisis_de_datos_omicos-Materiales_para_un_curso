@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="6.3 Obtención y lectura de los datos | Analisis de datos omicos" />
+<meta property="og:type" content="book" />
+
+
+
+
+
+<meta name="author" content="Alex Sánchez-Pla^{1,2} y Ricardo Gonzalo Sanz^2" />
+<meta name="author" content="^1 Departament de Genètica, Microbiologia i Estadística. Universitat de Barcelona (UB)." />
+<meta name="author" content="^2 Unitat d’Estadística i Bioinformàtica. Vall d’Hebron Institut de Recerca (VHIR)." />
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" type="text/javascript"></script>
+
+<meta name="description" content="6.3 Obtención y lectura de los datos | Analisis de datos omicos">
+
+<title>6.3 Obtención y lectura de los datos | Analisis de datos omicos</title>
+
+<script src="libs/header-attrs-2.7/header-attrs.js"></script>
+<script src="libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="libs/navigation-1.1/tabsets.js"></script>
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container-fluid main-container">
+
+
+<div class="row">
+<div class="col-sm-12">
+<div id="TOC">
+<ul>
+<li><a href="index.html#presentación"><span class="toc-section-number">1</span> Presentación</a></li>
+<li><a href="2-MDAProcess.html#MDAProcess"><span class="toc-section-number">2</span> El proceso de análisis de microarrays</a>
+<ul>
+<li><a href="2-1-tipos-de-estudios.html#tipos-de-estudios"><span class="toc-section-number">2.1</span> Tipos de estudios</a>
+<ul>
+<li><a href="2-1-tipos-de-estudios.html#comparación-de-grupos-o-class-comparison"><span class="toc-section-number">2.1.1</span> Comparación de grupos o “Class comparison”</a></li>
+<li><a href="2-1-tipos-de-estudios.html#predicción-de-clase-o-class-prediction"><span class="toc-section-number">2.1.2</span> Predicción de clase o “Class prediction”</a></li>
+<li><a href="2-1-tipos-de-estudios.html#descubrimiento-de-clases-o-class-discovery"><span class="toc-section-number">2.1.3</span> Descubrimiento de clases o “Class discovery”</a></li>
+<li><a href="2-1-tipos-de-estudios.html#otros-tipos-de-estudios"><span class="toc-section-number">2.1.4</span> Otros tipos de estudios</a></li>
+</ul></li>
+<li><a href="2-2-c4examples.html#c4examples"><span class="toc-section-number">2.2</span> Algunos ejemplos concretos</a>
+<ul>
+<li><a href="2-2-c4examples.html#celltypes"><span class="toc-section-number">2.2.1</span> Estudio de procesos regulados por citoquinas</a></li>
+<li><a href="2-2-c4examples.html#golub"><span class="toc-section-number">2.2.2</span> Clasificación molecular de la leucemia</a></li>
+<li><a href="2-2-c4examples.html#efecto-del-estrogeno-y-el-tiempo-de-administración-estrogen"><span class="toc-section-number">2.2.3</span> Efecto del estrogeno y el tiempo de administración {#estrogen]</a></li>
+<li><a href="2-2-c4examples.html#CCL4"><span class="toc-section-number">2.2.4</span> Efecto del CCL4 en la expresión génica</a></li>
+<li><a href="2-2-c4examples.html#yeast"><span class="toc-section-number">2.2.5</span> Análisis de patrones en el ciclo celular</a></li>
+<li><a href="2-2-c4examples.html#recapitulación"><span class="toc-section-number">2.2.6</span> Recapitulación</a></li>
+</ul></li>
+<li><a href="2-3-el-proceso-de-análisis-de-microarrays.html#el-proceso-de-análisis-de-microarrays"><span class="toc-section-number">2.3</span> El proceso de análisis de microarrays</a></li>
+</ul></li>
+<li><a href="3-MDAExpDesign.html#MDAExpDesign"><span class="toc-section-number">3</span> Diseño de experimentos de microarrays</a>
+<ul>
+<li><a href="3-1-fuentes-de-variabilidad.html#fuentes-de-variabilidad"><span class="toc-section-number">3.1</span> Fuentes de variabilidad</a></li>
+<li><a href="3-2-tipos-de-variabilidad.html#tipos-de-variabilidad"><span class="toc-section-number">3.2</span> Tipos de variabilidad</a></li>
+<li><a href="3-3-conceptos-básicos-de-diseño-de-experimentos.html#conceptos-básicos-de-diseño-de-experimentos"><span class="toc-section-number">3.3</span> Conceptos básicos de diseño de Experimentos</a></li>
+<li><a href="3-4-principios-de-diseño-de-experimentos.html#principios-de-diseño-de-experimentos"><span class="toc-section-number">3.4</span> Principios de diseño de experimentos</a>
+<ul>
+<li><a href="3-4-principios-de-diseño-de-experimentos.html#replicación"><span class="toc-section-number">3.4.1</span> Replicación</a></li>
+<li><a href="3-4-principios-de-diseño-de-experimentos.html#aleatorización"><span class="toc-section-number">3.4.2</span> Aleatorización</a></li>
+<li><a href="3-4-principios-de-diseño-de-experimentos.html#bloqueo-o-control-local"><span class="toc-section-number">3.4.3</span> Bloqueo o control local</a></li>
+</ul></li>
+<li><a href="3-5-diseños-experimentales-para-microarrays-de-dos-colores.html#diseños-experimentales-para-microarrays-de-dos-colores"><span class="toc-section-number">3.5</span> Diseños experimentales para microarrays de dos colores</a></li>
+</ul></li>
+<li><a href="4-exploración-de-los-datos-control-de-calidad-y-preprocesado.html#exploración-de-los-datos-control-de-calidad-y-preprocesado"><span class="toc-section-number">4</span> Exploración de los datos, control de calidad y preprocesado</a>
+<ul>
+<li><a href="4-1-introducción.html#introducción"><span class="toc-section-number">4.1</span> Introducción</a>
+<ul>
+<li><a href="4-1-introducción.html#nivel-de-análisis-y-tipo-de-microarray"><span class="toc-section-number">4.1.1</span> Nivel de análisis y tipo de microarray</a></li>
+<li><a href="4-1-introducción.html#datos-de-partida"><span class="toc-section-number">4.1.2</span> Datos de partida</a></li>
+</ul></li>
+<li><a href="4-2-exploración-y-control-de-calidad.html#exploración-y-control-de-calidad"><span class="toc-section-number">4.2</span> Exploración y control de calidad</a>
+<ul>
+<li><a href="4-2-exploración-y-control-de-calidad.html#control-de-calidad-con-gráficos-estadísticos-generales"><span class="toc-section-number">4.2.1</span> Control de calidad con gráficos estadísticos generales</a></li>
+<li><a href="4-2-exploración-y-control-de-calidad.html#gráficos-de-diagnóstico-para-microarrays-de-dos-colores"><span class="toc-section-number">4.2.2</span> Gráficos de diagnóstico para microarrays de dos colores</a></li>
+<li><a href="4-2-exploración-y-control-de-calidad.html#gráficos-de-diagnóstico-para-microarrays-de-un-color"><span class="toc-section-number">4.2.3</span> Gráficos de diagnóstico para microarrays de un color</a></li>
+</ul></li>
+<li><a href="4-3-normalización-de-arrays-de-dos-colores.html#normalización-de-arrays-de-dos-colores"><span class="toc-section-number">4.3</span> Normalización de arrays de dos colores</a>
+<ul>
+<li><a href="4-3-normalización-de-arrays-de-dos-colores.html#normalización-global"><span class="toc-section-number">4.3.1</span> Normalización global</a></li>
+<li><a href="4-3-normalización-de-arrays-de-dos-colores.html#normalización-dependiente-de-la-intensidad"><span class="toc-section-number">4.3.2</span> Normalización dependiente de la intensidad</a></li>
+</ul></li>
+<li><a href="4-4-resumen-y-normalización-de-microarrays-de-affymetrix.html#resumen-y-normalización-de-microarrays-de-affymetrix"><span class="toc-section-number">4.4</span> Resumen y normalización de microarrays de Affymetrix</a>
+<ul>
+<li><a href="4-4-resumen-y-normalización-de-microarrays-de-affymetrix.html#métodos-originales-de-affymetrix"><span class="toc-section-number">4.4.1</span> Métodos originales de Affymetrix</a></li>
+<li><a href="4-4-resumen-y-normalización-de-microarrays-de-affymetrix.html#el-método-rma-robust-multi-array-average"><span class="toc-section-number">4.4.2</span> El método RMA (Robust Multi-Array Average)</a></li>
+</ul></li>
+<li><a href="4-5-filtraje-no-específico.html#filtraje-no-específico"><span class="toc-section-number">4.5</span> Filtraje no específico</a></li>
+</ul></li>
+<li><a href="5-selección-de-genes-diferencialmente-expresados-chapdeg.html#selección-de-genes-diferencialmente-expresados-chapdeg"><span class="toc-section-number">5</span> Selección de genes diferencialmente expresados {# chapDEG}</a>
+<ul>
+<li><a href="5-1-introducción-1.html#introducción-1"><span class="toc-section-number">5.1</span> Introducción</a></li>
+<li><a href="5-2-selección-de-genes-diferencialmente-expresados.html#selección-de-genes-diferencialmente-expresados"><span class="toc-section-number">5.2</span> Selección de genes diferencialmente expresados</a>
+<ul>
+<li><a href="5-2-selección-de-genes-diferencialmente-expresados.html#medidas-naturales-para-comparar-dos-muestras"><span class="toc-section-number">5.2.1</span> Medidas <em>naturales</em> para comparar dos muestras</a></li>
+<li><a href="5-2-selección-de-genes-diferencialmente-expresados.html#un-primer-ejemplo"><span class="toc-section-number">5.2.2</span> Un primer ejemplo</a></li>
+<li><a href="5-2-selección-de-genes-diferencialmente-expresados.html#selección-de-genes-usando-tests-estadísticos"><span class="toc-section-number">5.2.3</span> Selección de genes usando tests estadísticos</a></li>
+</ul></li>
+<li><a href="5-3-significación-estadística-y-expresión-diferencial.html#significación-estadística-y-expresión-diferencial"><span class="toc-section-number">5.3</span> Significación estadística y expresión diferencial</a>
+<ul>
+<li><a href="5-3-significación-estadística-y-expresión-diferencial.html#volcano-plots"><span class="toc-section-number">5.3.1</span> “Volcano plots”</a></li>
+<li><a href="5-3-significación-estadística-y-expresión-diferencial.html#potencia-y-tamaño-muestral"><span class="toc-section-number">5.3.2</span> Potencia y tamaño muestral</a></li>
+</ul></li>
+<li><a href="5-4-el-problema-de-la-múltiplicidad-de-tests-multiple-testing.html#el-problema-de-la-múltiplicidad-de-tests-multiple-testing"><span class="toc-section-number">5.4</span> El problema de la múltiplicidad de tests (“multiple testing”)</a></li>
+<li><a href="5-5-modelos-lineales-para-la-selección-de-genes-limma.html#modelos-lineales-para-la-selección-de-genes-limma"><span class="toc-section-number">5.5</span> Modelos lineales para la selección de genes: <tt>limma </tt></a>
+<ul>
+<li><a href="5-5-modelos-lineales-para-la-selección-de-genes-limma.html#el-modelo-lineal-general"><span class="toc-section-number">5.5.1</span> El modelo lineal general</a></li>
+<li><a href="5-5-modelos-lineales-para-la-selección-de-genes-limma.html#ejemplos-de-situaciones-modelizables-linealmente"><span class="toc-section-number">5.5.2</span> Ejemplos de situaciones <em>modelizables linealmente</em></a></li>
+<li><a href="5-5-modelos-lineales-para-la-selección-de-genes-limma.html#ejemplo-2-comparación-de-tres-grupos"><span class="toc-section-number">5.5.3</span> Ejemplo 2: Comparación de tres grupos</a></li>
+<li><a href="5-5-modelos-lineales-para-la-selección-de-genes-limma.html#estimación-e-inferencia-con-el-modelo-lineal"><span class="toc-section-number">5.5.4</span> Estimación e inferencia con el modelo lineal</a></li>
+<li><a href="5-5-modelos-lineales-para-la-selección-de-genes-limma.html#modelos-lineales-para-microarrays"><span class="toc-section-number">5.5.5</span> Modelos lineales para Microarrays</a></li>
+<li><a href="5-5-modelos-lineales-para-la-selección-de-genes-limma.html#implementación-y-ejemplos"><span class="toc-section-number">5.5.6</span> Implementación y ejemplos</a></li>
+</ul></li>
+</ul></li>
+<li><a href="6-caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html#caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos."><span class="toc-section-number">6</span> Caso “Estrógeno”: Selección de genes diferencialmente expresados asociados con la resistencia a estrógenos.</a>
+<ul>
+<li><a href="6-1-introducción-2.html#introducción-2"><span class="toc-section-number">6.1</span> Introducción</a></li>
+<li><a href="6-2-el-estudio-estrógeno.html#el-estudio-estrógeno"><span class="toc-section-number">6.2</span> El estudio “Estrógeno”</a>
+<ul>
+<li><a href="6-2-el-estudio-estrógeno.html#directorios-y-opciones-de-trabajo"><span class="toc-section-number">6.2.1</span> Directorios y opciones de trabajo</a></li>
+</ul></li>
+<li><a href="6-3-obtención-y-lectura-de-los-datos.html#obtención-y-lectura-de-los-datos"><span class="toc-section-number">6.3</span> Obtención y lectura de los datos</a>
+<ul>
+<li><a href="6-3-obtención-y-lectura-de-los-datos.html#los-datos"><span class="toc-section-number">6.3.1</span> Los datos</a></li>
+<li><a href="6-3-obtención-y-lectura-de-los-datos.html#lectura-de-los-datos"><span class="toc-section-number">6.3.2</span> Lectura de los datos</a></li>
+</ul></li>
+<li><a href="6-4-exploración-control-de-calidad-y-normalización.html#exploración-control-de-calidad-y-normalización"><span class="toc-section-number">6.4</span> Exploración, Control de Calidad y Normalización</a>
+<ul>
+<li><a href="6-4-exploración-control-de-calidad-y-normalización.html#exploración-y-visualización"><span class="toc-section-number">6.4.1</span> Exploración y visualización</a></li>
+<li><a href="6-4-exploración-control-de-calidad-y-normalización.html#control-de-calidad"><span class="toc-section-number">6.4.2</span> Control de calidad</a></li>
+<li><a href="6-4-exploración-control-de-calidad-y-normalización.html#normalizacion-y-filtraje"><span class="toc-section-number">6.4.3</span> Normalizacion y Filtraje</a></li>
+</ul></li>
+<li><a href="6-5-selección-de-genes-diferencialmente-expresados-1.html#selección-de-genes-diferencialmente-expresados-1"><span class="toc-section-number">6.5</span> Selección de genes diferencialmente expresados</a>
+<ul>
+<li><a href="6-5-selección-de-genes-diferencialmente-expresados-1.html#análisis-basado-en-modelos-lineales"><span class="toc-section-number">6.5.1</span> Análisis basado en modelos lineales</a></li>
+<li><a href="6-5-selección-de-genes-diferencialmente-expresados-1.html#comparaciones-múltiples"><span class="toc-section-number">6.5.2</span> Comparaciones múltiples</a></li>
+</ul></li>
+</ul></li>
+<li><a href="7-referencias.html#referencias"><span class="toc-section-number">7</span> Referencias</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12">
+<div id="obtención-y-lectura-de-los-datos" class="section level2" number="6.3">
+<h2><span class="header-section-number">6.3</span> Obtención y lectura de los datos</h2>
+<p>Para un análisis de datos de microarrays de Affymetrix se necesitan los archivos
+de imágenes escaneadas (“.CEL”) y un archivo en el que se asigne una condición
+experimental a cada archivo.</p>
+<div id="los-datos" class="section level3" number="6.3.1">
+<h3><span class="header-section-number">6.3.1</span> Los datos</h3>
+<p>Una ventaja de este ejemplo es que los datos se encuentran disponibles tras instalar el paquete <tt>estrogen</tt> por lo que se pueden copiar un directorio de trabajo o simplemente trabajar con ellos en el directorio original.
+El directorio en que se encuentran los archivos .CEL es:</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="6-3-obtención-y-lectura-de-los-datos.html#cb46-1"></a><span class="kw">library</span>(estrogen)</span>
+<span id="cb46-2"><a href="6-3-obtención-y-lectura-de-los-datos.html#cb46-2"></a>estrogenDir &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;estrogen&quot;</span>)</span>
+<span id="cb46-3"><a href="6-3-obtención-y-lectura-de-los-datos.html#cb46-3"></a><span class="kw">print</span>(estrogenDir)</span></code></pre></div>
+<pre><code>## [1] &quot;/home/alex/R/x86_64-pc-linux-gnu-library/4.0/estrogen/extdata&quot;</code></pre>
+<p>Para realizar el análisis es preciso copiar todos los archivos del directorio “extdata”
+a nuestro directorio de trabajo “data”.</p>
+<p><strong>ATENCION: Esta operación que depende de la instalación y del sistema operativo</strong>. Por ejemplo para copiarlos desde R en linux se escribirá:</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="6-3-obtención-y-lectura-de-los-datos.html#cb48-1"></a><span class="kw">system</span>(<span class="kw">paste</span> (<span class="st">&quot;cp &quot;</span>, estrogenDir,<span class="st">&quot;/* ./data&quot;</span>, <span class="dt">sep=</span><span class="st">&quot;&quot;</span>))</span></code></pre></div>
+<p>Los archivos copiados son</p>
+<ul>
+<li>Los ocho archivos .CEL para el análisis</li>
+<li>Un archivo defectuoso para que se vea como debe salir un “array malo” en el control de calidad.</li>
+<li>Un archivo de covariables o “targets” que se usará al leer los archivos .CEL incorporar la información de las covariables en el objeto que se creará.</li>
+</ul>
+</div>
+<div id="lectura-de-los-datos" class="section level3" number="6.3.2">
+<h3><span class="header-section-number">6.3.2</span> Lectura de los datos</h3>
+<p>El proceso de leer los datos puede parecer un poco extraño a primera vista
+pero la idea es simple:</p>
+En primer lugar creamos algunas estructuras de datos que
+contienen la información sobre las variables y - opcionalmente - sobre
+las anotaciones y el experimento y
+<p>A continuación nos basamos en estas estructuras para leer los datos y crear
+los objetos principales que se utilizarán para el análisis.</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="6-3-obtención-y-lectura-de-los-datos.html#cb49-1"></a><span class="kw">library</span>(Biobase)</span>
+<span id="cb49-2"><a href="6-3-obtención-y-lectura-de-los-datos.html#cb49-2"></a><span class="kw">library</span>(affy)</span>
+<span id="cb49-3"><a href="6-3-obtención-y-lectura-de-los-datos.html#cb49-3"></a>sampleInfo &lt;-<span class="st"> </span><span class="kw">read.AnnotatedDataFrame</span>(<span class="kw">file.path</span>(estrogenDir,<span class="st">&quot;targLimma.txt&quot;</span>),</span>
+<span id="cb49-4"><a href="6-3-obtención-y-lectura-de-los-datos.html#cb49-4"></a>    <span class="dt">header =</span> <span class="ot">TRUE</span>, <span class="dt">row.names =</span> <span class="dv">1</span>, <span class="dt">sep=</span><span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>)</span>
+<span id="cb49-5"><a href="6-3-obtención-y-lectura-de-los-datos.html#cb49-5"></a>fileNames &lt;-<span class="st"> </span><span class="kw">pData</span>(sampleInfo)<span class="op">$</span>FileName</span>
+<span id="cb49-6"><a href="6-3-obtención-y-lectura-de-los-datos.html#cb49-6"></a>rawData &lt;-<span class="st"> </span><span class="kw">read.affybatch</span>(<span class="dt">filenames=</span><span class="kw">file.path</span>(estrogenDir,fileNames),</span>
+<span id="cb49-7"><a href="6-3-obtención-y-lectura-de-los-datos.html#cb49-7"></a>                          <span class="dt">phenoData=</span>sampleInfo)</span></code></pre></div>
+<p>En este ejemplo se incluye un archivo defectuoso con fines didácticos, llamado “badcel”.
+Para ilustrar las diferencias entre archivos correctos e incorrectos se puede leer en otro objeto.</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="6-3-obtención-y-lectura-de-los-datos.html#cb50-1"></a><span class="kw">library</span>(affy)</span>
+<span id="cb50-2"><a href="6-3-obtención-y-lectura-de-los-datos.html#cb50-2"></a>sampleInfoWithBad &lt;-<span class="st"> </span><span class="kw">read.AnnotatedDataFrame</span>(<span class="kw">file.path</span>(dataDir,<span class="st">&quot;phenoDataWithBad.txt&quot;</span>),</span>
+<span id="cb50-3"><a href="6-3-obtención-y-lectura-de-los-datos.html#cb50-3"></a>    <span class="dt">header =</span> <span class="ot">TRUE</span>, <span class="dt">row.names =</span> <span class="ot">NULL</span>, <span class="dt">sep=</span><span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>)</span>
+<span id="cb50-4"><a href="6-3-obtención-y-lectura-de-los-datos.html#cb50-4"></a>fileNames &lt;-<span class="st"> </span><span class="kw">pData</span>(sampleInfoWithBad)<span class="op">$</span>FileName</span>
+<span id="cb50-5"><a href="6-3-obtención-y-lectura-de-los-datos.html#cb50-5"></a>rawData.wrong &lt;-<span class="st"> </span><span class="kw">read.affybatch</span>(<span class="dt">filenames=</span><span class="kw">file.path</span>(dataDir,fileNames),</span>
+<span id="cb50-6"><a href="6-3-obtención-y-lectura-de-los-datos.html#cb50-6"></a>                          <span class="dt">phenoData=</span>sampleInfoWithBad)</span></code></pre></div>
+</div>
+</div>
+<p style="text-align: center;">
+<a href="6-2-el-estudio-estrógeno.html"><button class="btn btn-default">Previous</button></a>
+<a href="6-4-exploración-control-de-calidad-y-normalización.html"><button class="btn btn-default">Next</button></a>
+</p>
+</div>
+</div>
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+$(document).ready(function () {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+});
+
+</script>
+
+</body>
+</html>
