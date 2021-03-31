@@ -1,4 +1,4 @@
-## ----getCellTypesData, eval=FALSE-----------------------------------------------------------------------------------------
+## ----getCellTypesData, eval=FALSE-----------------------------------
 ## library(affy)
 ## library(genefilter)
 ## affyPath<- "datos/celltypes/celfiles"
@@ -11,7 +11,7 @@
 ## save(eset_rma, eset_rma_filtered, file="datos/celltypes/celltypes-normalized.rma.Rda")
 
 
-## ----c7codec01, eval=T----------------------------------------------------------------------------------------------------
+## ----c7codec01, eval=T----------------------------------------------
 stopifnot(require(Biobase))
 load (file="./datos/celltypes/celltypes-normalized.rma.Rda")
 my.eset <- eset_rma_filtered
@@ -21,23 +21,23 @@ teststat <-rowttests(my.eset, "treat")
 print(teststat[1:5,])
 
 
-## ----sortBypvals, eval=T--------------------------------------------------------------------------------------------------
+## ----sortBypvals, eval=T--------------------------------------------
 ranked <-teststat[order(teststat$p.value),]
 print(ranked[1:5,])
 
 
-## ----selectedGenes--------------------------------------------------------------------------------------------------------
+## ----selectedGenes--------------------------------------------------
 selectedTeststat <- ranked[ranked$p.value < 0.01,]
 
 
-## ----volcano0-------------------------------------------------------------------------------------------------------------
+## ----volcano0-------------------------------------------------------
 FC <- teststat$statistic
 pVal<-teststat$p.value
 Y <- -log(pVal)
 plot(Y~FC)
 
 
-## ---- eval=FALSE----------------------------------------------------------------------------------------------------------
+## ---- eval=FALSE----------------------------------------------------
 ## library(ggrepel)
 ## # plot adding up all layers we have seen so far
 ## volcanoP<- function (de,log2FoldChange,  pvalue,
@@ -57,7 +57,7 @@ plot(Y~FC)
 ##           diffexpressed = diffexpressed, delabel = label)
 
 
-## ----adjustPvals----------------------------------------------------------------------------------------------------------
+## ----adjustPvals----------------------------------------------------
 stopifnot(require(multtest))
 procs <- c("Bonferroni","BH", "BY")
 adjPvalues <- mt.rawp2adjp(teststat$p.value, procs)
@@ -66,12 +66,12 @@ ranked.adjusted<-cbind(ranked, adjPvalues$adjp)
 head(ranked.adjusted)
 
 
-## ----selectAdjusted-------------------------------------------------------------------------------------------------------
+## ----selectAdjusted-------------------------------------------------
 selectedAdjusted<-ranked.adjusted[ranked.adjusted$BY<0.001,]
 nrow(selectedAdjusted)
 
 
-## ---- echo=FALSE----------------------------------------------------------------------------------------------------------
+## ---- echo=FALSE----------------------------------------------------
 stopifnot(require(Biobase))
 load (file="./datos/celltypes/celltypes-normalized.rma.Rda")
 my.eset <- eset_rma_filtered
@@ -84,7 +84,7 @@ rownames(design) <-rownames(targets)
 print(design)
 
 
-## ----setContrasts---------------------------------------------------------------------------------------------------------
+## ----setContrasts---------------------------------------------------
 require(limma)
 cont.matrix <- makeContrasts (
       LPS.in.AGED=(Aged.LPS-Aged.MED),
@@ -94,7 +94,7 @@ cont.matrix <- makeContrasts (
 cont.matrix
 
 
-## ----linearmodelfit,echo=F------------------------------------------------------------------------------------------------
+## ----linearmodelfit,echo=F------------------------------------------
 require(limma)
 fit<-lmFit(my.eset, design)
 fit.main<-contrasts.fit(fit, cont.matrix)
@@ -102,13 +102,13 @@ fit.main<-eBayes(fit.main)
 save(fit.main, file="./datos/celltypes/celltypes-fit.main.Rda")
 
 
-## ----print=FALSE, echo=TRUE-----------------------------------------------------------------------------------------------
+## ----print=FALSE, echo=TRUE-----------------------------------------
 topTab_LPS.in.AGED <- topTable (fit.main, number=nrow(fit.main), coef="LPS.in.AGED", adjust="fdr")
 topTab_LPS.in.YOUNG <- topTable (fit.main, number=nrow(fit.main), coef="LPS.in.YOUNG", adjust="fdr")
 topTab_AGE  <- topTable (fit.main, number=nrow(fit.main) , coef="AGE", adjust="fdr")
 
 
-## ----volcano1-------------------------------------------------------------------------------------------------------------
+## ----volcano1-------------------------------------------------------
 coefnum = 1
 opt <- par(cex.lab = 0.7)
 volcanoplot(fit.main, coef=coefnum, highlight=10, names=fit.main$ID,

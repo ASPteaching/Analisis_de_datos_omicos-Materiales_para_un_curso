@@ -1,0 +1,352 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+# Después de la selección: Análisis de listas de genes
+<a name="chapPostProcess"></a>
+
+
+## Introducción
+
+El resultado de un análisis de microarrays como los descritos hasta el momento suele ser una "lista de genes", es decir una archivo o una tabla con los identificadores de los genes considerados diferencialmente expresados en una o mÃ¡s comparaciones.
+
+La pregunta obvia que los investigadores se plantean al disponer de estas listas es _¿cuál es su significado biológico?_.
+
+Para el bioinfomatico eta pregunta se replantea de la siguiente manera: ¿Que se puede hacer para convertir -de forma más o menos automática-- la lista obtenida en algún tipo de información biológicamente relevante. Esta cuestión ha llevado al desarrollo de métodos y herramientas que de forma general se agrupan bajo el título de métodos para el _análisis de listas de genes_ o métodos de _análisis de la significación biológica_.
+
+Siendo este un campo muy extenso no lo vamos a desarrollar en profundidad sinó que nos limitaremos  a considerar brevemente algunas aproximaciones sencillas que pueden contribuir a una mejor interpretación de los resultados de un experimento de microarrays.
+
+Los aspectos que trataremos serán:
+
+* Análisis comparativo de listas de genes.
+* Anotación de los resultados.
+* Visualización de la matriz de expresión para los genes seleccionados en una o más comparaciones.
+* Análisis básico de la significación biológica: _Gene Enrichment Analysis_
+
+
+## Análisis comparativo de listas de genes
+
+Muchos estudios analizan el comportamiento de los genes bajo varios tratamientos o condiciones experimentales.
+
+En estos casos puede ser interesante ver como cambia un gen bajo distintos tratamientos o bien ver qué genes son afectados de forma parecida o distinta bajo los mismos.
+La forma habitual de hacer esta comparación es mediante algún programa que permita comparar los elementos de dos o más listas. En Bioconductor, por ejemplo el paquete <tt>limma</tt> tiene algunas funciones que permiten seleccionar los genes cambiados simultaneamente en dos o más condiciones.
+
+
+### Ejemplo: comparación de listas en el caso <tt>celltypes</tt>
+
+Supondremos que tras las comparaciones del capítulo anterior disponemos de los valores de expresión y las listas de genes obtenidas de las tres comparaciones del caso <tt>cellypes</tt>. Ambos están almacenados en archivos binarios que podemos recuperar con la instrucción <tt>load</tt>.
+
+```{r loadValues}
+require(Biobase)
+require(limma)
+load("datos/celltypes/celltypes-normalized.rma.Rda")
+load("datos/celltypes/celltypes-fit.main.Rda")
+topTab_LPS.in.AGED <- topTable (fit.main, number=nrow(fit.main), coef="LPS.in.AGED", adjust="fdr",lfc=2)
+topTab_LPS.in.YOUNG <- topTable (fit.main, number=nrow(fit.main), coef="LPS.in.YOUNG", adjust="fdr",lfc=2)
+topTab_AGE  <- topTable (fit.main, number=nrow(fit.main) , coef="AGE", adjust="fdr", lfc=2)
+```
+
+La función <tt>decidetests</tt> permite realizar ambas cosas.
+En este ejemplo no se ajustaran los p--valores entre comparaciones. Tan solo se seleccionaran los genes que cambian en una o más condiciones.
+
+EL resultado del análisis es una tabla <tt>res</tt> que para cada gen
+y cada comparación contiene un 1 (si el gen esta sobre-expresado o
+"up" en esta condicion), un 0 (si no hay cambio significativo) o un
+-1 (si esta "down"-regulado).
+
+```{r decideTests01, echo=F}
+require(limma)
+res<-decideTests(fit.main, method="separate", adjust.method="fdr", p.value=0.0001, lfc=1)
+```
+Para resumir dicho análisis podemos contar qué filas tienen como mínimo una celda distinta de cero:
+
+```{r resumeDecideTests1}
+sum.res.rows<-apply(abs(res),1,sum)
+res.selected<-res[sum.res.rows!=0,]
+print(summary(res))
+```
+
+En vista de estos valores podemos aplicar otros criterios de selección, por ejemplo genes con un p-valor ajustado inferior a 0.0001 y <tt>log Fold change</tt> mayor o igual a 2._ Este criterio combina a la vez la significación estadística y la significación biológica por lo que, en un estudio real sería probablemente el escogido_.
+
+```{r decideTests02, echo=F, eval=TRUE}
+res<-decideTests(fit.main, method="separate", adjust.method="fdr", p.value=0.0001, lfc=2)
+sum.res.rows<-apply(abs(res),1,sum)
+res.selected<-res[sum.res.rows!=0,]
+print(summary(res))
+```
+
+Un diagrama de Venn permite visualizar la tabla anterior sin diferenciar entre genes "up" o "down" regulados.
+
+```{r venn01, fig.cap="Número de genes seleccionado en cada comparación"}
+vennDiagram (res.selected[,1:3], main="Genes in common #1", cex=0.9)
+```
+
+
+## Anotación de los resultados
+
+La identificación de los genes seleccionados puede resultar más
+sencilla para el especialista en un campo si se utilizan nombres
+estándar como el simbolo del gen o "gene symbol".  Ahora bien hemos de recordar que los microarrays suele ser un producto comercial en los que la empresa que los crea decide que sondas de cada gen o exón coloca en cada posición del array. Esto significa que para poder indicar el nombre de cada gen seleccionado es preciso disponer de algún tipo de _tabla de anotaciones_ que relacione cada sonda con los genes a los que apunta.
+Esta tabla debería ser proporcionada por las companñias que producen los arrays pero es algo que queda a su criterio y, en el mejor de los casos, cada empresa puede seguir unos criterios distintos.
+
+Afortunadamente si se trabaja con Bioconductor existe una solución homogenea a este problema. Se trata de los _paquetes de anotaciones_ creados y mantenidos por el equipo de Bioconductor a partir de la información publicada por cada compañia pero con una forma común de acceso. Es decir aunque las distintas empresas utilicen fotmatos distintos desde el punto de vista del usuario de Bioconductor esto no importará: si existe el paquete se utiliza como todos los demás.
+
+De hecho Bioconductor incorpora varios tipos de paquetes de anotaciones:
+
+
+* **Paquetes de anotaciones de microarrays**: Asocian a vada sonda la información disponible para ella en distintas bases de datos. Consisten en una serie de tablas SQL (de hecho cada paquete es una base de datos SQL) que asocian las sondas de cada gen con sus correspondencias en distintas bases de datos.
+* **Paquetes de anotaciones de organismos**: Contienen asociaciones similares a las anteriores pero las claves principales de cada tabla no son las sondas de un microarray determinado sino los genes de un organismo dado. Es decir en estos paquetes cada tabla asocia el identificador _entrez_ del gen con sus correspondientes identificadores en otras bases de datos.
+* **Paquetes de anotaciones de bases de datos** Estos paquetes difieren de los anteriores porque lo que hacen es almacenar en el mismo formato que los anteriores --bases de datos SQL consultables en R-- una copia de ciertas bases de datos como la _Gene Ontology (GO)_ o la _Kyoto Encyclopedia of Genes and Genomes (KEGG)_.
+
+Para saber que anotaciones estan disponibles debe cargarse el paquete y llamar la función del mismo nombre. Por ejempl para los microarrays del caso <tt>celltypes</tt>:
+
+Para saber que anotaciones estan disponibles debe cargarse el paquete y llamar la función del mismo nombre sin el sufijo ".db".
+
+```{r anota01, print=FALSE }
+library(mouse4302.db)
+anotData <- capture.output(mouse4302())
+print(anotData)
+cat ("... output continues until ", length(anotData), " lines.\n")
+```
+
+Si en vez del paquetes del microarray usáramos el paquete de organismo, en este caso del ratón.
+
+```{r anota02, print=FALSE}
+if (!(require(org.Mm.eg.db))){
+        biocLite("org.Mm.eg.db")
+      }
+require(org.Mm.eg.db)
+anotData <- capture.output(org.Mm.eg())
+print(anotData[1:15])
+cat ("... output continues until ", length(anotData), " lines.\n")
+```
+
+Cada tabla de asociación puede consultarse de diversas formas,
+
+* Con las funciones <tt>get</tt> o <tt>mget</tt>.
+* Convirtiéndola en una tabla y extrayendo valores
+* En algunos casos utilizando funciones específicas como <tt>getSYMBOL</tt> o <tt>getEG</tt> (por "Entrez Gene") cuando exitan.
+
+Por ejemplo si tomamos los cinco primeros genes seleccionados en la comparación "LPS.in.AGED"
+
+```{r top5Genes01}
+top5 <-rownames(topTab_LPS.in.AGED)[1:5]
+cat("Usando mget\n")
+geneSymbol5.1 <- unlist(mget(top5, mouse4302SYMBOL))
+geneSymbol5.1
+cat("Usando toTable\n")
+genesTable<- toTable(mouse4302SYMBOL)
+rownames(genesTable) <-  genesTable$probe_id
+genesTable[top5, 2]
+cat("Usando getSYMBOL\n")
+require(annotate)
+geneSymbol5.3 <- getSYMBOL(top5, "mouse4302.db")
+geneSymbol5.3
+```
+
+Bioconductor dispone de algunos paquetes que permiten aprovechar esta funcionalidad anterior para obtener las anotaciones de cada gen y generar una tabla HTML con enlaces a algunas bases de datos.
+
+De forma sencilla es posible obtener tablas con las anotaciones correspondientes a los genes seleccionados. Si se desea ser más ambicioso es posible generar tablas en las que se combinen hiperenlaces a las anotaciones con los resultados de la selección de genes.
+
+El paquete <tt>annafy</tt> permite de forma muy simple generar una tabla de anotaciones con hiperenlaces a las bases de datos para cada anotación seleccionada.
+
+La instrucción siguiente crearia una tabla con las anotaciones disponibles para los genes seleccionados en la sección de comparaciones múltiples.
+
+```{r annaffy01, eval=FALSE}
+require(annaffy)
+genesSelected <- rownames(res.selected)
+at <- aafTableAnn(genesSelected, "mouse4302.db")
+saveHTML (at, file="results/anotations.html",
+          "Annotations for selected genes")
+```
+
+
+## Visualización de los perfiles de expresión
+
+Tras seleccionar los genes diferencialmente expresados podemos visualizar las expresiones de cada gen agrupándolas para destacar los genes que se
+encuentran up o down regulados simultáneamente constituyendo _perfiles de expresión_.
+
+Hay distintas formas de visualización pero aquí tan sólo se presenta el uso de mapas de color o <tt>Heatmaps</tt> cuyos fundamentos se explican en el capítulo dedicado al descubrimiento de clases.
+
+En primer lugar seleccionamos los genes a visualizar: Se toman todos aquellos que
+han resultado diferencialmente expresados en alguna de las tres comparaciones.
+
+```{r prepareData01}
+probeNames<-rownames(res)
+probeNames.selected<-probeNames[sum.res.rows!=0]
+exprs2cluster <-exprs(eset_rma_filtered)[probeNames.selected,]
+colnames(exprs2cluster)<- c("OldLPS80L", "OldLPS86L", "OldLPS88L",
+                            "OldMED81m", "OldMED82m", "OldMED84m",
+                            "YouLPS75L",  "YouLPS76L",  "YouLPS77L",
+                            "YouMED71m", "YouMED72m", "YouMED73m")
+```
+
+Para representar el Heatmap tan sólo necesitamos la matriz de datos resultante.
+
+```{r plotHeatMap01, fig=T}
+color.map <- function(grupo) {
+  switch(grupo,
+         "yellow",
+         "red",
+         "blue",
+         "pink")
+}
+grupColors <- unlist(lapply(pData(eset_rma_filtered)$grupo, color.map))
+heatmap(exprs2cluster,
+        cexCol=0.8,
+        main="Heatmap para las tres comparaciones de 'celltypes'", cex.main=0.8)
+```
+
+Si se desea realizar mapas de color más sofisticados puede utilizarse el paquete `R`package{gplots} que implementa una version mejorada en la función <tt>heatmap.2</tt>
+
+```{r plotHeatMap02, fig=T}
+require("gplots")
+heatmap.2(exprs2cluster,
+          col=bluered(75), scale="row",
+          ColSideColors=grupColors, key=TRUE, symkey=FALSE,
+          density.info="none", trace="none", cexCol=0.8,
+          main="Heatmap de las muestras de 'celltypes'",   cex.main=0.6)
+```
+
+
+
+## Análisis de significación biológica
+
+En las secciones anteriores se ha visto como encontrar los identificadores de los genes en distintas bases de datos, lo que permite por ejemplo conocer sus nombres comunes ("gene symbol").
+
+Otra aproximación razonable es estudiar las funciones de los genes buscando sus anotaciones en bases de datos de _anotación funcional_ como la _Gene Ontology_ (GO), o la _Kyoto Encyclopedia of Genes and Genomes_.
+
+Por ejemplo las anotaciones en GO para los cinco primeros genes de la lista analizada en <a href=```{r anchorLoc('anotExample')`">here</a> serian:
+
+```{r GOanots01}
+require(annotate)
+(top1 <-rownames(topTab_LPS.in.AGED)[1])
+(geneSymbol1 <- getSYMBOL(top1, "mouse4302.db"))
+GOAnots1 <- mget(top1, mouse4302GO)
+for (i in 1:length(GOAnots1)){
+  for (j in 1:length(GOAnots1[[i]])){
+    GOAnot <- GOAnots1[[i]][[j]][[1]]
+    cat(top1[i],geneSymbol1[i],GOAnot,substr(Term(GOAnot),1,30), "\n")
+  }
+}
+```
+
+Como se ve en el ejemplo el número de anotaciones para un gen en la Gene Ontology es muy alto, aparte de que, aunque aquí no se muestra, no todas las anotaciones tienen la misma fiabilidad.
+
+Aparte del problema de lo extenso de las anotaciones está el hecho de que antes de empezar a hacer inferencias sobre el significado de una anotación debería poderse establecer si dicha anotación está relacionada con el proceso que se está estudiando o aparece por azar entre la muchas anotaciones de los genes de la lista.
+Hay diferentes métodos y modelos para hacer esto (ver Draghici y colegas,
+ @Khatri:2005 o Mosquera and Sánchez--Pla,  @Mosquera:2005,Sanchez:2007b) pero aquí se presentará brevemente lo que se conoce por _Análisis de enriquecimiento_.
+
+
+### Análisis de enriquecimiento <a name="GEA"></a>
+
+El objetivo del análisis de enriquecimiento es establecer si una
+determinada categoría, que representa, por ejemplo, un proceso
+biológico (GO) o una vía (KEGG), aparece más ("enriquecido") o
+menos ("pobre") a menudo en la lista de genes seleccionados que en
+la población (génica), desde donde se han obtenido, es decir, el
+array, el genoma, o simplemente los genes que fueron seleccionados
+para la prueba. La idea básica es que si una función aparece más a menudo en la lista que en general es probable que tenga algo que ver con el proceso en base al cual se ha seleccionado la lista que se estudia.
+
+Por ejemplo, consideremos un experimento que da una lista de genes y
+el 10\% de los genes más diferencialmente expresados están
+asociados con el término apoptosis en la GO (GO:0006915). Esto puede
+parecer una proporción inusualmente grande de la lista de genes,
+dado que la apoptosis es un proceso biológico muy específico. Para 
+determinar cuánto más grande de lo normal es esta proporción,
+debe ser comparada con la proporción de genes relacionados con
+apoptosis en la lista de genes de referencia, que suele ser el
+conjunto de todos los genes del microarray.
+
+El análisis estadístico realizado para comparar proporciones es un test Hipergeométrico o el test exacto de Fisher que se utiliza
+para probar la hipótesis:
+
+$$
+H_0: \ p_{sel}^A = p_{all}^A \ vs  \ H_1: \ p_{sel}^A \neq p_{all}^A,
+$$
+
+donde $A$ representa el conjunto de genes cuya más/menos
+representación está siendo considerada, $p_{sel}^A$ es la
+proporción de genes seleccionados que están incluidos en este
+conjunto de genes y $p_{all}^A$ es la proporción de genes de la
+lista de referencia.
+
+
+### Análisis de enriquecimiento con Bioconductor
+
+Hay muchas herramientas que pueden ayudar a realizar este  análisis. Siguiendo nuestra costumbre usaremos las que contiene el paquete de R(Bioconductor),
+principalmente en el paquete <tt>GOstats</tt>.
+
+El análisis realizado utilizando este paquete procede de la forma siguiente:
+
+
+* Toma como entrada los identificadores de _Entrez_ o de
+  _Affy_ de la lista de genes seleccionada así como el nombre
+  del paquete de la anotación correspondiente al array que ha sido
+  usado para el análisis.
+* La salida del análisis es la lista de categorias que aparece
+  más/menos representado en cada conjunto seleccionado.
+
+El código siguiente ilustra como se procederá para realizar un análisis de enriquecimiento con las listas de genes seleccionados en la primera de las comparaciones realizadas en este capítulo.
+
+```{r GOAnalysis01, eval=FALSE}
+require(GOstats)
+require(mouse4302.db)
+require(org.Mm.eg.db)
+
+  # Seleccionamos la "topTable"
+  topTab <- topTab_LPS.in.AGED
+  # Definimos el universo de genes: todos los que se han incluido en el análisis
+  # EL programa trabaja con identificadores "entrez" y no admite duplicados
+
+  entrezUniverse <- unique(getEG(as.character(rownames(topTab)), "mouse4302.db"))
+
+  # Escogemos los grupos de sondas a incluir en el análisis
+  # Este análisis trabaja bien con varios centenares de genes
+  # por lo que es habitual basarse en p-valores sin ajustar para incluirlos
+
+  whichGenes<-topTab["adj.P.Val"]<0.001
+  geneIds <-   unique(getEG(as.character(rownames(topTab)[whichGenes]),"mouse4302.db"))
+
+  # Creamos los "hiperparámetros" en que se basa el análisis
+  GOparams = new("GOHyperGParams",
+    geneIds=geneIds, universeGeneIds=entrezUniverse,
+    annotation="org.Mm.eg.db", ontology="BP",
+    pvalueCutoff=0.001, conditional=FALSE,
+    testDirection="over")
+
+  # Ejecutamos los análisis
+
+  GOhyper = hyperGTest(GOparams)
+
+# Creamos un informe html con los resultados
+   comparison = "topTab_LPS.in.AGED"
+   GOfilename =file.path(resultsDir,
+     paste("GOResults.",comparison,".html", sep=""))
+  htmlReport(GOhyper, file = GOfilename, summary.args=list("htmlLinks"=TRUE))
+```
+
+El análisis basado en la base de datos de Pathways, KEGG será básicamente el mismo, cambiando únicamente el tipo de "hiperparámetro" invocado.
+
+
+```{r KEGGAnalysis01, eval=FALSE}
+
+  KEGGparams = new("KEGGHyperGParams",
+    geneIds=geneIds, universeGeneIds=entrezUniverse,
+    annotation="org.Mm.eg.db",
+    pvalueCutoff=0.01, testDirection="over")
+
+  # Ejecutamos los análisis
+
+  KEGGhyper = hyperGTest(KEGGparams)
+
+# Creamos un informe html con los resultados
+ comparison = "topTab_LPS.in.AGED"
+ KEGGfilename =file.path(resultsDir,
+     paste("KEGGResults.",comparison,".html", sep=""))
+  htmlReport(KEGGhyper, file = KEGGfilename, summary.args=list("htmlLinks"=TRUE))
+```
+
+

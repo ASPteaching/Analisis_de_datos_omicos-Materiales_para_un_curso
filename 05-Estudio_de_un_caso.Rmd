@@ -121,7 +121,7 @@ En este ejemplo se incluye un archivo defectuoso con fines didácticos, llamado 
 Para ilustrar las diferencias entre archivos correctos e incorrectos se puede leer en otro objeto.
 
 ```{r wrongaffybatch.create, eval=T}
-library(affy)
+require(affy)
 sampleInfoWithBad <- read.AnnotatedDataFrame(file.path(dataDir,"phenoDataWithBad.txt"),
     header = TRUE, row.names = NULL, sep="\t")
 fileNames <- pData(sampleInfoWithBad)$FileName
@@ -242,14 +242,14 @@ El procesado mediante RMA implica un proceso en tres etapas:
 * Summarización de las diversas sondas asociadas a cada grupo de sondas para dar un único valor.
 
 ```{r normalizationrma}
-library(affy)
+require(affy)
 eset_rma <- rma(rawData)
 ```
 
 Si se desea normalizar _únicamente si los datos normalizados no estan disponibles_ puede utilizarse el código siguiente:
 
 ```{r normalizationrma2, eval=FALSE}
-library(affy)
+require(affy)
 normalize <- T
 if(normalize){
   eset_rma <- rma(rawData)

@@ -31,3 +31,12 @@ El plan de desarrollo para esta nueva edición, que podra seguirse en el reposit
 2. En una posterior miraré de añadir capítulos que introduzcan nuevas tecnologías y muestren como analizar los datos que estas generan. Si logro engañar a algunos colegas para que escriban un capítulo también los añadiré a los autores.
 
 Previsiblemente este documento, con sus errores e imperfecciones se quedará como "open source" para uso de quien lo desee sin tener que pasar por el doloroso y anquilosante proceso de convertirlo en un libro, que, en este caso, empezaría a quedar obsoleto al minuto de estar acabado.
+
+## Instalación de paquetes de R y código de los capítulos
+
+En este documento se utiliza cierto número de paquetes de R. En vez de indicar que se instalen la primera vez que aparecen hemos creado un archivo de instalación -que convertiremos más adelante en un paquete- llamado `install_me_1st,R`. Nuestra recomendación es que antes de empezar a usar los materiales se ejecute dicho archivo para asegurarse de que todos los paquetes necesarios se encuentran instalados, preferentemente en la versión más actualizada. 
+
+El archivo se encuentra en el directorio `codigo_R`.
+
+Este directorio contiene además los archivos de código R extraídos de los archivos fuente "Rmarkdown" (con la instrucción `knitr::purl()`) para facilitar su ejecución.
+

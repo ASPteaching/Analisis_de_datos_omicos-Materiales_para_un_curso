@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Capítulo 8 Después de la selección: Análisis de listas de genes | Analisis de datos omicos</title>
+  <meta name="description" content="Capítulo 8 Después de la selección: Análisis de listas de genes | Analisis de datos omicos" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Capítulo 8 Después de la selección: Análisis de listas de genes | Analisis de datos omicos" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capítulo 8 Después de la selección: Análisis de listas de genes | Analisis de datos omicos" />
+  
+  
+  
+
+<meta name="author" content="Alex Sánchez-Pla^{1,2} y Ricardo Gonzalo Sanz^2" />
+<meta name="author" content="^1 Departament de Genètica, Microbiologia i Estadística. Universitat de Barcelona (UB)." />
+<meta name="author" content="^2 Unitat d’Estadística i Bioinformàtica. Vall d’Hebron Institut de Recerca (VHIR)." />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html"/>
+<link rel="next" href="referencias.html"/>
+<script src="libs/header-attrs-2.7/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Presentación</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#instalación-de-paquetes-de-r-y-código-de-los-capítulos"><i class="fa fa-check"></i><b>1.1</b> Instalación de paquetes de R y código de los capítulos</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><i class="fa fa-check"></i><b>2</b> Introduccion a los microarrays y otras tecnologías omicas</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#antecedentes-históricos"><i class="fa fa-check"></i><b>2.1</b> Antecedentes históricos</a></li>
+<li class="chapter" data-level="2.2" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#los-microarrays"><i class="fa fa-check"></i><b>2.2</b> Los microarrays</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#aplicaciones-de-los-microarrays"><i class="fa fa-check"></i><b>2.2.1</b> Aplicaciones de los microarrays</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#cómo-funcionan-los-microarrays"><i class="fa fa-check"></i><b>2.3</b> Cómo funcionan los microarrays</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#microarrays-de-dos-colores"><i class="fa fa-check"></i><b>2.3.1</b> Microarrays de dos colores</a></li>
+<li class="chapter" data-level="2.3.2" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#microarrays-de-un-color"><i class="fa fa-check"></i><b>2.3.2</b> Microarrays de un color</a></li>
+<li class="chapter" data-level="2.3.3" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#realización-de-un-experimento-de-microarrays"><i class="fa fa-check"></i><b>2.3.3</b> Realización de un experimento de microarrays</a></li>
+<li class="chapter" data-level="2.3.4" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#como-se-mide-la-expresión"><i class="fa fa-check"></i><b>2.3.4</b> Como se mide la expresión</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#bioinformática-de-microarrays"><i class="fa fa-check"></i><b>2.4</b> Bioinformática de Microarrays<a name="Bioinformática"></a></a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#software-para-el-análisis-de-datos-de-microarrays"><i class="fa fa-check"></i><b>2.4.1</b> Software para el análisis de datos de microarrays</a></li>
+<li class="chapter" data-level="2.4.2" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#bases-de-datos-de-microarrays"><i class="fa fa-check"></i><b>2.4.2</b> Bases de datos de Microarrays</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#extensiones-1-otros-tipos-de-microarrays"><i class="fa fa-check"></i><b>2.5</b> Extensiones (1): Otros tipos de microarrays<a name="extensions"></a></a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#otros-microarrays-de-adn"><i class="fa fa-check"></i><b>2.5.1</b> Otros microarrays de ADN</a></li>
+<li class="chapter" data-level="2.5.2" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#otros-tipos-de-microarrays-proteínas-o-carbohidratos"><i class="fa fa-check"></i><b>2.5.2</b> Otros tipos de microarrays: Proteínas o carbohidratos</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#extensiones-2-ngs-nextnow-generation-sequencing"><i class="fa fa-check"></i><b>2.6</b> Extensiones (2): <em>NGS: Next(Now) Generation Sequencing</em></a>
+<ul>
+<li class="chapter" data-level="2.6.1" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#visión-global-de-las-tecnologías-de-secuenciación"><i class="fa fa-check"></i><b>2.6.1</b> Visión global de las tecnologías de secuenciación</a></li>
+<li class="chapter" data-level="2.6.2" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#de-la-secuenciación-sanger-a-la-ultrasecuenciación"><i class="fa fa-check"></i><b>2.6.2</b> De la secuenciación Sanger a la ultrasecuenciación</a></li>
+<li class="chapter" data-level="2.6.3" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#tecnologías-de-ultrasecuenciación"><i class="fa fa-check"></i><b>2.6.3</b> Tecnologías de ultrasecuenciación</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="MDAProcess.html"><a href="MDAProcess.html"><i class="fa fa-check"></i><b>3</b> El proceso de análisis de microarrays</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="MDAProcess.html"><a href="MDAProcess.html#tipos-de-estudios"><i class="fa fa-check"></i><b>3.1</b> Tipos de estudios</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="MDAProcess.html"><a href="MDAProcess.html#comparación-de-grupos-o-class-comparison"><i class="fa fa-check"></i><b>3.1.1</b> Comparación de grupos o “Class comparison”</a></li>
+<li class="chapter" data-level="3.1.2" data-path="MDAProcess.html"><a href="MDAProcess.html#predicción-de-clase-o-class-prediction"><i class="fa fa-check"></i><b>3.1.2</b> Predicción de clase o “Class prediction”</a></li>
+<li class="chapter" data-level="3.1.3" data-path="MDAProcess.html"><a href="MDAProcess.html#descubrimiento-de-clases-o-class-discovery"><i class="fa fa-check"></i><b>3.1.3</b> Descubrimiento de clases o “Class discovery”</a></li>
+<li class="chapter" data-level="3.1.4" data-path="MDAProcess.html"><a href="MDAProcess.html#otros-tipos-de-estudios"><i class="fa fa-check"></i><b>3.1.4</b> Otros tipos de estudios</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="MDAProcess.html"><a href="MDAProcess.html#c4examples"><i class="fa fa-check"></i><b>3.2</b> Algunos ejemplos concretos</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="MDAProcess.html"><a href="MDAProcess.html#celltypes"><i class="fa fa-check"></i><b>3.2.1</b> Estudio de procesos regulados por citoquinas</a></li>
+<li class="chapter" data-level="3.2.2" data-path="MDAProcess.html"><a href="MDAProcess.html#golub"><i class="fa fa-check"></i><b>3.2.2</b> Clasificación molecular de la leucemia</a></li>
+<li class="chapter" data-level="3.2.3" data-path="MDAProcess.html"><a href="MDAProcess.html#efecto-del-estrogeno-y-el-tiempo-de-administración-estrogen"><i class="fa fa-check"></i><b>3.2.3</b> Efecto del estrogeno y el tiempo de administración {#estrogen]</a></li>
+<li class="chapter" data-level="3.2.4" data-path="MDAProcess.html"><a href="MDAProcess.html#CCL4"><i class="fa fa-check"></i><b>3.2.4</b> Efecto del CCL4 en la expresión génica</a></li>
+<li class="chapter" data-level="3.2.5" data-path="MDAProcess.html"><a href="MDAProcess.html#yeast"><i class="fa fa-check"></i><b>3.2.5</b> Análisis de patrones en el ciclo celular</a></li>
+<li class="chapter" data-level="3.2.6" data-path="MDAProcess.html"><a href="MDAProcess.html#recapitulación"><i class="fa fa-check"></i><b>3.2.6</b> Recapitulación</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="MDAProcess.html"><a href="MDAProcess.html#el-proceso-de-análisis-de-microarrays"><i class="fa fa-check"></i><b>3.3</b> El proceso de análisis de microarrays</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="MDAExpDesign.html"><a href="MDAExpDesign.html"><i class="fa fa-check"></i><b>4</b> Diseño de experimentos de microarrays</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="MDAExpDesign.html"><a href="MDAExpDesign.html#fuentes-de-variabilidad"><i class="fa fa-check"></i><b>4.1</b> Fuentes de variabilidad</a></li>
+<li class="chapter" data-level="4.2" data-path="MDAExpDesign.html"><a href="MDAExpDesign.html#tipos-de-variabilidad"><i class="fa fa-check"></i><b>4.2</b> Tipos de variabilidad</a></li>
+<li class="chapter" data-level="4.3" data-path="MDAExpDesign.html"><a href="MDAExpDesign.html#conceptos-básicos-de-diseño-de-experimentos"><i class="fa fa-check"></i><b>4.3</b> Conceptos básicos de diseño de Experimentos</a></li>
+<li class="chapter" data-level="4.4" data-path="MDAExpDesign.html"><a href="MDAExpDesign.html#principios-de-diseño-de-experimentos"><i class="fa fa-check"></i><b>4.4</b> Principios de diseño de experimentos</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="MDAExpDesign.html"><a href="MDAExpDesign.html#replicación"><i class="fa fa-check"></i><b>4.4.1</b> Replicación</a></li>
+<li class="chapter" data-level="4.4.2" data-path="MDAExpDesign.html"><a href="MDAExpDesign.html#aleatorización"><i class="fa fa-check"></i><b>4.4.2</b> Aleatorización</a></li>
+<li class="chapter" data-level="4.4.3" data-path="MDAExpDesign.html"><a href="MDAExpDesign.html#bloqueo-o-control-local"><i class="fa fa-check"></i><b>4.4.3</b> Bloqueo o control local</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="MDAExpDesign.html"><a href="MDAExpDesign.html#diseños-experimentales-para-microarrays-de-dos-colores"><i class="fa fa-check"></i><b>4.5</b> Diseños experimentales para microarrays de dos colores</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><i class="fa fa-check"></i><b>5</b> Exploración de los datos, control de calidad y preprocesado</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#introducción"><i class="fa fa-check"></i><b>5.1</b> Introducción</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#nivel-de-análisis-y-tipo-de-microarray"><i class="fa fa-check"></i><b>5.1.1</b> Nivel de análisis y tipo de microarray</a></li>
+<li class="chapter" data-level="5.1.2" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#datos-de-partida"><i class="fa fa-check"></i><b>5.1.2</b> Datos de partida</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#exploración-y-control-de-calidad"><i class="fa fa-check"></i><b>5.2</b> Exploración y control de calidad</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#control-de-calidad-con-gráficos-estadísticos-generales"><i class="fa fa-check"></i><b>5.2.1</b> Control de calidad con gráficos estadísticos generales</a></li>
+<li class="chapter" data-level="5.2.2" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#gráficos-de-diagnóstico-para-microarrays-de-dos-colores"><i class="fa fa-check"></i><b>5.2.2</b> Gráficos de diagnóstico para microarrays de dos colores</a></li>
+<li class="chapter" data-level="5.2.3" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#gráficos-de-diagnóstico-para-microarrays-de-un-color"><i class="fa fa-check"></i><b>5.2.3</b> Gráficos de diagnóstico para microarrays de un color</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#normalización-de-arrays-de-dos-colores"><i class="fa fa-check"></i><b>5.3</b> Normalización de arrays de dos colores</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#normalización-global"><i class="fa fa-check"></i><b>5.3.1</b> Normalización global</a></li>
+<li class="chapter" data-level="5.3.2" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#normalización-dependiente-de-la-intensidad"><i class="fa fa-check"></i><b>5.3.2</b> Normalización dependiente de la intensidad</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#resumen-y-normalización-de-microarrays-de-affymetrix"><i class="fa fa-check"></i><b>5.4</b> Resumen y normalización de microarrays de Affymetrix</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#métodos-originales-de-affymetrix"><i class="fa fa-check"></i><b>5.4.1</b> Métodos originales de Affymetrix</a></li>
+<li class="chapter" data-level="5.4.2" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#el-método-rma-robust-multi-array-average"><i class="fa fa-check"></i><b>5.4.2</b> El método RMA (Robust Multi-Array Average)</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#filtraje-no-específico"><i class="fa fa-check"></i><b>5.5</b> Filtraje no específico</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="selección-de-genes-diferencialmente-expresados-chapdeg.html"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html"><i class="fa fa-check"></i><b>6</b> Selección de genes diferencialmente expresados {# chapDEG}</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="selección-de-genes-diferencialmente-expresados-chapdeg.html"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#introducción-1"><i class="fa fa-check"></i><b>6.1</b> Introducción</a></li>
+<li class="chapter" data-level="6.2" data-path="selección-de-genes-diferencialmente-expresados-chapdeg.html"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#selección-de-genes-diferencialmente-expresados"><i class="fa fa-check"></i><b>6.2</b> Selección de genes diferencialmente expresados</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="selección-de-genes-diferencialmente-expresados-chapdeg.html"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#medidas-naturales-para-comparar-dos-muestras"><i class="fa fa-check"></i><b>6.2.1</b> Medidas <em>naturales</em> para comparar dos muestras</a></li>
+<li class="chapter" data-level="6.2.2" data-path="selección-de-genes-diferencialmente-expresados-chapdeg.html"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#un-primer-ejemplo"><i class="fa fa-check"></i><b>6.2.2</b> Un primer ejemplo</a></li>
+<li class="chapter" data-level="6.2.3" data-path="selección-de-genes-diferencialmente-expresados-chapdeg.html"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#selección-de-genes-usando-tests-estadísticos"><i class="fa fa-check"></i><b>6.2.3</b> Selección de genes usando tests estadísticos</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="selección-de-genes-diferencialmente-expresados-chapdeg.html"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#significación-estadística-y-expresión-diferencial"><i class="fa fa-check"></i><b>6.3</b> Significación estadística y expresión diferencial</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="selección-de-genes-diferencialmente-expresados-chapdeg.html"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#volcano-plots"><i class="fa fa-check"></i><b>6.3.1</b> “Volcano plots”</a></li>
+<li class="chapter" data-level="6.3.2" data-path="selección-de-genes-diferencialmente-expresados-chapdeg.html"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#potencia-y-tamaño-muestral"><i class="fa fa-check"></i><b>6.3.2</b> Potencia y tamaño muestral</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="selección-de-genes-diferencialmente-expresados-chapdeg.html"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#el-problema-de-la-múltiplicidad-de-tests-multiple-testing"><i class="fa fa-check"></i><b>6.4</b> El problema de la múltiplicidad de tests (“multiple testing”)</a></li>
+<li class="chapter" data-level="6.5" data-path="selección-de-genes-diferencialmente-expresados-chapdeg.html"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#modelos-lineales-para-la-selección-de-genes-limma"><i class="fa fa-check"></i><b>6.5</b> Modelos lineales para la selección de genes: <tt>limma </tt></a>
+<ul>
+<li class="chapter" data-level="6.5.1" data-path="selección-de-genes-diferencialmente-expresados-chapdeg.html"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#el-modelo-lineal-general"><i class="fa fa-check"></i><b>6.5.1</b> El modelo lineal general</a></li>
+<li class="chapter" data-level="6.5.2" data-path="selección-de-genes-diferencialmente-expresados-chapdeg.html"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#ejemplos-de-situaciones-modelizables-linealmente"><i class="fa fa-check"></i><b>6.5.2</b> Ejemplos de situaciones <em>modelizables linealmente</em></a></li>
+<li class="chapter" data-level="6.5.3" data-path="selección-de-genes-diferencialmente-expresados-chapdeg.html"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#ejemplo-2-comparación-de-tres-grupos"><i class="fa fa-check"></i><b>6.5.3</b> Ejemplo 2: Comparación de tres grupos</a></li>
+<li class="chapter" data-level="6.5.4" data-path="selección-de-genes-diferencialmente-expresados-chapdeg.html"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#estimación-e-inferencia-con-el-modelo-lineal"><i class="fa fa-check"></i><b>6.5.4</b> Estimación e inferencia con el modelo lineal</a></li>
+<li class="chapter" data-level="6.5.5" data-path="selección-de-genes-diferencialmente-expresados-chapdeg.html"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#modelos-lineales-para-microarrays"><i class="fa fa-check"></i><b>6.5.5</b> Modelos lineales para Microarrays</a></li>
+<li class="chapter" data-level="6.5.6" data-path="selección-de-genes-diferencialmente-expresados-chapdeg.html"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#implementación-y-ejemplos"><i class="fa fa-check"></i><b>6.5.6</b> Implementación y ejemplos</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html"><i class="fa fa-check"></i><b>7</b> Caso “Estrógeno”: Selección de genes diferencialmente expresados asociados con la resistencia a estrógenos.</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html#introducción-2"><i class="fa fa-check"></i><b>7.1</b> Introducción</a></li>
+<li class="chapter" data-level="7.2" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html#el-estudio-estrógeno"><i class="fa fa-check"></i><b>7.2</b> El estudio “Estrógeno”</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html#directorios-y-opciones-de-trabajo"><i class="fa fa-check"></i><b>7.2.1</b> Directorios y opciones de trabajo</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html#obtención-y-lectura-de-los-datos"><i class="fa fa-check"></i><b>7.3</b> Obtención y lectura de los datos</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html#los-datos"><i class="fa fa-check"></i><b>7.3.1</b> Los datos</a></li>
+<li class="chapter" data-level="7.3.2" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html#lectura-de-los-datos"><i class="fa fa-check"></i><b>7.3.2</b> Lectura de los datos</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html#exploración-control-de-calidad-y-normalización"><i class="fa fa-check"></i><b>7.4</b> Exploración, Control de Calidad y Normalización</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html#exploración-y-visualización"><i class="fa fa-check"></i><b>7.4.1</b> Exploración y visualización</a></li>
+<li class="chapter" data-level="7.4.2" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html#control-de-calidad"><i class="fa fa-check"></i><b>7.4.2</b> Control de calidad</a></li>
+<li class="chapter" data-level="7.4.3" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html#normalizacion-y-filtraje"><i class="fa fa-check"></i><b>7.4.3</b> Normalizacion y Filtraje</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html#selección-de-genes-diferencialmente-expresados-1"><i class="fa fa-check"></i><b>7.5</b> Selección de genes diferencialmente expresados</a>
+<ul>
+<li class="chapter" data-level="7.5.1" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html#análisis-basado-en-modelos-lineales"><i class="fa fa-check"></i><b>7.5.1</b> Análisis basado en modelos lineales</a></li>
+<li class="chapter" data-level="7.5.2" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html#comparaciones-múltiples"><i class="fa fa-check"></i><b>7.5.2</b> Comparaciones múltiples</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="después-de-la-selección-análisis-de-listas-de-genes.html"><a href="después-de-la-selección-análisis-de-listas-de-genes.html"><i class="fa fa-check"></i><b>8</b> Después de la selección: Análisis de listas de genes</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="después-de-la-selección-análisis-de-listas-de-genes.html"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#introducción-3"><i class="fa fa-check"></i><b>8.1</b> Introducción</a></li>
+<li class="chapter" data-level="8.2" data-path="después-de-la-selección-análisis-de-listas-de-genes.html"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#análisis-comparativo-de-listas-de-genes"><i class="fa fa-check"></i><b>8.2</b> Análisis comparativo de listas de genes</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="después-de-la-selección-análisis-de-listas-de-genes.html"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#ejemplo-comparación-de-listas-en-el-caso-celltypes"><i class="fa fa-check"></i><b>8.2.1</b> Ejemplo: comparación de listas en el caso <tt>celltypes</tt></a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="después-de-la-selección-análisis-de-listas-de-genes.html"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#anotación-de-los-resultados"><i class="fa fa-check"></i><b>8.3</b> Anotación de los resultados</a></li>
+<li class="chapter" data-level="8.4" data-path="después-de-la-selección-análisis-de-listas-de-genes.html"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#visualización-de-los-perfiles-de-expresión"><i class="fa fa-check"></i><b>8.4</b> Visualización de los perfiles de expresión</a></li>
+<li class="chapter" data-level="8.5" data-path="después-de-la-selección-análisis-de-listas-de-genes.html"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#análisis-de-significación-biológica"><i class="fa fa-check"></i><b>8.5</b> Análisis de significación biológica</a>
+<ul>
+<li class="chapter" data-level="8.5.1" data-path="después-de-la-selección-análisis-de-listas-de-genes.html"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#análisis-de-enriquecimiento"><i class="fa fa-check"></i><b>8.5.1</b> Análisis de enriquecimiento <a name="GEA"></a></a></li>
+<li class="chapter" data-level="8.5.2" data-path="después-de-la-selección-análisis-de-listas-de-genes.html"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#análisis-de-enriquecimiento-con-bioconductor"><i class="fa fa-check"></i><b>8.5.2</b> Análisis de enriquecimiento con Bioconductor</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i><b>9</b> Referencias</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Analisis de datos omicos</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="después-de-la-selección-análisis-de-listas-de-genes" class="section level1" number="8">
+<h1><span class="header-section-number">Capítulo 8</span> Después de la selección: Análisis de listas de genes</h1>
+<p><a name="chapPostProcess"></a></p>
+<div id="introducción-3" class="section level2" number="8.1">
+<h2><span class="header-section-number">8.1</span> Introducción</h2>
+<p>El resultado de un análisis de microarrays como los descritos hasta el momento suele ser una “lista de genes,” es decir una archivo o una tabla con los identificadores de los genes considerados diferencialmente expresados en una o mÃ¡s comparaciones.</p>
+<p>La pregunta obvia que los investigadores se plantean al disponer de estas listas es <em>¿cuál es su significado biológico?</em>.</p>
+<p>Para el bioinfomatico eta pregunta se replantea de la siguiente manera: ¿Que se puede hacer para convertir -de forma más o menos automática– la lista obtenida en algún tipo de información biológicamente relevante. Esta cuestión ha llevado al desarrollo de métodos y herramientas que de forma general se agrupan bajo el título de métodos para el <em>análisis de listas de genes</em> o métodos de <em>análisis de la significación biológica</em>.</p>
+<p>Siendo este un campo muy extenso no lo vamos a desarrollar en profundidad sinó que nos limitaremos a considerar brevemente algunas aproximaciones sencillas que pueden contribuir a una mejor interpretación de los resultados de un experimento de microarrays.</p>
+<p>Los aspectos que trataremos serán:</p>
+<ul>
+<li>Análisis comparativo de listas de genes.</li>
+<li>Anotación de los resultados.</li>
+<li>Visualización de la matriz de expresión para los genes seleccionados en una o más comparaciones.</li>
+<li>Análisis básico de la significación biológica: <em>Gene Enrichment Analysis</em></li>
+</ul>
+</div>
+<div id="análisis-comparativo-de-listas-de-genes" class="section level2" number="8.2">
+<h2><span class="header-section-number">8.2</span> Análisis comparativo de listas de genes</h2>
+<p>Muchos estudios analizan el comportamiento de los genes bajo varios tratamientos o condiciones experimentales.</p>
+<p>En estos casos puede ser interesante ver como cambia un gen bajo distintos tratamientos o bien ver qué genes son afectados de forma parecida o distinta bajo los mismos.
+La forma habitual de hacer esta comparación es mediante algún programa que permita comparar los elementos de dos o más listas. En Bioconductor, por ejemplo el paquete <tt>limma</tt> tiene algunas funciones que permiten seleccionar los genes cambiados simultaneamente en dos o más condiciones.</p>
+<div id="ejemplo-comparación-de-listas-en-el-caso-celltypes" class="section level3" number="8.2.1">
+<h3><span class="header-section-number">8.2.1</span> Ejemplo: comparación de listas en el caso <tt>celltypes</tt></h3>
+<p>Supondremos que tras las comparaciones del capítulo anterior disponemos de los valores de expresión y las listas de genes obtenidas de las tres comparaciones del caso <tt>cellypes</tt>. Ambos están almacenados en archivos binarios que podemos recuperar con la instrucción <tt>load</tt>.</p>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(Biobase)</span>
+<span id="cb79-2"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb79-2" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(limma)</span>
+<span id="cb79-3"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb79-3" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;datos/celltypes/celltypes-normalized.rma.Rda&quot;</span>)</span>
+<span id="cb79-4"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb79-4" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;datos/celltypes/celltypes-fit.main.Rda&quot;</span>)</span>
+<span id="cb79-5"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb79-5" aria-hidden="true" tabindex="-1"></a>topTab_LPS.in.AGED <span class="ot">&lt;-</span> <span class="fu">topTable</span> (fit.main, <span class="at">number=</span><span class="fu">nrow</span>(fit.main), <span class="at">coef=</span><span class="st">&quot;LPS.in.AGED&quot;</span>, <span class="at">adjust=</span><span class="st">&quot;fdr&quot;</span>,<span class="at">lfc=</span><span class="dv">2</span>)</span>
+<span id="cb79-6"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb79-6" aria-hidden="true" tabindex="-1"></a>topTab_LPS.in.YOUNG <span class="ot">&lt;-</span> <span class="fu">topTable</span> (fit.main, <span class="at">number=</span><span class="fu">nrow</span>(fit.main), <span class="at">coef=</span><span class="st">&quot;LPS.in.YOUNG&quot;</span>, <span class="at">adjust=</span><span class="st">&quot;fdr&quot;</span>,<span class="at">lfc=</span><span class="dv">2</span>)</span>
+<span id="cb79-7"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb79-7" aria-hidden="true" tabindex="-1"></a>topTab_AGE  <span class="ot">&lt;-</span> <span class="fu">topTable</span> (fit.main, <span class="at">number=</span><span class="fu">nrow</span>(fit.main) , <span class="at">coef=</span><span class="st">&quot;AGE&quot;</span>, <span class="at">adjust=</span><span class="st">&quot;fdr&quot;</span>, <span class="at">lfc=</span><span class="dv">2</span>)</span></code></pre></div>
+<p>La función <tt>decidetests</tt> permite realizar ambas cosas.
+En este ejemplo no se ajustaran los p–valores entre comparaciones. Tan solo se seleccionaran los genes que cambian en una o más condiciones.</p>
+<p>EL resultado del análisis es una tabla <tt>res</tt> que para cada gen
+y cada comparación contiene un 1 (si el gen esta sobre-expresado o
+“up” en esta condicion), un 0 (si no hay cambio significativo) o un
+-1 (si esta “down”-regulado).</p>
+<p>Para resumir dicho análisis podemos contar qué filas tienen como mínimo una celda distinta de cero:</p>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb80-1" aria-hidden="true" tabindex="-1"></a>sum.res.rows<span class="ot">&lt;-</span><span class="fu">apply</span>(<span class="fu">abs</span>(res),<span class="dv">1</span>,sum)</span>
+<span id="cb80-2"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb80-2" aria-hidden="true" tabindex="-1"></a>res.selected<span class="ot">&lt;-</span>res[sum.res.rows<span class="sc">!=</span><span class="dv">0</span>,]</span>
+<span id="cb80-3"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb80-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">summary</span>(res))</span></code></pre></div>
+<pre><code>##        LPS.in.AGED LPS.in.YOUNG  AGE
+## Down           556          561  558
+## NotSig        9281         9239 8740
+## Up             417          454  956</code></pre>
+<p>En vista de estos valores podemos aplicar otros criterios de selección, por ejemplo genes con un p-valor ajustado inferior a 0.0001 y <tt>log Fold change</tt> mayor o igual a 2._ Este criterio combina a la vez la significación estadística y la significación biológica por lo que, en un estudio real sería probablemente el escogido_.</p>
+<pre><code>##        LPS.in.AGED LPS.in.YOUNG   AGE
+## Down            71           83    45
+## NotSig       10106        10083  9979
+## Up              77           88   230</code></pre>
+<p>Un diagrama de Venn permite visualizar la tabla anterior sin diferenciar entre genes “up” o “down” regulados.</p>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vennDiagram</span> (res.selected[,<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>], <span class="at">main=</span><span class="st">&quot;Genes in common #1&quot;</span>, <span class="at">cex=</span><span class="fl">0.9</span>)</span></code></pre></div>
+<div class="figure"><span id="fig:venn01"></span>
+<img src="Analisis_de_Datos_de_Microarrays_y_otras_Omicas_files/figure-html/venn01-1.png" alt="Número de genes seleccionado en cada comparación" width="672" />
+<p class="caption">
+Figure 8.1: Número de genes seleccionado en cada comparación
+</p>
+</div>
+</div>
+</div>
+<div id="anotación-de-los-resultados" class="section level2" number="8.3">
+<h2><span class="header-section-number">8.3</span> Anotación de los resultados</h2>
+<p>La identificación de los genes seleccionados puede resultar más
+sencilla para el especialista en un campo si se utilizan nombres
+estándar como el simbolo del gen o “gene symbol.” Ahora bien hemos de recordar que los microarrays suele ser un producto comercial en los que la empresa que los crea decide que sondas de cada gen o exón coloca en cada posición del array. Esto significa que para poder indicar el nombre de cada gen seleccionado es preciso disponer de algún tipo de <em>tabla de anotaciones</em> que relacione cada sonda con los genes a los que apunta.
+Esta tabla debería ser proporcionada por las companñias que producen los arrays pero es algo que queda a su criterio y, en el mejor de los casos, cada empresa puede seguir unos criterios distintos.</p>
+<p>Afortunadamente si se trabaja con Bioconductor existe una solución homogenea a este problema. Se trata de los <em>paquetes de anotaciones</em> creados y mantenidos por el equipo de Bioconductor a partir de la información publicada por cada compañia pero con una forma común de acceso. Es decir aunque las distintas empresas utilicen fotmatos distintos desde el punto de vista del usuario de Bioconductor esto no importará: si existe el paquete se utiliza como todos los demás.</p>
+<p>De hecho Bioconductor incorpora varios tipos de paquetes de anotaciones:</p>
+<ul>
+<li><strong>Paquetes de anotaciones de microarrays</strong>: Asocian a vada sonda la información disponible para ella en distintas bases de datos. Consisten en una serie de tablas SQL (de hecho cada paquete es una base de datos SQL) que asocian las sondas de cada gen con sus correspondencias en distintas bases de datos.</li>
+<li><strong>Paquetes de anotaciones de organismos</strong>: Contienen asociaciones similares a las anteriores pero las claves principales de cada tabla no son las sondas de un microarray determinado sino los genes de un organismo dado. Es decir en estos paquetes cada tabla asocia el identificador <em>entrez</em> del gen con sus correspondientes identificadores en otras bases de datos.</li>
+<li><strong>Paquetes de anotaciones de bases de datos</strong> Estos paquetes difieren de los anteriores porque lo que hacen es almacenar en el mismo formato que los anteriores –bases de datos SQL consultables en R– una copia de ciertas bases de datos como la <em>Gene Ontology (GO)</em> o la <em>Kyoto Encyclopedia of Genes and Genomes (KEGG)</em>.</li>
+</ul>
+<p>Para saber que anotaciones estan disponibles debe cargarse el paquete y llamar la función del mismo nombre. Por ejempl para los microarrays del caso <tt>celltypes</tt>:</p>
+<p>Para saber que anotaciones estan disponibles debe cargarse el paquete y llamar la función del mismo nombre sin el sufijo “.db.”</p>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mouse4302.db)</span>
+<span id="cb84-2"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb84-2" aria-hidden="true" tabindex="-1"></a>anotData <span class="ot">&lt;-</span> <span class="fu">capture.output</span>(<span class="fu">mouse4302</span>())</span>
+<span id="cb84-3"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb84-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(anotData)</span></code></pre></div>
+<pre><code>##  [1] &quot;Quality control information for mouse4302:&quot;                  
+##  [2] &quot;&quot;                                                            
+##  [3] &quot;&quot;                                                            
+##  [4] &quot;This package has the following mappings:&quot;                    
+##  [5] &quot;&quot;                                                            
+##  [6] &quot;mouse4302ACCNUM has 45101 mapped keys (of 45101 keys)&quot;       
+##  [7] &quot;mouse4302ALIAS2PROBE has 71766 mapped keys (of 145969 keys)&quot; 
+##  [8] &quot;mouse4302CHR has 38149 mapped keys (of 45101 keys)&quot;          
+##  [9] &quot;mouse4302CHRLENGTHS has 66 mapped keys (of 66 keys)&quot;         
+## [10] &quot;mouse4302CHRLOC has 34760 mapped keys (of 45101 keys)&quot;       
+## [11] &quot;mouse4302CHRLOCEND has 34760 mapped keys (of 45101 keys)&quot;    
+## [12] &quot;mouse4302ENSEMBL has 34226 mapped keys (of 45101 keys)&quot;      
+## [13] &quot;mouse4302ENSEMBL2PROBE has 17669 mapped keys (of 27643 keys)&quot;
+## [14] &quot;mouse4302ENTREZID has 38208 mapped keys (of 45101 keys)&quot;     
+## [15] &quot;mouse4302ENZYME has 4518 mapped keys (of 45101 keys)&quot;        
+## [16] &quot;mouse4302ENZYME2PROBE has 954 mapped keys (of 971 keys)&quot;     
+## [17] &quot;mouse4302GENENAME has 38208 mapped keys (of 45101 keys)&quot;     
+## [18] &quot;mouse4302GO has 34369 mapped keys (of 45101 keys)&quot;           
+## [19] &quot;mouse4302GO2ALLPROBES has 20474 mapped keys (of 22546 keys)&quot; 
+## [20] &quot;mouse4302GO2PROBE has 16215 mapped keys (of 18068 keys)&quot;     
+## [21] &quot;mouse4302MGI has 38123 mapped keys (of 45101 keys)&quot;          
+## [22] &quot;mouse4302MGI2PROBE has 20656 mapped keys (of 65865 keys)&quot;    
+## [23] &quot;mouse4302PATH has 10770 mapped keys (of 45101 keys)&quot;         
+## [24] &quot;mouse4302PATH2PROBE has 225 mapped keys (of 225 keys)&quot;       
+## [25] &quot;mouse4302PMID has 38010 mapped keys (of 45101 keys)&quot;         
+## [26] &quot;mouse4302PMID2PROBE has 237878 mapped keys (of 312857 keys)&quot; 
+## [27] &quot;mouse4302REFSEQ has 35767 mapped keys (of 45101 keys)&quot;       
+## [28] &quot;mouse4302SYMBOL has 38208 mapped keys (of 45101 keys)&quot;       
+## [29] &quot;mouse4302UNIGENE has 36482 mapped keys (of 45101 keys)&quot;      
+## [30] &quot;mouse4302UNIPROT has 33299 mapped keys (of 45101 keys)&quot;      
+## [31] &quot;&quot;                                                            
+## [32] &quot;&quot;                                                            
+## [33] &quot;Additional Information about this package:&quot;                  
+## [34] &quot;&quot;                                                            
+## [35] &quot;DB schema: MOUSECHIP_DB&quot;                                     
+## [36] &quot;DB schema version: 2.1&quot;                                      
+## [37] &quot;Organism: Mus musculus&quot;                                      
+## [38] &quot;Date for NCBI data: 2015-Sep27&quot;                              
+## [39] &quot;Date for GO data: 20150919&quot;                                  
+## [40] &quot;Date for KEGG data: 2011-Mar15&quot;                              
+## [41] &quot;Date for Golden Path data: 2012-Mar8&quot;                        
+## [42] &quot;Date for Ensembl data: 2015-Jul16&quot;</code></pre>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> (<span class="st">&quot;... output continues until &quot;</span>, <span class="fu">length</span>(anotData), <span class="st">&quot; lines.</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>## ... output continues until  42  lines.</code></pre>
+<p>Si en vez del paquetes del microarray usáramos el paquete de organismo, en este caso del ratón.</p>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span>(<span class="fu">require</span>(org.Mm.eg.db))){</span>
+<span id="cb88-2"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb88-2" aria-hidden="true" tabindex="-1"></a>        <span class="fu">biocLite</span>(<span class="st">&quot;org.Mm.eg.db&quot;</span>)</span>
+<span id="cb88-3"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb88-3" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb88-4"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb88-4" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(org.Mm.eg.db)</span>
+<span id="cb88-5"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb88-5" aria-hidden="true" tabindex="-1"></a>anotData <span class="ot">&lt;-</span> <span class="fu">capture.output</span>(<span class="fu">org.Mm.eg</span>())</span>
+<span id="cb88-6"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb88-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(anotData[<span class="dv">1</span><span class="sc">:</span><span class="dv">15</span>])</span></code></pre></div>
+<pre><code>##  [1] &quot;Quality control information for org.Mm.eg:&quot;                
+##  [2] &quot;&quot;                                                          
+##  [3] &quot;&quot;                                                          
+##  [4] &quot;This package has the following mappings:&quot;                  
+##  [5] &quot;&quot;                                                          
+##  [6] &quot;org.Mm.egACCNUM has 45544 mapped keys (of 72692 keys)&quot;     
+##  [7] &quot;org.Mm.egACCNUM2EG has 590433 mapped keys (of 590433 keys)&quot;
+##  [8] &quot;org.Mm.egALIAS2EG has 145969 mapped keys (of 145969 keys)&quot; 
+##  [9] &quot;org.Mm.egCHR has 71830 mapped keys (of 72692 keys)&quot;        
+## [10] &quot;org.Mm.egCHRLENGTHS has 66 mapped keys (of 66 keys)&quot;       
+## [11] &quot;org.Mm.egCHRLOC has 25133 mapped keys (of 72692 keys)&quot;     
+## [12] &quot;org.Mm.egCHRLOCEND has 25133 mapped keys (of 72692 keys)&quot;  
+## [13] &quot;org.Mm.egENSEMBL has 27449 mapped keys (of 72692 keys)&quot;    
+## [14] &quot;org.Mm.egENSEMBL2EG has 27643 mapped keys (of 27643 keys)&quot; 
+## [15] &quot;org.Mm.egENSEMBLPROT has 10294 mapped keys (of 72692 keys)&quot;</code></pre>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> (<span class="st">&quot;... output continues until &quot;</span>, <span class="fu">length</span>(anotData), <span class="st">&quot; lines.</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>## ... output continues until  49  lines.</code></pre>
+<p>Cada tabla de asociación puede consultarse de diversas formas,</p>
+<ul>
+<li>Con las funciones <tt>get</tt> o <tt>mget</tt>.</li>
+<li>Convirtiéndola en una tabla y extrayendo valores</li>
+<li>En algunos casos utilizando funciones específicas como <tt>getSYMBOL</tt> o <tt>getEG</tt> (por “Entrez Gene”) cuando exitan.</li>
+</ul>
+<p>Por ejemplo si tomamos los cinco primeros genes seleccionados en la comparación “LPS.in.AGED”</p>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb92-1" aria-hidden="true" tabindex="-1"></a>top5 <span class="ot">&lt;-</span><span class="fu">rownames</span>(topTab_LPS.in.AGED)[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span>
+<span id="cb92-2"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb92-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Usando mget</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>## Usando mget</code></pre>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb94-1" aria-hidden="true" tabindex="-1"></a>geneSymbol5<span class="fl">.1</span> <span class="ot">&lt;-</span> <span class="fu">unlist</span>(<span class="fu">mget</span>(top5, mouse4302SYMBOL))</span>
+<span id="cb94-2"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb94-2" aria-hidden="true" tabindex="-1"></a>geneSymbol5<span class="fl">.1</span></span></code></pre></div>
+<pre><code>## 1450826_a_at   1449450_at   1419607_at 1419681_a_at   1419209_at 
+##       &quot;Saa3&quot;      &quot;Ptges&quot;        &quot;Tnf&quot;      &quot;Prok2&quot;      &quot;Cxcl1&quot;</code></pre>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Usando toTable</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>## Usando toTable</code></pre>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb98-1" aria-hidden="true" tabindex="-1"></a>genesTable<span class="ot">&lt;-</span> <span class="fu">toTable</span>(mouse4302SYMBOL)</span>
+<span id="cb98-2"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb98-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(genesTable) <span class="ot">&lt;-</span>  genesTable<span class="sc">$</span>probe_id</span>
+<span id="cb98-3"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb98-3" aria-hidden="true" tabindex="-1"></a>genesTable[top5, <span class="dv">2</span>]</span></code></pre></div>
+<pre><code>## [1] &quot;Saa3&quot;  &quot;Ptges&quot; &quot;Tnf&quot;   &quot;Prok2&quot; &quot;Cxcl1&quot;</code></pre>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Usando getSYMBOL</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>## Usando getSYMBOL</code></pre>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(annotate)</span>
+<span id="cb102-2"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb102-2" aria-hidden="true" tabindex="-1"></a>geneSymbol5<span class="fl">.3</span> <span class="ot">&lt;-</span> <span class="fu">getSYMBOL</span>(top5, <span class="st">&quot;mouse4302.db&quot;</span>)</span>
+<span id="cb102-3"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb102-3" aria-hidden="true" tabindex="-1"></a>geneSymbol5<span class="fl">.3</span></span></code></pre></div>
+<pre><code>## 1450826_a_at   1449450_at   1419607_at 1419681_a_at   1419209_at 
+##       &quot;Saa3&quot;      &quot;Ptges&quot;        &quot;Tnf&quot;      &quot;Prok2&quot;      &quot;Cxcl1&quot;</code></pre>
+<p>Bioconductor dispone de algunos paquetes que permiten aprovechar esta funcionalidad anterior para obtener las anotaciones de cada gen y generar una tabla HTML con enlaces a algunas bases de datos.</p>
+<p>De forma sencilla es posible obtener tablas con las anotaciones correspondientes a los genes seleccionados. Si se desea ser más ambicioso es posible generar tablas en las que se combinen hiperenlaces a las anotaciones con los resultados de la selección de genes.</p>
+<p>El paquete <tt>annafy</tt> permite de forma muy simple generar una tabla de anotaciones con hiperenlaces a las bases de datos para cada anotación seleccionada.</p>
+<p>La instrucción siguiente crearia una tabla con las anotaciones disponibles para los genes seleccionados en la sección de comparaciones múltiples.</p>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(annaffy)</span>
+<span id="cb104-2"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb104-2" aria-hidden="true" tabindex="-1"></a>genesSelected <span class="ot">&lt;-</span> <span class="fu">rownames</span>(res.selected)</span>
+<span id="cb104-3"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb104-3" aria-hidden="true" tabindex="-1"></a>at <span class="ot">&lt;-</span> <span class="fu">aafTableAnn</span>(genesSelected, <span class="st">&quot;mouse4302.db&quot;</span>)</span>
+<span id="cb104-4"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb104-4" aria-hidden="true" tabindex="-1"></a><span class="fu">saveHTML</span> (at, <span class="at">file=</span><span class="st">&quot;results/anotations.html&quot;</span>,</span>
+<span id="cb104-5"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb104-5" aria-hidden="true" tabindex="-1"></a>          <span class="st">&quot;Annotations for selected genes&quot;</span>)</span></code></pre></div>
+</div>
+<div id="visualización-de-los-perfiles-de-expresión" class="section level2" number="8.4">
+<h2><span class="header-section-number">8.4</span> Visualización de los perfiles de expresión</h2>
+<p>Tras seleccionar los genes diferencialmente expresados podemos visualizar las expresiones de cada gen agrupándolas para destacar los genes que se
+encuentran up o down regulados simultáneamente constituyendo <em>perfiles de expresión</em>.</p>
+<p>Hay distintas formas de visualización pero aquí tan sólo se presenta el uso de mapas de color o <tt>Heatmaps</tt> cuyos fundamentos se explican en el capítulo dedicado al descubrimiento de clases.</p>
+<p>En primer lugar seleccionamos los genes a visualizar: Se toman todos aquellos que
+han resultado diferencialmente expresados en alguna de las tres comparaciones.</p>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb105-1" aria-hidden="true" tabindex="-1"></a>probeNames<span class="ot">&lt;-</span><span class="fu">rownames</span>(res)</span>
+<span id="cb105-2"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb105-2" aria-hidden="true" tabindex="-1"></a>probeNames.selected<span class="ot">&lt;-</span>probeNames[sum.res.rows<span class="sc">!=</span><span class="dv">0</span>]</span>
+<span id="cb105-3"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb105-3" aria-hidden="true" tabindex="-1"></a>exprs2cluster <span class="ot">&lt;-</span><span class="fu">exprs</span>(eset_rma_filtered)[probeNames.selected,]</span>
+<span id="cb105-4"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb105-4" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(exprs2cluster)<span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;OldLPS80L&quot;</span>, <span class="st">&quot;OldLPS86L&quot;</span>, <span class="st">&quot;OldLPS88L&quot;</span>,</span>
+<span id="cb105-5"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb105-5" aria-hidden="true" tabindex="-1"></a>                            <span class="st">&quot;OldMED81m&quot;</span>, <span class="st">&quot;OldMED82m&quot;</span>, <span class="st">&quot;OldMED84m&quot;</span>,</span>
+<span id="cb105-6"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb105-6" aria-hidden="true" tabindex="-1"></a>                            <span class="st">&quot;YouLPS75L&quot;</span>,  <span class="st">&quot;YouLPS76L&quot;</span>,  <span class="st">&quot;YouLPS77L&quot;</span>,</span>
+<span id="cb105-7"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb105-7" aria-hidden="true" tabindex="-1"></a>                            <span class="st">&quot;YouMED71m&quot;</span>, <span class="st">&quot;YouMED72m&quot;</span>, <span class="st">&quot;YouMED73m&quot;</span>)</span></code></pre></div>
+<p>Para representar el Heatmap tan sólo necesitamos la matriz de datos resultante.</p>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb106-1" aria-hidden="true" tabindex="-1"></a>color.map <span class="ot">&lt;-</span> <span class="cf">function</span>(grupo) {</span>
+<span id="cb106-2"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb106-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">switch</span>(grupo,</span>
+<span id="cb106-3"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb106-3" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;yellow&quot;</span>,</span>
+<span id="cb106-4"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb106-4" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;red&quot;</span>,</span>
+<span id="cb106-5"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb106-5" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;blue&quot;</span>,</span>
+<span id="cb106-6"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb106-6" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;pink&quot;</span>)</span>
+<span id="cb106-7"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb106-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb106-8"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb106-8" aria-hidden="true" tabindex="-1"></a>grupColors <span class="ot">&lt;-</span> <span class="fu">unlist</span>(<span class="fu">lapply</span>(<span class="fu">pData</span>(eset_rma_filtered)<span class="sc">$</span>grupo, color.map))</span>
+<span id="cb106-9"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb106-9" aria-hidden="true" tabindex="-1"></a><span class="fu">heatmap</span>(exprs2cluster,</span>
+<span id="cb106-10"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb106-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">cexCol=</span><span class="fl">0.8</span>,</span>
+<span id="cb106-11"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb106-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">main=</span><span class="st">&quot;Heatmap para las tres comparaciones de &#39;celltypes&#39;&quot;</span>, <span class="at">cex.main=</span><span class="fl">0.8</span>)</span></code></pre></div>
+<p><img src="Analisis_de_Datos_de_Microarrays_y_otras_Omicas_files/figure-html/plotHeatMap01-1.png" width="672" /></p>
+<p>Si se desea realizar mapas de color más sofisticados puede utilizarse el paquete <code>R</code>package{gplots} que implementa una version mejorada en la función <tt>heatmap.2</tt></p>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb107-1" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(<span class="st">&quot;gplots&quot;</span>)</span>
+<span id="cb107-2"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb107-2" aria-hidden="true" tabindex="-1"></a><span class="fu">heatmap.2</span>(exprs2cluster,</span>
+<span id="cb107-3"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb107-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">col=</span><span class="fu">bluered</span>(<span class="dv">75</span>), <span class="at">scale=</span><span class="st">&quot;row&quot;</span>,</span>
+<span id="cb107-4"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb107-4" aria-hidden="true" tabindex="-1"></a>          <span class="at">ColSideColors=</span>grupColors, <span class="at">key=</span><span class="cn">TRUE</span>, <span class="at">symkey=</span><span class="cn">FALSE</span>,</span>
+<span id="cb107-5"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb107-5" aria-hidden="true" tabindex="-1"></a>          <span class="at">density.info=</span><span class="st">&quot;none&quot;</span>, <span class="at">trace=</span><span class="st">&quot;none&quot;</span>, <span class="at">cexCol=</span><span class="fl">0.8</span>,</span>
+<span id="cb107-6"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb107-6" aria-hidden="true" tabindex="-1"></a>          <span class="at">main=</span><span class="st">&quot;Heatmap de las muestras de &#39;celltypes&#39;&quot;</span>,   <span class="at">cex.main=</span><span class="fl">0.6</span>)</span></code></pre></div>
+<p><img src="Analisis_de_Datos_de_Microarrays_y_otras_Omicas_files/figure-html/plotHeatMap02-1.png" width="672" /></p>
+</div>
+<div id="análisis-de-significación-biológica" class="section level2" number="8.5">
+<h2><span class="header-section-number">8.5</span> Análisis de significación biológica</h2>
+<p>En las secciones anteriores se ha visto como encontrar los identificadores de los genes en distintas bases de datos, lo que permite por ejemplo conocer sus nombres comunes (“gene symbol”).</p>
+<p>Otra aproximación razonable es estudiar las funciones de los genes buscando sus anotaciones en bases de datos de <em>anotación funcional</em> como la <em>Gene Ontology</em> (GO), o la <em>Kyoto Encyclopedia of Genes and Genomes</em>.</p>
+<p>Por ejemplo las anotaciones en GO para los cinco primeros genes de la lista analizada en &lt;a href=``<code>{r anchorLoc('anotExample')</code>"&gt;here</a> serian:</p>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb108-1" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(annotate)</span>
+<span id="cb108-2"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb108-2" aria-hidden="true" tabindex="-1"></a>(top1 <span class="ot">&lt;-</span><span class="fu">rownames</span>(topTab_LPS.in.AGED)[<span class="dv">1</span>])</span></code></pre></div>
+<pre><code>## [1] &quot;1450826_a_at&quot;</code></pre>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb110-1" aria-hidden="true" tabindex="-1"></a>(geneSymbol1 <span class="ot">&lt;-</span> <span class="fu">getSYMBOL</span>(top1, <span class="st">&quot;mouse4302.db&quot;</span>))</span></code></pre></div>
+<pre><code>## 1450826_a_at 
+##       &quot;Saa3&quot;</code></pre>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb112-1" aria-hidden="true" tabindex="-1"></a>GOAnots1 <span class="ot">&lt;-</span> <span class="fu">mget</span>(top1, mouse4302GO)</span>
+<span id="cb112-2"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb112-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(GOAnots1)){</span>
+<span id="cb112-3"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb112-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(GOAnots1[[i]])){</span>
+<span id="cb112-4"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb112-4" aria-hidden="true" tabindex="-1"></a>    GOAnot <span class="ot">&lt;-</span> GOAnots1[[i]][[j]][[<span class="dv">1</span>]]</span>
+<span id="cb112-5"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb112-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cat</span>(top1[i],geneSymbol1[i],GOAnot,<span class="fu">substr</span>(<span class="fu">Term</span>(GOAnot),<span class="dv">1</span>,<span class="dv">30</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb112-6"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb112-6" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb112-7"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb112-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<pre><code>## 1450826_a_at Saa3 GO:0006953 acute-phase response 
+## 1450826_a_at Saa3 GO:0007252 I-kappaB phosphorylation 
+## 1450826_a_at Saa3 GO:0009617 response to bacterium 
+## 1450826_a_at Saa3 GO:0035634 response to stilbenoid 
+## 1450826_a_at Saa3 GO:0060326 cell chemotaxis 
+## 1450826_a_at Saa3 GO:0060326 cell chemotaxis 
+## 1450826_a_at Saa3 GO:0071347 cellular response to interleuk 
+## 1450826_a_at Saa3 GO:0005576 extracellular region 
+## 1450826_a_at Saa3 GO:0005615 extracellular space 
+## 1450826_a_at Saa3 GO:0005615 extracellular space 
+## 1450826_a_at Saa3 GO:0034364 high-density lipoprotein parti 
+## 1450826_a_at Saa3 GO:0035662 Toll-like receptor 4 binding 
+## 1450826_a_at Saa3 GO:0042056 chemoattractant activity 
+## 1450826_a_at Saa3 GO:0042056 chemoattractant activity</code></pre>
+<p>Como se ve en el ejemplo el número de anotaciones para un gen en la Gene Ontology es muy alto, aparte de que, aunque aquí no se muestra, no todas las anotaciones tienen la misma fiabilidad.</p>
+<p>Aparte del problema de lo extenso de las anotaciones está el hecho de que antes de empezar a hacer inferencias sobre el significado de una anotación debería poderse establecer si dicha anotación está relacionada con el proceso que se está estudiando o aparece por azar entre la muchas anotaciones de los genes de la lista.
+Hay diferentes métodos y modelos para hacer esto (ver Draghici y colegas,
+<span class="citation">Khatri and Drăghici (2005)</span> o Mosquera and Sánchez–Pla, <span class="citation">Mosquera and Sánchez-Pla (2005)</span>,Sanchez:2007b) pero aquí se presentará brevemente lo que se conoce por <em>Análisis de enriquecimiento</em>.</p>
+<div id="análisis-de-enriquecimiento" class="section level3" number="8.5.1">
+<h3><span class="header-section-number">8.5.1</span> Análisis de enriquecimiento <a name="GEA"></a></h3>
+<p>El objetivo del análisis de enriquecimiento es establecer si una
+determinada categoría, que representa, por ejemplo, un proceso
+biológico (GO) o una vía (KEGG), aparece más (“enriquecido”) o
+menos (“pobre”) a menudo en la lista de genes seleccionados que en
+la población (génica), desde donde se han obtenido, es decir, el
+array, el genoma, o simplemente los genes que fueron seleccionados
+para la prueba. La idea básica es que si una función aparece más a menudo en la lista que en general es probable que tenga algo que ver con el proceso en base al cual se ha seleccionado la lista que se estudia.</p>
+<p>Por ejemplo, consideremos un experimento que da una lista de genes y
+el 10% de los genes más diferencialmente expresados están
+asociados con el término apoptosis en la GO (<a href="GO:0006915" class="uri">GO:0006915</a>). Esto puede
+parecer una proporción inusualmente grande de la lista de genes,
+dado que la apoptosis es un proceso biológico muy específico. Para
+determinar cuánto más grande de lo normal es esta proporción,
+debe ser comparada con la proporción de genes relacionados con
+apoptosis en la lista de genes de referencia, que suele ser el
+conjunto de todos los genes del microarray.</p>
+<p>El análisis estadístico realizado para comparar proporciones es un test Hipergeométrico o el test exacto de Fisher que se utiliza
+para probar la hipótesis:</p>
+<p><span class="math display">\[
+H_0: \ p_{sel}^A = p_{all}^A \ vs  \ H_1: \ p_{sel}^A \neq p_{all}^A,
+\]</span></p>
+<p>donde <span class="math inline">\(A\)</span> representa el conjunto de genes cuya más/menos
+representación está siendo considerada, <span class="math inline">\(p_{sel}^A\)</span> es la
+proporción de genes seleccionados que están incluidos en este
+conjunto de genes y <span class="math inline">\(p_{all}^A\)</span> es la proporción de genes de la
+lista de referencia.</p>
+</div>
+<div id="análisis-de-enriquecimiento-con-bioconductor" class="section level3" number="8.5.2">
+<h3><span class="header-section-number">8.5.2</span> Análisis de enriquecimiento con Bioconductor</h3>
+<p>Hay muchas herramientas que pueden ayudar a realizar este análisis. Siguiendo nuestra costumbre usaremos las que contiene el paquete de R(Bioconductor),
+principalmente en el paquete <tt>GOstats</tt>.</p>
+<p>El análisis realizado utilizando este paquete procede de la forma siguiente:</p>
+<ul>
+<li>Toma como entrada los identificadores de <em>Entrez</em> o de
+<em>Affy</em> de la lista de genes seleccionada así como el nombre
+del paquete de la anotación correspondiente al array que ha sido
+usado para el análisis.</li>
+<li>La salida del análisis es la lista de categorias que aparece
+más/menos representado en cada conjunto seleccionado.</li>
+</ul>
+<p>El código siguiente ilustra como se procederá para realizar un análisis de enriquecimiento con las listas de genes seleccionados en la primera de las comparaciones realizadas en este capítulo.</p>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb114-1" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(GOstats)</span>
+<span id="cb114-2"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb114-2" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(mouse4302.db)</span>
+<span id="cb114-3"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb114-3" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(org.Mm.eg.db)</span>
+<span id="cb114-4"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb114-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb114-5"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb114-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Seleccionamos la &quot;topTable&quot;</span></span>
+<span id="cb114-6"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb114-6" aria-hidden="true" tabindex="-1"></a>  topTab <span class="ot">&lt;-</span> topTab_LPS.in.AGED</span>
+<span id="cb114-7"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb114-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Definimos el universo de genes: todos los que se han incluido en el análisis</span></span>
+<span id="cb114-8"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb114-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># EL programa trabaja con identificadores &quot;entrez&quot; y no admite duplicados</span></span>
+<span id="cb114-9"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb114-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb114-10"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb114-10" aria-hidden="true" tabindex="-1"></a>  entrezUniverse <span class="ot">&lt;-</span> <span class="fu">unique</span>(<span class="fu">getEG</span>(<span class="fu">as.character</span>(<span class="fu">rownames</span>(topTab)), <span class="st">&quot;mouse4302.db&quot;</span>))</span>
+<span id="cb114-11"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb114-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb114-12"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb114-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Escogemos los grupos de sondas a incluir en el análisis</span></span>
+<span id="cb114-13"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb114-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Este análisis trabaja bien con varios centenares de genes</span></span>
+<span id="cb114-14"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb114-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># por lo que es habitual basarse en p-valores sin ajustar para incluirlos</span></span>
+<span id="cb114-15"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb114-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb114-16"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb114-16" aria-hidden="true" tabindex="-1"></a>  whichGenes<span class="ot">&lt;-</span>topTab[<span class="st">&quot;adj.P.Val&quot;</span>]<span class="sc">&lt;</span><span class="fl">0.001</span></span>
+<span id="cb114-17"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb114-17" aria-hidden="true" tabindex="-1"></a>  geneIds <span class="ot">&lt;-</span>   <span class="fu">unique</span>(<span class="fu">getEG</span>(<span class="fu">as.character</span>(<span class="fu">rownames</span>(topTab)[whichGenes]),<span class="st">&quot;mouse4302.db&quot;</span>))</span>
+<span id="cb114-18"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb114-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb114-19"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb114-19" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Creamos los &quot;hiperparámetros&quot; en que se basa el análisis</span></span>
+<span id="cb114-20"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb114-20" aria-hidden="true" tabindex="-1"></a>  GOparams <span class="ot">=</span> <span class="fu">new</span>(<span class="st">&quot;GOHyperGParams&quot;</span>,</span>
+<span id="cb114-21"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb114-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">geneIds=</span>geneIds, <span class="at">universeGeneIds=</span>entrezUniverse,</span>
+<span id="cb114-22"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb114-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">annotation=</span><span class="st">&quot;org.Mm.eg.db&quot;</span>, <span class="at">ontology=</span><span class="st">&quot;BP&quot;</span>,</span>
+<span id="cb114-23"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb114-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">pvalueCutoff=</span><span class="fl">0.001</span>, <span class="at">conditional=</span><span class="cn">FALSE</span>,</span>
+<span id="cb114-24"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb114-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">testDirection=</span><span class="st">&quot;over&quot;</span>)</span>
+<span id="cb114-25"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb114-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb114-26"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb114-26" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Ejecutamos los análisis</span></span>
+<span id="cb114-27"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb114-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb114-28"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb114-28" aria-hidden="true" tabindex="-1"></a>  GOhyper <span class="ot">=</span> <span class="fu">hyperGTest</span>(GOparams)</span>
+<span id="cb114-29"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb114-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb114-30"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb114-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Creamos un informe html con los resultados</span></span>
+<span id="cb114-31"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb114-31" aria-hidden="true" tabindex="-1"></a>   comparison <span class="ot">=</span> <span class="st">&quot;topTab_LPS.in.AGED&quot;</span></span>
+<span id="cb114-32"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb114-32" aria-hidden="true" tabindex="-1"></a>   GOfilename <span class="ot">=</span><span class="fu">file.path</span>(resultsDir,</span>
+<span id="cb114-33"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb114-33" aria-hidden="true" tabindex="-1"></a>     <span class="fu">paste</span>(<span class="st">&quot;GOResults.&quot;</span>,comparison,<span class="st">&quot;.html&quot;</span>, <span class="at">sep=</span><span class="st">&quot;&quot;</span>))</span>
+<span id="cb114-34"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb114-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">htmlReport</span>(GOhyper, <span class="at">file =</span> GOfilename, <span class="at">summary.args=</span><span class="fu">list</span>(<span class="st">&quot;htmlLinks&quot;</span><span class="ot">=</span><span class="cn">TRUE</span>))</span></code></pre></div>
+<p>El análisis basado en la base de datos de Pathways, KEGG será básicamente el mismo, cambiando únicamente el tipo de “hiperparámetro” invocado.</p>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb115-1" aria-hidden="true" tabindex="-1"></a>  KEGGparams <span class="ot">=</span> <span class="fu">new</span>(<span class="st">&quot;KEGGHyperGParams&quot;</span>,</span>
+<span id="cb115-2"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb115-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">geneIds=</span>geneIds, <span class="at">universeGeneIds=</span>entrezUniverse,</span>
+<span id="cb115-3"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb115-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">annotation=</span><span class="st">&quot;org.Mm.eg.db&quot;</span>,</span>
+<span id="cb115-4"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb115-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">pvalueCutoff=</span><span class="fl">0.01</span>, <span class="at">testDirection=</span><span class="st">&quot;over&quot;</span>)</span>
+<span id="cb115-5"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb115-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb115-6"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb115-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Ejecutamos los análisis</span></span>
+<span id="cb115-7"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb115-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb115-8"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb115-8" aria-hidden="true" tabindex="-1"></a>  KEGGhyper <span class="ot">=</span> <span class="fu">hyperGTest</span>(KEGGparams)</span>
+<span id="cb115-9"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb115-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb115-10"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb115-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Creamos un informe html con los resultados</span></span>
+<span id="cb115-11"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb115-11" aria-hidden="true" tabindex="-1"></a> comparison <span class="ot">=</span> <span class="st">&quot;topTab_LPS.in.AGED&quot;</span></span>
+<span id="cb115-12"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb115-12" aria-hidden="true" tabindex="-1"></a> KEGGfilename <span class="ot">=</span><span class="fu">file.path</span>(resultsDir,</span>
+<span id="cb115-13"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb115-13" aria-hidden="true" tabindex="-1"></a>     <span class="fu">paste</span>(<span class="st">&quot;KEGGResults.&quot;</span>,comparison,<span class="st">&quot;.html&quot;</span>, <span class="at">sep=</span><span class="st">&quot;&quot;</span>))</span>
+<span id="cb115-14"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb115-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">htmlReport</span>(KEGGhyper, <span class="at">file =</span> KEGGfilename, <span class="at">summary.args=</span><span class="fu">list</span>(<span class="st">&quot;htmlLinks&quot;</span><span class="ot">=</span><span class="cn">TRUE</span>))</span></code></pre></div>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="referencias.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

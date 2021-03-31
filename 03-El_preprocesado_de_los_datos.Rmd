@@ -36,7 +36,7 @@ multitud de opciones podemos diferenciar:
 - Datos de bajo nivel Son los datos proporcionados por el escáner contenidos por ejemplo en archivos .gpr (dos colores) o .cel (un color). Estos últimos son binarios por lo que no es posible ni tan sólo visualizarlos sin programas específicos.
 - Datos de alto nivel Son los datos resultantes del (pre)procesado de los datos de bajo nivel. Básicamente se corresponden con los datos de expresión ya resumidos ("sumarizados"), normalizados o no.
 
-La exploración y el control de calidad pueden basarse en datos de bajo o de alto nivel. En cada caso se pueden aplicar ya sean tácnicas generales de visualización de datos, como histogramas, diagramas de caja o visualización en dimensiones reducidas (PCA u otras), o bien técnicas "ad-hoc" para cada tipo de datos como el MA-Plot u otras que se discuten a continuación.
+La exploración y el control de calidad pueden basarse en datos de bajo o de alto nivel. En cada caso se pueden aplicar ya sean técnicas generales de visualización de datos, como histogramas, diagramas de caja o visualización en dimensiones reducidas (PCA u otras), o bien técnicas "ad-hoc" para cada tipo de datos como el MA-Plot u otras que se discuten a continuación.
 
 ### Datos de partida 
 
@@ -234,12 +234,12 @@ plotPCA <- function ( X, labels=NULL, colors=NULL, dataDesc="", scale=FALSE)
 ``` 
 
 ```{r tempNorm, echo= TRUE, results='hide'}
-if (!file.exists("allAffyNorm")){
+if (!file.exists("datos/affyNorm")){
   allAffyNorm<- rma(allAffyRaw)
   affyNorm <- rma(affyRaw)
-  save(allAffyNorm, affyNorm, file="affyNorm.Rda")
+  save(allAffyNorm, affyNorm, file="datos/affyNorm.Rda")
 }else{
-  load(file="affyNorm.Rda")
+  load(file="datos/affyNorm.Rda")
 }
 ``` 
 
