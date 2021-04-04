@@ -52,13 +52,13 @@
 
 
 
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -179,10 +179,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="3.2.1" data-path="MDAProcess.html"><a href="MDAProcess.html#celltypes"><i class="fa fa-check"></i><b>3.2.1</b> Estudio de procesos regulados por citoquinas</a></li>
 <li class="chapter" data-level="3.2.2" data-path="MDAProcess.html"><a href="MDAProcess.html#golub"><i class="fa fa-check"></i><b>3.2.2</b> Clasificación molecular de la leucemia</a></li>
-<li class="chapter" data-level="3.2.3" data-path="MDAProcess.html"><a href="MDAProcess.html#efecto-del-estrogeno-y-el-tiempo-de-administración-estrogen"><i class="fa fa-check"></i><b>3.2.3</b> Efecto del estrogeno y el tiempo de administración {#estrogen]</a></li>
+<li class="chapter" data-level="3.2.3" data-path="MDAProcess.html"><a href="MDAProcess.html#estrogen"><i class="fa fa-check"></i><b>3.2.3</b> Efecto del estrogeno y el tiempo de administración</a></li>
 <li class="chapter" data-level="3.2.4" data-path="MDAProcess.html"><a href="MDAProcess.html#CCL4"><i class="fa fa-check"></i><b>3.2.4</b> Efecto del CCL4 en la expresión génica</a></li>
-<li class="chapter" data-level="3.2.5" data-path="MDAProcess.html"><a href="MDAProcess.html#yeast"><i class="fa fa-check"></i><b>3.2.5</b> Análisis de patrones en el ciclo celular</a></li>
-<li class="chapter" data-level="3.2.6" data-path="MDAProcess.html"><a href="MDAProcess.html#recapitulación"><i class="fa fa-check"></i><b>3.2.6</b> Recapitulación</a></li>
+<li class="chapter" data-level="3.2.5" data-path="MDAProcess.html"><a href="MDAProcess.html#swirl"><i class="fa fa-check"></i><b>3.2.5</b> Estudio de la mutación “swirl” en el desarrollo del pez cebra</a></li>
+<li class="chapter" data-level="3.2.6" data-path="MDAProcess.html"><a href="MDAProcess.html#yeast"><i class="fa fa-check"></i><b>3.2.6</b> Análisis de patrones en el ciclo celular</a></li>
+<li class="chapter" data-level="3.2.7" data-path="MDAProcess.html"><a href="MDAProcess.html#recapitulación"><i class="fa fa-check"></i><b>3.2.7</b> Recapitulación</a></li>
 </ul></li>
 <li class="chapter" data-level="3.3" data-path="MDAProcess.html"><a href="MDAProcess.html#el-proceso-de-análisis-de-microarrays"><i class="fa fa-check"></i><b>3.3</b> El proceso de análisis de microarrays</a></li>
 </ul></li>
@@ -219,8 +220,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="5.4" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#resumen-y-normalización-de-microarrays-de-affymetrix"><i class="fa fa-check"></i><b>5.4</b> Resumen y normalización de microarrays de Affymetrix</a>
 <ul>
-<li class="chapter" data-level="5.4.1" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#métodos-originales-de-affymetrix"><i class="fa fa-check"></i><b>5.4.1</b> Métodos originales de Affymetrix</a></li>
-<li class="chapter" data-level="5.4.2" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#el-método-rma-robust-multi-array-average"><i class="fa fa-check"></i><b>5.4.2</b> El método RMA (Robust Multi-Array Average)</a></li>
+<li class="chapter" data-level="5.4.1" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#el-método-rma-robust-multi-array-average"><i class="fa fa-check"></i><b>5.4.1</b> El método RMA (Robust Multi-Array Average)</a></li>
 </ul></li>
 <li class="chapter" data-level="5.5" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#filtraje-no-específico"><i class="fa fa-check"></i><b>5.5</b> Filtraje no específico</a></li>
 </ul></li>
@@ -334,7 +334,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="otros-tipos-de-estudios" class="section level3" number="3.1.4">
 <h3><span class="header-section-number">3.1.4</span> Otros tipos de estudios</h3>
-<p>Una vez identificados los principales tipos de estudios quedan muchos que no coinciden plenamente con ninguno de ellos. Sin entrar en detalles podemos señalar los estudios de evolución a lo largo del tiempo (“time course”), los de significación biológica (“Gene Enrichment Analysis,” “Gene Set Enrichment Analysis,” …) , los que buscan relaciones entre los genes (“network analysis” o “pathway analysis”). De momento con conocer e identificar los tres grandes bloques mencionados resultará más que suficiente.</p>
+<p>Una vez identificados los principales tipos de estudios quedan muchos que no coinciden plenamente con ninguno de ellos. Sin entrar en detalles podemos señalar los estudios de evolución a lo largo del tiempo (“time course”), los de significación biológica (“Gene Enrichment Analysis”, “Gene Set Enrichment Analysis”, …) , los que buscan relaciones entre los genes (“network analysis” o “pathway analysis”). De momento con conocer e identificar los tres grandes bloques mencionados resultará más que suficiente.</p>
 </div>
 </div>
 <div id="c4examples" class="section level2" number="3.2">
@@ -351,7 +351,7 @@ desea exponer o por su accesibilidad.</p>
 <div id="celltypes" class="section level3" number="3.2.1">
 <h3><span class="header-section-number">3.2.1</span> Estudio de procesos regulados por citoquinas</h3>
 <p></p>
-<p>Este conjunto de datos, que se denominará “celltypes,” corresponde a un estudio realizado por Chelvarajan y sus colegas (<span class="citation">Chelvarajan et al. (2006)</span>) que analizaron el efecto de la estimulación con lipopolisacáridos en la regulación por parte de citoquinas de ciertos procesos biológicos relacionados con la inflamación.</p>
+<p>Este conjunto de datos, que se denominará “celltypes”, corresponde a un estudio realizado por Chelvarajan y sus colegas (<span class="citation">Chelvarajan et al. (2006)</span>) que analizaron el efecto de la estimulación con lipopolisacáridos en la regulación por parte de citoquinas de ciertos procesos biológicos relacionados con la inflamación.</p>
 <p>Este estudio es del tipo “class comparison” es decir su principal objetivo es la obtención de genes diferencialmente expresados entre dos o más condiciones.</p>
 <p>Los datos se encuentran disponibles en la base de datos pública <code>GEne Expression Omnibus</code> mantenida por el <em>National Institute of Health (NIH)</em>, pero pueden descargarse de la página de materiales del curso para garantizar su disponibilidad.</p>
 </div>
@@ -363,8 +363,8 @@ Además se interesaba por la posibilidad de descubrir subgrupos de forma que pud
 <p>La diversidad de objetivos del estudio lleva a clasificarlo tanto entre los del tipo de predicción de clase como entre los que buscan descubrir nuievas clases o grupos en los datos.</p>
 <p>Los datos de este estudio se encuentran disponibles en la web del instituto Broad, en donde se llevó a cabo (<a href="http://www.broadinstitute.org">http://www.broadinstitute.org</a>). También se encuentra disponible un paquete de <code>R</code> denominado <code>ALL</code> que permite utilizarlos directamente usando <code>R</code> y Bioconductor.</p>
 </div>
-<div id="efecto-del-estrogeno-y-el-tiempo-de-administración-estrogen" class="section level3" number="3.2.3">
-<h3><span class="header-section-number">3.2.3</span> Efecto del estrogeno y el tiempo de administración {#estrogen]</h3>
+<div id="estrogen" class="section level3" number="3.2.3">
+<h3><span class="header-section-number">3.2.3</span> Efecto del estrogeno y el tiempo de administración</h3>
 <p></p>
 <p>Scholtens y colegas (<span class="citation">Scholtens et al. (2004)</span>) describen un estudio sobre el efecto de un tratamiento con estrógenos y del tiempo transcurrido desde el tratamiento en la expresión génica en pacientes de cáncer de mama. Los investigadores supusieron que los genes asociados con una respuesta temprana podrían considerarse dianas directas del tratamiento,
 mientras que los que tardaron más en hacerlo podrían considerarse objetivos secundarios correspondientes a dianas más alejadas en las
@@ -378,15 +378,18 @@ vías metabólicas.</p>
 <p>Los datos de este estudio no han sido publicados pero se encuentran disponibles en el paquete <code>CCL4</code> de bioconductor. Su interés reside por un lado en que se trata de datos de microarrays de dos colores de la marca Agilent –en un momento en que la mayoría de estudios se realizan con datos de un color. Aparte de esto cabe resaltar el hecho de que el paquete incluye, de forma similar al anterior, los datos “crudos” en forma de archivos de tipo “Genepix” uno de los programas populares para escanear imágenes generadas con microarrays de dos colores.</p>
 <p>Este estudio es también un estudio de comparación de clases cuyo objetivo principal es la selección de genes cuya expresión se asocia al tratamiento con CCL4 o DMSO.</p>
 </div>
-<div id="yeast" class="section level3" number="3.2.5">
-<h3><span class="header-section-number">3.2.5</span> Análisis de patrones en el ciclo celular</h3>
+<div id="swirl" class="section level3" number="3.2.5">
+<h3><span class="header-section-number">3.2.5</span> Estudio de la mutación “swirl” en el desarrollo del pez cebra</h3>
+</div>
+<div id="yeast" class="section level3" number="3.2.6">
+<h3><span class="header-section-number">3.2.6</span> Análisis de patrones en el ciclo celular</h3>
 <p>
-Los datos de este ejemplo denominado <code>kidney</code> son datos ya normalizados referidos a la expresión de los genes en distintos momentos del ciclo delular de la levadura e decir desde que concluye la división celular hasta que se inicia la siguiente.</p>
+Los datos de este ejemplo denominado <code>yeast</code> son datos ya normalizados referidos a la expresión de los genes en distintos momentos del ciclo delular de la levadura e decir desde que concluye la división celular hasta que se inicia la siguiente.</p>
 <p>Los datos puede descargarse desde la página del proyecto “Yeast Cell Cycle Project” (Proyecto de estudio del ciclo celular de la levadura) en la dirección:</p>
 <p><a href="http://genome-www.stanford.edu/cellcycle/data/rawdata/">http://genome-www.stanford.edu/cellcycle/data/rawdata/</a>.</p>
 </div>
-<div id="recapitulación" class="section level3" number="3.2.6">
-<h3><span class="header-section-number">3.2.6</span> Recapitulación</h3>
+<div id="recapitulación" class="section level3" number="3.2.7">
+<h3><span class="header-section-number">3.2.7</span> Recapitulación</h3>
 <p>La tabla  resume la lista de ejemplos que se utilizan en este manual indicando el nombre con que nos referiremos de aquí en adelante a cada conjunto de datos as' como algunas de sus carcaterísticas.</p>
 <p>La tabla siguiente resume los “datasets” utilizados en este manual. Aparte del nombre (arbitrario y “mnemotécnico”) se indica el tipo de microarrays, el número de muestras, y el tipo de problema para el que se utilizaron originalmente.</p>
 <table>
@@ -424,6 +427,12 @@ Los datos de este ejemplo denominado <code>kidney</code> son datos ya normalizad
 <td>Comparativo</td>
 </tr>
 <tr class="odd">
+<td><code>swirl</code></td>
+<td>Dos colores (“Custom”)</td>
+<td>4</td>
+<td>Comparativo</td>
+</tr>
+<tr class="even">
 <td><code>breastTum</code></td>
 <td>Un color (Affy, HGU95A)</td>
 <td>49</td>
@@ -439,7 +448,7 @@ Los datos de este ejemplo denominado <code>kidney</code> son datos ya normalizad
 <p>El análisis de microarrays, como la mayoría de análisis debe proceder de forma ordenada y siguiendo el método científico:</p>
 <ul>
 <li>La pregunta y su contexto nos servirán de guía para definir el <em>Diseño experimental</em> adecuado.</li>
-<li>El experimento se deberá realizar siguiendo las pautas decididas en el <em>Diseño experimental</em> y los datos obtenidos, que solemos denominar datos “crudos” o “raw data,” deberán someterse a los <em>Controles de calidad adecuados</em> antes de continuar con su análisis.</li>
+<li>El experimento se deberá realizar siguiendo las pautas decididas en el <em>Diseño experimental</em> y los datos obtenidos, que solemos denominar datos “crudos” o “raw data”, deberán someterse a los <em>Controles de calidad adecuados</em> antes de continuar con su análisis.</li>
 <li>Una vez decidido si la calidad de los datos es aceptable pasaremos a prepararlos para el análisis lo que puede incluir diversas formas
 de <em>preprocesado, o transformaciones</em> que a menudo se incluyen de forma general bajo el paraguas del término <em>normalización</em>, aunque, como veremos se trata de conceptos distintos.</li>
 <li>Los datos normalizados se utilizarán para los <em>análisis estadísticos</em> que hayamos decidido realizar durante el diseño experimental.</li>
@@ -464,7 +473,7 @@ posibilidades.</p>
 <p>En la práctica lo que suele hacerse es optar por utilizar algunos de los métodos en los que hay un cierto consenso acerca de su calidad y
 utilidad para cada problema. Allison (<span class="citation">Allison et al. (2006)</span>) repasa los puntos principales de este consenso dando una lista de puntos a tener en
 cuenta en cualquier estudio que utilice microarrays. Imbeaud y Auffray (<span class="citation">Imbeaud and Auffray (2005)</span>) citan una lista de hasta 39 puntos que uno debe
-seguir en un experimento con microarrays para usar “buenas prácticas.”</p>
+seguir en un experimento con microarrays para usar “buenas prácticas”.</p>
 <p>Finalmente Zhu y otros (<span class="citation">Zhu, Miecznikowski, and Halfon (2010)</span>) utilizan un conjunto de
 arrays con valores de expresión conocidos para proponer los que, a su parecer, resultan los métodos más apropiados para cada etapa desde la
 corrección del backround hasta la selección de genes diferencialmente expresados.

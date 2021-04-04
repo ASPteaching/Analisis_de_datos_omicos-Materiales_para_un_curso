@@ -22,7 +22,7 @@ MathJax.Hub.Config({
   TeX: { equationNumbers: { autoNumber: "AMS" } }
 });
 </script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" type="text/javascript"></script>
 
 <meta name="description" content="5.4 Resumen y normalización de microarrays de Affymetrix | Analisis de datos omicos">
 
@@ -45,6 +45,7 @@ MathJax.Hub.Config({
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
 <script src="libs/navigation-1.1/tabsets.js"></script>
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 
 
 <style type="text/css">code{white-space: pre;}</style>
@@ -52,7 +53,6 @@ MathJax.Hub.Config({
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
@@ -196,10 +196,11 @@ img {
 <ul>
 <li><a href="3-2-c4examples.html#celltypes"><span class="toc-section-number">3.2.1</span> Estudio de procesos regulados por citoquinas</a></li>
 <li><a href="3-2-c4examples.html#golub"><span class="toc-section-number">3.2.2</span> Clasificación molecular de la leucemia</a></li>
-<li><a href="3-2-c4examples.html#efecto-del-estrogeno-y-el-tiempo-de-administración-estrogen"><span class="toc-section-number">3.2.3</span> Efecto del estrogeno y el tiempo de administración {#estrogen]</a></li>
+<li><a href="3-2-c4examples.html#estrogen"><span class="toc-section-number">3.2.3</span> Efecto del estrogeno y el tiempo de administración</a></li>
 <li><a href="3-2-c4examples.html#CCL4"><span class="toc-section-number">3.2.4</span> Efecto del CCL4 en la expresión génica</a></li>
-<li><a href="3-2-c4examples.html#yeast"><span class="toc-section-number">3.2.5</span> Análisis de patrones en el ciclo celular</a></li>
-<li><a href="3-2-c4examples.html#recapitulación"><span class="toc-section-number">3.2.6</span> Recapitulación</a></li>
+<li><a href="3-2-c4examples.html#swirl"><span class="toc-section-number">3.2.5</span> Estudio de la mutación “swirl” en el desarrollo del pez cebra</a></li>
+<li><a href="3-2-c4examples.html#yeast"><span class="toc-section-number">3.2.6</span> Análisis de patrones en el ciclo celular</a></li>
+<li><a href="3-2-c4examples.html#recapitulación"><span class="toc-section-number">3.2.7</span> Recapitulación</a></li>
 </ul></li>
 <li><a href="3-3-el-proceso-de-análisis-de-microarrays.html#el-proceso-de-análisis-de-microarrays"><span class="toc-section-number">3.3</span> El proceso de análisis de microarrays</a></li>
 </ul></li>
@@ -236,8 +237,7 @@ img {
 </ul></li>
 <li><a href="5-4-resumen-y-normalización-de-microarrays-de-affymetrix.html#resumen-y-normalización-de-microarrays-de-affymetrix"><span class="toc-section-number">5.4</span> Resumen y normalización de microarrays de Affymetrix</a>
 <ul>
-<li><a href="5-4-resumen-y-normalización-de-microarrays-de-affymetrix.html#métodos-originales-de-affymetrix"><span class="toc-section-number">5.4.1</span> Métodos originales de Affymetrix</a></li>
-<li><a href="5-4-resumen-y-normalización-de-microarrays-de-affymetrix.html#el-método-rma-robust-multi-array-average"><span class="toc-section-number">5.4.2</span> El método RMA (Robust Multi-Array Average)</a></li>
+<li><a href="5-4-resumen-y-normalización-de-microarrays-de-affymetrix.html#el-método-rma-robust-multi-array-average"><span class="toc-section-number">5.4.1</span> El método RMA (Robust Multi-Array Average)</a></li>
 </ul></li>
 <li><a href="5-5-filtraje-no-específico.html#filtraje-no-específico"><span class="toc-section-number">5.5</span> Filtraje no específico</a></li>
 </ul></li>
@@ -318,12 +318,15 @@ img {
 intensidad de cada elemento del chip.
 En el caso de estos arrays sabemos que cada valor no corresponde a la expresión de un gen:</p>
 <ul>
-<li>Hay múltiples valores (sondas o “probes”) por cada gen, que originan un .</li>
-<li>Cada grupo de sondas consiste en múltiples pares de sondas, donde cada puede tener dos elementos:
-Un “perfect match” que coincide exactamente con el fragmento del gen al que corresponde la sonda
-Un “mismatch” que que coincide con el anterior salvo por el valor central que se ha sustituído por el nucleótido complementario.
-Estos "mismatches’ se introdujeron en los primeros arrays de affymetrix para tener una medida de hibridación no específica pero en las versiones más recientes se han abandonado.</li>
+<li>Hay múltiples valores (sondas o “probes”) por cada gen, que originan un <em>probeset</em>.</li>
+<li>Cada grupo de sondas consiste en múltiples sondas</li>
 </ul>
+<p>Originalmente, en los primeros arrays de Affymetrix se introdujo un sistema para estimar el “ruído” y diferenciarlo de la “señal”. Éste consistía en que cada sonda era en ralidad un par de sondas:</p>
+<ul>
+<li>Una que coincidía exactamente con el fragmento del gen al que corresponde la sonda y que se denominaba “perfect match”.</li>
+<li>Otra, que coincidía con la anterior salvo por el valor central que se sustituía por el nucleótido complementario. Esta segunda sonda se denominaba un “mismatch”.</li>
+</ul>
+<p>La idea original consistía en utilizar estos “mismatches’ para tener una medida de hibridación no específica pero en las versiones más recientes se han abandonado, por lo que también se ha abandonado la utilización de los métodos”MAS-4" y “MAS-5” que utilizaban estos valores.</p>
 <p>El proceso que convierte las señales individuales en valores de expresión normalizados para cada gen consta de tres etapas:</p>
 <ol style="list-style-type: decimal">
 <li>Corrección del ruido de fondo o “background”</li>
@@ -331,74 +334,14 @@ Estos "mismatches’ se introdujeron en los primeros arrays de affymetrix para t
 <li>“Sumarización”(Resumen) o concentración de los valores de cada grupo de sondas en un único valor de expresión absoluto normalizado
 para cada gen.</li>
 </ol>
-<p>A menudo los tres pasos se denominan genérica -y erróneamente- “normalización.”</p>
+<p>A menudo los tres pasos se denominan genérica -y erróneamente- “normalización”.</p>
 <p>A diferencia de los chips de ADNc, aquí las medidas de expresión son absolutas (no se compara una condición contra otra)
 dado que cada chip se hibrida con un única muestra.</p>
 <p>Hay muchos métodos para estimar la expresión (más de 30 publicados).
-Cada método contempla de forma explícita o implícita las tres formas de preprocesado: corrección del fondo,
-normalización y resumen.</p>
-<p>Los principales métodos que consideraremos son:</p>
-<ul>
-<li>Microarray Suite (MAS). Método oficial de Affymetrix. Versiones 4.0 y 5.0</li>
-<li>dChip: Li and Wong. Método basado en modelos multichip.</li>
-<li>RMA (Bioconductor). Actualmente es el método “estándar.”</li>
-</ul>
-<div id="métodos-originales-de-affymetrix" class="section level3" number="5.4.1">
-<h3><span class="header-section-number">5.4.1</span> Métodos originales de Affymetrix</h3>
-<div id="m.a.s.-4.0" class="section level4" number="5.4.1.1">
-<h4><span class="header-section-number">5.4.1.1</span> M.A.S. 4.0</h4>
-<p>Es el primer método introducida por Affymetrix.
-La corrección del fondo se realiza restando el “perfect match” del “mismatch”
-<span class="math display">\[\begin{equation}
- E_j=PM_j-MM_j
-\end{equation}\]</span>
-La normalización se realiza de forma global haciendo transformaciones de forma que la media de todo el chip sea la misma y
-la sumarización se basa en calcular el promedio de las diferencias absolutas ignorando los pares que se desvían más de <span class="math inline">\(3\sigma\)</span> de <span class="math inline">\(\mu\)</span>.
-<span class="math display">\[\begin{equation}
- Dif. Media=\frac{1}{|A|}\sum_{j \in A}(PM_j-MM_j)
-\end{equation}\]</span>
-Los problemas que presenta estemétodo son:</p>
-<ul>
-<li>1/3 de los MM son mayores que los PM</li>
-<li>Pueden aparecer valores MM negativos</li>
-<li>El uso de los MM añade ruido</li>
-</ul>
-</div>
-<div id="m.a.s.-5.0" class="section level4" number="5.4.1.2">
-<h4><span class="header-section-number">5.4.1.2</span> M.A.S. 5.0</h4>
-<p>Los problemas que presentaba el método M.A.S. 4.0 llevaron a
-sustituirlo por otra variante, el M.A.S 5.0, llamado así por venir
-implementado en el software de affymetrix llamado “MicroArray Suite
-5.0.”</p>
-<p>Este método utiliza un estadístico robusto, , para corregir y ponderar el fondo y calcular (estimar) la
-señal. El biweight de Tukey <span class="math inline">\(T_{bi}\)</span> pondera los valores por su
-distancia a la mediana, es decir, mide la tendencia central pero
-realiza un ajuste de outliers.</p>
-<p>La lógica de este método reside en pensar que el valor de MM no siempre tiene sentido, (p.ej si MM <span class="math inline">\(&gt;\)</span> PM).
-Dado que esto sucede en ocasiones se realiza el cambio siguiente:</p>
-<ol style="list-style-type: decimal">
-<li>Se introduce el background específico de un conjunto de pruebas <span class="math inline">\(i\)</span> de tamaño <span class="math inline">\(n\)</span> basado en los pares de pruebas <span class="math inline">\(j\)</span>:
-<span class="math display">\[\begin{equation}
- SB_i=T_{bi}(\log(PM_{i,j})-\log(MM_{i,j})): j= 1,\ldots,n
-\end{equation}\]</span></li>
-<li>SB se utiliza para decidir como se ajusta el background</li>
-</ol>
-<ul>
-<li>Si es grande los datos suelen ser fiables</li>
-<li>Si es pequeño mejor basarse tan solo en PM</li>
-</ul>
-<p>Este método no tan solo corrige el background sino que también permite normalizar y sumarizar.
-Para ello se introduce el “Mismatch Idealizado” (IM) que permite corregir la intensidad de las pruebas individuales.
-Este método también ha sido muy criticado:</p>
-<ul>
-<li>Se considera que no tiene mucho sentido promediar las pruebas entre arrays, pues éstos pueden tener características
-de hibridación intrínsecamente distintas.</li>
-<li>El método no mejora “aprendiendo” del funcionamiento entre arrays de las pruebas individuales.</li>
-</ul>
-</div>
-</div>
-<div id="el-método-rma-robust-multi-array-average" class="section level3" number="5.4.2">
-<h3><span class="header-section-number">5.4.2</span> El método RMA (Robust Multi-Array Average)</h3>
+Cada método contempla de forma explícita o implícita las tres formas de preprocesado: corrección del fondo, normalización y resumen.</p>
+<p>Aquí nos centraremos únicamente en el método más popular que continua siendo utilizado trece años después de su introducción: El “Robust Multi-chip Average” o RMA</p>
+<div id="el-método-rma-robust-multi-array-average" class="section level3" number="5.4.1">
+<h3><span class="header-section-number">5.4.1</span> El método RMA (Robust Multi-Array Average)</h3>
 <p>Para compensar algunas deficiencias de los primeros métodos de
 resumen y normalización de arrays de Affymetrix, Irizarry y sus
 colegas introdujeron en 2003 (~) un método basado en la modelización de las intensidades de las sondas que, en vez de basarse en las distintas sondas de un gen dentro de un mismo array se basa en los distintos valores de la misma sonda entre todos los arrays disponibles,</p>
@@ -408,7 +351,7 @@ colegas introdujeron en 2003 (~) un método basado en la modelización de las in
 valores PM y utilizando un modelo estadístico complejo en el que
 combina la modelización de la señal mediante una distribución exponencial con la del ruído mediante una distribución normal.</li>
 <li>Toma logaritmos base 2 de cada intensidad ajustada por el background.</li>
-<li>Realiza una  de los valores del paso 2 consistente en substituir cada valor individual por el que tendría la misma posición en la distribución empírica estimada sobre todas las muestras, es decir los promedios de las distribuciones de los valores ordenados de cada array (véase figura )</li>
+<li>Realiza una <em>normalización por cuantiles</em> de los valores del paso 2 consistente en substituir cada valor individual por el que tendría la misma posición en la distribución empírica estimada sobre todas las muestras, es decir los promedios de las distribuciones de los valores ordenados de cada array (véase figura )</li>
 <li>Estima las intensidades de cada gen separadamente para cada conjunto de sondas. Para ello realiza una técnica similar
 a una regresión robusta denominada “pulido de medianas” (median polish) sobre una matriz de datos que tiene los arrays en filas y los grupos
 de sondas en columnas.</li>
@@ -417,7 +360,7 @@ de sondas en columnas.</li>
 <div class="figure"><span id="fig:c06quantilNorm"></span>
 <img src="figures/c06quantilNorm.png" alt="El método RMA incluye una normalización por cuantiles como la representada esquemáticamente en esta figura" width="534" />
 <p class="caption">
-Figure 5.6: El método RMA incluye una normalización por cuantiles como la representada esquemáticamente en esta figura
+Figure 5.7: El método RMA incluye una normalización por cuantiles como la representada esquemáticamente en esta figura
 </p>
 </div>
 </div>

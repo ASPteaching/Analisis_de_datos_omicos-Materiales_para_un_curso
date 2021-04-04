@@ -52,13 +52,13 @@
 
 
 
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -179,10 +179,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="3.2.1" data-path="MDAProcess.html"><a href="MDAProcess.html#celltypes"><i class="fa fa-check"></i><b>3.2.1</b> Estudio de procesos regulados por citoquinas</a></li>
 <li class="chapter" data-level="3.2.2" data-path="MDAProcess.html"><a href="MDAProcess.html#golub"><i class="fa fa-check"></i><b>3.2.2</b> Clasificación molecular de la leucemia</a></li>
-<li class="chapter" data-level="3.2.3" data-path="MDAProcess.html"><a href="MDAProcess.html#efecto-del-estrogeno-y-el-tiempo-de-administración-estrogen"><i class="fa fa-check"></i><b>3.2.3</b> Efecto del estrogeno y el tiempo de administración {#estrogen]</a></li>
+<li class="chapter" data-level="3.2.3" data-path="MDAProcess.html"><a href="MDAProcess.html#estrogen"><i class="fa fa-check"></i><b>3.2.3</b> Efecto del estrogeno y el tiempo de administración</a></li>
 <li class="chapter" data-level="3.2.4" data-path="MDAProcess.html"><a href="MDAProcess.html#CCL4"><i class="fa fa-check"></i><b>3.2.4</b> Efecto del CCL4 en la expresión génica</a></li>
-<li class="chapter" data-level="3.2.5" data-path="MDAProcess.html"><a href="MDAProcess.html#yeast"><i class="fa fa-check"></i><b>3.2.5</b> Análisis de patrones en el ciclo celular</a></li>
-<li class="chapter" data-level="3.2.6" data-path="MDAProcess.html"><a href="MDAProcess.html#recapitulación"><i class="fa fa-check"></i><b>3.2.6</b> Recapitulación</a></li>
+<li class="chapter" data-level="3.2.5" data-path="MDAProcess.html"><a href="MDAProcess.html#swirl"><i class="fa fa-check"></i><b>3.2.5</b> Estudio de la mutación “swirl” en el desarrollo del pez cebra</a></li>
+<li class="chapter" data-level="3.2.6" data-path="MDAProcess.html"><a href="MDAProcess.html#yeast"><i class="fa fa-check"></i><b>3.2.6</b> Análisis de patrones en el ciclo celular</a></li>
+<li class="chapter" data-level="3.2.7" data-path="MDAProcess.html"><a href="MDAProcess.html#recapitulación"><i class="fa fa-check"></i><b>3.2.7</b> Recapitulación</a></li>
 </ul></li>
 <li class="chapter" data-level="3.3" data-path="MDAProcess.html"><a href="MDAProcess.html#el-proceso-de-análisis-de-microarrays"><i class="fa fa-check"></i><b>3.3</b> El proceso de análisis de microarrays</a></li>
 </ul></li>
@@ -219,8 +220,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="5.4" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#resumen-y-normalización-de-microarrays-de-affymetrix"><i class="fa fa-check"></i><b>5.4</b> Resumen y normalización de microarrays de Affymetrix</a>
 <ul>
-<li class="chapter" data-level="5.4.1" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#métodos-originales-de-affymetrix"><i class="fa fa-check"></i><b>5.4.1</b> Métodos originales de Affymetrix</a></li>
-<li class="chapter" data-level="5.4.2" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#el-método-rma-robust-multi-array-average"><i class="fa fa-check"></i><b>5.4.2</b> El método RMA (Robust Multi-Array Average)</a></li>
+<li class="chapter" data-level="5.4.1" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#el-método-rma-robust-multi-array-average"><i class="fa fa-check"></i><b>5.4.1</b> El método RMA (Robust Multi-Array Average)</a></li>
 </ul></li>
 <li class="chapter" data-level="5.5" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#filtraje-no-específico"><i class="fa fa-check"></i><b>5.5</b> Filtraje no específico</a></li>
 </ul></li>
@@ -389,7 +389,7 @@ conclusiones contradictoria según nos basemos en el promedio o el test t.</p>
 <p>Si se observan los valores del test t del gen C se concluye que el gen no aparenta estar diferencialmente expresado. Si
 en cambio se observa su promedio parece que si que lo esté.</p>
 <p>En el gen E pasa exctamente lo opuesto. La explicación de estas aparentes contradicciones se halla en el error
-estándar. En el gen C es muy elevado, debido a que el valor (20) es probablemente un “outlier.” En el gen D el
+estándar. En el gen C es muy elevado, debido a que el valor (20) es probablemente un “outlier”. En el gen D el
 error estándar es muy bajo por lo que, al encontrarse en el denominador del t-test aumenta artificialmente su valor.</p>
 </div>
 <div id="selección-de-genes-usando-tests-estadísticos" class="section level3" number="6.2.3">
@@ -445,25 +445,25 @@ selección de genes diferencialmente expresados.</p>
 <h4><span class="header-section-number">6.2.3.1</span> Ejemplo de utilización del test-t</h4>
 <p>Como ejemplo utilizaremos el conjunto de datos <tt>celltypes</tt> y supondremos que disponemos ya de los datos normalizados y filtrados almacenados en un objeto <tt>expressionSet</tt>.</p>
 <p>Este proceso es sencillo de hacer siguiendo los pasos del capiítulo anterior. Para simplificar el ejemplo una vez cargados y normalizados filtraremos los datos usando funcion <code>nSFilter</code> de la librería <code>genefilter</code> con sus opciones por defecto, lo que nos dejara un total de 10254 sondas en vez de las 45101 originales.</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(affy)</span>
-<span id="cb24-2"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(genefilter)</span>
-<span id="cb24-3"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb24-3" aria-hidden="true" tabindex="-1"></a>affyPath<span class="ot">&lt;-</span> <span class="st">&quot;datos/celltypes/celfiles&quot;</span></span>
-<span id="cb24-4"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb24-4" aria-hidden="true" tabindex="-1"></a>cellTypesTargets<span class="ot">&lt;-</span>  <span class="fu">read.AnnotatedDataFrame</span>(<span class="st">&quot;targets.txt&quot;</span>, <span class="at">sep=</span><span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>,  <span class="at">path=</span>affyPath)</span>
-<span id="cb24-5"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb24-5" aria-hidden="true" tabindex="-1"></a>cellTypesTargets<span class="sc">$</span>filename <span class="ot">=</span> <span class="fu">file.path</span>(affyPath, <span class="fu">row.names</span>(cellTypesTargets))</span>
-<span id="cb24-6"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb24-6" aria-hidden="true" tabindex="-1"></a>cellTypesRaw <span class="ot">&lt;-</span> <span class="fu">read.affybatch</span>(cellTypesTargets<span class="sc">$</span>filename, <span class="at">phenoData=</span>cellTypesTargets)</span>
-<span id="cb24-7"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb24-7" aria-hidden="true" tabindex="-1"></a>eset_rma <span class="ot">&lt;-</span> <span class="fu">rma</span>(cellTypesRaw)</span>
-<span id="cb24-8"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb24-8" aria-hidden="true" tabindex="-1"></a>Filtered <span class="ot">&lt;-</span> <span class="fu">nsFilter</span>(eset_rma)</span>
-<span id="cb24-9"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb24-9" aria-hidden="true" tabindex="-1"></a>eset_rma_filtered <span class="ot">&lt;-</span> Filtered[[<span class="st">&quot;eset&quot;</span>]]</span>
-<span id="cb24-10"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(eset_rma, eset_rma_filtered, <span class="at">file=</span><span class="st">&quot;datos/celltypes/celltypes-normalized.rma.Rda&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb28-1"></a><span class="kw">library</span>(affy)</span>
+<span id="cb28-2"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb28-2"></a><span class="kw">library</span>(genefilter)</span>
+<span id="cb28-3"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb28-3"></a>affyPath&lt;-<span class="st"> &quot;datos/celltypes/celfiles&quot;</span></span>
+<span id="cb28-4"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb28-4"></a>cellTypesTargets&lt;-<span class="st">  </span><span class="kw">read.AnnotatedDataFrame</span>(<span class="st">&quot;targets.txt&quot;</span>, <span class="dt">sep=</span><span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>,  <span class="dt">path=</span>affyPath)</span>
+<span id="cb28-5"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb28-5"></a>cellTypesTargets<span class="op">$</span>filename =<span class="st"> </span><span class="kw">file.path</span>(affyPath, <span class="kw">row.names</span>(cellTypesTargets))</span>
+<span id="cb28-6"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb28-6"></a>cellTypesRaw &lt;-<span class="st"> </span><span class="kw">read.affybatch</span>(cellTypesTargets<span class="op">$</span>filename, <span class="dt">phenoData=</span>cellTypesTargets)</span>
+<span id="cb28-7"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb28-7"></a>eset_rma &lt;-<span class="st"> </span><span class="kw">rma</span>(cellTypesRaw)</span>
+<span id="cb28-8"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb28-8"></a>Filtered &lt;-<span class="st"> </span><span class="kw">nsFilter</span>(eset_rma)</span>
+<span id="cb28-9"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb28-9"></a>eset_rma_filtered &lt;-<span class="st"> </span>Filtered[[<span class="st">&quot;eset&quot;</span>]]</span>
+<span id="cb28-10"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb28-10"></a><span class="kw">save</span>(eset_rma, eset_rma_filtered, <span class="dt">file=</span><span class="st">&quot;datos/celltypes/celltypes-normalized.rma.Rda&quot;</span>)</span></code></pre></div>
 <p>Si consideramos que el campo <em>treat</em> del objeto contiene la información de los grupos a comparar (ratones estimulados con LPS frente a los que no han sido tratados), podemos realizar un primer análisis utilizando el test-t. Para ello utilizaremos el la función
 <tt>rowttests</tt> del paquete <tt>genefilter</tt> que realiza un test <span class="math inline">\(t\)</span> sobre cada una de las filas (genes) de una matriz de expresión.</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">require</span>(Biobase))</span>
-<span id="cb25-2"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span> (<span class="at">file=</span><span class="st">&quot;./datos/celltypes/celltypes-normalized.rma.Rda&quot;</span>)</span>
-<span id="cb25-3"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb25-3" aria-hidden="true" tabindex="-1"></a>my.eset <span class="ot">&lt;-</span> eset_rma_filtered</span>
-<span id="cb25-4"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb25-4" aria-hidden="true" tabindex="-1"></a>grupo_1 <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(<span class="fu">pData</span>(my.eset)<span class="sc">$</span>treat)</span>
-<span id="cb25-5"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">require</span>(genefilter))</span>
-<span id="cb25-6"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb25-6" aria-hidden="true" tabindex="-1"></a>teststat <span class="ot">&lt;-</span><span class="fu">rowttests</span>(my.eset, <span class="st">&quot;treat&quot;</span>)</span>
-<span id="cb25-7"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(teststat[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,])</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb29-1"></a><span class="kw">stopifnot</span>(<span class="kw">require</span>(Biobase))</span>
+<span id="cb29-2"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb29-2"></a><span class="kw">load</span> (<span class="dt">file=</span><span class="st">&quot;./datos/celltypes/celltypes-normalized.rma.Rda&quot;</span>)</span>
+<span id="cb29-3"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb29-3"></a>my.eset &lt;-<span class="st"> </span>eset_rma_filtered</span>
+<span id="cb29-4"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb29-4"></a>grupo_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">as.factor</span>(<span class="kw">pData</span>(my.eset)<span class="op">$</span>treat)</span>
+<span id="cb29-5"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb29-5"></a><span class="kw">stopifnot</span>(<span class="kw">require</span>(genefilter))</span>
+<span id="cb29-6"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb29-6"></a>teststat &lt;-<span class="kw">rowttests</span>(my.eset, <span class="st">&quot;treat&quot;</span>)</span>
+<span id="cb29-7"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb29-7"></a><span class="kw">print</span>(teststat[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>,])</span></code></pre></div>
 <pre><code>##                statistic         dm      p.value
 ## 1424378_at   -10.6739944 -1.1113660 8.715342e-07
 ## 1417675_a_at  20.7390631  0.9451576 1.504712e-09
@@ -477,7 +477,7 @@ selección de genes diferencialmente expresados.</p>
 <div id="significación-estadística-y-expresión-diferencial" class="section level2" number="6.3">
 <h2><span class="header-section-number">6.3</span> Significación estadística y expresión diferencial</h2>
 <p>Como hemos visto en la sección anterior dos medidas naturales para
-la selección de genes son el promedio de “log-ratios,” o la
+la selección de genes son el promedio de “log-ratios”, o la
 diferencia de promedios en el caso de muestras independientes, o el valor del estadístico de test (<span class="math inline">\(t\)</span>-test) de una o dos muestras según si se trata de
 muestras apareadas o independientes respectivamente. Los primeros
 estudios de microarrays eran muy costosos y se hacían con pocas o
@@ -497,8 +497,8 @@ p–valor del test sea inferior a un cierto umbral como 0.05 o 0.01.</p>
 <p>Como es sabido, un test estadístico procede decidiendo rechazar la hipótesis nula si el
 p–valor es más pequeño que el nivel de significación del test.</p>
 <p>Siguiendo con el ejemplo anterior podemos ordenar los resultados de los tests en base a los p–valores:</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb27-1" aria-hidden="true" tabindex="-1"></a>ranked <span class="ot">&lt;-</span>teststat[<span class="fu">order</span>(teststat<span class="sc">$</span>p.value),]</span>
-<span id="cb27-2"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(ranked[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,])</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb31-1"></a>ranked &lt;-teststat[<span class="kw">order</span>(teststat<span class="op">$</span>p.value),]</span>
+<span id="cb31-2"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb31-2"></a><span class="kw">print</span>(ranked[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>,])</span></code></pre></div>
 <pre><code>##              statistic        dm      p.value
 ## 1449383_at   -48.61014 -2.044928 3.276616e-13
 ## 1451421_a_at -40.72173 -1.445182 1.909283e-12
@@ -506,7 +506,7 @@ p–valor es más pequeño que el nivel de significación del test.</p>
 ## 1450826_a_at  37.62239  5.147992 4.193941e-12
 ## 1448303_at   -31.92365 -2.283765 2.140612e-11</code></pre>
 <p>Ahora podríamos seleccionar, por ejemplo los genes cuyo p–valor fuera inferior a 0.01</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb29-1" aria-hidden="true" tabindex="-1"></a>selectedTeststat <span class="ot">&lt;-</span> ranked[ranked<span class="sc">$</span>p.value <span class="sc">&lt;</span> <span class="fl">0.01</span>,]</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb33-1"></a>selectedTeststat &lt;-<span class="st"> </span>ranked[ranked<span class="op">$</span>p.value <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.01</span>,]</span></code></pre></div>
 <p>Esto deja un total de <code>{r} dim(selectedTeststat)[1]</code> con un p–valor inferior a 0.01</p>
 <div id="volcano-plots" class="section level3" number="6.3.1">
 <h3><span class="header-section-number">6.3.1</span> “Volcano plots”</h3>
@@ -518,30 +518,30 @@ de manera que la regulación positiva o negativa se representa de forma simétri
 de forma que los p–valores más pequeños aparecen mayores.</p>
 <p>Así pues puede considerarse que el primer eje indica impacto biológico del cambio (a más efecto biológico mayor “fold-change”) y el segundo muestra la evidencia estadística, o la fiabilidad del cambio.</p>
 <p>Como veremos más adelante en esta sección, el paquete <code>limma</code> permite realizar volcano-plots de forma sencilla a partir de los resultados de un anàlisis, pero para hacer un volcano plot tan sólo se necesita una lista de p-valores y los efectos (“fold-change”) asociados.</p>
-<p>La figura <span class="citation">(<strong>ref?</strong>)</span>(fig:volcano0) muestra un “volcano-plot” para este ejemplo de los “celltypes” para la comparación “LPS” frente a “Medium.”</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb30-1" aria-hidden="true" tabindex="-1"></a>FC <span class="ot">&lt;-</span> teststat<span class="sc">$</span>statistic</span>
-<span id="cb30-2"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb30-2" aria-hidden="true" tabindex="-1"></a>pVal<span class="ot">&lt;-</span>teststat<span class="sc">$</span>p.value</span>
-<span id="cb30-3"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb30-3" aria-hidden="true" tabindex="-1"></a>Y <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fu">log</span>(pVal)</span>
-<span id="cb30-4"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Y<span class="sc">~</span>FC)</span></code></pre></div>
+<p>La figura <span class="citation">(<span class="citeproc-not-found" data-reference-id="ref"><strong>???</strong></span>)</span>(fig:volcano0) muestra un “volcano-plot” para este ejemplo de los “celltypes” para la comparación “LPS” frente a “Medium”.</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb34-1"></a>FC &lt;-<span class="st"> </span>teststat<span class="op">$</span>statistic</span>
+<span id="cb34-2"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb34-2"></a>pVal&lt;-teststat<span class="op">$</span>p.value</span>
+<span id="cb34-3"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb34-3"></a>Y &lt;-<span class="st"> </span><span class="op">-</span><span class="kw">log</span>(pVal)</span>
+<span id="cb34-4"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb34-4"></a><span class="kw">plot</span>(Y<span class="op">~</span>FC)</span></code></pre></div>
 <p><img src="Analisis_de_Datos_de_Microarrays_y_otras_Omicas_files/figure-html/volcano0-1.png" width="672" /></p>
 <p>También podemos adaptar alguna función “ad-hoc” como la siguiente, tomada de :<a href=""></a></p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggrepel)</span>
-<span id="cb31-2"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="co"># plot adding up all layers we have seen so far</span></span>
-<span id="cb31-3"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb31-3" aria-hidden="true" tabindex="-1"></a>volcanoP<span class="ot">&lt;-</span> <span class="cf">function</span> (de,log2FoldChange,  pvalue, </span>
-<span id="cb31-4"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb31-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">diffexpressed=</span><span class="cn">NULL</span>, <span class="at">col=</span><span class="cn">NULL</span>, <span class="at">delabel=</span><span class="cn">NULL</span>){</span>
-<span id="cb31-5"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb31-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">data=</span>de, <span class="fu">aes</span>(<span class="at">x=</span>log2FoldChange, <span class="at">y=</span><span class="sc">-</span><span class="fu">log10</span>(pvalue), <span class="at">col=</span>diffexpressed, <span class="at">label=</span>delabel)) <span class="sc">+</span></span>
-<span id="cb31-6"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb31-6" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb31-7"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb31-7" aria-hidden="true" tabindex="-1"></a>        <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb31-8"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb31-8" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_text_repel</span>() <span class="sc">+</span></span>
-<span id="cb31-9"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb31-9" aria-hidden="true" tabindex="-1"></a>        <span class="fu">scale_color_manual</span>(<span class="at">values=</span><span class="fu">c</span>(<span class="st">&quot;blue&quot;</span>, <span class="st">&quot;black&quot;</span>, <span class="st">&quot;red&quot;</span>)) <span class="sc">+</span></span>
-<span id="cb31-10"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb31-10" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_vline</span>(<span class="at">xintercept=</span><span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.6</span>, <span class="fl">0.6</span>), <span class="at">col=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
-<span id="cb31-11"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb31-11" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_hline</span>(<span class="at">yintercept=</span><span class="sc">-</span><span class="fu">log10</span>(<span class="fl">0.05</span>), <span class="at">col=</span><span class="st">&quot;red&quot;</span>)</span>
-<span id="cb31-12"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb31-12" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb31-13"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb31-13" aria-hidden="true" tabindex="-1"></a>diffexpressed <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">abs</span>(teststat<span class="sc">$</span>statistic)<span class="sc">&gt;</span><span class="dv">10</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>)</span>
-<span id="cb31-14"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb31-14" aria-hidden="true" tabindex="-1"></a>label <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="fu">length</span>(diffexpressed))</span>
-<span id="cb31-15"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb31-15" aria-hidden="true" tabindex="-1"></a>label[diffexpressed] <span class="ot">&lt;-</span> <span class="fu">rownames</span>(teststat)[diffexpressed]</span>
-<span id="cb31-16"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb31-16" aria-hidden="true" tabindex="-1"></a><span class="fu">volcanoP</span> (<span class="at">de=</span>teststat, <span class="at">log2FoldChange=</span>teststat<span class="sc">$</span>statistic,  <span class="at">pvalue=</span>teststat<span class="sc">$</span>p.value,</span>
-<span id="cb31-17"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb31-17" aria-hidden="true" tabindex="-1"></a>          <span class="at">diffexpressed =</span> diffexpressed, <span class="at">delabel =</span> label)</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb35-1"></a><span class="kw">library</span>(ggrepel)</span>
+<span id="cb35-2"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb35-2"></a><span class="co"># plot adding up all layers we have seen so far</span></span>
+<span id="cb35-3"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb35-3"></a>volcanoP&lt;-<span class="st"> </span><span class="cf">function</span> (de,log2FoldChange,  pvalue, </span>
+<span id="cb35-4"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb35-4"></a>                     <span class="dt">diffexpressed=</span><span class="ot">NULL</span>, <span class="dt">col=</span><span class="ot">NULL</span>, <span class="dt">delabel=</span><span class="ot">NULL</span>){</span>
+<span id="cb35-5"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb35-5"></a>  <span class="kw">ggplot</span>(<span class="dt">data=</span>de, <span class="kw">aes</span>(<span class="dt">x=</span>log2FoldChange, <span class="dt">y=</span><span class="op">-</span><span class="kw">log10</span>(pvalue), <span class="dt">col=</span>diffexpressed, <span class="dt">label=</span>delabel)) <span class="op">+</span></span>
+<span id="cb35-6"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb35-6"></a><span class="st">        </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb35-7"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb35-7"></a><span class="st">        </span><span class="kw">theme_minimal</span>() <span class="op">+</span></span>
+<span id="cb35-8"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb35-8"></a><span class="st">        </span><span class="kw">geom_text_repel</span>() <span class="op">+</span></span>
+<span id="cb35-9"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb35-9"></a><span class="st">        </span><span class="kw">scale_color_manual</span>(<span class="dt">values=</span><span class="kw">c</span>(<span class="st">&quot;blue&quot;</span>, <span class="st">&quot;black&quot;</span>, <span class="st">&quot;red&quot;</span>)) <span class="op">+</span></span>
+<span id="cb35-10"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb35-10"></a><span class="st">        </span><span class="kw">geom_vline</span>(<span class="dt">xintercept=</span><span class="kw">c</span>(<span class="op">-</span><span class="fl">0.6</span>, <span class="fl">0.6</span>), <span class="dt">col=</span><span class="st">&quot;red&quot;</span>) <span class="op">+</span></span>
+<span id="cb35-11"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb35-11"></a><span class="st">        </span><span class="kw">geom_hline</span>(<span class="dt">yintercept=</span><span class="op">-</span><span class="kw">log10</span>(<span class="fl">0.05</span>), <span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</span>
+<span id="cb35-12"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb35-12"></a>}</span>
+<span id="cb35-13"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb35-13"></a>diffexpressed &lt;-<span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">abs</span>(teststat<span class="op">$</span>statistic)<span class="op">&gt;</span><span class="dv">10</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>)</span>
+<span id="cb35-14"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb35-14"></a>label &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="ot">NA</span>, <span class="kw">length</span>(diffexpressed))</span>
+<span id="cb35-15"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb35-15"></a>label[diffexpressed] &lt;-<span class="st"> </span><span class="kw">rownames</span>(teststat)[diffexpressed]</span>
+<span id="cb35-16"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb35-16"></a><span class="kw">volcanoP</span> (<span class="dt">de=</span>teststat, <span class="dt">log2FoldChange=</span>teststat<span class="op">$</span>statistic,  <span class="dt">pvalue=</span>teststat<span class="op">$</span>p.value,</span>
+<span id="cb35-17"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb35-17"></a>          <span class="dt">diffexpressed =</span> diffexpressed, <span class="dt">delabel =</span> label)</span></code></pre></div>
 </div>
 <div id="potencia-y-tamaño-muestral" class="section level3" number="6.3.2">
 <h3><span class="header-section-number">6.3.2</span> Potencia y tamaño muestral</h3>
@@ -591,7 +591,7 @@ analizando.</p>
 <p>De forma simplificada consideramos las dos aproximaciones más utilizadas.</p>
 <p>Una posibilidad es mirar de controlar la probabilidad de obtener
 <em>al menos un falso positivo</em> o “Family-wise-error-rate
-(FWER).” El más popular de estos métodos de control es la
+(FWER)”. El más popular de estos métodos de control es la
 corrección de Bonferroni, consistente en multiplicar el p–valor por
 el número de tests realizados. La misma Dudoit y muchos otros
 autores han desarrollado variantes de los métodos clásicos de
@@ -625,13 +625,13 @@ apropiado.</p>
 usando el paquete <tt>multtest</tt> de Bioconductor para ajustar por
 los métodos de Bonferroni (FWER), Benjamini &amp; Hochberg (FDR) o
 Benjamini &amp; Yekutieli (BY, FDR).</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">require</span>(multtest))</span>
-<span id="cb32-2"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb32-2" aria-hidden="true" tabindex="-1"></a>procs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Bonferroni&quot;</span>,<span class="st">&quot;BH&quot;</span>, <span class="st">&quot;BY&quot;</span>)</span>
-<span id="cb32-3"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb32-3" aria-hidden="true" tabindex="-1"></a>adjPvalues <span class="ot">&lt;-</span> <span class="fu">mt.rawp2adjp</span>(teststat<span class="sc">$</span>p.value, procs)</span>
-<span id="cb32-4"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(adjPvalues)</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb36-1"></a><span class="kw">stopifnot</span>(<span class="kw">require</span>(multtest))</span>
+<span id="cb36-2"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb36-2"></a>procs &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Bonferroni&quot;</span>,<span class="st">&quot;BH&quot;</span>, <span class="st">&quot;BY&quot;</span>)</span>
+<span id="cb36-3"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb36-3"></a>adjPvalues &lt;-<span class="st"> </span><span class="kw">mt.rawp2adjp</span>(teststat<span class="op">$</span>p.value, procs)</span>
+<span id="cb36-4"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb36-4"></a><span class="kw">names</span>(adjPvalues)</span></code></pre></div>
 <pre><code>## [1] &quot;adjp&quot;    &quot;index&quot;   &quot;h0.ABH&quot;  &quot;h0.TSBH&quot;</code></pre>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb34-1" aria-hidden="true" tabindex="-1"></a>ranked.adjusted<span class="ot">&lt;-</span><span class="fu">cbind</span>(ranked, adjPvalues<span class="sc">$</span>adjp)</span>
-<span id="cb34-2"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(ranked.adjusted)</span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb38-1"></a>ranked.adjusted&lt;-<span class="kw">cbind</span>(ranked, adjPvalues<span class="op">$</span>adjp)</span>
+<span id="cb38-2"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb38-2"></a><span class="kw">head</span>(ranked.adjusted)</span></code></pre></div>
 <pre><code>##              statistic        dm      p.value         rawp   Bonferroni
 ## 1449383_at   -48.61014 -2.044928 3.276616e-13 3.276616e-13 3.359842e-09
 ## 1451421_a_at -40.72173 -1.445182 1.909283e-12 1.909283e-12 1.957778e-08
@@ -647,8 +647,8 @@ Benjamini &amp; Yekutieli (BY, FDR).</p>
 ## 1448303_at   4.389966e-08 4.307737e-07
 ## 1418645_at   1.033014e-07 1.013665e-06</code></pre>
 <p>Si seleccionamos los genes en base a su p–valor ajustado por ejemplo por le método de Banjamini y Yekutieli se obtienen los siguientes genes</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb36-1" aria-hidden="true" tabindex="-1"></a>selectedAdjusted<span class="ot">&lt;-</span>ranked.adjusted[ranked.adjusted<span class="sc">$</span>BY<span class="sc">&lt;</span><span class="fl">0.001</span>,]</span>
-<span id="cb36-2"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(selectedAdjusted)</span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb40-1"></a>selectedAdjusted&lt;-ranked.adjusted[ranked.adjusted<span class="op">$</span>BY<span class="op">&lt;</span><span class="fl">0.001</span>,]</span>
+<span id="cb40-2"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb40-2"></a><span class="kw">nrow</span>(selectedAdjusted)</span></code></pre></div>
 <pre><code>## [1] 420</code></pre>
 </div>
 <div id="modelos-lineales-para-la-selección-de-genes-limma" class="section level2" number="6.5">
@@ -665,7 +665,7 @@ usados en estadística y ha sido popularizado en el campo de microarrays gracias
 el paquete <tt>limma</tt> que se ha convertido en la herramiente más utilizada para el análisis de microarrays.</p>
 <div id="el-modelo-lineal-general" class="section level3" number="6.5.1">
 <h3><span class="header-section-number">6.5.1</span> El modelo lineal general</h3>
-<p>El modelo lineal (ver por ejemplo Faraway, <span class="citation">(<strong>Faraway:2004?</strong>)</span>) es un marco general para la modelización y el análisis de
+<p>El modelo lineal (ver por ejemplo Faraway, <span class="citation">(<span class="citeproc-not-found" data-reference-id="Faraway:2004"><strong>???</strong></span>)</span>) es un marco general para la modelización y el análisis de
 datos estadística.</p>
 <p>EL método consiste en asumir una relación lineal entre los valores observados de una variable <em>respuesta</em> y las
 condiciones experimentales. A partir de aquí se obtienen estimadores para los parámetros del modelo y de sus errores
@@ -689,7 +689,7 @@ un par de ellas.</p>
 <h4><span class="header-section-number">6.5.2.1</span> Ejemplo 1: Experimento “Swirl–Zebrafish”</h4>
 <p>Swirl es una mutación puntual que provoca defectos en la organización del embrión en desarrollo a lo largo de su eje
 dorsal-ventral. Como resultado, algunos tipos celulares se reducen y otros se expanden. Un objetivo de este trabajo fue
-identificar los genes con expresión alterada en el mutante Swirl en comparación con “wild zebrafish.”</p>
+identificar los genes con expresión alterada en el mutante Swirl en comparación con “wild zebrafish”.</p>
 <ol style="list-style-type: decimal">
 <li>El diseño experimental para este estudio fue el siguiente:
 \begin{center} <!-- ?---></li>
@@ -733,7 +733,7 @@ identificar los genes con expresión alterada en el mutante Swirl en comparació
 </ol>
 <ul>
 <li>El parámetro de interés es: <span class="math inline">\(\alpha= \mathbf{E}\left (log\frac{S}{W}\right )\)</span> .</li>
-<li>Las muestras 1 y 3 estan marcadas con : S (Verde=“Green”) y W (Rojo=“Red”), y las muestras 2 y 4 son “dye-swapped.”</li>
+<li>Las muestras 1 y 3 estan marcadas con : S (Verde=“Green”) y W (Rojo=“Red”), y las muestras 2 y 4 son “dye-swapped”.</li>
 <li>El modelo, <span class="math inline">\(\mathbf{y=X\alpha+\varepsilon}\)</span>, es:
 <span class="math display">\[
 \begin{array}{ccccc}
@@ -791,7 +791,7 @@ comparaciones son las de mayor interés.</p>
 </ul>
 <p>" width=“50%”&gt;</p>
 <ul>
-<li>Permite la comparación directa de Mutantes vs “Wild.”</li>
+<li>Permite la comparación directa de Mutantes vs “Wild”.</li>
 <li>Número de parámetros a estimar es 3, relación intuitiva
 entre el número de parámetros y mutantes.</li>
 <li>Las comparaciones de Mutante vs Mutante son menos eficientes.</li>
@@ -1246,7 +1246,7 @@ $$</p>
 <span class="math display">\[
 \mathbf{E(y_g)=X\alpha_g},\quad \text{var}(y_g)=W_g\sigma_g,
 \]</span>
-es posible usar <em>la teoría estándar del modelo lineal</em> (ver <span class="citation">(<strong>Faraway:2004?</strong>)</span>)
+es posible usar <em>la teoría estándar del modelo lineal</em> (ver <span class="citation">(<span class="citeproc-not-found" data-reference-id="Faraway:2004"><strong>???</strong></span>)</span>)
 para obtener:</p>
 <ul>
 <li>Estimación de los parámetros: <span class="math inline">\(\hat \alpha_g( \approx \mathbf{\alpha})\)</span>.</li>
@@ -1323,13 +1323,13 @@ gen esté diferencialmente expresado. A mayor valor negativo, más probable es q
 ## attr(,&quot;contrasts&quot;)$lev
 ## [1] &quot;contr.treatment&quot;</code></pre>
 <p>Usando los nombres de las columnas de la matriz de diseño creamos los contrastes</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(limma)</span>
-<span id="cb39-2"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb39-2" aria-hidden="true" tabindex="-1"></a>cont.matrix <span class="ot">&lt;-</span> <span class="fu">makeContrasts</span> (</span>
-<span id="cb39-3"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb39-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">LPS.in.AGED=</span>(Aged.LPS<span class="sc">-</span>Aged.MED),</span>
-<span id="cb39-4"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb39-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">LPS.in.YOUNG=</span>(Young.LPS<span class="sc">-</span>Young.MED),</span>
-<span id="cb39-5"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb39-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">AGE=</span>(Aged.MED<span class="sc">-</span>Young.MED),</span>
-<span id="cb39-6"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb39-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">levels=</span>design)</span>
-<span id="cb39-7"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb39-7" aria-hidden="true" tabindex="-1"></a>cont.matrix</span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb43-1"></a><span class="kw">require</span>(limma)</span>
+<span id="cb43-2"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb43-2"></a>cont.matrix &lt;-<span class="st"> </span><span class="kw">makeContrasts</span> (</span>
+<span id="cb43-3"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb43-3"></a>      <span class="dt">LPS.in.AGED=</span>(Aged.LPS<span class="op">-</span>Aged.MED),</span>
+<span id="cb43-4"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb43-4"></a>      <span class="dt">LPS.in.YOUNG=</span>(Young.LPS<span class="op">-</span>Young.MED),</span>
+<span id="cb43-5"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb43-5"></a>      <span class="dt">AGE=</span>(Aged.MED<span class="op">-</span>Young.MED),</span>
+<span id="cb43-6"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb43-6"></a>      <span class="dt">levels=</span>design)</span>
+<span id="cb43-7"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb43-7"></a>cont.matrix</span></code></pre></div>
 <pre><code>##            Contrasts
 ## Levels      LPS.in.AGED LPS.in.YOUNG AGE
 ##   Aged.LPS            1            0   0
@@ -1353,18 +1353,18 @@ los p–valores se ajustan de forma que tengamos control sobre la tasa de falsos
 de Benjamini y Hochberg (<span class="citation">Benjamini and Hochberg (1995)</span>).</p>
 <p>La funcion <tt>topTable</tt> genera para cada contraste una lista de genes
 ordenados de mas a menos diferencialmente expresados.</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb41-1" aria-hidden="true" tabindex="-1"></a>topTab_LPS.in.AGED <span class="ot">&lt;-</span> <span class="fu">topTable</span> (fit.main, <span class="at">number=</span><span class="fu">nrow</span>(fit.main), <span class="at">coef=</span><span class="st">&quot;LPS.in.AGED&quot;</span>, <span class="at">adjust=</span><span class="st">&quot;fdr&quot;</span>)</span>
-<span id="cb41-2"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb41-2" aria-hidden="true" tabindex="-1"></a>topTab_LPS.in.YOUNG <span class="ot">&lt;-</span> <span class="fu">topTable</span> (fit.main, <span class="at">number=</span><span class="fu">nrow</span>(fit.main), <span class="at">coef=</span><span class="st">&quot;LPS.in.YOUNG&quot;</span>, <span class="at">adjust=</span><span class="st">&quot;fdr&quot;</span>)</span>
-<span id="cb41-3"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb41-3" aria-hidden="true" tabindex="-1"></a>topTab_AGE  <span class="ot">&lt;-</span> <span class="fu">topTable</span> (fit.main, <span class="at">number=</span><span class="fu">nrow</span>(fit.main) , <span class="at">coef=</span><span class="st">&quot;AGE&quot;</span>, <span class="at">adjust=</span><span class="st">&quot;fdr&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb45-1"></a>topTab_LPS.in.AGED &lt;-<span class="st"> </span><span class="kw">topTable</span> (fit.main, <span class="dt">number=</span><span class="kw">nrow</span>(fit.main), <span class="dt">coef=</span><span class="st">&quot;LPS.in.AGED&quot;</span>, <span class="dt">adjust=</span><span class="st">&quot;fdr&quot;</span>)</span>
+<span id="cb45-2"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb45-2"></a>topTab_LPS.in.YOUNG &lt;-<span class="st"> </span><span class="kw">topTable</span> (fit.main, <span class="dt">number=</span><span class="kw">nrow</span>(fit.main), <span class="dt">coef=</span><span class="st">&quot;LPS.in.YOUNG&quot;</span>, <span class="dt">adjust=</span><span class="st">&quot;fdr&quot;</span>)</span>
+<span id="cb45-3"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb45-3"></a>topTab_AGE  &lt;-<span class="st"> </span><span class="kw">topTable</span> (fit.main, <span class="dt">number=</span><span class="kw">nrow</span>(fit.main) , <span class="dt">coef=</span><span class="st">&quot;AGE&quot;</span>, <span class="dt">adjust=</span><span class="st">&quot;fdr&quot;</span>)</span></code></pre></div>
 <p>Se puede visualizar los resultados mediante un <tt>volcano plot</tt> que, en este caso, representa en abscisas los cambios de expresión en escala logarítmica
 y en ordenadas el estadístico <span class="math inline">\(B\)</span> en vez de el “menos logaritmo” del p-valor.</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb42-1" aria-hidden="true" tabindex="-1"></a>coefnum <span class="ot">=</span> <span class="dv">1</span></span>
-<span id="cb42-2"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb42-2" aria-hidden="true" tabindex="-1"></a>opt <span class="ot">&lt;-</span> <span class="fu">par</span>(<span class="at">cex.lab =</span> <span class="fl">0.7</span>)</span>
-<span id="cb42-3"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="fu">volcanoplot</span>(fit.main, <span class="at">coef=</span>coefnum, <span class="at">highlight=</span><span class="dv">10</span>, <span class="at">names=</span>fit.main<span class="sc">$</span>ID,</span>
-<span id="cb42-4"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb42-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">main=</span><span class="fu">paste</span>(<span class="st">&quot;Differentially expressed genes&quot;</span>,<span class="fu">colnames</span>(cont.matrix)[coefnum], <span class="at">sep=</span><span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>))</span>
-<span id="cb42-5"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb42-5" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb46-1"></a>coefnum =<span class="st"> </span><span class="dv">1</span></span>
+<span id="cb46-2"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb46-2"></a>opt &lt;-<span class="st"> </span><span class="kw">par</span>(<span class="dt">cex.lab =</span> <span class="fl">0.7</span>)</span>
+<span id="cb46-3"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb46-3"></a><span class="kw">volcanoplot</span>(fit.main, <span class="dt">coef=</span>coefnum, <span class="dt">highlight=</span><span class="dv">10</span>, <span class="dt">names=</span>fit.main<span class="op">$</span>ID,</span>
+<span id="cb46-4"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb46-4"></a>            <span class="dt">main=</span><span class="kw">paste</span>(<span class="st">&quot;Differentially expressed genes&quot;</span>,<span class="kw">colnames</span>(cont.matrix)[coefnum], <span class="dt">sep=</span><span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>))</span>
+<span id="cb46-5"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb46-5"></a><span class="kw">abline</span>(<span class="dt">v=</span><span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>,<span class="dv">1</span>))</span></code></pre></div>
 <p><img src="Analisis_de_Datos_de_Microarrays_y_otras_Omicas_files/figure-html/volcano1-1.png" width="672" /></p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(opt)</span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="selección-de-genes-diferencialmente-expresados-chapdeg.html#cb47-1"></a><span class="kw">par</span>(opt)</span></code></pre></div>
 
 </div>
 </div>

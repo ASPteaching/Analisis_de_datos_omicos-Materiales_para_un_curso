@@ -22,7 +22,7 @@ MathJax.Hub.Config({
   TeX: { equationNumbers: { autoNumber: "AMS" } }
 });
 </script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" type="text/javascript"></script>
 
 <meta name="description" content="4.4 Principios de diseño de experimentos | Analisis de datos omicos">
 
@@ -45,6 +45,7 @@ MathJax.Hub.Config({
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
 <script src="libs/navigation-1.1/tabsets.js"></script>
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 
 
 <style type="text/css">code{white-space: pre;}</style>
@@ -52,7 +53,6 @@ MathJax.Hub.Config({
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
@@ -196,10 +196,11 @@ img {
 <ul>
 <li><a href="3-2-c4examples.html#celltypes"><span class="toc-section-number">3.2.1</span> Estudio de procesos regulados por citoquinas</a></li>
 <li><a href="3-2-c4examples.html#golub"><span class="toc-section-number">3.2.2</span> Clasificación molecular de la leucemia</a></li>
-<li><a href="3-2-c4examples.html#efecto-del-estrogeno-y-el-tiempo-de-administración-estrogen"><span class="toc-section-number">3.2.3</span> Efecto del estrogeno y el tiempo de administración {#estrogen]</a></li>
+<li><a href="3-2-c4examples.html#estrogen"><span class="toc-section-number">3.2.3</span> Efecto del estrogeno y el tiempo de administración</a></li>
 <li><a href="3-2-c4examples.html#CCL4"><span class="toc-section-number">3.2.4</span> Efecto del CCL4 en la expresión génica</a></li>
-<li><a href="3-2-c4examples.html#yeast"><span class="toc-section-number">3.2.5</span> Análisis de patrones en el ciclo celular</a></li>
-<li><a href="3-2-c4examples.html#recapitulación"><span class="toc-section-number">3.2.6</span> Recapitulación</a></li>
+<li><a href="3-2-c4examples.html#swirl"><span class="toc-section-number">3.2.5</span> Estudio de la mutación “swirl” en el desarrollo del pez cebra</a></li>
+<li><a href="3-2-c4examples.html#yeast"><span class="toc-section-number">3.2.6</span> Análisis de patrones en el ciclo celular</a></li>
+<li><a href="3-2-c4examples.html#recapitulación"><span class="toc-section-number">3.2.7</span> Recapitulación</a></li>
 </ul></li>
 <li><a href="3-3-el-proceso-de-análisis-de-microarrays.html#el-proceso-de-análisis-de-microarrays"><span class="toc-section-number">3.3</span> El proceso de análisis de microarrays</a></li>
 </ul></li>
@@ -236,8 +237,7 @@ img {
 </ul></li>
 <li><a href="5-4-resumen-y-normalización-de-microarrays-de-affymetrix.html#resumen-y-normalización-de-microarrays-de-affymetrix"><span class="toc-section-number">5.4</span> Resumen y normalización de microarrays de Affymetrix</a>
 <ul>
-<li><a href="5-4-resumen-y-normalización-de-microarrays-de-affymetrix.html#métodos-originales-de-affymetrix"><span class="toc-section-number">5.4.1</span> Métodos originales de Affymetrix</a></li>
-<li><a href="5-4-resumen-y-normalización-de-microarrays-de-affymetrix.html#el-método-rma-robust-multi-array-average"><span class="toc-section-number">5.4.2</span> El método RMA (Robust Multi-Array Average)</a></li>
+<li><a href="5-4-resumen-y-normalización-de-microarrays-de-affymetrix.html#el-método-rma-robust-multi-array-average"><span class="toc-section-number">5.4.1</span> El método RMA (Robust Multi-Array Average)</a></li>
 </ul></li>
 <li><a href="5-5-filtraje-no-específico.html#filtraje-no-específico"><span class="toc-section-number">5.5</span> Filtraje no específico</a></li>
 </ul></li>
@@ -344,7 +344,7 @@ procedimiento es mejor para determinar el tamaño de las muestras, sí que lo ha
 <h4><span class="header-section-number">4.4.1.2</span> <em>Pooling</em></h4>
 <p>En el contexto de los microarrays, llamamos “pooling” a la combinación del RNA de diferentes casos en una única muestra.</p>
 <p>Hay dos razones a favor de ello, una, es que, a veces, no hay suficiente ARN disponible y esta es la única forma de conseguir suficiente material para construir los arrays, otra, más controvertida,
-es la creencia que la variabilidad entre arrays puede reducirse por “pooling.”
+es la creencia que la variabilidad entre arrays puede reducirse por “pooling”.
 La justificación es que combinar muestras equivale a promediar expresiones, y como ya se conoce, el promedio es menos variable que los valores individuales. A pesar de la debilidad de este argumento, es verdad que en ciertas situaciones el <em>pooling</em> puede ser apropiado y, recientemente, muchos estadísticos han dedicado sus esfuerzos para tratar de responder la pregunta “to pool or not to pool” <span class="citation">(Kerr and Churchill 2001)</span>. Por ejemplo, si la variabilidad biológica está altamente relacionada con el error en las medidas, y las muestras biológicas tienen un coste mínimo en comparación con el de los arrays, una apropiada estrategia de “pooling” puede ser claramente eficiente en costes.</p>
 <p>De todos modos, el “pooling” no se debería usar en cualquier tipo de estudios.
 Si el objetivo es comparar expresiones medias (ver más adelante " comparación de clases"), puede funcionar adecuadamente, pero se debería claramente evitar cuando el objetivo del experimento es construir predictores que se basen en

@@ -14,6 +14,7 @@ fig:c04dyelabels
 fig:c04referencevsloop
 fig:plotDendro
 fig:c05normScatterMA
+fig:c05normScatterMA2
 fig:c05signalNoise
 fig:c05plotAffy
 fig:c05MAPlotAffy
@@ -56,8 +57,9 @@ otros-tipos-de-estudios
 c4examples
 celltypes
 golub
-efecto-del-estrogeno-y-el-tiempo-de-administración-estrogen
+estrogen
 CCL4
+swirl
 yeast
 recapitulación
 el-proceso-de-análisis-de-microarrays
@@ -98,9 +100,6 @@ normalización-de-arrays-de-dos-colores
 normalización-global
 normalización-dependiente-de-la-intensidad
 resumen-y-normalización-de-microarrays-de-affymetrix
-métodos-originales-de-affymetrix
-m.a.s.-4.0
-m.a.s.-5.0
 el-método-rma-robust-multi-array-average
 filtraje-no-específico
 selección-de-genes-diferencialmente-expresados-chapdeg

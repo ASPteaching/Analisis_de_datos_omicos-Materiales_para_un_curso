@@ -22,7 +22,7 @@ MathJax.Hub.Config({
   TeX: { equationNumbers: { autoNumber: "AMS" } }
 });
 </script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" type="text/javascript"></script>
 
 <meta name="description" content="5.1 Introducción | Analisis de datos omicos">
 
@@ -45,6 +45,7 @@ MathJax.Hub.Config({
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
 <script src="libs/navigation-1.1/tabsets.js"></script>
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 
 
 <style type="text/css">code{white-space: pre;}</style>
@@ -52,7 +53,6 @@ MathJax.Hub.Config({
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
@@ -196,10 +196,11 @@ img {
 <ul>
 <li><a href="3-2-c4examples.html#celltypes"><span class="toc-section-number">3.2.1</span> Estudio de procesos regulados por citoquinas</a></li>
 <li><a href="3-2-c4examples.html#golub"><span class="toc-section-number">3.2.2</span> Clasificación molecular de la leucemia</a></li>
-<li><a href="3-2-c4examples.html#efecto-del-estrogeno-y-el-tiempo-de-administración-estrogen"><span class="toc-section-number">3.2.3</span> Efecto del estrogeno y el tiempo de administración {#estrogen]</a></li>
+<li><a href="3-2-c4examples.html#estrogen"><span class="toc-section-number">3.2.3</span> Efecto del estrogeno y el tiempo de administración</a></li>
 <li><a href="3-2-c4examples.html#CCL4"><span class="toc-section-number">3.2.4</span> Efecto del CCL4 en la expresión génica</a></li>
-<li><a href="3-2-c4examples.html#yeast"><span class="toc-section-number">3.2.5</span> Análisis de patrones en el ciclo celular</a></li>
-<li><a href="3-2-c4examples.html#recapitulación"><span class="toc-section-number">3.2.6</span> Recapitulación</a></li>
+<li><a href="3-2-c4examples.html#swirl"><span class="toc-section-number">3.2.5</span> Estudio de la mutación “swirl” en el desarrollo del pez cebra</a></li>
+<li><a href="3-2-c4examples.html#yeast"><span class="toc-section-number">3.2.6</span> Análisis de patrones en el ciclo celular</a></li>
+<li><a href="3-2-c4examples.html#recapitulación"><span class="toc-section-number">3.2.7</span> Recapitulación</a></li>
 </ul></li>
 <li><a href="3-3-el-proceso-de-análisis-de-microarrays.html#el-proceso-de-análisis-de-microarrays"><span class="toc-section-number">3.3</span> El proceso de análisis de microarrays</a></li>
 </ul></li>
@@ -236,8 +237,7 @@ img {
 </ul></li>
 <li><a href="5-4-resumen-y-normalización-de-microarrays-de-affymetrix.html#resumen-y-normalización-de-microarrays-de-affymetrix"><span class="toc-section-number">5.4</span> Resumen y normalización de microarrays de Affymetrix</a>
 <ul>
-<li><a href="5-4-resumen-y-normalización-de-microarrays-de-affymetrix.html#métodos-originales-de-affymetrix"><span class="toc-section-number">5.4.1</span> Métodos originales de Affymetrix</a></li>
-<li><a href="5-4-resumen-y-normalización-de-microarrays-de-affymetrix.html#el-método-rma-robust-multi-array-average"><span class="toc-section-number">5.4.2</span> El método RMA (Robust Multi-Array Average)</a></li>
+<li><a href="5-4-resumen-y-normalización-de-microarrays-de-affymetrix.html#el-método-rma-robust-multi-array-average"><span class="toc-section-number">5.4.1</span> El método RMA (Robust Multi-Array Average)</a></li>
 </ul></li>
 <li><a href="5-5-filtraje-no-específico.html#filtraje-no-específico"><span class="toc-section-number">5.5</span> Filtraje no específico</a></li>
 </ul></li>
@@ -325,7 +325,7 @@ que deben ser corregidas.</p></li>
 <li><p><strong>Preprocesado</strong> Incluso si son correctos, los datos “crudos” no sirven para el análisis sino que necesitan preprocesados, lo que puede interpretarse como uno o más de los procesos siguientes:</p></li>
 </ol>
 <ul>
-<li>“Limpiados,” para eliminar la parte de la señal no atribuible a la expresión, llamada “background” o ruído.</li>
+<li>“Limpiados”, para eliminar la parte de la señal no atribuible a la expresión, llamada “background” o ruído.</li>
 <li>“Normalizados” para hacerlos comparables entre muestras y eliminar posibles sesgos técnicos.</li>
 <li>Resumidos o “sumarizados” de forma que se tenga un sólo valor por gen.</li>
 <li>“Transformados” de forma que la escala sea razonable y facilite el análisis.</li>
@@ -632,41 +632,41 @@ y una fila por gen (mismas filas que archivos “.gpr”).</p>
 <h4><span class="header-section-number">5.1.2.3</span> Datos de ejemplo</h4>
 <p>Los ejemplos de este capítulo se basarán en dos de los conjuntos de datos descritos en el capítulo <a href="3-MDAProcess.html#MDAProcess">3</a>.</p>
 <ul>
-<li>Por un lado, trabajaremos con los datos del conjunto  referidos al efecto del tratamiento con estrógenos en cancer de mama descrito en @ref{estrogen}. La exploración se basará en los datos normalizados pero también en los datos “crudos,” de bajo nivel, contenidos en los archivos “.cel.” Estos datos pueden obtenerse directamente del paquete de Bioconductor . Un aspecto interesante de este conjunto de datos es que, junto con 8 muestras “buenas” se proporciona un array defectuoso, denominado “” que facilita el ver como aparecen ciertos gráficos cuando hay problemas.</li>
+<li>Por un lado, trabajaremos con los datos del conjunto  referidos al efecto del tratamiento con estrógenos en cancer de mama descrito en @ref{estrogen}. La exploración se basará en los datos normalizados pero también en los datos “crudos”, de bajo nivel, contenidos en los archivos “.cel”. Estos datos pueden obtenerse directamente del paquete de Bioconductor . Un aspecto interesante de este conjunto de datos es que, junto con 8 muestras “buenas” se proporciona un array defectuoso, denominado “” que facilita el ver como aparecen ciertos gráficos cuando hay problemas.</li>
 <li>Por otro lado, usaremos los datos del conjunto , relativos al efecto del tratamiento con CCL4 en la expresión de los hepatocitos. Los datos resultan accesibles al instalar el paquete .</li>
 </ul>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="5-1-introducción.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(BiocManager)) <span class="fu">install.packages</span>(<span class="st">&quot;BiocManager&quot;</span>)</span>
-<span id="cb3-2"><a href="5-1-introducción.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span>(<span class="fu">require</span>(CCl4))){</span>
-<span id="cb3-3"><a href="5-1-introducción.html#cb3-3" aria-hidden="true" tabindex="-1"></a> BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">&quot;CCl4&quot;</span>)</span>
-<span id="cb3-4"><a href="5-1-introducción.html#cb3-4" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb3-5"><a href="5-1-introducción.html#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span>(<span class="fu">require</span>(estrogen))){</span>
-<span id="cb3-6"><a href="5-1-introducción.html#cb3-6" aria-hidden="true" tabindex="-1"></a> BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">&quot;estrogen&quot;</span>)</span>
-<span id="cb3-7"><a href="5-1-introducción.html#cb3-7" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb3-8"><a href="5-1-introducción.html#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span>(<span class="fu">require</span>(affy))){</span>
-<span id="cb3-9"><a href="5-1-introducción.html#cb3-9" aria-hidden="true" tabindex="-1"></a> BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">&quot;affy&quot;</span>)</span>
-<span id="cb3-10"><a href="5-1-introducción.html#cb3-10" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb3-11"><a href="5-1-introducción.html#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span>(<span class="fu">require</span>(affyPLM))){</span>
-<span id="cb3-12"><a href="5-1-introducción.html#cb3-12" aria-hidden="true" tabindex="-1"></a> BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">&quot;affyPLM&quot;</span>)</span>
-<span id="cb3-13"><a href="5-1-introducción.html#cb3-13" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="5-1-introducción.html#cb3-1"></a><span class="cf">if</span>(<span class="op">!</span><span class="kw">require</span>(BiocManager)) <span class="kw">install.packages</span>(<span class="st">&quot;BiocManager&quot;</span>)</span>
+<span id="cb3-2"><a href="5-1-introducción.html#cb3-2"></a><span class="cf">if</span> (<span class="op">!</span>(<span class="kw">require</span>(CCl4))){</span>
+<span id="cb3-3"><a href="5-1-introducción.html#cb3-3"></a> BiocManager<span class="op">::</span><span class="kw">install</span>(<span class="st">&quot;CCl4&quot;</span>)</span>
+<span id="cb3-4"><a href="5-1-introducción.html#cb3-4"></a>}</span>
+<span id="cb3-5"><a href="5-1-introducción.html#cb3-5"></a><span class="cf">if</span> (<span class="op">!</span>(<span class="kw">require</span>(estrogen))){</span>
+<span id="cb3-6"><a href="5-1-introducción.html#cb3-6"></a> BiocManager<span class="op">::</span><span class="kw">install</span>(<span class="st">&quot;estrogen&quot;</span>)</span>
+<span id="cb3-7"><a href="5-1-introducción.html#cb3-7"></a>}</span>
+<span id="cb3-8"><a href="5-1-introducción.html#cb3-8"></a><span class="cf">if</span> (<span class="op">!</span>(<span class="kw">require</span>(affy))){</span>
+<span id="cb3-9"><a href="5-1-introducción.html#cb3-9"></a> BiocManager<span class="op">::</span><span class="kw">install</span>(<span class="st">&quot;affy&quot;</span>)</span>
+<span id="cb3-10"><a href="5-1-introducción.html#cb3-10"></a>}</span>
+<span id="cb3-11"><a href="5-1-introducción.html#cb3-11"></a><span class="cf">if</span> (<span class="op">!</span>(<span class="kw">require</span>(affyPLM))){</span>
+<span id="cb3-12"><a href="5-1-introducción.html#cb3-12"></a> BiocManager<span class="op">::</span><span class="kw">install</span>(<span class="st">&quot;affyPLM&quot;</span>)</span>
+<span id="cb3-13"><a href="5-1-introducción.html#cb3-13"></a>}</span></code></pre></div>
 <p>Aunque, en la actualidad (año 2021) el paquete más utilizado para arrays de este tipo es el paquete <code>oligo</code> este ejemplo utiliza el paquete <code>affy</code>.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="5-1-introducción.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(estrogen)</span>
-<span id="cb4-2"><a href="5-1-introducción.html#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(affy)</span>
-<span id="cb4-3"><a href="5-1-introducción.html#cb4-3" aria-hidden="true" tabindex="-1"></a>affyPath <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="at">package =</span> <span class="st">&quot;estrogen&quot;</span>)</span>
-<span id="cb4-4"><a href="5-1-introducción.html#cb4-4" aria-hidden="true" tabindex="-1"></a>adfAffy <span class="ot">=</span> <span class="fu">read.AnnotatedDataFrame</span>(<span class="st">&quot;phenoData.txt&quot;</span>, <span class="at">sep=</span><span class="st">&quot;&quot;</span>,  <span class="at">path=</span>affyPath)</span>
-<span id="cb4-5"><a href="5-1-introducción.html#cb4-5" aria-hidden="true" tabindex="-1"></a>affyTargets <span class="ot">=</span> <span class="fu">pData</span>(adfAffy)</span>
-<span id="cb4-6"><a href="5-1-introducción.html#cb4-6" aria-hidden="true" tabindex="-1"></a>affyTargets<span class="sc">$</span>filename <span class="ot">=</span> <span class="fu">file.path</span>(affyPath, <span class="fu">row.names</span>(affyTargets))</span>
-<span id="cb4-7"><a href="5-1-introducción.html#cb4-7" aria-hidden="true" tabindex="-1"></a>affyRaw <span class="ot">&lt;-</span> <span class="fu">read.affybatch</span>(affyTargets<span class="sc">$</span>filename, <span class="at">phenoData=</span>adfAffy)</span>
-<span id="cb4-8"><a href="5-1-introducción.html#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co"># show(affyRaw)</span></span>
-<span id="cb4-9"><a href="5-1-introducción.html#cb4-9" aria-hidden="true" tabindex="-1"></a>actualPath <span class="ot">&lt;-</span> <span class="fu">getwd</span>()</span>
-<span id="cb4-10"><a href="5-1-introducción.html#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(affyPath)</span>
-<span id="cb4-11"><a href="5-1-introducción.html#cb4-11" aria-hidden="true" tabindex="-1"></a>allAffyRaw <span class="ot">&lt;-</span> <span class="fu">ReadAffy</span>()</span>
-<span id="cb4-12"><a href="5-1-introducción.html#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(actualPath)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="5-1-introducción.html#cb4-1"></a><span class="kw">library</span>(estrogen)</span>
+<span id="cb4-2"><a href="5-1-introducción.html#cb4-2"></a><span class="kw">library</span>(affy)</span>
+<span id="cb4-3"><a href="5-1-introducción.html#cb4-3"></a>affyPath &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;estrogen&quot;</span>)</span>
+<span id="cb4-4"><a href="5-1-introducción.html#cb4-4"></a>adfAffy =<span class="st"> </span><span class="kw">read.AnnotatedDataFrame</span>(<span class="st">&quot;phenoData.txt&quot;</span>, <span class="dt">sep=</span><span class="st">&quot;&quot;</span>,  <span class="dt">path=</span>affyPath)</span>
+<span id="cb4-5"><a href="5-1-introducción.html#cb4-5"></a>affyTargets =<span class="st"> </span><span class="kw">pData</span>(adfAffy)</span>
+<span id="cb4-6"><a href="5-1-introducción.html#cb4-6"></a>affyTargets<span class="op">$</span>filename =<span class="st"> </span><span class="kw">file.path</span>(affyPath, <span class="kw">row.names</span>(affyTargets))</span>
+<span id="cb4-7"><a href="5-1-introducción.html#cb4-7"></a>affyRaw &lt;-<span class="st"> </span><span class="kw">read.affybatch</span>(affyTargets<span class="op">$</span>filename, <span class="dt">phenoData=</span>adfAffy)</span>
+<span id="cb4-8"><a href="5-1-introducción.html#cb4-8"></a><span class="co"># show(affyRaw)</span></span>
+<span id="cb4-9"><a href="5-1-introducción.html#cb4-9"></a>actualPath &lt;-<span class="st"> </span><span class="kw">getwd</span>()</span>
+<span id="cb4-10"><a href="5-1-introducción.html#cb4-10"></a><span class="kw">setwd</span>(affyPath)</span>
+<span id="cb4-11"><a href="5-1-introducción.html#cb4-11"></a>allAffyRaw &lt;-<span class="st"> </span><span class="kw">ReadAffy</span>()</span>
+<span id="cb4-12"><a href="5-1-introducción.html#cb4-12"></a><span class="kw">setwd</span>(actualPath)</span></code></pre></div>
 <p>El resultado de la lectura es un objeto “affyraw” de clase “affyBatch”:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="5-1-introducción.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(affyRaw)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="5-1-introducción.html#cb5-1"></a><span class="kw">class</span>(affyRaw)</span></code></pre></div>
 <pre><code>## [1] &quot;AffyBatch&quot;
 ## attr(,&quot;package&quot;)
 ## [1] &quot;affy&quot;</code></pre>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="5-1-introducción.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(affyRaw)</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="5-1-introducción.html#cb7-1"></a><span class="kw">print</span>(affyRaw)</span></code></pre></div>
 <pre><code>## AffyBatch object
 ## size of arrays=640x640 features (22 kb)
 ## cdf=HG_U95Av2 (12625 affyids)
@@ -675,25 +675,25 @@ y una fila por gen (mismas filas que archivos “.gpr”).</p>
 ## annotation=hgu95av2
 ## notes=</code></pre>
 <p>El paquete <code>limma</code> es conocido como paquete para la selección de genes diferencialmente expresados pero también incluye algunas funciones para la lectura y preprocesado de arrays de dos colores.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="5-1-introducción.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;limma&quot;</span>)</span>
-<span id="cb9-2"><a href="5-1-introducción.html#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;CCl4&quot;</span>)</span>
-<span id="cb9-3"><a href="5-1-introducción.html#cb9-3" aria-hidden="true" tabindex="-1"></a>dataPath <span class="ot">=</span> <span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="at">package=</span><span class="st">&quot;CCl4&quot;</span>)</span>
-<span id="cb9-4"><a href="5-1-introducción.html#cb9-4" aria-hidden="true" tabindex="-1"></a>adf <span class="ot">=</span> <span class="fu">read.AnnotatedDataFrame</span>(<span class="st">&quot;samplesInfo.txt&quot;</span>, </span>
-<span id="cb9-5"><a href="5-1-introducción.html#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">path=</span>dataPath)</span>
-<span id="cb9-6"><a href="5-1-introducción.html#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co">#adf</span></span>
-<span id="cb9-7"><a href="5-1-introducción.html#cb9-7" aria-hidden="true" tabindex="-1"></a>targets <span class="ot">=</span> <span class="fu">pData</span>(adf)</span>
-<span id="cb9-8"><a href="5-1-introducción.html#cb9-8" aria-hidden="true" tabindex="-1"></a>targets<span class="sc">$</span>FileName <span class="ot">=</span> <span class="fu">row.names</span>(targets)</span>
-<span id="cb9-9"><a href="5-1-introducción.html#cb9-9" aria-hidden="true" tabindex="-1"></a>RG <span class="ot">&lt;-</span> <span class="fu">read.maimages</span>(targets, <span class="at">path=</span>dataPath, <span class="at">source=</span><span class="st">&quot;genepix&quot;</span>)</span>
-<span id="cb9-10"><a href="5-1-introducción.html#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(RG<span class="sc">$</span>targets)</span>
-<span id="cb9-11"><a href="5-1-introducción.html#cb9-11" aria-hidden="true" tabindex="-1"></a>newNames <span class="ot">&lt;-</span><span class="fu">paste</span>(<span class="fu">substr</span>(Cy3,<span class="dv">1</span>,<span class="dv">3</span>),<span class="fu">substr</span>(Cy5,<span class="dv">1</span>,<span class="dv">3</span>),<span class="fu">substr</span>(FileName,<span class="dv">10</span>,<span class="dv">12</span>), <span class="at">sep=</span><span class="st">&quot;&quot;</span>)</span>
-<span id="cb9-12"><a href="5-1-introducción.html#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(RG<span class="sc">$</span>R)<span class="ot">&lt;-</span><span class="fu">colnames</span>(RG<span class="sc">$</span>G)<span class="ot">&lt;-</span><span class="fu">colnames</span>(RG<span class="sc">$</span>Rb)<span class="ot">&lt;-</span><span class="fu">colnames</span>(RG<span class="sc">$</span>Gb)<span class="ot">&lt;-</span><span class="fu">rownames</span>(RG<span class="sc">$</span>targets)<span class="ot">&lt;-</span> newNames</span>
-<span id="cb9-13"><a href="5-1-introducción.html#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="co"># show(RG)</span></span></code></pre></div>
-<p>El resultado de la lectura es un objeto de classe “RGlist.”</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="5-1-introducción.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(RG)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="5-1-introducción.html#cb9-1"></a><span class="kw">library</span>(<span class="st">&quot;limma&quot;</span>)</span>
+<span id="cb9-2"><a href="5-1-introducción.html#cb9-2"></a><span class="kw">library</span>(<span class="st">&quot;CCl4&quot;</span>)</span>
+<span id="cb9-3"><a href="5-1-introducción.html#cb9-3"></a>dataPath =<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="dt">package=</span><span class="st">&quot;CCl4&quot;</span>)</span>
+<span id="cb9-4"><a href="5-1-introducción.html#cb9-4"></a>adf =<span class="st"> </span><span class="kw">read.AnnotatedDataFrame</span>(<span class="st">&quot;samplesInfo.txt&quot;</span>, </span>
+<span id="cb9-5"><a href="5-1-introducción.html#cb9-5"></a>    <span class="dt">path=</span>dataPath)</span>
+<span id="cb9-6"><a href="5-1-introducción.html#cb9-6"></a><span class="co">#adf</span></span>
+<span id="cb9-7"><a href="5-1-introducción.html#cb9-7"></a>targets =<span class="st"> </span><span class="kw">pData</span>(adf)</span>
+<span id="cb9-8"><a href="5-1-introducción.html#cb9-8"></a>targets<span class="op">$</span>FileName =<span class="st"> </span><span class="kw">row.names</span>(targets)</span>
+<span id="cb9-9"><a href="5-1-introducción.html#cb9-9"></a>RG &lt;-<span class="st"> </span><span class="kw">read.maimages</span>(targets, <span class="dt">path=</span>dataPath, <span class="dt">source=</span><span class="st">&quot;genepix&quot;</span>)</span>
+<span id="cb9-10"><a href="5-1-introducción.html#cb9-10"></a><span class="kw">attach</span>(RG<span class="op">$</span>targets)</span>
+<span id="cb9-11"><a href="5-1-introducción.html#cb9-11"></a>newNames &lt;-<span class="kw">paste</span>(<span class="kw">substr</span>(Cy3,<span class="dv">1</span>,<span class="dv">3</span>),<span class="kw">substr</span>(Cy5,<span class="dv">1</span>,<span class="dv">3</span>),<span class="kw">substr</span>(FileName,<span class="dv">10</span>,<span class="dv">12</span>), <span class="dt">sep=</span><span class="st">&quot;&quot;</span>)</span>
+<span id="cb9-12"><a href="5-1-introducción.html#cb9-12"></a><span class="kw">colnames</span>(RG<span class="op">$</span>R)&lt;-<span class="kw">colnames</span>(RG<span class="op">$</span>G)&lt;-<span class="kw">colnames</span>(RG<span class="op">$</span>Rb)&lt;-<span class="kw">colnames</span>(RG<span class="op">$</span>Gb)&lt;-<span class="kw">rownames</span>(RG<span class="op">$</span>targets)&lt;-<span class="st"> </span>newNames</span>
+<span id="cb9-13"><a href="5-1-introducción.html#cb9-13"></a><span class="co"># show(RG)</span></span></code></pre></div>
+<p>El resultado de la lectura es un objeto de classe “RGlist”.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="5-1-introducción.html#cb10-1"></a><span class="kw">class</span>(RG)</span></code></pre></div>
 <pre><code>## [1] &quot;RGList&quot;
 ## attr(,&quot;package&quot;)
 ## [1] &quot;limma&quot;</code></pre>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="5-1-introducción.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(RG)</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="5-1-introducción.html#cb12-1"></a><span class="kw">print</span>(RG)</span></code></pre></div>
 <pre><code>## An object of class &quot;RGList&quot;
 ## $R
 ##      DMSCCl319 DMSCCl320 DMSCCl321 DMSCCl329 CClDMS330 CClDMS331 CClDMS332

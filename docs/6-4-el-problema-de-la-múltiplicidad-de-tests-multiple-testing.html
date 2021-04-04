@@ -22,7 +22,7 @@ MathJax.Hub.Config({
   TeX: { equationNumbers: { autoNumber: "AMS" } }
 });
 </script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" type="text/javascript"></script>
 
 <meta name="description" content="6.4 El problema de la múltiplicidad de tests (“multiple testing”) | Analisis de datos omicos">
 
@@ -45,6 +45,7 @@ MathJax.Hub.Config({
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
 <script src="libs/navigation-1.1/tabsets.js"></script>
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 
 
 <style type="text/css">code{white-space: pre;}</style>
@@ -52,7 +53,6 @@ MathJax.Hub.Config({
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
@@ -196,10 +196,11 @@ img {
 <ul>
 <li><a href="3-2-c4examples.html#celltypes"><span class="toc-section-number">3.2.1</span> Estudio de procesos regulados por citoquinas</a></li>
 <li><a href="3-2-c4examples.html#golub"><span class="toc-section-number">3.2.2</span> Clasificación molecular de la leucemia</a></li>
-<li><a href="3-2-c4examples.html#efecto-del-estrogeno-y-el-tiempo-de-administración-estrogen"><span class="toc-section-number">3.2.3</span> Efecto del estrogeno y el tiempo de administración {#estrogen]</a></li>
+<li><a href="3-2-c4examples.html#estrogen"><span class="toc-section-number">3.2.3</span> Efecto del estrogeno y el tiempo de administración</a></li>
 <li><a href="3-2-c4examples.html#CCL4"><span class="toc-section-number">3.2.4</span> Efecto del CCL4 en la expresión génica</a></li>
-<li><a href="3-2-c4examples.html#yeast"><span class="toc-section-number">3.2.5</span> Análisis de patrones en el ciclo celular</a></li>
-<li><a href="3-2-c4examples.html#recapitulación"><span class="toc-section-number">3.2.6</span> Recapitulación</a></li>
+<li><a href="3-2-c4examples.html#swirl"><span class="toc-section-number">3.2.5</span> Estudio de la mutación “swirl” en el desarrollo del pez cebra</a></li>
+<li><a href="3-2-c4examples.html#yeast"><span class="toc-section-number">3.2.6</span> Análisis de patrones en el ciclo celular</a></li>
+<li><a href="3-2-c4examples.html#recapitulación"><span class="toc-section-number">3.2.7</span> Recapitulación</a></li>
 </ul></li>
 <li><a href="3-3-el-proceso-de-análisis-de-microarrays.html#el-proceso-de-análisis-de-microarrays"><span class="toc-section-number">3.3</span> El proceso de análisis de microarrays</a></li>
 </ul></li>
@@ -236,8 +237,7 @@ img {
 </ul></li>
 <li><a href="5-4-resumen-y-normalización-de-microarrays-de-affymetrix.html#resumen-y-normalización-de-microarrays-de-affymetrix"><span class="toc-section-number">5.4</span> Resumen y normalización de microarrays de Affymetrix</a>
 <ul>
-<li><a href="5-4-resumen-y-normalización-de-microarrays-de-affymetrix.html#métodos-originales-de-affymetrix"><span class="toc-section-number">5.4.1</span> Métodos originales de Affymetrix</a></li>
-<li><a href="5-4-resumen-y-normalización-de-microarrays-de-affymetrix.html#el-método-rma-robust-multi-array-average"><span class="toc-section-number">5.4.2</span> El método RMA (Robust Multi-Array Average)</a></li>
+<li><a href="5-4-resumen-y-normalización-de-microarrays-de-affymetrix.html#el-método-rma-robust-multi-array-average"><span class="toc-section-number">5.4.1</span> El método RMA (Robust Multi-Array Average)</a></li>
 </ul></li>
 <li><a href="5-5-filtraje-no-específico.html#filtraje-no-específico"><span class="toc-section-number">5.5</span> Filtraje no específico</a></li>
 </ul></li>
@@ -325,7 +325,7 @@ analizando.</p>
 <p>De forma simplificada consideramos las dos aproximaciones más utilizadas.</p>
 <p>Una posibilidad es mirar de controlar la probabilidad de obtener
 <em>al menos un falso positivo</em> o “Family-wise-error-rate
-(FWER).” El más popular de estos métodos de control es la
+(FWER)”. El más popular de estos métodos de control es la
 corrección de Bonferroni, consistente en multiplicar el p–valor por
 el número de tests realizados. La misma Dudoit y muchos otros
 autores han desarrollado variantes de los métodos clásicos de
@@ -359,13 +359,13 @@ apropiado.</p>
 usando el paquete <tt>multtest</tt> de Bioconductor para ajustar por
 los métodos de Bonferroni (FWER), Benjamini &amp; Hochberg (FDR) o
 Benjamini &amp; Yekutieli (BY, FDR).</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="6-4-el-problema-de-la-múltiplicidad-de-tests-multiple-testing.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">require</span>(multtest))</span>
-<span id="cb32-2"><a href="6-4-el-problema-de-la-múltiplicidad-de-tests-multiple-testing.html#cb32-2" aria-hidden="true" tabindex="-1"></a>procs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Bonferroni&quot;</span>,<span class="st">&quot;BH&quot;</span>, <span class="st">&quot;BY&quot;</span>)</span>
-<span id="cb32-3"><a href="6-4-el-problema-de-la-múltiplicidad-de-tests-multiple-testing.html#cb32-3" aria-hidden="true" tabindex="-1"></a>adjPvalues <span class="ot">&lt;-</span> <span class="fu">mt.rawp2adjp</span>(teststat<span class="sc">$</span>p.value, procs)</span>
-<span id="cb32-4"><a href="6-4-el-problema-de-la-múltiplicidad-de-tests-multiple-testing.html#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(adjPvalues)</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="6-4-el-problema-de-la-múltiplicidad-de-tests-multiple-testing.html#cb36-1"></a><span class="kw">stopifnot</span>(<span class="kw">require</span>(multtest))</span>
+<span id="cb36-2"><a href="6-4-el-problema-de-la-múltiplicidad-de-tests-multiple-testing.html#cb36-2"></a>procs &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Bonferroni&quot;</span>,<span class="st">&quot;BH&quot;</span>, <span class="st">&quot;BY&quot;</span>)</span>
+<span id="cb36-3"><a href="6-4-el-problema-de-la-múltiplicidad-de-tests-multiple-testing.html#cb36-3"></a>adjPvalues &lt;-<span class="st"> </span><span class="kw">mt.rawp2adjp</span>(teststat<span class="op">$</span>p.value, procs)</span>
+<span id="cb36-4"><a href="6-4-el-problema-de-la-múltiplicidad-de-tests-multiple-testing.html#cb36-4"></a><span class="kw">names</span>(adjPvalues)</span></code></pre></div>
 <pre><code>## [1] &quot;adjp&quot;    &quot;index&quot;   &quot;h0.ABH&quot;  &quot;h0.TSBH&quot;</code></pre>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="6-4-el-problema-de-la-múltiplicidad-de-tests-multiple-testing.html#cb34-1" aria-hidden="true" tabindex="-1"></a>ranked.adjusted<span class="ot">&lt;-</span><span class="fu">cbind</span>(ranked, adjPvalues<span class="sc">$</span>adjp)</span>
-<span id="cb34-2"><a href="6-4-el-problema-de-la-múltiplicidad-de-tests-multiple-testing.html#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(ranked.adjusted)</span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="6-4-el-problema-de-la-múltiplicidad-de-tests-multiple-testing.html#cb38-1"></a>ranked.adjusted&lt;-<span class="kw">cbind</span>(ranked, adjPvalues<span class="op">$</span>adjp)</span>
+<span id="cb38-2"><a href="6-4-el-problema-de-la-múltiplicidad-de-tests-multiple-testing.html#cb38-2"></a><span class="kw">head</span>(ranked.adjusted)</span></code></pre></div>
 <pre><code>##              statistic        dm      p.value         rawp   Bonferroni
 ## 1449383_at   -48.61014 -2.044928 3.276616e-13 3.276616e-13 3.359842e-09
 ## 1451421_a_at -40.72173 -1.445182 1.909283e-12 1.909283e-12 1.957778e-08
@@ -381,8 +381,8 @@ Benjamini &amp; Yekutieli (BY, FDR).</p>
 ## 1448303_at   4.389966e-08 4.307737e-07
 ## 1418645_at   1.033014e-07 1.013665e-06</code></pre>
 <p>Si seleccionamos los genes en base a su p–valor ajustado por ejemplo por le método de Banjamini y Yekutieli se obtienen los siguientes genes</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="6-4-el-problema-de-la-múltiplicidad-de-tests-multiple-testing.html#cb36-1" aria-hidden="true" tabindex="-1"></a>selectedAdjusted<span class="ot">&lt;-</span>ranked.adjusted[ranked.adjusted<span class="sc">$</span>BY<span class="sc">&lt;</span><span class="fl">0.001</span>,]</span>
-<span id="cb36-2"><a href="6-4-el-problema-de-la-múltiplicidad-de-tests-multiple-testing.html#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(selectedAdjusted)</span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="6-4-el-problema-de-la-múltiplicidad-de-tests-multiple-testing.html#cb40-1"></a>selectedAdjusted&lt;-ranked.adjusted[ranked.adjusted<span class="op">$</span>BY<span class="op">&lt;</span><span class="fl">0.001</span>,]</span>
+<span id="cb40-2"><a href="6-4-el-problema-de-la-múltiplicidad-de-tests-multiple-testing.html#cb40-2"></a><span class="kw">nrow</span>(selectedAdjusted)</span></code></pre></div>
 <pre><code>## [1] 420</code></pre>
 </div>
 <p style="text-align: center;">

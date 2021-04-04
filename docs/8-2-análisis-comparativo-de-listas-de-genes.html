@@ -22,7 +22,7 @@ MathJax.Hub.Config({
   TeX: { equationNumbers: { autoNumber: "AMS" } }
 });
 </script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" type="text/javascript"></script>
 
 <meta name="description" content="8.2 Análisis comparativo de listas de genes | Analisis de datos omicos">
 
@@ -45,6 +45,7 @@ MathJax.Hub.Config({
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
 <script src="libs/navigation-1.1/tabsets.js"></script>
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 
 
 <style type="text/css">code{white-space: pre;}</style>
@@ -52,7 +53,6 @@ MathJax.Hub.Config({
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
@@ -196,10 +196,11 @@ img {
 <ul>
 <li><a href="3-2-c4examples.html#celltypes"><span class="toc-section-number">3.2.1</span> Estudio de procesos regulados por citoquinas</a></li>
 <li><a href="3-2-c4examples.html#golub"><span class="toc-section-number">3.2.2</span> Clasificación molecular de la leucemia</a></li>
-<li><a href="3-2-c4examples.html#efecto-del-estrogeno-y-el-tiempo-de-administración-estrogen"><span class="toc-section-number">3.2.3</span> Efecto del estrogeno y el tiempo de administración {#estrogen]</a></li>
+<li><a href="3-2-c4examples.html#estrogen"><span class="toc-section-number">3.2.3</span> Efecto del estrogeno y el tiempo de administración</a></li>
 <li><a href="3-2-c4examples.html#CCL4"><span class="toc-section-number">3.2.4</span> Efecto del CCL4 en la expresión génica</a></li>
-<li><a href="3-2-c4examples.html#yeast"><span class="toc-section-number">3.2.5</span> Análisis de patrones en el ciclo celular</a></li>
-<li><a href="3-2-c4examples.html#recapitulación"><span class="toc-section-number">3.2.6</span> Recapitulación</a></li>
+<li><a href="3-2-c4examples.html#swirl"><span class="toc-section-number">3.2.5</span> Estudio de la mutación “swirl” en el desarrollo del pez cebra</a></li>
+<li><a href="3-2-c4examples.html#yeast"><span class="toc-section-number">3.2.6</span> Análisis de patrones en el ciclo celular</a></li>
+<li><a href="3-2-c4examples.html#recapitulación"><span class="toc-section-number">3.2.7</span> Recapitulación</a></li>
 </ul></li>
 <li><a href="3-3-el-proceso-de-análisis-de-microarrays.html#el-proceso-de-análisis-de-microarrays"><span class="toc-section-number">3.3</span> El proceso de análisis de microarrays</a></li>
 </ul></li>
@@ -236,8 +237,7 @@ img {
 </ul></li>
 <li><a href="5-4-resumen-y-normalización-de-microarrays-de-affymetrix.html#resumen-y-normalización-de-microarrays-de-affymetrix"><span class="toc-section-number">5.4</span> Resumen y normalización de microarrays de Affymetrix</a>
 <ul>
-<li><a href="5-4-resumen-y-normalización-de-microarrays-de-affymetrix.html#métodos-originales-de-affymetrix"><span class="toc-section-number">5.4.1</span> Métodos originales de Affymetrix</a></li>
-<li><a href="5-4-resumen-y-normalización-de-microarrays-de-affymetrix.html#el-método-rma-robust-multi-array-average"><span class="toc-section-number">5.4.2</span> El método RMA (Robust Multi-Array Average)</a></li>
+<li><a href="5-4-resumen-y-normalización-de-microarrays-de-affymetrix.html#el-método-rma-robust-multi-array-average"><span class="toc-section-number">5.4.1</span> El método RMA (Robust Multi-Array Average)</a></li>
 </ul></li>
 <li><a href="5-5-filtraje-no-específico.html#filtraje-no-específico"><span class="toc-section-number">5.5</span> Filtraje no específico</a></li>
 </ul></li>
@@ -320,13 +320,13 @@ La forma habitual de hacer esta comparación es mediante algún programa que per
 <div id="ejemplo-comparación-de-listas-en-el-caso-celltypes" class="section level3" number="8.2.1">
 <h3><span class="header-section-number">8.2.1</span> Ejemplo: comparación de listas en el caso <tt>celltypes</tt></h3>
 <p>Supondremos que tras las comparaciones del capítulo anterior disponemos de los valores de expresión y las listas de genes obtenidas de las tres comparaciones del caso <tt>cellypes</tt>. Ambos están almacenados en archivos binarios que podemos recuperar con la instrucción <tt>load</tt>.</p>
-<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="8-2-análisis-comparativo-de-listas-de-genes.html#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(Biobase)</span>
-<span id="cb79-2"><a href="8-2-análisis-comparativo-de-listas-de-genes.html#cb79-2" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(limma)</span>
-<span id="cb79-3"><a href="8-2-análisis-comparativo-de-listas-de-genes.html#cb79-3" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;datos/celltypes/celltypes-normalized.rma.Rda&quot;</span>)</span>
-<span id="cb79-4"><a href="8-2-análisis-comparativo-de-listas-de-genes.html#cb79-4" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;datos/celltypes/celltypes-fit.main.Rda&quot;</span>)</span>
-<span id="cb79-5"><a href="8-2-análisis-comparativo-de-listas-de-genes.html#cb79-5" aria-hidden="true" tabindex="-1"></a>topTab_LPS.in.AGED <span class="ot">&lt;-</span> <span class="fu">topTable</span> (fit.main, <span class="at">number=</span><span class="fu">nrow</span>(fit.main), <span class="at">coef=</span><span class="st">&quot;LPS.in.AGED&quot;</span>, <span class="at">adjust=</span><span class="st">&quot;fdr&quot;</span>,<span class="at">lfc=</span><span class="dv">2</span>)</span>
-<span id="cb79-6"><a href="8-2-análisis-comparativo-de-listas-de-genes.html#cb79-6" aria-hidden="true" tabindex="-1"></a>topTab_LPS.in.YOUNG <span class="ot">&lt;-</span> <span class="fu">topTable</span> (fit.main, <span class="at">number=</span><span class="fu">nrow</span>(fit.main), <span class="at">coef=</span><span class="st">&quot;LPS.in.YOUNG&quot;</span>, <span class="at">adjust=</span><span class="st">&quot;fdr&quot;</span>,<span class="at">lfc=</span><span class="dv">2</span>)</span>
-<span id="cb79-7"><a href="8-2-análisis-comparativo-de-listas-de-genes.html#cb79-7" aria-hidden="true" tabindex="-1"></a>topTab_AGE  <span class="ot">&lt;-</span> <span class="fu">topTable</span> (fit.main, <span class="at">number=</span><span class="fu">nrow</span>(fit.main) , <span class="at">coef=</span><span class="st">&quot;AGE&quot;</span>, <span class="at">adjust=</span><span class="st">&quot;fdr&quot;</span>, <span class="at">lfc=</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="8-2-análisis-comparativo-de-listas-de-genes.html#cb83-1"></a><span class="kw">require</span>(Biobase)</span>
+<span id="cb83-2"><a href="8-2-análisis-comparativo-de-listas-de-genes.html#cb83-2"></a><span class="kw">require</span>(limma)</span>
+<span id="cb83-3"><a href="8-2-análisis-comparativo-de-listas-de-genes.html#cb83-3"></a><span class="kw">load</span>(<span class="st">&quot;datos/celltypes/celltypes-normalized.rma.Rda&quot;</span>)</span>
+<span id="cb83-4"><a href="8-2-análisis-comparativo-de-listas-de-genes.html#cb83-4"></a><span class="kw">load</span>(<span class="st">&quot;datos/celltypes/celltypes-fit.main.Rda&quot;</span>)</span>
+<span id="cb83-5"><a href="8-2-análisis-comparativo-de-listas-de-genes.html#cb83-5"></a>topTab_LPS.in.AGED &lt;-<span class="st"> </span><span class="kw">topTable</span> (fit.main, <span class="dt">number=</span><span class="kw">nrow</span>(fit.main), <span class="dt">coef=</span><span class="st">&quot;LPS.in.AGED&quot;</span>, <span class="dt">adjust=</span><span class="st">&quot;fdr&quot;</span>,<span class="dt">lfc=</span><span class="dv">2</span>)</span>
+<span id="cb83-6"><a href="8-2-análisis-comparativo-de-listas-de-genes.html#cb83-6"></a>topTab_LPS.in.YOUNG &lt;-<span class="st"> </span><span class="kw">topTable</span> (fit.main, <span class="dt">number=</span><span class="kw">nrow</span>(fit.main), <span class="dt">coef=</span><span class="st">&quot;LPS.in.YOUNG&quot;</span>, <span class="dt">adjust=</span><span class="st">&quot;fdr&quot;</span>,<span class="dt">lfc=</span><span class="dv">2</span>)</span>
+<span id="cb83-7"><a href="8-2-análisis-comparativo-de-listas-de-genes.html#cb83-7"></a>topTab_AGE  &lt;-<span class="st"> </span><span class="kw">topTable</span> (fit.main, <span class="dt">number=</span><span class="kw">nrow</span>(fit.main) , <span class="dt">coef=</span><span class="st">&quot;AGE&quot;</span>, <span class="dt">adjust=</span><span class="st">&quot;fdr&quot;</span>, <span class="dt">lfc=</span><span class="dv">2</span>)</span></code></pre></div>
 <p>La función <tt>decidetests</tt> permite realizar ambas cosas.
 En este ejemplo no se ajustaran los p–valores entre comparaciones. Tan solo se seleccionaran los genes que cambian en una o más condiciones.</p>
 <p>EL resultado del análisis es una tabla <tt>res</tt> que para cada gen
@@ -334,9 +334,9 @@ y cada comparación contiene un 1 (si el gen esta sobre-expresado o
 “up” en esta condicion), un 0 (si no hay cambio significativo) o un
 -1 (si esta “down”-regulado).</p>
 <p>Para resumir dicho análisis podemos contar qué filas tienen como mínimo una celda distinta de cero:</p>
-<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="8-2-análisis-comparativo-de-listas-de-genes.html#cb80-1" aria-hidden="true" tabindex="-1"></a>sum.res.rows<span class="ot">&lt;-</span><span class="fu">apply</span>(<span class="fu">abs</span>(res),<span class="dv">1</span>,sum)</span>
-<span id="cb80-2"><a href="8-2-análisis-comparativo-de-listas-de-genes.html#cb80-2" aria-hidden="true" tabindex="-1"></a>res.selected<span class="ot">&lt;-</span>res[sum.res.rows<span class="sc">!=</span><span class="dv">0</span>,]</span>
-<span id="cb80-3"><a href="8-2-análisis-comparativo-de-listas-de-genes.html#cb80-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">summary</span>(res))</span></code></pre></div>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="8-2-análisis-comparativo-de-listas-de-genes.html#cb84-1"></a>sum.res.rows&lt;-<span class="kw">apply</span>(<span class="kw">abs</span>(res),<span class="dv">1</span>,sum)</span>
+<span id="cb84-2"><a href="8-2-análisis-comparativo-de-listas-de-genes.html#cb84-2"></a>res.selected&lt;-res[sum.res.rows<span class="op">!=</span><span class="dv">0</span>,]</span>
+<span id="cb84-3"><a href="8-2-análisis-comparativo-de-listas-de-genes.html#cb84-3"></a><span class="kw">print</span>(<span class="kw">summary</span>(res))</span></code></pre></div>
 <pre><code>##        LPS.in.AGED LPS.in.YOUNG  AGE
 ## Down           556          561  558
 ## NotSig        9281         9239 8740
@@ -347,7 +347,7 @@ y cada comparación contiene un 1 (si el gen esta sobre-expresado o
 ## NotSig       10106        10083  9979
 ## Up              77           88   230</code></pre>
 <p>Un diagrama de Venn permite visualizar la tabla anterior sin diferenciar entre genes “up” o “down” regulados.</p>
-<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="8-2-análisis-comparativo-de-listas-de-genes.html#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vennDiagram</span> (res.selected[,<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>], <span class="at">main=</span><span class="st">&quot;Genes in common #1&quot;</span>, <span class="at">cex=</span><span class="fl">0.9</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="8-2-análisis-comparativo-de-listas-de-genes.html#cb87-1"></a><span class="kw">vennDiagram</span> (res.selected[,<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>], <span class="dt">main=</span><span class="st">&quot;Genes in common #1&quot;</span>, <span class="dt">cex=</span><span class="fl">0.9</span>)</span></code></pre></div>
 <div class="figure"><span id="fig:venn01"></span>
 <img src="Analisis_de_Datos_de_Microarrays_y_otras_Omicas_files/figure-html/venn01-1.png" alt="Número de genes seleccionado en cada comparación" width="672" />
 <p class="caption">

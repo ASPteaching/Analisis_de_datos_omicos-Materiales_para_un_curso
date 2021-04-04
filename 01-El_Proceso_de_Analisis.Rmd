@@ -74,7 +74,7 @@ La diversidad de objetivos del estudio lleva a clasificarlo tanto entre los del 
 
 Los datos de este estudio se encuentran disponibles en la web del instituto Broad, en donde se llevó a cabo ([http://www.broadinstitute.org](http://www.broadinstitute.org)). También se encuentra disponible un paquete de `R` denominado `ALL` que permite utilizarlos directamente usando `R` y Bioconductor.
 
-### Efecto del estrogeno y el tiempo de administración {#estrogen]
+### Efecto del estrogeno y el tiempo de administración {#estrogen}
 
 \underline{Efecto del tratamiento con estrógenos en la expresión de genes relacionados con cáncer de mama }
 
@@ -94,12 +94,14 @@ Los datos de este estudio no han sido publicados pero se encuentran disponibles 
 
 Este estudio es también un estudio de comparación de clases cuyo objetivo principal es la selección de genes cuya expresión se asocia al tratamiento con CCL4 o DMSO.
 
+### Estudio de la mutación "swirl" en el desarrollo del pez cebra {#swirl}
+
 
 ### Análisis de patrones en el ciclo celular {#yeast}
 
 \underline{Busqueda de patrones de coexpresión en datos de ciclo celular de levadura
 }
-Los datos de este ejemplo denominado `kidney` son datos ya normalizados referidos a la expresión de los genes en distintos momentos del ciclo delular de la levadura e decir desde que concluye la división celular hasta que se inicia la siguiente.
+Los datos de este ejemplo denominado `yeast` son datos ya normalizados referidos a la expresión de los genes en distintos momentos del ciclo delular de la levadura e decir desde que concluye la división celular hasta que se inicia la siguiente.
 
 Los datos puede descargarse desde la página del proyecto "Yeast Cell Cycle Project" (Proyecto de estudio del ciclo celular de la levadura) en la dirección:
 
@@ -118,6 +120,7 @@ La tabla \ref{ejemplosEstudios} resume la lista de ejemplos que se utilizan en e
 | `golub`     | Un color (Affy, HGU95A)                  | 38           | Clasificación   |
 | `estrogen`  | Un color (Affy, HGU95A)                  | 8            | Comparativo     |
 | `CCL4`      | Dos colores (Agilent, WG Rat Microarray) | 16           | Comparativo     |
+| `swirl` | Dos colores  ("Custom")                 | 4           | Comparativo   |
 | `breastTum` | Un color  (Affy, HGU95A)                 | 49           | Clasificación   |
 
 

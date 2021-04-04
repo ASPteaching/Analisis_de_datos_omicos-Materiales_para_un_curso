@@ -247,11 +247,13 @@ La figura  \@ref(fig:plotPCA2D) muestra dos diagramas de compnentes principales 
 
 El gráfico de la parte inferior en el que este array se ha eliminado antes de calcular las componentes principales muestra dos agrupaciones claras de arrays "derecha e izquierda" y "arriba y abajo" de la figura. El hecho de que los grupos no se correspondan con los tratamientos sugiere que puede haber alguna fuente adicional de variación que ha de tenerse en cuenta.
 
-```{r plotPCA2D, echo=TRUE}
-opt <- par(mfrow=c(2,1))
-plotPCA(exprs(allAffyNorm), labels=affySampleNames, dataDesc="PCA for all arrays\nincludes defective sample")
-plotPCA(exprs(affyNorm), labels=colnames(exprs(affyNorm)), dataDesc="PCA for all arrays")
-par(opt)
+```{r plotPCA2D1, echo=TRUE}
+plotPCA(exprs(allAffyNorm), labels=affySampleNames, dataDesc="Grafico con todos los arrays\nIncluye muestra defectuosa")
+```
+
+
+```{r plotPCA2D2, echo=TRUE}
+plotPCA(exprs(affyNorm), labels=colnames(exprs(affyNorm)), dataDesc="Grafico con todos los arrays\nSin la muestra defectuosa")
 ```
 
 #### Imagen del chip
@@ -283,7 +285,7 @@ poder ser utilizados, y no cualquier método puede funcionar con
 todos ellos.
 
 En general, los métodos de normalización se basan en el siguiente
-principio: \emph{La mayor parte de los genes en un array se pueden expresar
+principio: _La mayor parte de los genes en un array se pueden expresar
 o no expresar ante cualquier condición, pero se espera que sólo
 una pequeña cantidad de genes muestre cambios de expresión entre
 condiciones}.
@@ -297,32 +299,67 @@ debería ser atribuible a razones técnicas, no biológicas, y por
 tanto, debería ser eliminada. Esto ha conducido a un método de
 normalización muy popular consistente en estimar la transformación
 a aplicar, como una función de las intensidades utilizando el
-método \emph{lowess} en la representación transformada de la
-gráfica de dispersión conocida como el \emph{gráfico MA--plot}.
+método _lowess_ en la representación transformada de la
+gráfica de dispersión conocida como el _gráfico MA--plot_.
 
-La figura \@ref(fig:c05normScatterMA) muestra, en su parte izquierda (a) un gráfico de dispersión del canal
-rojo frente al verde en un array de dos colores. El hecho de que los
-datos no estén centrados alrededor de la diagonal sugiere la necesidad de
-normalización. 
+La figura \@ref(fig:c05normScatterMA) muestra, en su parte izquierda un gráfico de dispersión del canal
+rojo frente al verde en un array de dos colores. En concreto se trata del primer array del dataset `CCl4` presentado en la introducción.
 
-Una representación muy popular que ayuda a visualizar mejor esta
-asimetría es lo que se conoce como  "\emph{MA-plot}", que aparece en la parte derecha (b) de la figura\@ref(fig:c05normScatterMA). Geométricamente representa una rotación del gráfico de dispersión, en la que el significado de los nuevos ejes es:
+El hecho de que los datos estén centrados alrededor de la diagonal sugiere que puede no ser necesario normalizar los datos.
+
+Una representación muy popular que ayuda a visualizar mejor esta relación es lo que se conoce como  _MA-plot_, que aparece en la parte derecha (b) de la figura\@ref(fig:c05normScatterMA). Geométricamente representa una rotación del gráfico de dispersión, en la que el significado de los nuevos ejes es:
 
 - $A=\displaystyle \frac{1}{2}(\log_2 (R*G))$: El logaritmo de la
   intensidad media de los dos canales,
 - $M=\log_2 \displaystyle \frac{R}{G}$: El logaritmo de la expresión relativa entre
 ambos canales (normalmente conocido como "log--ratio").
 
-```{r c05normScatterMA, fig.cap="(a) Gráfico de  un canal frente al otro  (b) MA-plot (intensidad frente log-ratio)", echo=FALSE}
-knitr::include_graphics("figures/c05normScatterMA.png")
+```{r  c05normScatterMA, fig.cap="(a) Gráfico de  un canal frente al otro  (b) MA-plot (intensidad frente log-ratio)"}
+R <- RG$R[,"DMSCCl319"]
+G <- RG$G[,"DMSCCl319"]
+logR <- log(R)
+logG <- log(G)
+M <- logR-logG
+A <- 0.5*(logR+logG)
+opt<- par(mfrow=c(1,2))
+plot(logR~ logG, main= "Scatterplot")
+abline(lm(logR~logG), col="yellow")
+plot(M~A, main= "MA-Plot")
+abline(h=0, col="yellow")
+par(opt)
 ```
+
+Si en vez de explorar un array mas moderno como el de la figura anterior lo hacemos con uno de los primeros que se utilizaron, el dataset `swirl` vemos que el resultado es menos simetrico ,o que sugiere la necesidad de normalizacion.
+
+Este dataset se encuentra disponible en el paquete `swirl` pero también aparece como ejemplo en el paquete `marray`. En la viñeta de dicho paquete se realiza una exploración completa de este dataset. Aquí nos limitaremos a reproducir los dos gráficos anteriores para ilustrar un caso en que sí que se pone de manifiesto la necesidad de normalizar los datos.
+
+La clase del objeto "swirl" es distinta a la del objeto "RG" por lo que elk acceso es ligeramente distinto
+
+```{r c05normScatterMA2, fig.cap="(a) Gráfico de  un canal frente al otro  (b) MA-plot (intensidad frente log-ratio). Estos gráficos sugieren la necesidad de normalizar los datos"}
+library(marray)
+data(swirl)
+R <- swirl@maRf[,1]
+G <- swirl@maGf[,1]
+logR <- log(R)
+logG <- log(G)
+M <- logR-logG
+A <- 0.5*(logR+logG)
+opt<- par(mfrow=c(1,2))
+plot(logR~ logG, main= "Scatterplot")
+abline(lm(logR~logG), col="yellow")
+plot(M~A, main= "MA-Plot")
+abline(h=0, col="yellow")
+par(opt)
+```
+
+Aunque el diagrama de dispersión no lo muestra claramente, en el diagrama "MA" sí que se puede ver como los puntos estan claramente por debajo de lo que sería el eje de simetría horizontal
 
 #### Imagen del array
 
 La imagen del chip (véase la figura \@ref(c05signalNoise),
 izquierda) ofrece una visión rápida de la calidad del array,
 proporcionando información acerca del balance del color, la
-uniformidad en la hibridación y en los \emph{spots}, de si el
+uniformidad en la hibridación y en los _spots_, de si el
 background es mayor del normal y dela existencia de artefactos como el
 polvo o pequeñas marcas (rasguños).
 
@@ -403,13 +440,13 @@ par(opt)
 
 ## Normalización de arrays de dos colores
 
-La palabra \emph{normalización} describe las técnicas utilizadas para transformar adecuadamente los datos antes de que sean analizados.
+La palabra _normalización_ describe las técnicas utilizadas para transformar adecuadamente los datos antes de que sean analizados.
 El objetivo es corregir diferencias sistemáticas entre muestras, en la misma o entre imágenes, lo que no representa
 una verdadera variación entre las muestras biológicas.
 
 Estas  diferencias sistemáticas pueden deberse, entre otras, a:
 
- - Cambios en la tinción que producen sesgos  la intensidad del \emph{spot}.
+ - Cambios en la tinción que producen sesgos  la intensidad del _spot_.
 - La ubicación en el array que puede afectar el proceso de lectura.
 - Un problem en la placa de origen.
 - La existencia de diferencias en la calidad de la impresión: pueden presentarse  variaciones en  los pins y el tiempo de impresión
@@ -426,7 +463,7 @@ A veces puede ser difícil detectar estos problemas , aunque existen algunas  fo
 
 ### Normalización global
 
-Este método esta basado en un ajuste global, es decir en modificar todos los valores una cantidad \emph{c}, estimada de acuerdo a algún criterio.
+Este método esta basado en un ajuste global, es decir en modificar todos los valores una cantidad _c_, estimada de acuerdo a algún criterio.
 \begin{equation}
  \log_2 R/G \rightarrow \log_2 R/G-c=\log_2 R/(Gk)
 \end{equation}
@@ -444,7 +481,7 @@ En este caso se realiza una modificación específica para cada valor. Esta modi
  \log_2 R/G \rightarrow \log_2 R/G-c(A)=\log_2 R/(Gk(A))
 \end{equation}
 
-Una posible estimación de esta función puede hacerse utilizando la función \emph{lowess} (LOcally WEighted  Scatterplot Smoothing).
+Una posible estimación de esta función puede hacerse utilizando la función _lowess_ (LOcally WEighted  Scatterplot Smoothing).
 
 ## Resumen y normalización de microarrays de Affymetrix
 
@@ -452,12 +489,15 @@ En los arrays de Affymetrix, como en todos los tipos de microarrays, tras escane
 intensidad de cada elemento del chip.
 En el caso de estos arrays sabemos que cada valor no corresponde a la expresión de un gen:
 
+- Hay múltiples valores (sondas o "probes") por cada gen, que originan un _probeset_.
+- Cada grupo de sondas  consiste en múltiples sondas
 
-- Hay múltiples valores (sondas o "probes") por cada gen, que originan un \emph{probeset}.
-- Cada grupo de sondas  consiste en múltiples pares de sondas, donde cada puede tener  dos elementos:
-\subitem Un "perfect match" que coincide exactamente con el fragmento del gen al que corresponde la sonda
-\subitem Un "mismatch" que que coincide con el anterior salvo por el valor central que se ha sustituído por el nucleótido complementario.
-Estos "mismatches' se introdujeron en los primeros arrays de affymetrix para tener una medida de hibridación no específica pero en las versiones más recientes se han abandonado.
+Originalmente, en los primeros arrays de Affymetrix se introdujo un sistema para estimar el "ruído" y diferenciarlo de la "señal". Éste consistía en que cada sonda era en ralidad un par de sondas:
+
+- Una que coincidía exactamente con el fragmento del gen al que corresponde la sonda y que se denominaba "perfect match".
+- Otra, que coincidía con la anterior salvo por el valor central que se sustituía por el nucleótido complementario. Esta segunda sonda se denominaba un "mismatch".
+
+La idea original consistía en utilizar estos "mismatches' para tener una medida de hibridación no específica pero en las versiones más recientes se han abandonado, por lo que también se ha abandonado la utilización de los  métodos "MAS-4" y "MAS-5" que utilizaban estos valores.
 
 El proceso que convierte las señales individuales en valores de expresión normalizados para cada gen consta de tres etapas:
 
@@ -472,68 +512,10 @@ A diferencia de los chips de ADNc, aquí las medidas de expresión son absolutas
 dado que cada chip se hibrida con un única muestra.
 
 Hay muchos métodos para estimar la expresión (más de 30 publicados).
-Cada método contempla de forma explícita o implícita las tres formas de preprocesado: corrección del fondo,
-normalización y resumen.
+Cada método contempla de forma explícita o implícita las tres formas de preprocesado: corrección del fondo, normalización y resumen.
 
-Los principales métodos que consideraremos son:
+Aquí nos centraremos únicamente en el método más popular que continua siendo utilizado trece años después de su introducción: El "Robust Multi-chip Average" o RMA
 
-- Microarray Suite (MAS). Método oficial de Affymetrix. Versiones 4.0 y 5.0
-- dChip: Li and Wong. Método basado en modelos multichip.
-- RMA (Bioconductor). Actualmente es el método "estándar".
-
-
-### Métodos originales de Affymetrix 
-#### M.A.S. 4.0
-
-Es el primer método introducida por Affymetrix.
-La corrección del fondo se realiza restando el "perfect match" del "mismatch"
-\begin{equation}
- E_j=PM_j-MM_j
-\end{equation}
-La normalización se realiza de forma global haciendo transformaciones de forma que la media de todo el chip sea la misma y
-la sumarización se basa en calcular el promedio de las diferencias absolutas ignorando los pares que se desvían más de $3\sigma$ de $\mu$.
-\begin{equation}
- Dif. Media=\frac{1}{|A|}\sum_{j \in A}(PM_j-MM_j)
-\end{equation}
-Los problemas que presenta estemétodo son:
-
-- 1/3 de los MM son mayores que los PM
-- Pueden aparecer valores MM negativos
-- El uso de los MM añade ruido
-
-
-#### M.A.S. 5.0
-
-Los problemas que presentaba el método M.A.S. 4.0 llevaron a
-sustituirlo por otra variante, el M.A.S 5.0, llamado así por venir
-implementado en el software de affymetrix llamado "MicroArray Suite
-5.0".
-
-Este método utiliza un estadístico robusto, \emph{el biweight de
-  Tukey}, para corregir y ponderar el fondo y calcular (estimar) la
-señal.  El biweight de Tukey $T_{bi}$ pondera los valores por su
-distancia a la mediana, es decir, mide la tendencia central pero
-realiza un ajuste de outliers.
-
-La lógica de este método reside en pensar que el valor de MM no siempre tiene sentido, (p.ej si MM $>$ PM).
-Dado que esto sucede en ocasiones se realiza el cambio siguiente:
-
-1. Se introduce el background específico de un conjunto de pruebas $i$ de tamaño $n$ basado en los pares de pruebas $j$:
-\begin{equation}
- SB_i=T_{bi}(\log(PM_{i,j})-\log(MM_{i,j})): j= 1,\ldots,n
-\end{equation}
-2. SB se utiliza para decidir como se ajusta el background
-
-- Si es grande los datos suelen ser fiables
-- Si es pequeño mejor basarse tan solo en PM
-
-Este método no tan solo corrige el background sino que también permite normalizar y sumarizar.
-Para ello se introduce el "Mismatch Idealizado" (IM) que permite corregir la intensidad de las pruebas individuales.
-Este método también ha sido muy criticado:
-
-- Se considera que no tiene mucho sentido promediar las pruebas entre arrays, pues éstos pueden tener características
-de hibridación intrínsecamente distintas.
-- El método no mejora "aprendiendo" del funcionamiento entre arrays de las pruebas individuales.
 
 ### El método RMA (Robust Multi-Array Average)
 
@@ -547,7 +529,7 @@ Esquemáticamente los pasos que realiza este método son:
   valores PM y utilizando un modelo estadístico complejo en el que
   combina la modelización de la señal mediante una distribución exponencial con la del ruído mediante una distribución normal.
 2. Toma logaritmos base 2 de cada intensidad ajustada por el background.
-3. Realiza una \emph{normalización por cuantiles} de los valores del paso 2 consistente en substituir cada valor individual por el que tendría la misma posición en la distribución empírica estimada sobre todas las muestras, es decir los promedios de las distribuciones de los valores ordenados de cada array (véase figura \ref{c06quantilNorm})
+3. Realiza una _normalización por cuantiles_ de los valores del paso 2 consistente en substituir cada valor individual por el que tendría la misma posición en la distribución empírica estimada sobre todas las muestras, es decir los promedios de las distribuciones de los valores ordenados de cada array (véase figura \ref{c06quantilNorm})
 4. Estima las intensidades de cada gen separadamente para cada conjunto de sondas. Para ello realiza una técnica similar
 a una regresión robusta denominada "pulido de medianas" (median polish) sobre una matriz de datos que tiene los arrays en filas y los grupos
 de sondas en columnas.
@@ -560,16 +542,16 @@ knitr::include_graphics("figures/c06quantilNorm.png")
 
 ## Filtraje no específico
 
-El filtraje no específico es recomendable para eliminar el ruido de fondo y limitar los ajustes posteriores a los necesarios.
+El objetivo del filtraje es eliminar aquellos genes o aquellos _spots_ cuyas imágenes o señales sean erróneas por diferentes motivos, con el fin de reducir el ruído de fondo.
+
 Los principales procesos de filtrado son:
 
- - Eliminanción de los spots marcados como erróneos mediante  flags y que son debidos  a problemas en la hibridación o en el escaneo.
- - Eliminanción de spots con señales muy bajas debido a problemas en el \emph{spotting} o a que no ha habido hibridación en ese spot (Filtraje pr ).
+ - Eliminación de los spots marcados como erróneos mediante  flags y que son debidos  a problemas en la hibridación o en el escaneo.
+ - Eliminación de spots o genes con señales muy bajas debido a problemas en el _spotting_ o a que no ha habido hibridación en ese spot (Filtraje por señal).
 - Eliminación de genes que no presenten una variación significativa en su señal, entre distintas condiciones experimentales (Filtraje por variabilidad).
-Ante la duda,\emph{se debe ser conservador y reducir la operación de filtraje al mínimo}
 
-El objetivo del filtraje es eliminar aquellos spots cuyas imágenes o señales sean erróneas por diferentes motivos, disminuyendo el ruido
-de fondo. Aunque existe controversia a su uso, prefiriendo el no filtrado a eliminar de forma no intencionado spots informativos.
+Ante la duda, se suele aconsejar ser conservador y _reducir la operación de filtraje al mínimo_, puesto que cuesta mucho convencerse, y convencer a los investigadores, de que el beneficio del filtraje compensa la posibilidad de eliminar, por error, un gen o una señal interesantes.
+
 
 
 

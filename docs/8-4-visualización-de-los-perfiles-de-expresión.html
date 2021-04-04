@@ -22,7 +22,7 @@ MathJax.Hub.Config({
   TeX: { equationNumbers: { autoNumber: "AMS" } }
 });
 </script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" type="text/javascript"></script>
 
 <meta name="description" content="8.4 Visualización de los perfiles de expresión | Analisis de datos omicos">
 
@@ -45,6 +45,7 @@ MathJax.Hub.Config({
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
 <script src="libs/navigation-1.1/tabsets.js"></script>
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 
 
 <style type="text/css">code{white-space: pre;}</style>
@@ -52,7 +53,6 @@ MathJax.Hub.Config({
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
@@ -196,10 +196,11 @@ img {
 <ul>
 <li><a href="3-2-c4examples.html#celltypes"><span class="toc-section-number">3.2.1</span> Estudio de procesos regulados por citoquinas</a></li>
 <li><a href="3-2-c4examples.html#golub"><span class="toc-section-number">3.2.2</span> Clasificación molecular de la leucemia</a></li>
-<li><a href="3-2-c4examples.html#efecto-del-estrogeno-y-el-tiempo-de-administración-estrogen"><span class="toc-section-number">3.2.3</span> Efecto del estrogeno y el tiempo de administración {#estrogen]</a></li>
+<li><a href="3-2-c4examples.html#estrogen"><span class="toc-section-number">3.2.3</span> Efecto del estrogeno y el tiempo de administración</a></li>
 <li><a href="3-2-c4examples.html#CCL4"><span class="toc-section-number">3.2.4</span> Efecto del CCL4 en la expresión génica</a></li>
-<li><a href="3-2-c4examples.html#yeast"><span class="toc-section-number">3.2.5</span> Análisis de patrones en el ciclo celular</a></li>
-<li><a href="3-2-c4examples.html#recapitulación"><span class="toc-section-number">3.2.6</span> Recapitulación</a></li>
+<li><a href="3-2-c4examples.html#swirl"><span class="toc-section-number">3.2.5</span> Estudio de la mutación “swirl” en el desarrollo del pez cebra</a></li>
+<li><a href="3-2-c4examples.html#yeast"><span class="toc-section-number">3.2.6</span> Análisis de patrones en el ciclo celular</a></li>
+<li><a href="3-2-c4examples.html#recapitulación"><span class="toc-section-number">3.2.7</span> Recapitulación</a></li>
 </ul></li>
 <li><a href="3-3-el-proceso-de-análisis-de-microarrays.html#el-proceso-de-análisis-de-microarrays"><span class="toc-section-number">3.3</span> El proceso de análisis de microarrays</a></li>
 </ul></li>
@@ -236,8 +237,7 @@ img {
 </ul></li>
 <li><a href="5-4-resumen-y-normalización-de-microarrays-de-affymetrix.html#resumen-y-normalización-de-microarrays-de-affymetrix"><span class="toc-section-number">5.4</span> Resumen y normalización de microarrays de Affymetrix</a>
 <ul>
-<li><a href="5-4-resumen-y-normalización-de-microarrays-de-affymetrix.html#métodos-originales-de-affymetrix"><span class="toc-section-number">5.4.1</span> Métodos originales de Affymetrix</a></li>
-<li><a href="5-4-resumen-y-normalización-de-microarrays-de-affymetrix.html#el-método-rma-robust-multi-array-average"><span class="toc-section-number">5.4.2</span> El método RMA (Robust Multi-Array Average)</a></li>
+<li><a href="5-4-resumen-y-normalización-de-microarrays-de-affymetrix.html#el-método-rma-robust-multi-array-average"><span class="toc-section-number">5.4.1</span> El método RMA (Robust Multi-Array Average)</a></li>
 </ul></li>
 <li><a href="5-5-filtraje-no-específico.html#filtraje-no-específico"><span class="toc-section-number">5.5</span> Filtraje no específico</a></li>
 </ul></li>
@@ -319,33 +319,33 @@ encuentran up o down regulados simultáneamente constituyendo <em>perfiles de ex
 <p>Hay distintas formas de visualización pero aquí tan sólo se presenta el uso de mapas de color o <tt>Heatmaps</tt> cuyos fundamentos se explican en el capítulo dedicado al descubrimiento de clases.</p>
 <p>En primer lugar seleccionamos los genes a visualizar: Se toman todos aquellos que
 han resultado diferencialmente expresados en alguna de las tres comparaciones.</p>
-<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="8-4-visualización-de-los-perfiles-de-expresión.html#cb105-1" aria-hidden="true" tabindex="-1"></a>probeNames<span class="ot">&lt;-</span><span class="fu">rownames</span>(res)</span>
-<span id="cb105-2"><a href="8-4-visualización-de-los-perfiles-de-expresión.html#cb105-2" aria-hidden="true" tabindex="-1"></a>probeNames.selected<span class="ot">&lt;-</span>probeNames[sum.res.rows<span class="sc">!=</span><span class="dv">0</span>]</span>
-<span id="cb105-3"><a href="8-4-visualización-de-los-perfiles-de-expresión.html#cb105-3" aria-hidden="true" tabindex="-1"></a>exprs2cluster <span class="ot">&lt;-</span><span class="fu">exprs</span>(eset_rma_filtered)[probeNames.selected,]</span>
-<span id="cb105-4"><a href="8-4-visualización-de-los-perfiles-de-expresión.html#cb105-4" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(exprs2cluster)<span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;OldLPS80L&quot;</span>, <span class="st">&quot;OldLPS86L&quot;</span>, <span class="st">&quot;OldLPS88L&quot;</span>,</span>
-<span id="cb105-5"><a href="8-4-visualización-de-los-perfiles-de-expresión.html#cb105-5" aria-hidden="true" tabindex="-1"></a>                            <span class="st">&quot;OldMED81m&quot;</span>, <span class="st">&quot;OldMED82m&quot;</span>, <span class="st">&quot;OldMED84m&quot;</span>,</span>
-<span id="cb105-6"><a href="8-4-visualización-de-los-perfiles-de-expresión.html#cb105-6" aria-hidden="true" tabindex="-1"></a>                            <span class="st">&quot;YouLPS75L&quot;</span>,  <span class="st">&quot;YouLPS76L&quot;</span>,  <span class="st">&quot;YouLPS77L&quot;</span>,</span>
-<span id="cb105-7"><a href="8-4-visualización-de-los-perfiles-de-expresión.html#cb105-7" aria-hidden="true" tabindex="-1"></a>                            <span class="st">&quot;YouMED71m&quot;</span>, <span class="st">&quot;YouMED72m&quot;</span>, <span class="st">&quot;YouMED73m&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="8-4-visualización-de-los-perfiles-de-expresión.html#cb109-1"></a>probeNames&lt;-<span class="kw">rownames</span>(res)</span>
+<span id="cb109-2"><a href="8-4-visualización-de-los-perfiles-de-expresión.html#cb109-2"></a>probeNames.selected&lt;-probeNames[sum.res.rows<span class="op">!=</span><span class="dv">0</span>]</span>
+<span id="cb109-3"><a href="8-4-visualización-de-los-perfiles-de-expresión.html#cb109-3"></a>exprs2cluster &lt;-<span class="kw">exprs</span>(eset_rma_filtered)[probeNames.selected,]</span>
+<span id="cb109-4"><a href="8-4-visualización-de-los-perfiles-de-expresión.html#cb109-4"></a><span class="kw">colnames</span>(exprs2cluster)&lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;OldLPS80L&quot;</span>, <span class="st">&quot;OldLPS86L&quot;</span>, <span class="st">&quot;OldLPS88L&quot;</span>,</span>
+<span id="cb109-5"><a href="8-4-visualización-de-los-perfiles-de-expresión.html#cb109-5"></a>                            <span class="st">&quot;OldMED81m&quot;</span>, <span class="st">&quot;OldMED82m&quot;</span>, <span class="st">&quot;OldMED84m&quot;</span>,</span>
+<span id="cb109-6"><a href="8-4-visualización-de-los-perfiles-de-expresión.html#cb109-6"></a>                            <span class="st">&quot;YouLPS75L&quot;</span>,  <span class="st">&quot;YouLPS76L&quot;</span>,  <span class="st">&quot;YouLPS77L&quot;</span>,</span>
+<span id="cb109-7"><a href="8-4-visualización-de-los-perfiles-de-expresión.html#cb109-7"></a>                            <span class="st">&quot;YouMED71m&quot;</span>, <span class="st">&quot;YouMED72m&quot;</span>, <span class="st">&quot;YouMED73m&quot;</span>)</span></code></pre></div>
 <p>Para representar el Heatmap tan sólo necesitamos la matriz de datos resultante.</p>
-<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="8-4-visualización-de-los-perfiles-de-expresión.html#cb106-1" aria-hidden="true" tabindex="-1"></a>color.map <span class="ot">&lt;-</span> <span class="cf">function</span>(grupo) {</span>
-<span id="cb106-2"><a href="8-4-visualización-de-los-perfiles-de-expresión.html#cb106-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">switch</span>(grupo,</span>
-<span id="cb106-3"><a href="8-4-visualización-de-los-perfiles-de-expresión.html#cb106-3" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;yellow&quot;</span>,</span>
-<span id="cb106-4"><a href="8-4-visualización-de-los-perfiles-de-expresión.html#cb106-4" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;red&quot;</span>,</span>
-<span id="cb106-5"><a href="8-4-visualización-de-los-perfiles-de-expresión.html#cb106-5" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;blue&quot;</span>,</span>
-<span id="cb106-6"><a href="8-4-visualización-de-los-perfiles-de-expresión.html#cb106-6" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;pink&quot;</span>)</span>
-<span id="cb106-7"><a href="8-4-visualización-de-los-perfiles-de-expresión.html#cb106-7" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb106-8"><a href="8-4-visualización-de-los-perfiles-de-expresión.html#cb106-8" aria-hidden="true" tabindex="-1"></a>grupColors <span class="ot">&lt;-</span> <span class="fu">unlist</span>(<span class="fu">lapply</span>(<span class="fu">pData</span>(eset_rma_filtered)<span class="sc">$</span>grupo, color.map))</span>
-<span id="cb106-9"><a href="8-4-visualización-de-los-perfiles-de-expresión.html#cb106-9" aria-hidden="true" tabindex="-1"></a><span class="fu">heatmap</span>(exprs2cluster,</span>
-<span id="cb106-10"><a href="8-4-visualización-de-los-perfiles-de-expresión.html#cb106-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">cexCol=</span><span class="fl">0.8</span>,</span>
-<span id="cb106-11"><a href="8-4-visualización-de-los-perfiles-de-expresión.html#cb106-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">main=</span><span class="st">&quot;Heatmap para las tres comparaciones de &#39;celltypes&#39;&quot;</span>, <span class="at">cex.main=</span><span class="fl">0.8</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="8-4-visualización-de-los-perfiles-de-expresión.html#cb110-1"></a>color.map &lt;-<span class="st"> </span><span class="cf">function</span>(grupo) {</span>
+<span id="cb110-2"><a href="8-4-visualización-de-los-perfiles-de-expresión.html#cb110-2"></a>  <span class="cf">switch</span>(grupo,</span>
+<span id="cb110-3"><a href="8-4-visualización-de-los-perfiles-de-expresión.html#cb110-3"></a>         <span class="st">&quot;yellow&quot;</span>,</span>
+<span id="cb110-4"><a href="8-4-visualización-de-los-perfiles-de-expresión.html#cb110-4"></a>         <span class="st">&quot;red&quot;</span>,</span>
+<span id="cb110-5"><a href="8-4-visualización-de-los-perfiles-de-expresión.html#cb110-5"></a>         <span class="st">&quot;blue&quot;</span>,</span>
+<span id="cb110-6"><a href="8-4-visualización-de-los-perfiles-de-expresión.html#cb110-6"></a>         <span class="st">&quot;pink&quot;</span>)</span>
+<span id="cb110-7"><a href="8-4-visualización-de-los-perfiles-de-expresión.html#cb110-7"></a>}</span>
+<span id="cb110-8"><a href="8-4-visualización-de-los-perfiles-de-expresión.html#cb110-8"></a>grupColors &lt;-<span class="st"> </span><span class="kw">unlist</span>(<span class="kw">lapply</span>(<span class="kw">pData</span>(eset_rma_filtered)<span class="op">$</span>grupo, color.map))</span>
+<span id="cb110-9"><a href="8-4-visualización-de-los-perfiles-de-expresión.html#cb110-9"></a><span class="kw">heatmap</span>(exprs2cluster,</span>
+<span id="cb110-10"><a href="8-4-visualización-de-los-perfiles-de-expresión.html#cb110-10"></a>        <span class="dt">cexCol=</span><span class="fl">0.8</span>,</span>
+<span id="cb110-11"><a href="8-4-visualización-de-los-perfiles-de-expresión.html#cb110-11"></a>        <span class="dt">main=</span><span class="st">&quot;Heatmap para las tres comparaciones de &#39;celltypes&#39;&quot;</span>, <span class="dt">cex.main=</span><span class="fl">0.8</span>)</span></code></pre></div>
 <p><img src="Analisis_de_Datos_de_Microarrays_y_otras_Omicas_files/figure-html/plotHeatMap01-1.png" width="672" /></p>
 <p>Si se desea realizar mapas de color más sofisticados puede utilizarse el paquete <code>R</code>package{gplots} que implementa una version mejorada en la función <tt>heatmap.2</tt></p>
-<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="8-4-visualización-de-los-perfiles-de-expresión.html#cb107-1" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(<span class="st">&quot;gplots&quot;</span>)</span>
-<span id="cb107-2"><a href="8-4-visualización-de-los-perfiles-de-expresión.html#cb107-2" aria-hidden="true" tabindex="-1"></a><span class="fu">heatmap.2</span>(exprs2cluster,</span>
-<span id="cb107-3"><a href="8-4-visualización-de-los-perfiles-de-expresión.html#cb107-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">col=</span><span class="fu">bluered</span>(<span class="dv">75</span>), <span class="at">scale=</span><span class="st">&quot;row&quot;</span>,</span>
-<span id="cb107-4"><a href="8-4-visualización-de-los-perfiles-de-expresión.html#cb107-4" aria-hidden="true" tabindex="-1"></a>          <span class="at">ColSideColors=</span>grupColors, <span class="at">key=</span><span class="cn">TRUE</span>, <span class="at">symkey=</span><span class="cn">FALSE</span>,</span>
-<span id="cb107-5"><a href="8-4-visualización-de-los-perfiles-de-expresión.html#cb107-5" aria-hidden="true" tabindex="-1"></a>          <span class="at">density.info=</span><span class="st">&quot;none&quot;</span>, <span class="at">trace=</span><span class="st">&quot;none&quot;</span>, <span class="at">cexCol=</span><span class="fl">0.8</span>,</span>
-<span id="cb107-6"><a href="8-4-visualización-de-los-perfiles-de-expresión.html#cb107-6" aria-hidden="true" tabindex="-1"></a>          <span class="at">main=</span><span class="st">&quot;Heatmap de las muestras de &#39;celltypes&#39;&quot;</span>,   <span class="at">cex.main=</span><span class="fl">0.6</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="8-4-visualización-de-los-perfiles-de-expresión.html#cb111-1"></a><span class="kw">require</span>(<span class="st">&quot;gplots&quot;</span>)</span>
+<span id="cb111-2"><a href="8-4-visualización-de-los-perfiles-de-expresión.html#cb111-2"></a><span class="kw">heatmap.2</span>(exprs2cluster,</span>
+<span id="cb111-3"><a href="8-4-visualización-de-los-perfiles-de-expresión.html#cb111-3"></a>          <span class="dt">col=</span><span class="kw">bluered</span>(<span class="dv">75</span>), <span class="dt">scale=</span><span class="st">&quot;row&quot;</span>,</span>
+<span id="cb111-4"><a href="8-4-visualización-de-los-perfiles-de-expresión.html#cb111-4"></a>          <span class="dt">ColSideColors=</span>grupColors, <span class="dt">key=</span><span class="ot">TRUE</span>, <span class="dt">symkey=</span><span class="ot">FALSE</span>,</span>
+<span id="cb111-5"><a href="8-4-visualización-de-los-perfiles-de-expresión.html#cb111-5"></a>          <span class="dt">density.info=</span><span class="st">&quot;none&quot;</span>, <span class="dt">trace=</span><span class="st">&quot;none&quot;</span>, <span class="dt">cexCol=</span><span class="fl">0.8</span>,</span>
+<span id="cb111-6"><a href="8-4-visualización-de-los-perfiles-de-expresión.html#cb111-6"></a>          <span class="dt">main=</span><span class="st">&quot;Heatmap de las muestras de &#39;celltypes&#39;&quot;</span>,   <span class="dt">cex.main=</span><span class="fl">0.6</span>)</span></code></pre></div>
 <p><img src="Analisis_de_Datos_de_Microarrays_y_otras_Omicas_files/figure-html/plotHeatMap02-1.png" width="672" /></p>
 </div>
 <p style="text-align: center;">

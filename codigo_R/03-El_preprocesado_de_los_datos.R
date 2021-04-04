@@ -40,7 +40,7 @@ library("CCl4")
 dataPath = system.file("extdata", package="CCl4")
 adf = read.AnnotatedDataFrame("samplesInfo.txt", 
     path=dataPath)
-#adf
+adf
 targets = pData(adf)
 targets$FileName = row.names(targets)
 RG <- read.maimages(targets, path=dataPath, source="genepix")
@@ -48,7 +48,6 @@ attach(RG$targets)
 newNames <-paste(substr(Cy3,1,3),substr(Cy5,1,3),substr(FileName,10,12), sep="")
 colnames(RG$R)<-colnames(RG$G)<-colnames(RG$Rb)<-colnames(RG$Gb)<-rownames(RG$targets)<- newNames
 # show(RG)
-
 
 ## -------------------------------------------------------------------------------------------------------------------------
 class(RG)

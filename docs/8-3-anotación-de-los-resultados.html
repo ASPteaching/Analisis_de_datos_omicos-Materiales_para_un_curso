@@ -22,7 +22,7 @@ MathJax.Hub.Config({
   TeX: { equationNumbers: { autoNumber: "AMS" } }
 });
 </script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" type="text/javascript"></script>
 
 <meta name="description" content="8.3 Anotación de los resultados | Analisis de datos omicos">
 
@@ -45,6 +45,7 @@ MathJax.Hub.Config({
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
 <script src="libs/navigation-1.1/tabsets.js"></script>
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 
 
 <style type="text/css">code{white-space: pre;}</style>
@@ -52,7 +53,6 @@ MathJax.Hub.Config({
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
@@ -196,10 +196,11 @@ img {
 <ul>
 <li><a href="3-2-c4examples.html#celltypes"><span class="toc-section-number">3.2.1</span> Estudio de procesos regulados por citoquinas</a></li>
 <li><a href="3-2-c4examples.html#golub"><span class="toc-section-number">3.2.2</span> Clasificación molecular de la leucemia</a></li>
-<li><a href="3-2-c4examples.html#efecto-del-estrogeno-y-el-tiempo-de-administración-estrogen"><span class="toc-section-number">3.2.3</span> Efecto del estrogeno y el tiempo de administración {#estrogen]</a></li>
+<li><a href="3-2-c4examples.html#estrogen"><span class="toc-section-number">3.2.3</span> Efecto del estrogeno y el tiempo de administración</a></li>
 <li><a href="3-2-c4examples.html#CCL4"><span class="toc-section-number">3.2.4</span> Efecto del CCL4 en la expresión génica</a></li>
-<li><a href="3-2-c4examples.html#yeast"><span class="toc-section-number">3.2.5</span> Análisis de patrones en el ciclo celular</a></li>
-<li><a href="3-2-c4examples.html#recapitulación"><span class="toc-section-number">3.2.6</span> Recapitulación</a></li>
+<li><a href="3-2-c4examples.html#swirl"><span class="toc-section-number">3.2.5</span> Estudio de la mutación “swirl” en el desarrollo del pez cebra</a></li>
+<li><a href="3-2-c4examples.html#yeast"><span class="toc-section-number">3.2.6</span> Análisis de patrones en el ciclo celular</a></li>
+<li><a href="3-2-c4examples.html#recapitulación"><span class="toc-section-number">3.2.7</span> Recapitulación</a></li>
 </ul></li>
 <li><a href="3-3-el-proceso-de-análisis-de-microarrays.html#el-proceso-de-análisis-de-microarrays"><span class="toc-section-number">3.3</span> El proceso de análisis de microarrays</a></li>
 </ul></li>
@@ -236,8 +237,7 @@ img {
 </ul></li>
 <li><a href="5-4-resumen-y-normalización-de-microarrays-de-affymetrix.html#resumen-y-normalización-de-microarrays-de-affymetrix"><span class="toc-section-number">5.4</span> Resumen y normalización de microarrays de Affymetrix</a>
 <ul>
-<li><a href="5-4-resumen-y-normalización-de-microarrays-de-affymetrix.html#métodos-originales-de-affymetrix"><span class="toc-section-number">5.4.1</span> Métodos originales de Affymetrix</a></li>
-<li><a href="5-4-resumen-y-normalización-de-microarrays-de-affymetrix.html#el-método-rma-robust-multi-array-average"><span class="toc-section-number">5.4.2</span> El método RMA (Robust Multi-Array Average)</a></li>
+<li><a href="5-4-resumen-y-normalización-de-microarrays-de-affymetrix.html#el-método-rma-robust-multi-array-average"><span class="toc-section-number">5.4.1</span> El método RMA (Robust Multi-Array Average)</a></li>
 </ul></li>
 <li><a href="5-5-filtraje-no-específico.html#filtraje-no-específico"><span class="toc-section-number">5.5</span> Filtraje no específico</a></li>
 </ul></li>
@@ -316,7 +316,7 @@ img {
 <h2><span class="header-section-number">8.3</span> Anotación de los resultados</h2>
 <p>La identificación de los genes seleccionados puede resultar más
 sencilla para el especialista en un campo si se utilizan nombres
-estándar como el simbolo del gen o “gene symbol.” Ahora bien hemos de recordar que los microarrays suele ser un producto comercial en los que la empresa que los crea decide que sondas de cada gen o exón coloca en cada posición del array. Esto significa que para poder indicar el nombre de cada gen seleccionado es preciso disponer de algún tipo de <em>tabla de anotaciones</em> que relacione cada sonda con los genes a los que apunta.
+estándar como el simbolo del gen o “gene symbol”. Ahora bien hemos de recordar que los microarrays suele ser un producto comercial en los que la empresa que los crea decide que sondas de cada gen o exón coloca en cada posición del array. Esto significa que para poder indicar el nombre de cada gen seleccionado es preciso disponer de algún tipo de <em>tabla de anotaciones</em> que relacione cada sonda con los genes a los que apunta.
 Esta tabla debería ser proporcionada por las companñias que producen los arrays pero es algo que queda a su criterio y, en el mejor de los casos, cada empresa puede seguir unos criterios distintos.</p>
 <p>Afortunadamente si se trabaja con Bioconductor existe una solución homogenea a este problema. Se trata de los <em>paquetes de anotaciones</em> creados y mantenidos por el equipo de Bioconductor a partir de la información publicada por cada compañia pero con una forma común de acceso. Es decir aunque las distintas empresas utilicen fotmatos distintos desde el punto de vista del usuario de Bioconductor esto no importará: si existe el paquete se utiliza como todos los demás.</p>
 <p>De hecho Bioconductor incorpora varios tipos de paquetes de anotaciones:</p>
@@ -326,10 +326,10 @@ Esta tabla debería ser proporcionada por las companñias que producen los array
 <li><strong>Paquetes de anotaciones de bases de datos</strong> Estos paquetes difieren de los anteriores porque lo que hacen es almacenar en el mismo formato que los anteriores –bases de datos SQL consultables en R– una copia de ciertas bases de datos como la <em>Gene Ontology (GO)</em> o la <em>Kyoto Encyclopedia of Genes and Genomes (KEGG)</em>.</li>
 </ul>
 <p>Para saber que anotaciones estan disponibles debe cargarse el paquete y llamar la función del mismo nombre. Por ejempl para los microarrays del caso <tt>celltypes</tt>:</p>
-<p>Para saber que anotaciones estan disponibles debe cargarse el paquete y llamar la función del mismo nombre sin el sufijo “.db.”</p>
-<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="8-3-anotación-de-los-resultados.html#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mouse4302.db)</span>
-<span id="cb84-2"><a href="8-3-anotación-de-los-resultados.html#cb84-2" aria-hidden="true" tabindex="-1"></a>anotData <span class="ot">&lt;-</span> <span class="fu">capture.output</span>(<span class="fu">mouse4302</span>())</span>
-<span id="cb84-3"><a href="8-3-anotación-de-los-resultados.html#cb84-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(anotData)</span></code></pre></div>
+<p>Para saber que anotaciones estan disponibles debe cargarse el paquete y llamar la función del mismo nombre sin el sufijo “.db”.</p>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="8-3-anotación-de-los-resultados.html#cb88-1"></a><span class="kw">library</span>(mouse4302.db)</span>
+<span id="cb88-2"><a href="8-3-anotación-de-los-resultados.html#cb88-2"></a>anotData &lt;-<span class="st"> </span><span class="kw">capture.output</span>(<span class="kw">mouse4302</span>())</span>
+<span id="cb88-3"><a href="8-3-anotación-de-los-resultados.html#cb88-3"></a><span class="kw">print</span>(anotData)</span></code></pre></div>
 <pre><code>##  [1] &quot;Quality control information for mouse4302:&quot;                  
 ##  [2] &quot;&quot;                                                            
 ##  [3] &quot;&quot;                                                            
@@ -372,15 +372,15 @@ Esta tabla debería ser proporcionada por las companñias que producen los array
 ## [40] &quot;Date for KEGG data: 2011-Mar15&quot;                              
 ## [41] &quot;Date for Golden Path data: 2012-Mar8&quot;                        
 ## [42] &quot;Date for Ensembl data: 2015-Jul16&quot;</code></pre>
-<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="8-3-anotación-de-los-resultados.html#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> (<span class="st">&quot;... output continues until &quot;</span>, <span class="fu">length</span>(anotData), <span class="st">&quot; lines.</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="8-3-anotación-de-los-resultados.html#cb90-1"></a><span class="kw">cat</span> (<span class="st">&quot;... output continues until &quot;</span>, <span class="kw">length</span>(anotData), <span class="st">&quot; lines.</span><span class="ch">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 <pre><code>## ... output continues until  42  lines.</code></pre>
 <p>Si en vez del paquetes del microarray usáramos el paquete de organismo, en este caso del ratón.</p>
-<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="8-3-anotación-de-los-resultados.html#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span>(<span class="fu">require</span>(org.Mm.eg.db))){</span>
-<span id="cb88-2"><a href="8-3-anotación-de-los-resultados.html#cb88-2" aria-hidden="true" tabindex="-1"></a>        <span class="fu">biocLite</span>(<span class="st">&quot;org.Mm.eg.db&quot;</span>)</span>
-<span id="cb88-3"><a href="8-3-anotación-de-los-resultados.html#cb88-3" aria-hidden="true" tabindex="-1"></a>      }</span>
-<span id="cb88-4"><a href="8-3-anotación-de-los-resultados.html#cb88-4" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(org.Mm.eg.db)</span>
-<span id="cb88-5"><a href="8-3-anotación-de-los-resultados.html#cb88-5" aria-hidden="true" tabindex="-1"></a>anotData <span class="ot">&lt;-</span> <span class="fu">capture.output</span>(<span class="fu">org.Mm.eg</span>())</span>
-<span id="cb88-6"><a href="8-3-anotación-de-los-resultados.html#cb88-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(anotData[<span class="dv">1</span><span class="sc">:</span><span class="dv">15</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="8-3-anotación-de-los-resultados.html#cb92-1"></a><span class="cf">if</span> (<span class="op">!</span>(<span class="kw">require</span>(org.Mm.eg.db))){</span>
+<span id="cb92-2"><a href="8-3-anotación-de-los-resultados.html#cb92-2"></a>        <span class="kw">biocLite</span>(<span class="st">&quot;org.Mm.eg.db&quot;</span>)</span>
+<span id="cb92-3"><a href="8-3-anotación-de-los-resultados.html#cb92-3"></a>      }</span>
+<span id="cb92-4"><a href="8-3-anotación-de-los-resultados.html#cb92-4"></a><span class="kw">require</span>(org.Mm.eg.db)</span>
+<span id="cb92-5"><a href="8-3-anotación-de-los-resultados.html#cb92-5"></a>anotData &lt;-<span class="st"> </span><span class="kw">capture.output</span>(<span class="kw">org.Mm.eg</span>())</span>
+<span id="cb92-6"><a href="8-3-anotación-de-los-resultados.html#cb92-6"></a><span class="kw">print</span>(anotData[<span class="dv">1</span><span class="op">:</span><span class="dv">15</span>])</span></code></pre></div>
 <pre><code>##  [1] &quot;Quality control information for org.Mm.eg:&quot;                
 ##  [2] &quot;&quot;                                                          
 ##  [3] &quot;&quot;                                                          
@@ -396,7 +396,7 @@ Esta tabla debería ser proporcionada por las companñias que producen los array
 ## [13] &quot;org.Mm.egENSEMBL has 27449 mapped keys (of 72692 keys)&quot;    
 ## [14] &quot;org.Mm.egENSEMBL2EG has 27643 mapped keys (of 27643 keys)&quot; 
 ## [15] &quot;org.Mm.egENSEMBLPROT has 10294 mapped keys (of 72692 keys)&quot;</code></pre>
-<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="8-3-anotación-de-los-resultados.html#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> (<span class="st">&quot;... output continues until &quot;</span>, <span class="fu">length</span>(anotData), <span class="st">&quot; lines.</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="8-3-anotación-de-los-resultados.html#cb94-1"></a><span class="kw">cat</span> (<span class="st">&quot;... output continues until &quot;</span>, <span class="kw">length</span>(anotData), <span class="st">&quot; lines.</span><span class="ch">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 <pre><code>## ... output continues until  49  lines.</code></pre>
 <p>Cada tabla de asociación puede consultarse de diversas formas,</p>
 <ul>
@@ -405,35 +405,35 @@ Esta tabla debería ser proporcionada por las companñias que producen los array
 <li>En algunos casos utilizando funciones específicas como <tt>getSYMBOL</tt> o <tt>getEG</tt> (por “Entrez Gene”) cuando exitan.</li>
 </ul>
 <p>Por ejemplo si tomamos los cinco primeros genes seleccionados en la comparación “LPS.in.AGED”</p>
-<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="8-3-anotación-de-los-resultados.html#cb92-1" aria-hidden="true" tabindex="-1"></a>top5 <span class="ot">&lt;-</span><span class="fu">rownames</span>(topTab_LPS.in.AGED)[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span>
-<span id="cb92-2"><a href="8-3-anotación-de-los-resultados.html#cb92-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Usando mget</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="8-3-anotación-de-los-resultados.html#cb96-1"></a>top5 &lt;-<span class="kw">rownames</span>(topTab_LPS.in.AGED)[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>]</span>
+<span id="cb96-2"><a href="8-3-anotación-de-los-resultados.html#cb96-2"></a><span class="kw">cat</span>(<span class="st">&quot;Usando mget</span><span class="ch">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 <pre><code>## Usando mget</code></pre>
-<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="8-3-anotación-de-los-resultados.html#cb94-1" aria-hidden="true" tabindex="-1"></a>geneSymbol5<span class="fl">.1</span> <span class="ot">&lt;-</span> <span class="fu">unlist</span>(<span class="fu">mget</span>(top5, mouse4302SYMBOL))</span>
-<span id="cb94-2"><a href="8-3-anotación-de-los-resultados.html#cb94-2" aria-hidden="true" tabindex="-1"></a>geneSymbol5<span class="fl">.1</span></span></code></pre></div>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="8-3-anotación-de-los-resultados.html#cb98-1"></a>geneSymbol5<span class="fl">.1</span> &lt;-<span class="st"> </span><span class="kw">unlist</span>(<span class="kw">mget</span>(top5, mouse4302SYMBOL))</span>
+<span id="cb98-2"><a href="8-3-anotación-de-los-resultados.html#cb98-2"></a>geneSymbol5<span class="fl">.1</span></span></code></pre></div>
 <pre><code>## 1450826_a_at   1449450_at   1419607_at 1419681_a_at   1419209_at 
 ##       &quot;Saa3&quot;      &quot;Ptges&quot;        &quot;Tnf&quot;      &quot;Prok2&quot;      &quot;Cxcl1&quot;</code></pre>
-<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="8-3-anotación-de-los-resultados.html#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Usando toTable</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="8-3-anotación-de-los-resultados.html#cb100-1"></a><span class="kw">cat</span>(<span class="st">&quot;Usando toTable</span><span class="ch">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 <pre><code>## Usando toTable</code></pre>
-<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="8-3-anotación-de-los-resultados.html#cb98-1" aria-hidden="true" tabindex="-1"></a>genesTable<span class="ot">&lt;-</span> <span class="fu">toTable</span>(mouse4302SYMBOL)</span>
-<span id="cb98-2"><a href="8-3-anotación-de-los-resultados.html#cb98-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(genesTable) <span class="ot">&lt;-</span>  genesTable<span class="sc">$</span>probe_id</span>
-<span id="cb98-3"><a href="8-3-anotación-de-los-resultados.html#cb98-3" aria-hidden="true" tabindex="-1"></a>genesTable[top5, <span class="dv">2</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="8-3-anotación-de-los-resultados.html#cb102-1"></a>genesTable&lt;-<span class="st"> </span><span class="kw">toTable</span>(mouse4302SYMBOL)</span>
+<span id="cb102-2"><a href="8-3-anotación-de-los-resultados.html#cb102-2"></a><span class="kw">rownames</span>(genesTable) &lt;-<span class="st">  </span>genesTable<span class="op">$</span>probe_id</span>
+<span id="cb102-3"><a href="8-3-anotación-de-los-resultados.html#cb102-3"></a>genesTable[top5, <span class="dv">2</span>]</span></code></pre></div>
 <pre><code>## [1] &quot;Saa3&quot;  &quot;Ptges&quot; &quot;Tnf&quot;   &quot;Prok2&quot; &quot;Cxcl1&quot;</code></pre>
-<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="8-3-anotación-de-los-resultados.html#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Usando getSYMBOL</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="8-3-anotación-de-los-resultados.html#cb104-1"></a><span class="kw">cat</span>(<span class="st">&quot;Usando getSYMBOL</span><span class="ch">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
 <pre><code>## Usando getSYMBOL</code></pre>
-<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="8-3-anotación-de-los-resultados.html#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(annotate)</span>
-<span id="cb102-2"><a href="8-3-anotación-de-los-resultados.html#cb102-2" aria-hidden="true" tabindex="-1"></a>geneSymbol5<span class="fl">.3</span> <span class="ot">&lt;-</span> <span class="fu">getSYMBOL</span>(top5, <span class="st">&quot;mouse4302.db&quot;</span>)</span>
-<span id="cb102-3"><a href="8-3-anotación-de-los-resultados.html#cb102-3" aria-hidden="true" tabindex="-1"></a>geneSymbol5<span class="fl">.3</span></span></code></pre></div>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="8-3-anotación-de-los-resultados.html#cb106-1"></a><span class="kw">require</span>(annotate)</span>
+<span id="cb106-2"><a href="8-3-anotación-de-los-resultados.html#cb106-2"></a>geneSymbol5<span class="fl">.3</span> &lt;-<span class="st"> </span><span class="kw">getSYMBOL</span>(top5, <span class="st">&quot;mouse4302.db&quot;</span>)</span>
+<span id="cb106-3"><a href="8-3-anotación-de-los-resultados.html#cb106-3"></a>geneSymbol5<span class="fl">.3</span></span></code></pre></div>
 <pre><code>## 1450826_a_at   1449450_at   1419607_at 1419681_a_at   1419209_at 
 ##       &quot;Saa3&quot;      &quot;Ptges&quot;        &quot;Tnf&quot;      &quot;Prok2&quot;      &quot;Cxcl1&quot;</code></pre>
 <p>Bioconductor dispone de algunos paquetes que permiten aprovechar esta funcionalidad anterior para obtener las anotaciones de cada gen y generar una tabla HTML con enlaces a algunas bases de datos.</p>
 <p>De forma sencilla es posible obtener tablas con las anotaciones correspondientes a los genes seleccionados. Si se desea ser más ambicioso es posible generar tablas en las que se combinen hiperenlaces a las anotaciones con los resultados de la selección de genes.</p>
 <p>El paquete <tt>annafy</tt> permite de forma muy simple generar una tabla de anotaciones con hiperenlaces a las bases de datos para cada anotación seleccionada.</p>
 <p>La instrucción siguiente crearia una tabla con las anotaciones disponibles para los genes seleccionados en la sección de comparaciones múltiples.</p>
-<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="8-3-anotación-de-los-resultados.html#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(annaffy)</span>
-<span id="cb104-2"><a href="8-3-anotación-de-los-resultados.html#cb104-2" aria-hidden="true" tabindex="-1"></a>genesSelected <span class="ot">&lt;-</span> <span class="fu">rownames</span>(res.selected)</span>
-<span id="cb104-3"><a href="8-3-anotación-de-los-resultados.html#cb104-3" aria-hidden="true" tabindex="-1"></a>at <span class="ot">&lt;-</span> <span class="fu">aafTableAnn</span>(genesSelected, <span class="st">&quot;mouse4302.db&quot;</span>)</span>
-<span id="cb104-4"><a href="8-3-anotación-de-los-resultados.html#cb104-4" aria-hidden="true" tabindex="-1"></a><span class="fu">saveHTML</span> (at, <span class="at">file=</span><span class="st">&quot;results/anotations.html&quot;</span>,</span>
-<span id="cb104-5"><a href="8-3-anotación-de-los-resultados.html#cb104-5" aria-hidden="true" tabindex="-1"></a>          <span class="st">&quot;Annotations for selected genes&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="8-3-anotación-de-los-resultados.html#cb108-1"></a><span class="kw">require</span>(annaffy)</span>
+<span id="cb108-2"><a href="8-3-anotación-de-los-resultados.html#cb108-2"></a>genesSelected &lt;-<span class="st"> </span><span class="kw">rownames</span>(res.selected)</span>
+<span id="cb108-3"><a href="8-3-anotación-de-los-resultados.html#cb108-3"></a>at &lt;-<span class="st"> </span><span class="kw">aafTableAnn</span>(genesSelected, <span class="st">&quot;mouse4302.db&quot;</span>)</span>
+<span id="cb108-4"><a href="8-3-anotación-de-los-resultados.html#cb108-4"></a><span class="kw">saveHTML</span> (at, <span class="dt">file=</span><span class="st">&quot;results/anotations.html&quot;</span>,</span>
+<span id="cb108-5"><a href="8-3-anotación-de-los-resultados.html#cb108-5"></a>          <span class="st">&quot;Annotations for selected genes&quot;</span>)</span></code></pre></div>
 </div>
 <p style="text-align: center;">
 <a href="8-2-análisis-comparativo-de-listas-de-genes.html"><button class="btn btn-default">Previous</button></a>

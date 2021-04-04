@@ -22,7 +22,7 @@ MathJax.Hub.Config({
   TeX: { equationNumbers: { autoNumber: "AMS" } }
 });
 </script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" type="text/javascript"></script>
 
 <meta name="description" content="6.3 Significación estadística y expresión diferencial | Analisis de datos omicos">
 
@@ -45,6 +45,7 @@ MathJax.Hub.Config({
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
 <script src="libs/navigation-1.1/tabsets.js"></script>
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 
 
 <style type="text/css">code{white-space: pre;}</style>
@@ -52,7 +53,6 @@ MathJax.Hub.Config({
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
@@ -196,10 +196,11 @@ img {
 <ul>
 <li><a href="3-2-c4examples.html#celltypes"><span class="toc-section-number">3.2.1</span> Estudio de procesos regulados por citoquinas</a></li>
 <li><a href="3-2-c4examples.html#golub"><span class="toc-section-number">3.2.2</span> Clasificación molecular de la leucemia</a></li>
-<li><a href="3-2-c4examples.html#efecto-del-estrogeno-y-el-tiempo-de-administración-estrogen"><span class="toc-section-number">3.2.3</span> Efecto del estrogeno y el tiempo de administración {#estrogen]</a></li>
+<li><a href="3-2-c4examples.html#estrogen"><span class="toc-section-number">3.2.3</span> Efecto del estrogeno y el tiempo de administración</a></li>
 <li><a href="3-2-c4examples.html#CCL4"><span class="toc-section-number">3.2.4</span> Efecto del CCL4 en la expresión génica</a></li>
-<li><a href="3-2-c4examples.html#yeast"><span class="toc-section-number">3.2.5</span> Análisis de patrones en el ciclo celular</a></li>
-<li><a href="3-2-c4examples.html#recapitulación"><span class="toc-section-number">3.2.6</span> Recapitulación</a></li>
+<li><a href="3-2-c4examples.html#swirl"><span class="toc-section-number">3.2.5</span> Estudio de la mutación “swirl” en el desarrollo del pez cebra</a></li>
+<li><a href="3-2-c4examples.html#yeast"><span class="toc-section-number">3.2.6</span> Análisis de patrones en el ciclo celular</a></li>
+<li><a href="3-2-c4examples.html#recapitulación"><span class="toc-section-number">3.2.7</span> Recapitulación</a></li>
 </ul></li>
 <li><a href="3-3-el-proceso-de-análisis-de-microarrays.html#el-proceso-de-análisis-de-microarrays"><span class="toc-section-number">3.3</span> El proceso de análisis de microarrays</a></li>
 </ul></li>
@@ -236,8 +237,7 @@ img {
 </ul></li>
 <li><a href="5-4-resumen-y-normalización-de-microarrays-de-affymetrix.html#resumen-y-normalización-de-microarrays-de-affymetrix"><span class="toc-section-number">5.4</span> Resumen y normalización de microarrays de Affymetrix</a>
 <ul>
-<li><a href="5-4-resumen-y-normalización-de-microarrays-de-affymetrix.html#métodos-originales-de-affymetrix"><span class="toc-section-number">5.4.1</span> Métodos originales de Affymetrix</a></li>
-<li><a href="5-4-resumen-y-normalización-de-microarrays-de-affymetrix.html#el-método-rma-robust-multi-array-average"><span class="toc-section-number">5.4.2</span> El método RMA (Robust Multi-Array Average)</a></li>
+<li><a href="5-4-resumen-y-normalización-de-microarrays-de-affymetrix.html#el-método-rma-robust-multi-array-average"><span class="toc-section-number">5.4.1</span> El método RMA (Robust Multi-Array Average)</a></li>
 </ul></li>
 <li><a href="5-5-filtraje-no-específico.html#filtraje-no-específico"><span class="toc-section-number">5.5</span> Filtraje no específico</a></li>
 </ul></li>
@@ -315,7 +315,7 @@ img {
 <div id="significación-estadística-y-expresión-diferencial" class="section level2" number="6.3">
 <h2><span class="header-section-number">6.3</span> Significación estadística y expresión diferencial</h2>
 <p>Como hemos visto en la sección anterior dos medidas naturales para
-la selección de genes son el promedio de “log-ratios,” o la
+la selección de genes son el promedio de “log-ratios”, o la
 diferencia de promedios en el caso de muestras independientes, o el valor del estadístico de test (<span class="math inline">\(t\)</span>-test) de una o dos muestras según si se trata de
 muestras apareadas o independientes respectivamente. Los primeros
 estudios de microarrays eran muy costosos y se hacían con pocas o
@@ -335,8 +335,8 @@ p–valor del test sea inferior a un cierto umbral como 0.05 o 0.01.</p>
 <p>Como es sabido, un test estadístico procede decidiendo rechazar la hipótesis nula si el
 p–valor es más pequeño que el nivel de significación del test.</p>
 <p>Siguiendo con el ejemplo anterior podemos ordenar los resultados de los tests en base a los p–valores:</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="6-3-significación-estadística-y-expresión-diferencial.html#cb27-1" aria-hidden="true" tabindex="-1"></a>ranked <span class="ot">&lt;-</span>teststat[<span class="fu">order</span>(teststat<span class="sc">$</span>p.value),]</span>
-<span id="cb27-2"><a href="6-3-significación-estadística-y-expresión-diferencial.html#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(ranked[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,])</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="6-3-significación-estadística-y-expresión-diferencial.html#cb31-1"></a>ranked &lt;-teststat[<span class="kw">order</span>(teststat<span class="op">$</span>p.value),]</span>
+<span id="cb31-2"><a href="6-3-significación-estadística-y-expresión-diferencial.html#cb31-2"></a><span class="kw">print</span>(ranked[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>,])</span></code></pre></div>
 <pre><code>##              statistic        dm      p.value
 ## 1449383_at   -48.61014 -2.044928 3.276616e-13
 ## 1451421_a_at -40.72173 -1.445182 1.909283e-12
@@ -344,7 +344,7 @@ p–valor es más pequeño que el nivel de significación del test.</p>
 ## 1450826_a_at  37.62239  5.147992 4.193941e-12
 ## 1448303_at   -31.92365 -2.283765 2.140612e-11</code></pre>
 <p>Ahora podríamos seleccionar, por ejemplo los genes cuyo p–valor fuera inferior a 0.01</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="6-3-significación-estadística-y-expresión-diferencial.html#cb29-1" aria-hidden="true" tabindex="-1"></a>selectedTeststat <span class="ot">&lt;-</span> ranked[ranked<span class="sc">$</span>p.value <span class="sc">&lt;</span> <span class="fl">0.01</span>,]</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="6-3-significación-estadística-y-expresión-diferencial.html#cb33-1"></a>selectedTeststat &lt;-<span class="st"> </span>ranked[ranked<span class="op">$</span>p.value <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.01</span>,]</span></code></pre></div>
 <p>Esto deja un total de <code>{r} dim(selectedTeststat)[1]</code> con un p–valor inferior a 0.01</p>
 <div id="volcano-plots" class="section level3" number="6.3.1">
 <h3><span class="header-section-number">6.3.1</span> “Volcano plots”</h3>
@@ -356,30 +356,30 @@ de manera que la regulación positiva o negativa se representa de forma simétri
 de forma que los p–valores más pequeños aparecen mayores.</p>
 <p>Así pues puede considerarse que el primer eje indica impacto biológico del cambio (a más efecto biológico mayor “fold-change”) y el segundo muestra la evidencia estadística, o la fiabilidad del cambio.</p>
 <p>Como veremos más adelante en esta sección, el paquete <code>limma</code> permite realizar volcano-plots de forma sencilla a partir de los resultados de un anàlisis, pero para hacer un volcano plot tan sólo se necesita una lista de p-valores y los efectos (“fold-change”) asociados.</p>
-<p>La figura <span class="citation">(<strong>ref?</strong>)</span>(fig:volcano0) muestra un “volcano-plot” para este ejemplo de los “celltypes” para la comparación “LPS” frente a “Medium.”</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="6-3-significación-estadística-y-expresión-diferencial.html#cb30-1" aria-hidden="true" tabindex="-1"></a>FC <span class="ot">&lt;-</span> teststat<span class="sc">$</span>statistic</span>
-<span id="cb30-2"><a href="6-3-significación-estadística-y-expresión-diferencial.html#cb30-2" aria-hidden="true" tabindex="-1"></a>pVal<span class="ot">&lt;-</span>teststat<span class="sc">$</span>p.value</span>
-<span id="cb30-3"><a href="6-3-significación-estadística-y-expresión-diferencial.html#cb30-3" aria-hidden="true" tabindex="-1"></a>Y <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fu">log</span>(pVal)</span>
-<span id="cb30-4"><a href="6-3-significación-estadística-y-expresión-diferencial.html#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Y<span class="sc">~</span>FC)</span></code></pre></div>
+<p>La figura <span class="citation">(<span class="citeproc-not-found" data-reference-id="ref"><strong>???</strong></span>)</span>(fig:volcano0) muestra un “volcano-plot” para este ejemplo de los “celltypes” para la comparación “LPS” frente a “Medium”.</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="6-3-significación-estadística-y-expresión-diferencial.html#cb34-1"></a>FC &lt;-<span class="st"> </span>teststat<span class="op">$</span>statistic</span>
+<span id="cb34-2"><a href="6-3-significación-estadística-y-expresión-diferencial.html#cb34-2"></a>pVal&lt;-teststat<span class="op">$</span>p.value</span>
+<span id="cb34-3"><a href="6-3-significación-estadística-y-expresión-diferencial.html#cb34-3"></a>Y &lt;-<span class="st"> </span><span class="op">-</span><span class="kw">log</span>(pVal)</span>
+<span id="cb34-4"><a href="6-3-significación-estadística-y-expresión-diferencial.html#cb34-4"></a><span class="kw">plot</span>(Y<span class="op">~</span>FC)</span></code></pre></div>
 <p><img src="Analisis_de_Datos_de_Microarrays_y_otras_Omicas_files/figure-html/volcano0-1.png" width="672" /></p>
 <p>También podemos adaptar alguna función “ad-hoc” como la siguiente, tomada de :<a href=""></a></p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="6-3-significación-estadística-y-expresión-diferencial.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggrepel)</span>
-<span id="cb31-2"><a href="6-3-significación-estadística-y-expresión-diferencial.html#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="co"># plot adding up all layers we have seen so far</span></span>
-<span id="cb31-3"><a href="6-3-significación-estadística-y-expresión-diferencial.html#cb31-3" aria-hidden="true" tabindex="-1"></a>volcanoP<span class="ot">&lt;-</span> <span class="cf">function</span> (de,log2FoldChange,  pvalue, </span>
-<span id="cb31-4"><a href="6-3-significación-estadística-y-expresión-diferencial.html#cb31-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">diffexpressed=</span><span class="cn">NULL</span>, <span class="at">col=</span><span class="cn">NULL</span>, <span class="at">delabel=</span><span class="cn">NULL</span>){</span>
-<span id="cb31-5"><a href="6-3-significación-estadística-y-expresión-diferencial.html#cb31-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">data=</span>de, <span class="fu">aes</span>(<span class="at">x=</span>log2FoldChange, <span class="at">y=</span><span class="sc">-</span><span class="fu">log10</span>(pvalue), <span class="at">col=</span>diffexpressed, <span class="at">label=</span>delabel)) <span class="sc">+</span></span>
-<span id="cb31-6"><a href="6-3-significación-estadística-y-expresión-diferencial.html#cb31-6" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb31-7"><a href="6-3-significación-estadística-y-expresión-diferencial.html#cb31-7" aria-hidden="true" tabindex="-1"></a>        <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb31-8"><a href="6-3-significación-estadística-y-expresión-diferencial.html#cb31-8" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_text_repel</span>() <span class="sc">+</span></span>
-<span id="cb31-9"><a href="6-3-significación-estadística-y-expresión-diferencial.html#cb31-9" aria-hidden="true" tabindex="-1"></a>        <span class="fu">scale_color_manual</span>(<span class="at">values=</span><span class="fu">c</span>(<span class="st">&quot;blue&quot;</span>, <span class="st">&quot;black&quot;</span>, <span class="st">&quot;red&quot;</span>)) <span class="sc">+</span></span>
-<span id="cb31-10"><a href="6-3-significación-estadística-y-expresión-diferencial.html#cb31-10" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_vline</span>(<span class="at">xintercept=</span><span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.6</span>, <span class="fl">0.6</span>), <span class="at">col=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
-<span id="cb31-11"><a href="6-3-significación-estadística-y-expresión-diferencial.html#cb31-11" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_hline</span>(<span class="at">yintercept=</span><span class="sc">-</span><span class="fu">log10</span>(<span class="fl">0.05</span>), <span class="at">col=</span><span class="st">&quot;red&quot;</span>)</span>
-<span id="cb31-12"><a href="6-3-significación-estadística-y-expresión-diferencial.html#cb31-12" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb31-13"><a href="6-3-significación-estadística-y-expresión-diferencial.html#cb31-13" aria-hidden="true" tabindex="-1"></a>diffexpressed <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">abs</span>(teststat<span class="sc">$</span>statistic)<span class="sc">&gt;</span><span class="dv">10</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>)</span>
-<span id="cb31-14"><a href="6-3-significación-estadística-y-expresión-diferencial.html#cb31-14" aria-hidden="true" tabindex="-1"></a>label <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="fu">length</span>(diffexpressed))</span>
-<span id="cb31-15"><a href="6-3-significación-estadística-y-expresión-diferencial.html#cb31-15" aria-hidden="true" tabindex="-1"></a>label[diffexpressed] <span class="ot">&lt;-</span> <span class="fu">rownames</span>(teststat)[diffexpressed]</span>
-<span id="cb31-16"><a href="6-3-significación-estadística-y-expresión-diferencial.html#cb31-16" aria-hidden="true" tabindex="-1"></a><span class="fu">volcanoP</span> (<span class="at">de=</span>teststat, <span class="at">log2FoldChange=</span>teststat<span class="sc">$</span>statistic,  <span class="at">pvalue=</span>teststat<span class="sc">$</span>p.value,</span>
-<span id="cb31-17"><a href="6-3-significación-estadística-y-expresión-diferencial.html#cb31-17" aria-hidden="true" tabindex="-1"></a>          <span class="at">diffexpressed =</span> diffexpressed, <span class="at">delabel =</span> label)</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="6-3-significación-estadística-y-expresión-diferencial.html#cb35-1"></a><span class="kw">library</span>(ggrepel)</span>
+<span id="cb35-2"><a href="6-3-significación-estadística-y-expresión-diferencial.html#cb35-2"></a><span class="co"># plot adding up all layers we have seen so far</span></span>
+<span id="cb35-3"><a href="6-3-significación-estadística-y-expresión-diferencial.html#cb35-3"></a>volcanoP&lt;-<span class="st"> </span><span class="cf">function</span> (de,log2FoldChange,  pvalue, </span>
+<span id="cb35-4"><a href="6-3-significación-estadística-y-expresión-diferencial.html#cb35-4"></a>                     <span class="dt">diffexpressed=</span><span class="ot">NULL</span>, <span class="dt">col=</span><span class="ot">NULL</span>, <span class="dt">delabel=</span><span class="ot">NULL</span>){</span>
+<span id="cb35-5"><a href="6-3-significación-estadística-y-expresión-diferencial.html#cb35-5"></a>  <span class="kw">ggplot</span>(<span class="dt">data=</span>de, <span class="kw">aes</span>(<span class="dt">x=</span>log2FoldChange, <span class="dt">y=</span><span class="op">-</span><span class="kw">log10</span>(pvalue), <span class="dt">col=</span>diffexpressed, <span class="dt">label=</span>delabel)) <span class="op">+</span></span>
+<span id="cb35-6"><a href="6-3-significación-estadística-y-expresión-diferencial.html#cb35-6"></a><span class="st">        </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb35-7"><a href="6-3-significación-estadística-y-expresión-diferencial.html#cb35-7"></a><span class="st">        </span><span class="kw">theme_minimal</span>() <span class="op">+</span></span>
+<span id="cb35-8"><a href="6-3-significación-estadística-y-expresión-diferencial.html#cb35-8"></a><span class="st">        </span><span class="kw">geom_text_repel</span>() <span class="op">+</span></span>
+<span id="cb35-9"><a href="6-3-significación-estadística-y-expresión-diferencial.html#cb35-9"></a><span class="st">        </span><span class="kw">scale_color_manual</span>(<span class="dt">values=</span><span class="kw">c</span>(<span class="st">&quot;blue&quot;</span>, <span class="st">&quot;black&quot;</span>, <span class="st">&quot;red&quot;</span>)) <span class="op">+</span></span>
+<span id="cb35-10"><a href="6-3-significación-estadística-y-expresión-diferencial.html#cb35-10"></a><span class="st">        </span><span class="kw">geom_vline</span>(<span class="dt">xintercept=</span><span class="kw">c</span>(<span class="op">-</span><span class="fl">0.6</span>, <span class="fl">0.6</span>), <span class="dt">col=</span><span class="st">&quot;red&quot;</span>) <span class="op">+</span></span>
+<span id="cb35-11"><a href="6-3-significación-estadística-y-expresión-diferencial.html#cb35-11"></a><span class="st">        </span><span class="kw">geom_hline</span>(<span class="dt">yintercept=</span><span class="op">-</span><span class="kw">log10</span>(<span class="fl">0.05</span>), <span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</span>
+<span id="cb35-12"><a href="6-3-significación-estadística-y-expresión-diferencial.html#cb35-12"></a>}</span>
+<span id="cb35-13"><a href="6-3-significación-estadística-y-expresión-diferencial.html#cb35-13"></a>diffexpressed &lt;-<span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">abs</span>(teststat<span class="op">$</span>statistic)<span class="op">&gt;</span><span class="dv">10</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>)</span>
+<span id="cb35-14"><a href="6-3-significación-estadística-y-expresión-diferencial.html#cb35-14"></a>label &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="ot">NA</span>, <span class="kw">length</span>(diffexpressed))</span>
+<span id="cb35-15"><a href="6-3-significación-estadística-y-expresión-diferencial.html#cb35-15"></a>label[diffexpressed] &lt;-<span class="st"> </span><span class="kw">rownames</span>(teststat)[diffexpressed]</span>
+<span id="cb35-16"><a href="6-3-significación-estadística-y-expresión-diferencial.html#cb35-16"></a><span class="kw">volcanoP</span> (<span class="dt">de=</span>teststat, <span class="dt">log2FoldChange=</span>teststat<span class="op">$</span>statistic,  <span class="dt">pvalue=</span>teststat<span class="op">$</span>p.value,</span>
+<span id="cb35-17"><a href="6-3-significación-estadística-y-expresión-diferencial.html#cb35-17"></a>          <span class="dt">diffexpressed =</span> diffexpressed, <span class="dt">delabel =</span> label)</span></code></pre></div>
 </div>
 <div id="potencia-y-tamaño-muestral" class="section level3" number="6.3.2">
 <h3><span class="header-section-number">6.3.2</span> Potencia y tamaño muestral</h3>

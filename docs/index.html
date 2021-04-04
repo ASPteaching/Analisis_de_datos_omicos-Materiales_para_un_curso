@@ -52,13 +52,13 @@
 
 
 
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -179,10 +179,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="3.2.1" data-path="MDAProcess.html"><a href="MDAProcess.html#celltypes"><i class="fa fa-check"></i><b>3.2.1</b> Estudio de procesos regulados por citoquinas</a></li>
 <li class="chapter" data-level="3.2.2" data-path="MDAProcess.html"><a href="MDAProcess.html#golub"><i class="fa fa-check"></i><b>3.2.2</b> Clasificación molecular de la leucemia</a></li>
-<li class="chapter" data-level="3.2.3" data-path="MDAProcess.html"><a href="MDAProcess.html#efecto-del-estrogeno-y-el-tiempo-de-administración-estrogen"><i class="fa fa-check"></i><b>3.2.3</b> Efecto del estrogeno y el tiempo de administración {#estrogen]</a></li>
+<li class="chapter" data-level="3.2.3" data-path="MDAProcess.html"><a href="MDAProcess.html#estrogen"><i class="fa fa-check"></i><b>3.2.3</b> Efecto del estrogeno y el tiempo de administración</a></li>
 <li class="chapter" data-level="3.2.4" data-path="MDAProcess.html"><a href="MDAProcess.html#CCL4"><i class="fa fa-check"></i><b>3.2.4</b> Efecto del CCL4 en la expresión génica</a></li>
-<li class="chapter" data-level="3.2.5" data-path="MDAProcess.html"><a href="MDAProcess.html#yeast"><i class="fa fa-check"></i><b>3.2.5</b> Análisis de patrones en el ciclo celular</a></li>
-<li class="chapter" data-level="3.2.6" data-path="MDAProcess.html"><a href="MDAProcess.html#recapitulación"><i class="fa fa-check"></i><b>3.2.6</b> Recapitulación</a></li>
+<li class="chapter" data-level="3.2.5" data-path="MDAProcess.html"><a href="MDAProcess.html#swirl"><i class="fa fa-check"></i><b>3.2.5</b> Estudio de la mutación “swirl” en el desarrollo del pez cebra</a></li>
+<li class="chapter" data-level="3.2.6" data-path="MDAProcess.html"><a href="MDAProcess.html#yeast"><i class="fa fa-check"></i><b>3.2.6</b> Análisis de patrones en el ciclo celular</a></li>
+<li class="chapter" data-level="3.2.7" data-path="MDAProcess.html"><a href="MDAProcess.html#recapitulación"><i class="fa fa-check"></i><b>3.2.7</b> Recapitulación</a></li>
 </ul></li>
 <li class="chapter" data-level="3.3" data-path="MDAProcess.html"><a href="MDAProcess.html#el-proceso-de-análisis-de-microarrays"><i class="fa fa-check"></i><b>3.3</b> El proceso de análisis de microarrays</a></li>
 </ul></li>
@@ -219,8 +220,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="5.4" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#resumen-y-normalización-de-microarrays-de-affymetrix"><i class="fa fa-check"></i><b>5.4</b> Resumen y normalización de microarrays de Affymetrix</a>
 <ul>
-<li class="chapter" data-level="5.4.1" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#métodos-originales-de-affymetrix"><i class="fa fa-check"></i><b>5.4.1</b> Métodos originales de Affymetrix</a></li>
-<li class="chapter" data-level="5.4.2" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#el-método-rma-robust-multi-array-average"><i class="fa fa-check"></i><b>5.4.2</b> El método RMA (Robust Multi-Array Average)</a></li>
+<li class="chapter" data-level="5.4.1" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#el-método-rma-robust-multi-array-average"><i class="fa fa-check"></i><b>5.4.1</b> El método RMA (Robust Multi-Array Average)</a></li>
 </ul></li>
 <li class="chapter" data-level="5.5" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#filtraje-no-específico"><i class="fa fa-check"></i><b>5.5</b> Filtraje no específico</a></li>
 </ul></li>
@@ -315,7 +315,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="presentación" class="section level1" number="1">
 <h1><span class="header-section-number">Capítulo 1</span> Presentación</h1>
 <p>Este documento es una versión actualizada -en varios sentidos- de unos materiales de análisis de microparrays que escribimos allá por 2010, usando LateX y Sweave, junto con la profesora M. Carme Ruíz de Villa para la asignatura “Análisis de Microarrays” del posgrado de Bioinformática de la Universitat Oberta de Catalunya .</p>
-<p>En estos años han cambiado muchas cosas. El posgrado es ahora un máster interuniversitario entre la UOC y la Universidad de Barcelona (UB). Muchos estadísticos i/o bioinformáticos -entre los que me incluyo- han cambiado de Latex/Sweave a RStudio/RMarkdown y Github. Mi compañera de escritura, Mamen, se ha jubilado, pero un nuevo compañero, Ricardo, se ha apuntado a la aventura de revivir estos materiales. Y aunque sigue sin estar claro si los microarrays también se jubilaran pronto, el campo de las ómicas ha crecido de forma explosiva. El “Análisis de datos ómicos,” título de este nuevo documento ya no se centra en los microarrays. También trata de RNA-seq, Proteómica, Metagenómica, Metabolómica o Epigenómica por citar sólo algunos de los más populares.</p>
+<p>En estos años han cambiado muchas cosas. El posgrado es ahora un máster interuniversitario entre la UOC y la Universidad de Barcelona (UB). Muchos estadísticos i/o bioinformáticos -entre los que me incluyo- han cambiado de Latex/Sweave a RStudio/RMarkdown y Github. Mi compañera de escritura, Mamen, se ha jubilado, pero un nuevo compañero, Ricardo, se ha apuntado a la aventura de revivir estos materiales. Y aunque sigue sin estar claro si los microarrays también se jubilaran pronto, el campo de las ómicas ha crecido de forma explosiva. El “Análisis de datos ómicos”, título de este nuevo documento ya no se centra en los microarrays. También trata de RNA-seq, Proteómica, Metagenómica, Metabolómica o Epigenómica por citar sólo algunos de los más populares.</p>
 <p>Es obvio que un curso de “Análisis de datos ómicos” no puede abarcar todas estas disciplinas, aunque también lo es que comparten muchos elementos comunes.</p>
 <p>El plan de desarrollo para esta nueva edición, que podra seguirse en el repositorio de Github (), tendrá dos fases:</p>
 <ol style="list-style-type: decimal">

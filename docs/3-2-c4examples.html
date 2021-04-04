@@ -22,7 +22,7 @@ MathJax.Hub.Config({
   TeX: { equationNumbers: { autoNumber: "AMS" } }
 });
 </script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" type="text/javascript"></script>
 
 <meta name="description" content="3.2 Algunos ejemplos concretos | Analisis de datos omicos">
 
@@ -45,6 +45,7 @@ MathJax.Hub.Config({
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
 <script src="libs/navigation-1.1/tabsets.js"></script>
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 
 
 <style type="text/css">code{white-space: pre;}</style>
@@ -52,7 +53,6 @@ MathJax.Hub.Config({
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
@@ -196,10 +196,11 @@ img {
 <ul>
 <li><a href="3-2-c4examples.html#celltypes"><span class="toc-section-number">3.2.1</span> Estudio de procesos regulados por citoquinas</a></li>
 <li><a href="3-2-c4examples.html#golub"><span class="toc-section-number">3.2.2</span> Clasificación molecular de la leucemia</a></li>
-<li><a href="3-2-c4examples.html#efecto-del-estrogeno-y-el-tiempo-de-administración-estrogen"><span class="toc-section-number">3.2.3</span> Efecto del estrogeno y el tiempo de administración {#estrogen]</a></li>
+<li><a href="3-2-c4examples.html#estrogen"><span class="toc-section-number">3.2.3</span> Efecto del estrogeno y el tiempo de administración</a></li>
 <li><a href="3-2-c4examples.html#CCL4"><span class="toc-section-number">3.2.4</span> Efecto del CCL4 en la expresión génica</a></li>
-<li><a href="3-2-c4examples.html#yeast"><span class="toc-section-number">3.2.5</span> Análisis de patrones en el ciclo celular</a></li>
-<li><a href="3-2-c4examples.html#recapitulación"><span class="toc-section-number">3.2.6</span> Recapitulación</a></li>
+<li><a href="3-2-c4examples.html#swirl"><span class="toc-section-number">3.2.5</span> Estudio de la mutación “swirl” en el desarrollo del pez cebra</a></li>
+<li><a href="3-2-c4examples.html#yeast"><span class="toc-section-number">3.2.6</span> Análisis de patrones en el ciclo celular</a></li>
+<li><a href="3-2-c4examples.html#recapitulación"><span class="toc-section-number">3.2.7</span> Recapitulación</a></li>
 </ul></li>
 <li><a href="3-3-el-proceso-de-análisis-de-microarrays.html#el-proceso-de-análisis-de-microarrays"><span class="toc-section-number">3.3</span> El proceso de análisis de microarrays</a></li>
 </ul></li>
@@ -236,8 +237,7 @@ img {
 </ul></li>
 <li><a href="5-4-resumen-y-normalización-de-microarrays-de-affymetrix.html#resumen-y-normalización-de-microarrays-de-affymetrix"><span class="toc-section-number">5.4</span> Resumen y normalización de microarrays de Affymetrix</a>
 <ul>
-<li><a href="5-4-resumen-y-normalización-de-microarrays-de-affymetrix.html#métodos-originales-de-affymetrix"><span class="toc-section-number">5.4.1</span> Métodos originales de Affymetrix</a></li>
-<li><a href="5-4-resumen-y-normalización-de-microarrays-de-affymetrix.html#el-método-rma-robust-multi-array-average"><span class="toc-section-number">5.4.2</span> El método RMA (Robust Multi-Array Average)</a></li>
+<li><a href="5-4-resumen-y-normalización-de-microarrays-de-affymetrix.html#el-método-rma-robust-multi-array-average"><span class="toc-section-number">5.4.1</span> El método RMA (Robust Multi-Array Average)</a></li>
 </ul></li>
 <li><a href="5-5-filtraje-no-específico.html#filtraje-no-específico"><span class="toc-section-number">5.5</span> Filtraje no específico</a></li>
 </ul></li>
@@ -326,7 +326,7 @@ desea exponer o por su accesibilidad.</p>
 <div id="celltypes" class="section level3" number="3.2.1">
 <h3><span class="header-section-number">3.2.1</span> Estudio de procesos regulados por citoquinas</h3>
 <p></p>
-<p>Este conjunto de datos, que se denominará “celltypes,” corresponde a un estudio realizado por Chelvarajan y sus colegas (<span class="citation">Chelvarajan et al. (2006)</span>) que analizaron el efecto de la estimulación con lipopolisacáridos en la regulación por parte de citoquinas de ciertos procesos biológicos relacionados con la inflamación.</p>
+<p>Este conjunto de datos, que se denominará “celltypes”, corresponde a un estudio realizado por Chelvarajan y sus colegas (<span class="citation">Chelvarajan et al. (2006)</span>) que analizaron el efecto de la estimulación con lipopolisacáridos en la regulación por parte de citoquinas de ciertos procesos biológicos relacionados con la inflamación.</p>
 <p>Este estudio es del tipo “class comparison” es decir su principal objetivo es la obtención de genes diferencialmente expresados entre dos o más condiciones.</p>
 <p>Los datos se encuentran disponibles en la base de datos pública <code>GEne Expression Omnibus</code> mantenida por el <em>National Institute of Health (NIH)</em>, pero pueden descargarse de la página de materiales del curso para garantizar su disponibilidad.</p>
 </div>
@@ -338,8 +338,8 @@ Además se interesaba por la posibilidad de descubrir subgrupos de forma que pud
 <p>La diversidad de objetivos del estudio lleva a clasificarlo tanto entre los del tipo de predicción de clase como entre los que buscan descubrir nuievas clases o grupos en los datos.</p>
 <p>Los datos de este estudio se encuentran disponibles en la web del instituto Broad, en donde se llevó a cabo (<a href="http://www.broadinstitute.org">http://www.broadinstitute.org</a>). También se encuentra disponible un paquete de <code>R</code> denominado <code>ALL</code> que permite utilizarlos directamente usando <code>R</code> y Bioconductor.</p>
 </div>
-<div id="efecto-del-estrogeno-y-el-tiempo-de-administración-estrogen" class="section level3" number="3.2.3">
-<h3><span class="header-section-number">3.2.3</span> Efecto del estrogeno y el tiempo de administración {#estrogen]</h3>
+<div id="estrogen" class="section level3" number="3.2.3">
+<h3><span class="header-section-number">3.2.3</span> Efecto del estrogeno y el tiempo de administración</h3>
 <p></p>
 <p>Scholtens y colegas (<span class="citation">Scholtens et al. (2004)</span>) describen un estudio sobre el efecto de un tratamiento con estrógenos y del tiempo transcurrido desde el tratamiento en la expresión génica en pacientes de cáncer de mama. Los investigadores supusieron que los genes asociados con una respuesta temprana podrían considerarse dianas directas del tratamiento,
 mientras que los que tardaron más en hacerlo podrían considerarse objetivos secundarios correspondientes a dianas más alejadas en las
@@ -353,15 +353,18 @@ vías metabólicas.</p>
 <p>Los datos de este estudio no han sido publicados pero se encuentran disponibles en el paquete <code>CCL4</code> de bioconductor. Su interés reside por un lado en que se trata de datos de microarrays de dos colores de la marca Agilent –en un momento en que la mayoría de estudios se realizan con datos de un color. Aparte de esto cabe resaltar el hecho de que el paquete incluye, de forma similar al anterior, los datos “crudos” en forma de archivos de tipo “Genepix” uno de los programas populares para escanear imágenes generadas con microarrays de dos colores.</p>
 <p>Este estudio es también un estudio de comparación de clases cuyo objetivo principal es la selección de genes cuya expresión se asocia al tratamiento con CCL4 o DMSO.</p>
 </div>
-<div id="yeast" class="section level3" number="3.2.5">
-<h3><span class="header-section-number">3.2.5</span> Análisis de patrones en el ciclo celular</h3>
+<div id="swirl" class="section level3" number="3.2.5">
+<h3><span class="header-section-number">3.2.5</span> Estudio de la mutación “swirl” en el desarrollo del pez cebra</h3>
+</div>
+<div id="yeast" class="section level3" number="3.2.6">
+<h3><span class="header-section-number">3.2.6</span> Análisis de patrones en el ciclo celular</h3>
 <p>
-Los datos de este ejemplo denominado <code>kidney</code> son datos ya normalizados referidos a la expresión de los genes en distintos momentos del ciclo delular de la levadura e decir desde que concluye la división celular hasta que se inicia la siguiente.</p>
+Los datos de este ejemplo denominado <code>yeast</code> son datos ya normalizados referidos a la expresión de los genes en distintos momentos del ciclo delular de la levadura e decir desde que concluye la división celular hasta que se inicia la siguiente.</p>
 <p>Los datos puede descargarse desde la página del proyecto “Yeast Cell Cycle Project” (Proyecto de estudio del ciclo celular de la levadura) en la dirección:</p>
 <p><a href="http://genome-www.stanford.edu/cellcycle/data/rawdata/">http://genome-www.stanford.edu/cellcycle/data/rawdata/</a>.</p>
 </div>
-<div id="recapitulación" class="section level3" number="3.2.6">
-<h3><span class="header-section-number">3.2.6</span> Recapitulación</h3>
+<div id="recapitulación" class="section level3" number="3.2.7">
+<h3><span class="header-section-number">3.2.7</span> Recapitulación</h3>
 <p>La tabla  resume la lista de ejemplos que se utilizan en este manual indicando el nombre con que nos referiremos de aquí en adelante a cada conjunto de datos as' como algunas de sus carcaterísticas.</p>
 <p>La tabla siguiente resume los “datasets” utilizados en este manual. Aparte del nombre (arbitrario y “mnemotécnico”) se indica el tipo de microarrays, el número de muestras, y el tipo de problema para el que se utilizaron originalmente.</p>
 <table>
@@ -399,6 +402,12 @@ Los datos de este ejemplo denominado <code>kidney</code> son datos ya normalizad
 <td>Comparativo</td>
 </tr>
 <tr class="odd">
+<td><code>swirl</code></td>
+<td>Dos colores (“Custom”)</td>
+<td>4</td>
+<td>Comparativo</td>
+</tr>
+<tr class="even">
 <td><code>breastTum</code></td>
 <td>Un color (Affy, HGU95A)</td>
 <td>49</td>
