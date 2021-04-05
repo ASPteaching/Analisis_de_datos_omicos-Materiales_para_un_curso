@@ -1,9 +1,3 @@
----
-output: html_document
-editor_options: 
-  chunk_output_type: console
----
-
 # Después de la selección: Análisis de listas de genes
 <a name="chapPostProcess"></a>
 

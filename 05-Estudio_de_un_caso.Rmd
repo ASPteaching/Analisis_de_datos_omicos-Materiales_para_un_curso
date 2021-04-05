@@ -331,8 +331,8 @@ Como en las etapas anteriores la selección de genes diferencialmente expresados
 puede basarse en distintas aproximaciones, desde la $t$ de Student al programa SAM pasando por multitud de variantes.
 
 En este ejemplo se aplicará la aproximación presentada por Smyth
-_et al._ (2004) basado en la utilización del \emph{modelo
-  lineal general} combinada con un método para obtener una
+_et al._ (2004) basado en la utilización del _modelo
+  lineal general_ combinada con un método para obtener una
 estimación mejorada de la varianza.
 
 

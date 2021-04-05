@@ -1,16 +1,12 @@
 # Selección de genes diferencialmente expresados {# chapDEG}
 
-<!-- \textNotaBreu{La primera part s'ha redactat pero falta completar el tema dels tests de significacio i els p-valors}--->
-
-<!-- \textNotaBreu{La segona part (limma) s'ha tret d'una presentacio "beamer". Potser convindria reduir-la?}--->
-
 
 ## Introducción
 
 El motivo más habitual para el que se suelen utilizar microarrays es la búsqueda de genes cuya expresión cambia entre dos o más condiciones experimentales, por ejemplo a consecuencia de un tratamiento, una enfermedad u otras causas (distintos tiempos, distintas lineas celulares, ...).
 
-El problema consiste en identificar estos genes y suele denominarse \emph{selección de genes diferencialmente expresados
-("DEG")} o bien comparación de clases.
+El problema consiste en identificar estos genes y suele denominarse _selección de genes diferencialmente expresados
+("DEG")_ o bien comparación de clases.
 
 El problema de seleccionar genes diferencialmente expresados se traduce de manera casi inmediata al problema estadístico
 de comparar variables y, en años recientes, se han desarrollado un gran número de métodos estadísticos para resolverlo.
@@ -314,8 +310,8 @@ volcanoP (de=teststat, log2FoldChange=teststat$statistic,  pvalue=teststat$p.val
 
 ### Potencia y tamaño muestral
 
-Tal como se ha indicado más arriba, para realizar un \emph{buen
-  test} suele controlarse la probabilidad de error de tipo I (de
+Tal como se ha indicado más arriba, para realizar un _buen
+  test_ suele controlarse la probabilidad de error de tipo I (de
 falsos positivos) y buscar, de entre los tests candidatos, aquellos
 que tengan una menor probabilidad de error de tipo II, o
 equivalentemente una mayor potencia. A partir de este planteamiento
@@ -396,8 +392,8 @@ falsos positivos. Lo cual supone un enfoque menos restrictivo que
 controlar el FWER.
 
 La decisión de controlar el FDR o el FWER depende de los objetivos
-del experimento. Si, por ejemplo, el objetivo es la \emph{captura de
-  genes} es razonable permitir cierta cantidad de falsos positivos y
+del experimento. Si, por ejemplo, el objetivo es la _captura de
+  genes_ es razonable permitir cierta cantidad de falsos positivos y
 es preferible seleccionar FDR.  Si por el contrario se trabaja con una
 lista de un tamaño menor al deseado para verificar la expresión de
 ciertos genes específicos, entonces el FWER es el criterio
