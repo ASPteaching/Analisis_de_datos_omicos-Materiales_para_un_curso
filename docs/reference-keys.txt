@@ -102,7 +102,7 @@ normalización-dependiente-de-la-intensidad
 resumen-y-normalización-de-microarrays-de-affymetrix
 el-método-rma-robust-multi-array-average
 filtraje-no-específico
-selección-de-genes-diferencialmente-expresados-chapdeg
+chapDEG
 introducción-1
 selección-de-genes-diferencialmente-expresados
 medidas-naturales-para-comparar-dos-muestras

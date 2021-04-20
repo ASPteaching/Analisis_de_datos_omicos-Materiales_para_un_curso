@@ -22,7 +22,7 @@ MathJax.Hub.Config({
   TeX: { equationNumbers: { autoNumber: "AMS" } }
 });
 </script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" type="text/javascript"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <meta name="description" content="7.2 El estudio “Estrógeno” | Analisis de datos omicos">
 
@@ -45,7 +45,6 @@ MathJax.Hub.Config({
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
 <script src="libs/navigation-1.1/tabsets.js"></script>
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 
 
 <style type="text/css">code{white-space: pre;}</style>
@@ -53,6 +52,7 @@ MathJax.Hub.Config({
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
@@ -241,7 +241,7 @@ img {
 </ul></li>
 <li><a href="5-5-filtraje-no-específico.html#filtraje-no-específico"><span class="toc-section-number">5.5</span> Filtraje no específico</a></li>
 </ul></li>
-<li><a href="6-selección-de-genes-diferencialmente-expresados-chapdeg.html#selección-de-genes-diferencialmente-expresados-chapdeg"><span class="toc-section-number">6</span> Selección de genes diferencialmente expresados {# chapDEG}</a>
+<li><a href="6-chapDEG.html#chapDEG"><span class="toc-section-number">6</span> Selección de genes diferencialmente expresados</a>
 <ul>
 <li><a href="6-1-introducción-1.html#introducción-1"><span class="toc-section-number">6.1</span> Introducción</a></li>
 <li><a href="6-2-selección-de-genes-diferencialmente-expresados.html#selección-de-genes-diferencialmente-expresados"><span class="toc-section-number">6.2</span> Selección de genes diferencialmente expresados</a>
@@ -318,26 +318,26 @@ img {
 <p>El diseño experimental para este estudio consiste en un diseño factorial de 2 factores “Estrogeno” (Presente o Ausente), “Tiempo” (10h o 48h).
 La documentación del paquete <tt>estrogen</tt> ofrece más detalles acerca del diseño y las variables utilizadas.</p>
 <p>Si el paquete no se encuentra instalado puede instalarse con la instrucción <tt>BiocManager::install</tt> que se descarga de la web de Bioconductor.</p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="7-2-el-estudio-estrógeno.html#cb48-1"></a><span class="cf">if</span> (<span class="op">!</span>(<span class="kw">require</span>(<span class="st">&quot;estrogen&quot;</span>, <span class="dt">character.only=</span>T))){</span>
-<span id="cb48-2"><a href="7-2-el-estudio-estrógeno.html#cb48-2"></a>    BiocManager<span class="op">::</span><span class="kw">install</span>(<span class="st">&quot;estrogen&quot;</span>)</span>
-<span id="cb48-3"><a href="7-2-el-estudio-estrógeno.html#cb48-3"></a>    }</span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="7-2-el-estudio-estrógeno.html#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span>(<span class="fu">require</span>(<span class="st">&quot;estrogen&quot;</span>, <span class="at">character.only=</span>T))){</span>
+<span id="cb48-2"><a href="7-2-el-estudio-estrógeno.html#cb48-2" aria-hidden="true" tabindex="-1"></a>    BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">&quot;estrogen&quot;</span>)</span>
+<span id="cb48-3"><a href="7-2-el-estudio-estrógeno.html#cb48-3" aria-hidden="true" tabindex="-1"></a>    }</span></code></pre></div>
 <p>En lo que sigue supondremos que se ha llevado a cabo una instalación estándar de Bioconductor es decir se han ejecutado las instrucciones:</p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="7-2-el-estudio-estrógeno.html#cb49-1"></a>BiocManager<span class="op">::</span><span class="kw">install</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="7-2-el-estudio-estrógeno.html#cb49-1" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>()</span></code></pre></div>
 <div id="directorios-y-opciones-de-trabajo" class="section level3" number="7.2.1">
 <h3><span class="header-section-number">7.2.1</span> Directorios y opciones de trabajo</h3>
 <p>Para facilitar supondremos que trabajamos en un directorio escogido por nosotros y cuya localización se asigna a la variable <tt>workingDir</tt>.
 Los datos se copiaran en un subdirectorio del anterior denominado “data” que se almacenará en la variable
 <tt>dataDir</tt> y los resultados se almacenarán en un directorio “results” cuyo nombre completo
 se almacenará en la variable <tt>resultsDir</tt>.</p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="7-2-el-estudio-estrógeno.html#cb50-1"></a>workingDir &lt;-<span class="kw">getwd</span>()</span>
-<span id="cb50-2"><a href="7-2-el-estudio-estrógeno.html#cb50-2"></a><span class="cf">if</span> (<span class="op">!</span><span class="kw">file.exists</span>(<span class="st">&quot;datos&quot;</span>)) <span class="kw">system</span>(<span class="st">&quot;mkdir datos&quot;</span>)</span>
-<span id="cb50-3"><a href="7-2-el-estudio-estrógeno.html#cb50-3"></a><span class="cf">if</span> (<span class="op">!</span><span class="kw">file.exists</span>(<span class="st">&quot;datos/estrogen&quot;</span>)) <span class="kw">system</span>(<span class="st">&quot;mkdir datos/estrogen&quot;</span>)</span>
-<span id="cb50-4"><a href="7-2-el-estudio-estrógeno.html#cb50-4"></a><span class="cf">if</span> (<span class="op">!</span><span class="kw">file.exists</span>(<span class="st">&quot;results&quot;</span>)) <span class="kw">system</span>(<span class="st">&quot;mkdir results&quot;</span>)</span>
-<span id="cb50-5"><a href="7-2-el-estudio-estrógeno.html#cb50-5"></a>dataDir &lt;-<span class="kw">file.path</span>(workingDir, <span class="st">&quot;datos/estrogen&quot;</span>)</span>
-<span id="cb50-6"><a href="7-2-el-estudio-estrógeno.html#cb50-6"></a>resultsDir &lt;-<span class="st"> </span><span class="kw">file.path</span>(workingDir, <span class="st">&quot;results&quot;</span>)</span>
-<span id="cb50-7"><a href="7-2-el-estudio-estrógeno.html#cb50-7"></a><span class="kw">setwd</span>(workingDir)</span></code></pre></div>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="7-2-el-estudio-estrógeno.html#cb51-1"></a><span class="kw">options</span>(<span class="dt">width=</span><span class="dv">80</span>)</span>
-<span id="cb51-2"><a href="7-2-el-estudio-estrógeno.html#cb51-2"></a><span class="kw">options</span>(<span class="dt">digits=</span><span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="7-2-el-estudio-estrógeno.html#cb50-1" aria-hidden="true" tabindex="-1"></a>workingDir <span class="ot">&lt;-</span><span class="fu">getwd</span>()</span>
+<span id="cb50-2"><a href="7-2-el-estudio-estrógeno.html#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">file.exists</span>(<span class="st">&quot;datos&quot;</span>)) <span class="fu">system</span>(<span class="st">&quot;mkdir datos&quot;</span>)</span>
+<span id="cb50-3"><a href="7-2-el-estudio-estrógeno.html#cb50-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">file.exists</span>(<span class="st">&quot;datos/estrogen&quot;</span>)) <span class="fu">system</span>(<span class="st">&quot;mkdir datos/estrogen&quot;</span>)</span>
+<span id="cb50-4"><a href="7-2-el-estudio-estrógeno.html#cb50-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">file.exists</span>(<span class="st">&quot;results&quot;</span>)) <span class="fu">system</span>(<span class="st">&quot;mkdir results&quot;</span>)</span>
+<span id="cb50-5"><a href="7-2-el-estudio-estrógeno.html#cb50-5" aria-hidden="true" tabindex="-1"></a>dataDir <span class="ot">&lt;-</span><span class="fu">file.path</span>(workingDir, <span class="st">&quot;datos/estrogen&quot;</span>)</span>
+<span id="cb50-6"><a href="7-2-el-estudio-estrógeno.html#cb50-6" aria-hidden="true" tabindex="-1"></a>resultsDir <span class="ot">&lt;-</span> <span class="fu">file.path</span>(workingDir, <span class="st">&quot;results&quot;</span>)</span>
+<span id="cb50-7"><a href="7-2-el-estudio-estrógeno.html#cb50-7" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(workingDir)</span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="7-2-el-estudio-estrógeno.html#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">width=</span><span class="dv">80</span>)</span>
+<span id="cb51-2"><a href="7-2-el-estudio-estrógeno.html#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">digits=</span><span class="dv">5</span>)</span></code></pre></div>
 </div>
 </div>
 <p style="text-align: center;">

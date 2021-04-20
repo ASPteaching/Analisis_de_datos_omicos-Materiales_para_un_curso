@@ -22,7 +22,7 @@ MathJax.Hub.Config({
   TeX: { equationNumbers: { autoNumber: "AMS" } }
 });
 </script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" type="text/javascript"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <meta name="description" content="3.3 El proceso de análisis de microarrays | Analisis de datos omicos">
 
@@ -45,7 +45,6 @@ MathJax.Hub.Config({
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
 <script src="libs/navigation-1.1/tabsets.js"></script>
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 
 
 <style type="text/css">code{white-space: pre;}</style>
@@ -53,6 +52,7 @@ MathJax.Hub.Config({
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
@@ -241,7 +241,7 @@ img {
 </ul></li>
 <li><a href="5-5-filtraje-no-específico.html#filtraje-no-específico"><span class="toc-section-number">5.5</span> Filtraje no específico</a></li>
 </ul></li>
-<li><a href="6-selección-de-genes-diferencialmente-expresados-chapdeg.html#selección-de-genes-diferencialmente-expresados-chapdeg"><span class="toc-section-number">6</span> Selección de genes diferencialmente expresados {# chapDEG}</a>
+<li><a href="6-chapDEG.html#chapDEG"><span class="toc-section-number">6</span> Selección de genes diferencialmente expresados</a>
 <ul>
 <li><a href="6-1-introducción-1.html#introducción-1"><span class="toc-section-number">6.1</span> Introducción</a></li>
 <li><a href="6-2-selección-de-genes-diferencialmente-expresados.html#selección-de-genes-diferencialmente-expresados"><span class="toc-section-number">6.2</span> Selección de genes diferencialmente expresados</a>
@@ -318,7 +318,7 @@ img {
 <p>El análisis de microarrays, como la mayoría de análisis debe proceder de forma ordenada y siguiendo el método científico:</p>
 <ul>
 <li>La pregunta y su contexto nos servirán de guía para definir el <em>Diseño experimental</em> adecuado.</li>
-<li>El experimento se deberá realizar siguiendo las pautas decididas en el <em>Diseño experimental</em> y los datos obtenidos, que solemos denominar datos “crudos” o “raw data”, deberán someterse a los <em>Controles de calidad adecuados</em> antes de continuar con su análisis.</li>
+<li>El experimento se deberá realizar siguiendo las pautas decididas en el <em>Diseño experimental</em> y los datos obtenidos, que solemos denominar datos “crudos” o “raw data,” deberán someterse a los <em>Controles de calidad adecuados</em> antes de continuar con su análisis.</li>
 <li>Una vez decidido si la calidad de los datos es aceptable pasaremos a prepararlos para el análisis lo que puede incluir diversas formas
 de <em>preprocesado, o transformaciones</em> que a menudo se incluyen de forma general bajo el paraguas del término <em>normalización</em>, aunque, como veremos se trata de conceptos distintos.</li>
 <li>Los datos normalizados se utilizarán para los <em>análisis estadísticos</em> que hayamos decidido realizar durante el diseño experimental.</li>
@@ -343,7 +343,7 @@ posibilidades.</p>
 <p>En la práctica lo que suele hacerse es optar por utilizar algunos de los métodos en los que hay un cierto consenso acerca de su calidad y
 utilidad para cada problema. Allison (<span class="citation">Allison et al. (2006)</span>) repasa los puntos principales de este consenso dando una lista de puntos a tener en
 cuenta en cualquier estudio que utilice microarrays. Imbeaud y Auffray (<span class="citation">Imbeaud and Auffray (2005)</span>) citan una lista de hasta 39 puntos que uno debe
-seguir en un experimento con microarrays para usar “buenas prácticas”.</p>
+seguir en un experimento con microarrays para usar “buenas prácticas.”</p>
 <p>Finalmente Zhu y otros (<span class="citation">Zhu, Miecznikowski, and Halfon (2010)</span>) utilizan un conjunto de
 arrays con valores de expresión conocidos para proponer los que, a su parecer, resultan los métodos más apropiados para cada etapa desde la
 corrección del backround hasta la selección de genes diferencialmente expresados.

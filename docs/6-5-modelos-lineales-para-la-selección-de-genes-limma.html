@@ -22,7 +22,7 @@ MathJax.Hub.Config({
   TeX: { equationNumbers: { autoNumber: "AMS" } }
 });
 </script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" type="text/javascript"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <meta name="description" content="6.5 Modelos lineales para la selección de genes: limma  | Analisis de datos omicos">
 
@@ -45,7 +45,6 @@ MathJax.Hub.Config({
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
 <script src="libs/navigation-1.1/tabsets.js"></script>
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 
 
 <style type="text/css">code{white-space: pre;}</style>
@@ -53,6 +52,7 @@ MathJax.Hub.Config({
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
@@ -241,7 +241,7 @@ img {
 </ul></li>
 <li><a href="5-5-filtraje-no-específico.html#filtraje-no-específico"><span class="toc-section-number">5.5</span> Filtraje no específico</a></li>
 </ul></li>
-<li><a href="6-selección-de-genes-diferencialmente-expresados-chapdeg.html#selección-de-genes-diferencialmente-expresados-chapdeg"><span class="toc-section-number">6</span> Selección de genes diferencialmente expresados {# chapDEG}</a>
+<li><a href="6-chapDEG.html#chapDEG"><span class="toc-section-number">6</span> Selección de genes diferencialmente expresados</a>
 <ul>
 <li><a href="6-1-introducción-1.html#introducción-1"><span class="toc-section-number">6.1</span> Introducción</a></li>
 <li><a href="6-2-selección-de-genes-diferencialmente-expresados.html#selección-de-genes-diferencialmente-expresados"><span class="toc-section-number">6.2</span> Selección de genes diferencialmente expresados</a>
@@ -326,7 +326,7 @@ usados en estadística y ha sido popularizado en el campo de microarrays gracias
 el paquete <tt>limma</tt> que se ha convertido en la herramiente más utilizada para el análisis de microarrays.</p>
 <div id="el-modelo-lineal-general" class="section level3" number="6.5.1">
 <h3><span class="header-section-number">6.5.1</span> El modelo lineal general</h3>
-<p>El modelo lineal (ver por ejemplo Faraway, <span class="citation">(<span class="citeproc-not-found" data-reference-id="Faraway:2004"><strong>???</strong></span>)</span>) es un marco general para la modelización y el análisis de
+<p>El modelo lineal (ver por ejemplo Faraway, <span class="citation">(<strong>Faraway:2004?</strong>)</span>) es un marco general para la modelización y el análisis de
 datos estadística.</p>
 <p>EL método consiste en asumir una relación lineal entre los valores observados de una variable <em>respuesta</em> y las
 condiciones experimentales. A partir de aquí se obtienen estimadores para los parámetros del modelo y de sus errores
@@ -350,40 +350,41 @@ un par de ellas.</p>
 <h4><span class="header-section-number">6.5.2.1</span> Ejemplo 1: Experimento “Swirl–Zebrafish”</h4>
 <p>Swirl es una mutación puntual que provoca defectos en la organización del embrión en desarrollo a lo largo de su eje
 dorsal-ventral. Como resultado, algunos tipos celulares se reducen y otros se expanden. Un objetivo de este trabajo fue
-identificar los genes con expresión alterada en el mutante Swirl en comparación con “wild zebrafish”.</p>
+identificar los genes con expresión alterada en el mutante Swirl en comparación con “wild zebrafish.”</p>
 <ol style="list-style-type: decimal">
-<li>El diseño experimental para este estudio fue el siguiente:
-\begin{center} <!-- ?---></li>
+<li>El diseño experimental para este estudio fue el siguiente:</li>
 </ol>
 <table>
+<thead>
+<tr class="header">
+<th>Array</th>
+<th>Cy3</th>
+<th>Cy5</th>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
-<td></td>
-</tr>
-<tr class="even">
-<td></td>
-</tr>
-<tr class="odd">
-<td></td>
-</tr>
-<tr class="even">
 <td>1</td>
+<td>W</td>
+<td>M</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>2</td>
-</tr>
-<tr class="even">
-<td>3</td>
+<td>M</td>
+<td>W</td>
 </tr>
 <tr class="odd">
-<td>4</td>
+<td>3</td>
+<td>W</td>
+<td>M</td>
 </tr>
 <tr class="even">
-<td></td>
+<td>4</td>
+<td>M</td>
+<td>W</td>
 </tr>
 </tbody>
 </table>
-<p>\end{center} <!-- ?---></p>
 <ul>
 <li>Cada microarray contenía 8848 sondas de cDNA (genes o sequencias EST).</li>
 <li>Cuatro réplicas por array (slide): 2 juegos de pares de intercambio de color</li>
@@ -394,18 +395,17 @@ identificar los genes con expresión alterada en el mutante Swirl en comparació
 </ol>
 <ul>
 <li>El parámetro de interés es: <span class="math inline">\(\alpha= \mathbf{E}\left (log\frac{S}{W}\right )\)</span> .</li>
-<li>Las muestras 1 y 3 estan marcadas con : S (Verde=“Green”) y W (Rojo=“Red”), y las muestras 2 y 4 son “dye-swapped”.</li>
-<li>El modelo, <span class="math inline">\(\mathbf{y=X\alpha+\varepsilon}\)</span>, es:
-<span class="math display">\[
+<li>Las muestras 1 y 3 estan marcadas con : S (Verde=“Green”) y W (Rojo=“Red”), y las muestras 2 y 4 son “dye-swapped.”</li>
+<li>El modelo, <span class="math inline">\(\mathbf{y=X\alpha+\varepsilon}\)</span>, es:</li>
+</ul>
+<p><span class="math display">\[
 \begin{array}{ccccc}
 y_1 &amp;=&amp;\alpha&amp;+&amp;\varepsilon _1 \\
 y_2 &amp;=&amp;-\alpha&amp;+&amp;\varepsilon _2 \\
 y_3 &amp;=&amp;\alpha&amp;+&amp;\varepsilon _3 \\
 y_4 &amp;=&amp;-\alpha&amp;+&amp;\varepsilon _4\\
 \end{array}
-&lt;!-- \right.---&gt;
 \Longrightarrow
-&lt;!-- \left.---&gt;
 \left(
 \begin{array}{r}
 y_1 \\
@@ -428,8 +428,7 @@ y_4
 \varepsilon_4
 \end{array}
 \right)
-\]</span></li>
-</ul>
+\]</span></p>
 </div>
 </div>
 <div id="ejemplo-2-comparación-de-tres-grupos" class="section level3" number="6.5.3">
@@ -450,22 +449,17 @@ comparaciones son las de mayor interés.</p>
 </ul></li>
 <li>Array de un color: hibridar mutantes y “wild types” separadamente.</li>
 </ul>
-<p>" width=“50%”&gt;</p>
 <ul>
-<li>Permite la comparación directa de Mutantes vs “Wild”.</li>
+<li>Permite la comparación directa de Mutantes vs “Wild.”</li>
 <li>Número de parámetros a estimar es 3, relación intuitiva
 entre el número de parámetros y mutantes.</li>
 <li>Las comparaciones de Mutante vs Mutante son menos eficientes.</li>
 </ul>
-<!-- <img src="images/EColiLoop" width="50%">--->
-<p>" width=“50%”&gt;</p>
 <ul>
 <li>Permite la comparación directa de Mutantes vs Mutantes.</li>
 <li>El número de parámetros a estimar es 2. Menos intuitivo.</li>
 <li>Las comparaciones Mutante vs Mutante son más eficientes.</li>
 </ul>
-<!-- <img src="images/EColiAffy" width="50%">--->
-<p>" width=“50%”&gt;</p>
 <ul>
 <li>Permite la comparación directa de
 <ul>
@@ -738,70 +732,87 @@ y_8
 <p>Se trata de un modelo de un un factor (tratamiento, asignable por el individuo) y un
 bloque (edad, no asignable, prefijada en cada ratón). En la práctica el modelo equivale al del análisis de la varianza de dos factores.</p>
 <ol style="list-style-type: decimal">
-<li>El diseño experimental para este estudio fue el siguiente:
-\begin{center} <!-- ?---></li>
+<li>El diseño experimental para este estudio fue el siguiente:</li>
 </ol>
 <table>
+<thead>
+<tr class="header">
+<th>Array</th>
+<th>Tratamiento</th>
+<th>Edad</th>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
-<td>% after : or   …</td>
-</tr>
-<tr class="even">
-<td></td>
-</tr>
-<tr class="odd">
-<td></td>
-</tr>
-<tr class="even">
 <td>1</td>
+<td>LPS</td>
+<td>Viejo</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>2</td>
+<td>LPS</td>
+<td>Joven</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>3</td>
+<td>Medio</td>
+<td>Viejo</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>4</td>
+<td>Medio</td>
+<td>Joven</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>5</td>
+<td>LPS</td>
+<td>Viejo</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>6</td>
+<td>LPS</td>
+<td>Joven</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>7</td>
+<td>Medio</td>
+<td>Viejo</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>8</td>
+<td>Medio</td>
+<td>Joven</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>9</td>
+<td>LPS</td>
+<td>Viejo</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>10</td>
-</tr>
-<tr class="even">
-<td>11</td>
+<td>LPS</td>
+<td>Joven</td>
 </tr>
 <tr class="odd">
-<td>12</td>
+<td>11</td>
+<td>Medio</td>
+<td>Viejo</td>
 </tr>
 <tr class="even">
-<td></td>
+<td>12</td>
+<td>Medio</td>
+<td>Joven</td>
 </tr>
 </tbody>
 </table>
-<p>\end{center} <!-- ?---></p>
 <ul>
 <li>Se utilizáron microarrays de un color (Affymetrix).</li>
 <li>Cada condición se replicó tres veces.</li>
 <li>Las preguntas específicas a responder:
 <ul>
-<li>?`Cual es el efecto del tratamiento en ratones viejos?</li>
-<li>?`Cual es el efecto del tratamiento en ratones jovenes?</li>
-<li>?`En que genes el efecto es diferente?.</li>
+<li>¿Cual es el efecto del tratamiento en ratones viejos?</li>
+<li>¿Cual es el efecto del tratamiento en ratones jovenes?</li>
+<li>¿En que genes el efecto es diferente?.</li>
 </ul></li>
 </ul>
 <ol style="list-style-type: decimal">
@@ -813,34 +824,38 @@ bloque (edad, no asignable, prefijada en cada ratón). En la práctica el modelo
 i=1,2,\, j=1,2,\, k=1,2,3\]</span>
 Esta primera parametrización parece natural pero es más complicado confiar en ella para responder las preguntas propuestas.</li>
 <li>Un factor combinado con 4 niveles <br>
-(<em>LPS.Aged, Med.Aged, LPS.Young, Med.Young</em>)
-<span class="math display">\[
+(<em>LPS.Aged, Med.Aged, LPS.Young, Med.Young</em>)</li>
+</ul>
+<p><span class="math display">\[
 Y_{ij}=\alpha{i} +\varepsilon_{ij}, \quad i=1,...,4,\, j=1,2,3 .
 \]</span>
-Esta parametrización parece más rígida pero se adapta mejor para responder a las preguntas planteadas.</li>
-</ul>
+Esta parametrización parece más rígida pero se adapta mejor para responder a las preguntas planteadas.</p>
 <p>Aquí se adopta la segunda parametrización.</p>
 <ul>
 <li><p>Parámetros del modelo:
-<span class="math display">\[\begin{array}{ccc}
+<span class="math display">\[
+\begin{array}{ccc}
 \alpha_1&amp;=&amp;  \mathbf{E} (log{LPS.Aged} ),\
 \alpha_2= \mathbf{E} (log{Med.Aged} ),\\
 \alpha_3&amp;=&amp;\mathbf{E} (log{LPS.Young} ),\,
 \alpha_4=\mathbf{E} (log{Med.Young} ).
-\end{array}\]</span></p></li>
+\end{array}
+\]</span></p></li>
 <li><p><em>Contrastes</em>: Preguntas que interesa responder:
-<span class="math display">\[\begin{array}{ccc}
+<span class="math display">\[
+\begin{array}{ccc}
 \beta_1^1 &amp;=&amp; \alpha_3-\alpha_1,\quad \mbox{Efecto del tratamiento en ratones viejos} \\
 \beta_2^1 &amp;=&amp; \alpha_4-\alpha_2,\quad \mbox{Efecto del tratamiento en ratones jóvenes} \\
 \beta_3^1 &amp;=&amp; (\alpha_3-\alpha_1)- (\alpha_2-\alpha_4),\quad \mbox{Interacción: diferencia entre efectos}
-\end{array}\]</span></p></li>
+\end{array}
+\]</span></p></li>
 <li><p>Modelo lineal:</p></li>
 </ul>
 <p>Modelo, <span class="math inline">\(\mathbf{y=X\alpha+\varepsilon}\)</span>, y
 contrastes <span class="math inline">\(\mathbf{C&#39;\beta}\)</span></p>
-$$
-(
-<span class="math display">\[\begin{array}{r}
+<p><span class="math display">\[
+\left(
+\begin{array}{r}
 y_1 \\
 y_2 \\
 y_3 \\
@@ -853,19 +868,32 @@ y_9 \\
 y_{10} \\
 y_{11} \\
 y_{12}
-
-
-\end{array}\]</span>
-) = _{, } (
-<span class="math display">\[\begin{array}{c}
+\end{array}
+\right) = \underbrace{\left(
+\begin{array}{rrrr}
+1 &amp; 0 &amp; 0 &amp; 0\\
+1 &amp; 0 &amp; 0 &amp; 0\\
+1 &amp; 0 &amp; 0 &amp; 0\\
+0 &amp; 1 &amp; 0 &amp; 0 \\
+0 &amp; 1 &amp; 0 &amp; 0 \\
+0 &amp; 1 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 1 &amp; 0 \\
+0 &amp; 0 &amp; 1 &amp; 0 \\
+0 &amp; 0 &amp; 1 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 1 \\
+0 &amp; 0 &amp; 0 &amp; 1 \\
+0 &amp; 0 &amp; 0 &amp; 1
+\end{array}
+\right)}_{\text{Matriz de Diseño}, \mathbf{X}} \left(
+\begin{array}{c}
 \alpha_1 \\
 \alpha_2 \\
 \alpha_3 \\
 \alpha_4
-\end{array}\]</span>
-)
-+ (
-<span class="math display">\[\begin{array}{r}
+\end{array}
+\right)
+ + \left(
+\begin{array}{r}
 \varepsilon_1 \\
 \varepsilon_2 \\
 \varepsilon_3\\
@@ -874,9 +902,9 @@ y_{12}
 \varepsilon_6\\
 \varepsilon_7\\
 \varepsilon_8
-\end{array}\]</span>
-<p>)
-$$</p>
+\end{array}
+\right)
+\]</span></p>
 <p><span class="math display">\[
  \left(
 \begin{array}{r}
@@ -907,7 +935,7 @@ $$</p>
 <span class="math display">\[
 \mathbf{E(y_g)=X\alpha_g},\quad \text{var}(y_g)=W_g\sigma_g,
 \]</span>
-es posible usar <em>la teoría estándar del modelo lineal</em> (ver <span class="citation">(<span class="citeproc-not-found" data-reference-id="Faraway:2004"><strong>???</strong></span>)</span>)
+es posible usar <em>la teoría estándar del modelo lineal</em> (ver <span class="citation">(<strong>Faraway:2004?</strong>)</span>)
 para obtener:</p>
 <ul>
 <li>Estimación de los parámetros: <span class="math inline">\(\hat \alpha_g( \approx \mathbf{\alpha})\)</span>.</li>
@@ -984,13 +1012,13 @@ gen esté diferencialmente expresado. A mayor valor negativo, más probable es q
 ## attr(,&quot;contrasts&quot;)$lev
 ## [1] &quot;contr.treatment&quot;</code></pre>
 <p>Usando los nombres de las columnas de la matriz de diseño creamos los contrastes</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="6-5-modelos-lineales-para-la-selección-de-genes-limma.html#cb43-1"></a><span class="kw">require</span>(limma)</span>
-<span id="cb43-2"><a href="6-5-modelos-lineales-para-la-selección-de-genes-limma.html#cb43-2"></a>cont.matrix &lt;-<span class="st"> </span><span class="kw">makeContrasts</span> (</span>
-<span id="cb43-3"><a href="6-5-modelos-lineales-para-la-selección-de-genes-limma.html#cb43-3"></a>      <span class="dt">LPS.in.AGED=</span>(Aged.LPS<span class="op">-</span>Aged.MED),</span>
-<span id="cb43-4"><a href="6-5-modelos-lineales-para-la-selección-de-genes-limma.html#cb43-4"></a>      <span class="dt">LPS.in.YOUNG=</span>(Young.LPS<span class="op">-</span>Young.MED),</span>
-<span id="cb43-5"><a href="6-5-modelos-lineales-para-la-selección-de-genes-limma.html#cb43-5"></a>      <span class="dt">AGE=</span>(Aged.MED<span class="op">-</span>Young.MED),</span>
-<span id="cb43-6"><a href="6-5-modelos-lineales-para-la-selección-de-genes-limma.html#cb43-6"></a>      <span class="dt">levels=</span>design)</span>
-<span id="cb43-7"><a href="6-5-modelos-lineales-para-la-selección-de-genes-limma.html#cb43-7"></a>cont.matrix</span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="6-5-modelos-lineales-para-la-selección-de-genes-limma.html#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(limma)</span>
+<span id="cb43-2"><a href="6-5-modelos-lineales-para-la-selección-de-genes-limma.html#cb43-2" aria-hidden="true" tabindex="-1"></a>cont.matrix <span class="ot">&lt;-</span> <span class="fu">makeContrasts</span> (</span>
+<span id="cb43-3"><a href="6-5-modelos-lineales-para-la-selección-de-genes-limma.html#cb43-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">LPS.in.AGED=</span>(Aged.LPS<span class="sc">-</span>Aged.MED),</span>
+<span id="cb43-4"><a href="6-5-modelos-lineales-para-la-selección-de-genes-limma.html#cb43-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">LPS.in.YOUNG=</span>(Young.LPS<span class="sc">-</span>Young.MED),</span>
+<span id="cb43-5"><a href="6-5-modelos-lineales-para-la-selección-de-genes-limma.html#cb43-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">AGE=</span>(Aged.MED<span class="sc">-</span>Young.MED),</span>
+<span id="cb43-6"><a href="6-5-modelos-lineales-para-la-selección-de-genes-limma.html#cb43-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">levels=</span>design)</span>
+<span id="cb43-7"><a href="6-5-modelos-lineales-para-la-selección-de-genes-limma.html#cb43-7" aria-hidden="true" tabindex="-1"></a>cont.matrix</span></code></pre></div>
 <pre><code>##            Contrasts
 ## Levels      LPS.in.AGED LPS.in.YOUNG AGE
 ##   Aged.LPS            1            0   0
@@ -1014,18 +1042,18 @@ los p–valores se ajustan de forma que tengamos control sobre la tasa de falsos
 de Benjamini y Hochberg (<span class="citation">Benjamini and Hochberg (1995)</span>).</p>
 <p>La funcion <tt>topTable</tt> genera para cada contraste una lista de genes
 ordenados de mas a menos diferencialmente expresados.</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="6-5-modelos-lineales-para-la-selección-de-genes-limma.html#cb45-1"></a>topTab_LPS.in.AGED &lt;-<span class="st"> </span><span class="kw">topTable</span> (fit.main, <span class="dt">number=</span><span class="kw">nrow</span>(fit.main), <span class="dt">coef=</span><span class="st">&quot;LPS.in.AGED&quot;</span>, <span class="dt">adjust=</span><span class="st">&quot;fdr&quot;</span>)</span>
-<span id="cb45-2"><a href="6-5-modelos-lineales-para-la-selección-de-genes-limma.html#cb45-2"></a>topTab_LPS.in.YOUNG &lt;-<span class="st"> </span><span class="kw">topTable</span> (fit.main, <span class="dt">number=</span><span class="kw">nrow</span>(fit.main), <span class="dt">coef=</span><span class="st">&quot;LPS.in.YOUNG&quot;</span>, <span class="dt">adjust=</span><span class="st">&quot;fdr&quot;</span>)</span>
-<span id="cb45-3"><a href="6-5-modelos-lineales-para-la-selección-de-genes-limma.html#cb45-3"></a>topTab_AGE  &lt;-<span class="st"> </span><span class="kw">topTable</span> (fit.main, <span class="dt">number=</span><span class="kw">nrow</span>(fit.main) , <span class="dt">coef=</span><span class="st">&quot;AGE&quot;</span>, <span class="dt">adjust=</span><span class="st">&quot;fdr&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="6-5-modelos-lineales-para-la-selección-de-genes-limma.html#cb45-1" aria-hidden="true" tabindex="-1"></a>topTab_LPS.in.AGED <span class="ot">&lt;-</span> <span class="fu">topTable</span> (fit.main, <span class="at">number=</span><span class="fu">nrow</span>(fit.main), <span class="at">coef=</span><span class="st">&quot;LPS.in.AGED&quot;</span>, <span class="at">adjust=</span><span class="st">&quot;fdr&quot;</span>)</span>
+<span id="cb45-2"><a href="6-5-modelos-lineales-para-la-selección-de-genes-limma.html#cb45-2" aria-hidden="true" tabindex="-1"></a>topTab_LPS.in.YOUNG <span class="ot">&lt;-</span> <span class="fu">topTable</span> (fit.main, <span class="at">number=</span><span class="fu">nrow</span>(fit.main), <span class="at">coef=</span><span class="st">&quot;LPS.in.YOUNG&quot;</span>, <span class="at">adjust=</span><span class="st">&quot;fdr&quot;</span>)</span>
+<span id="cb45-3"><a href="6-5-modelos-lineales-para-la-selección-de-genes-limma.html#cb45-3" aria-hidden="true" tabindex="-1"></a>topTab_AGE  <span class="ot">&lt;-</span> <span class="fu">topTable</span> (fit.main, <span class="at">number=</span><span class="fu">nrow</span>(fit.main) , <span class="at">coef=</span><span class="st">&quot;AGE&quot;</span>, <span class="at">adjust=</span><span class="st">&quot;fdr&quot;</span>)</span></code></pre></div>
 <p>Se puede visualizar los resultados mediante un <tt>volcano plot</tt> que, en este caso, representa en abscisas los cambios de expresión en escala logarítmica
 y en ordenadas el estadístico <span class="math inline">\(B\)</span> en vez de el “menos logaritmo” del p-valor.</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="6-5-modelos-lineales-para-la-selección-de-genes-limma.html#cb46-1"></a>coefnum =<span class="st"> </span><span class="dv">1</span></span>
-<span id="cb46-2"><a href="6-5-modelos-lineales-para-la-selección-de-genes-limma.html#cb46-2"></a>opt &lt;-<span class="st"> </span><span class="kw">par</span>(<span class="dt">cex.lab =</span> <span class="fl">0.7</span>)</span>
-<span id="cb46-3"><a href="6-5-modelos-lineales-para-la-selección-de-genes-limma.html#cb46-3"></a><span class="kw">volcanoplot</span>(fit.main, <span class="dt">coef=</span>coefnum, <span class="dt">highlight=</span><span class="dv">10</span>, <span class="dt">names=</span>fit.main<span class="op">$</span>ID,</span>
-<span id="cb46-4"><a href="6-5-modelos-lineales-para-la-selección-de-genes-limma.html#cb46-4"></a>            <span class="dt">main=</span><span class="kw">paste</span>(<span class="st">&quot;Differentially expressed genes&quot;</span>,<span class="kw">colnames</span>(cont.matrix)[coefnum], <span class="dt">sep=</span><span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>))</span>
-<span id="cb46-5"><a href="6-5-modelos-lineales-para-la-selección-de-genes-limma.html#cb46-5"></a><span class="kw">abline</span>(<span class="dt">v=</span><span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>,<span class="dv">1</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="6-5-modelos-lineales-para-la-selección-de-genes-limma.html#cb46-1" aria-hidden="true" tabindex="-1"></a>coefnum <span class="ot">=</span> <span class="dv">1</span></span>
+<span id="cb46-2"><a href="6-5-modelos-lineales-para-la-selección-de-genes-limma.html#cb46-2" aria-hidden="true" tabindex="-1"></a>opt <span class="ot">&lt;-</span> <span class="fu">par</span>(<span class="at">cex.lab =</span> <span class="fl">0.7</span>)</span>
+<span id="cb46-3"><a href="6-5-modelos-lineales-para-la-selección-de-genes-limma.html#cb46-3" aria-hidden="true" tabindex="-1"></a><span class="fu">volcanoplot</span>(fit.main, <span class="at">coef=</span>coefnum, <span class="at">highlight=</span><span class="dv">10</span>, <span class="at">names=</span>fit.main<span class="sc">$</span>ID,</span>
+<span id="cb46-4"><a href="6-5-modelos-lineales-para-la-selección-de-genes-limma.html#cb46-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">main=</span><span class="fu">paste</span>(<span class="st">&quot;Differentially expressed genes&quot;</span>,<span class="fu">colnames</span>(cont.matrix)[coefnum], <span class="at">sep=</span><span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>))</span>
+<span id="cb46-5"><a href="6-5-modelos-lineales-para-la-selección-de-genes-limma.html#cb46-5" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>))</span></code></pre></div>
 <p><img src="Analisis_de_Datos_de_Microarrays_y_otras_Omicas_files/figure-html/volcano1-1.png" width="672" /></p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="6-5-modelos-lineales-para-la-selección-de-genes-limma.html#cb47-1"></a><span class="kw">par</span>(opt)</span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="6-5-modelos-lineales-para-la-selección-de-genes-limma.html#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(opt)</span></code></pre></div>
 
 </div>
 </div>

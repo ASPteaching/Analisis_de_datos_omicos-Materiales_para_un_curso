@@ -1,5 +1,4 @@
-# Selección de genes diferencialmente expresados {# chapDEG}
-
+# Selección de genes diferencialmente expresados {#chapDEG}
 
 ## Introducción
 
@@ -88,12 +87,8 @@ cociente es uno y su logaritmo es cero.
 
 Vale la pena insistir en el concepto de expresión _diferencial_: no nos preocupa cual es la expresión del gen en una u otra muestra sinó _si son distintas_.
 
-<!-- \begin{figure}[htp]---> <!-- ?--->
-<!-- \centering--->
-<!-- <img src="Selecciondegenesdiferencialmenteexpresados-img002.eps" width="50%">--->
-<!-- \end{figure}---> <!-- ?--->
 
-\begin{table}[htbp] <!-- ?--->
+\begin{table}[htbp] 
 
 |  |
 |-----|
@@ -105,7 +100,7 @@ Vale la pena insistir en el concepto de expresión _diferencial_: no nos preocup
 | E | 0.102 | 0.008 | 30.200   |
 
 <a name="simpleResultsTable"></a>
-\end{table} <!-- ?--->
+\end{table} 
 
 La tabla anterior sugiere que podría considerarse el gen A está diferencialmente expresado (promedio y t--test altos)
 mientras que el gen B o el D no lo están (promedio y test-t próximos a cero). Los genes C y D pueden llevar a
@@ -470,20 +465,13 @@ identificar los genes con expresión alterada en el mutante Swirl en comparació
 
 
 1. El diseño experimental para este estudio fue el siguiente:
-\begin{center} <!-- ?--->
 
-|      |
-|-----|
-|  |
-|     \text{Slide} | \text{Cy3} | \text{Cy5}  |
-|      |
-|     1 | W | M  |
-|     2 | M | W  |
-|     3 | W | M  |
-|     4 | M | W  |
-|      |
-
-\end{center} <!-- ?--->
+|Array | Cy3| Cy5|
+|-----|-----|-----|
+|  1 | W | M  |
+|  2 | M | W  |
+|  3 | W | M  |
+|  4 | M | W  |
 
 * Cada microarray contenía 8848 sondas de cDNA (genes o sequencias EST).
 * Cuatro réplicas por array (slide): 2 juegos de pares de intercambio de color
@@ -495,6 +483,7 @@ identificar los genes con expresión alterada en el mutante Swirl en comparació
 \mathbf{E}\left (log\frac{S}{W}\right )$ .
 * Las muestras 1 y 3 estan marcadas con : S (Verde="Green") y W (Rojo="Red"), y las muestras 2 y 4 son "dye-swapped".
 * El modelo, $\mathbf{y=X\alpha+\varepsilon}$, es:
+
 $$
 \begin{array}{ccccc}
 y_1 &=&\alpha&+&\varepsilon _1 \\
@@ -502,9 +491,7 @@ y_2 &=&-\alpha&+&\varepsilon _2 \\
 y_3 &=&\alpha&+&\varepsilon _3 \\
 y_4 &=&-\alpha&+&\varepsilon _4\\
 \end{array}
-<!-- \right.--->
 \Longrightarrow
-<!-- \left.--->
 \left(
 \begin{array}{r}
 y_1 \\
@@ -552,28 +539,20 @@ comparaciones son las de mayor interés.
     + A _diseño loop_: Hibridar cada mutante el uno al otro en un doble "loop" que incluye ("dye-swapping").
 * Array de un color: hibridar mutantes y "wild types" separadamente.
 
-\paragraph{Representación del diseño de referencia}
-\figcen{<img src="epsimages/EColiRef}" width="50%">
-
+\paragraph{Diseño de referencia}
 
 * Permite la comparación directa de Mutantes vs "Wild".
 * Número de parámetros a estimar es 3, relación intuitiva
 entre el número de parámetros y mutantes.
 * Las comparaciones de Mutante vs Mutante son menos eficientes.
 
-\paragraph{Representación del diseño de "loop" (bucle)}
-<!-- <img src="images/EColiLoop" width="50%">--->
-\figcen{<img src="epsimages/EColiLoop}" width="50%">
-
+\paragraph{Diseño de "loop" (bucle)}
 
 * Permite la comparación directa de Mutantes vs Mutantes.
 * El número de parámetros a estimar es 2. Menos intuitivo.
 * Las comparaciones Mutante vs Mutante son más eficientes.
 
-\paragraph{Representación del diseño del array de un color}
-<!-- <img src="images/EColiAffy" width="50%">--->
-\figcen{<img src="epsimages/EColiAffy}" width="50%">
-
+\paragraph{Diseño del array de un color}
 
 * Permite la comparación directa de
     + Mutante vs "Wild"
@@ -865,13 +844,10 @@ Se trata de un modelo de un un factor (tratamiento, asignable por el individuo) 
 bloque (edad, no asignable, prefijada en cada ratón). En la práctica el modelo equivale al del análisis de la varianza de dos factores.
 
 1. El diseño experimental para este estudio fue el siguiente:
-\begin{center} <!-- ?--->
 
-|      |
-|-----|
-|     % after :  or \cline{col1-col2} \cline{col3-col4} ... |
-|     \text{Array} | \text{Tratamiento} | \text{Edad}  |
-|      |
+
+|Array | Tratamiento | Edad|
+|-----|-----|-----|
 |     1 | LPS | Viejo  |
 |     2 | LPS | Joven  |
 |     3 | Medio | Viejo  |
@@ -884,17 +860,14 @@ bloque (edad, no asignable, prefijada en cada ratón). En la práctica el modelo
 |    10 | LPS | Joven  |
 |    11 | Medio | Viejo  |
 |    12 | Medio | Joven  |
-|      |
-
-\end{center} <!-- ?--->
 
 
 * Se utilizáron microarrays de un color (Affymetrix).
 * Cada condición se replicó tres veces.
 * Las preguntas específicas a responder:
-    + ?`Cual es el efecto del tratamiento en ratones viejos?
-    + ?`Cual es el efecto del tratamiento en ratones jovenes?
-    + ?`En que genes el efecto es diferente?.
+    + ¿Cual es el efecto del tratamiento en ratones viejos?
+    + ¿Cual es el efecto del tratamiento en ratones jovenes?
+    + ¿En que genes el efecto es diferente?.
 
 1. En este caso se pueden considerar distintos modelo lineales derivados del hecho de que este experimento admite diferente parametrizaciones:
 
@@ -904,6 +877,7 @@ i=1,2,\, j=1,2,\, k=1,2,3$$
 Esta primera parametrización parece natural pero es más complicado confiar en ella para responder las preguntas propuestas.
 * Un factor combinado con 4 niveles <br>
 (_LPS.Aged, Med.Aged, LPS.Young, Med.Young_)
+
 $$
 Y_{ij}=\alpha{i} +\varepsilon_{ij}, \quad i=1,...,4,\, j=1,2,3 .
 $$
@@ -912,19 +886,23 @@ Esta parametrización parece más rígida pero se adapta mejor para responder a 
 Aquí se adopta la segunda parametrización.
 
 * Parámetros del modelo:
-$$\begin{array}{ccc}
+$$
+\begin{array}{ccc}
 \alpha_1&=&  \mathbf{E} (log{LPS.Aged} ),\
 \alpha_2= \mathbf{E} (log{Med.Aged} ),\\
 \alpha_3&=&\mathbf{E} (log{LPS.Young} ),\,
 \alpha_4=\mathbf{E} (log{Med.Young} ).
-\end{array}$$
+\end{array}
+$$
 
 * _Contrastes_: Preguntas que interesa responder:
-$$\begin{array}{ccc}
+$$
+\begin{array}{ccc}
 \beta_1^1 &=& \alpha_3-\alpha_1,\quad \mbox{Efecto del tratamiento en ratones viejos} \\
 \beta_2^1 &=& \alpha_4-\alpha_2,\quad \mbox{Efecto del tratamiento en ratones jóvenes} \\
 \beta_3^1 &=& (\alpha_3-\alpha_1)- (\alpha_2-\alpha_4),\quad \mbox{Interacción: diferencia entre efectos}
-\end{array}$$
+\end{array}
+$$
 
 
 * Modelo lineal:
@@ -947,8 +925,6 @@ y_9 \\
 y_{10} \\
 y_{11} \\
 y_{12}
-
-
 \end{array}
 \right) = \underbrace{\left(
 \begin{array}{rrrr}

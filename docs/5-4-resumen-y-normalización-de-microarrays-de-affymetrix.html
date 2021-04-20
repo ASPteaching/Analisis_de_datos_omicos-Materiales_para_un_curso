@@ -22,7 +22,7 @@ MathJax.Hub.Config({
   TeX: { equationNumbers: { autoNumber: "AMS" } }
 });
 </script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" type="text/javascript"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <meta name="description" content="5.4 Resumen y normalización de microarrays de Affymetrix | Analisis de datos omicos">
 
@@ -45,7 +45,6 @@ MathJax.Hub.Config({
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
 <script src="libs/navigation-1.1/tabsets.js"></script>
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 
 
 <style type="text/css">code{white-space: pre;}</style>
@@ -53,6 +52,7 @@ MathJax.Hub.Config({
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
@@ -241,7 +241,7 @@ img {
 </ul></li>
 <li><a href="5-5-filtraje-no-específico.html#filtraje-no-específico"><span class="toc-section-number">5.5</span> Filtraje no específico</a></li>
 </ul></li>
-<li><a href="6-selección-de-genes-diferencialmente-expresados-chapdeg.html#selección-de-genes-diferencialmente-expresados-chapdeg"><span class="toc-section-number">6</span> Selección de genes diferencialmente expresados {# chapDEG}</a>
+<li><a href="6-chapDEG.html#chapDEG"><span class="toc-section-number">6</span> Selección de genes diferencialmente expresados</a>
 <ul>
 <li><a href="6-1-introducción-1.html#introducción-1"><span class="toc-section-number">6.1</span> Introducción</a></li>
 <li><a href="6-2-selección-de-genes-diferencialmente-expresados.html#selección-de-genes-diferencialmente-expresados"><span class="toc-section-number">6.2</span> Selección de genes diferencialmente expresados</a>
@@ -321,10 +321,10 @@ En el caso de estos arrays sabemos que cada valor no corresponde a la expresión
 <li>Hay múltiples valores (sondas o “probes”) por cada gen, que originan un <em>probeset</em>.</li>
 <li>Cada grupo de sondas consiste en múltiples sondas</li>
 </ul>
-<p>Originalmente, en los primeros arrays de Affymetrix se introdujo un sistema para estimar el “ruído” y diferenciarlo de la “señal”. Éste consistía en que cada sonda era en ralidad un par de sondas:</p>
+<p>Originalmente, en los primeros arrays de Affymetrix se introdujo un sistema para estimar el “ruído” y diferenciarlo de la “señal.” Éste consistía en que cada sonda era en ralidad un par de sondas:</p>
 <ul>
-<li>Una que coincidía exactamente con el fragmento del gen al que corresponde la sonda y que se denominaba “perfect match”.</li>
-<li>Otra, que coincidía con la anterior salvo por el valor central que se sustituía por el nucleótido complementario. Esta segunda sonda se denominaba un “mismatch”.</li>
+<li>Una que coincidía exactamente con el fragmento del gen al que corresponde la sonda y que se denominaba “perfect match.”</li>
+<li>Otra, que coincidía con la anterior salvo por el valor central que se sustituía por el nucleótido complementario. Esta segunda sonda se denominaba un “mismatch.”</li>
 </ul>
 <p>La idea original consistía en utilizar estos “mismatches’ para tener una medida de hibridación no específica pero en las versiones más recientes se han abandonado, por lo que también se ha abandonado la utilización de los métodos”MAS-4" y “MAS-5” que utilizaban estos valores.</p>
 <p>El proceso que convierte las señales individuales en valores de expresión normalizados para cada gen consta de tres etapas:</p>
@@ -334,7 +334,7 @@ En el caso de estos arrays sabemos que cada valor no corresponde a la expresión
 <li>“Sumarización”(Resumen) o concentración de los valores de cada grupo de sondas en un único valor de expresión absoluto normalizado
 para cada gen.</li>
 </ol>
-<p>A menudo los tres pasos se denominan genérica -y erróneamente- “normalización”.</p>
+<p>A menudo los tres pasos se denominan genérica -y erróneamente- “normalización.”</p>
 <p>A diferencia de los chips de ADNc, aquí las medidas de expresión son absolutas (no se compara una condición contra otra)
 dado que cada chip se hibrida con un única muestra.</p>
 <p>Hay muchos métodos para estimar la expresión (más de 30 publicados).

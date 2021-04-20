@@ -22,7 +22,7 @@ MathJax.Hub.Config({
   TeX: { equationNumbers: { autoNumber: "AMS" } }
 });
 </script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" type="text/javascript"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <meta name="description" content="2.3 Cómo funcionan los microarrays | Analisis de datos omicos">
 
@@ -45,7 +45,6 @@ MathJax.Hub.Config({
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
 <script src="libs/navigation-1.1/tabsets.js"></script>
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 
 
 <style type="text/css">code{white-space: pre;}</style>
@@ -53,6 +52,7 @@ MathJax.Hub.Config({
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
@@ -241,7 +241,7 @@ img {
 </ul></li>
 <li><a href="5-5-filtraje-no-específico.html#filtraje-no-específico"><span class="toc-section-number">5.5</span> Filtraje no específico</a></li>
 </ul></li>
-<li><a href="6-selección-de-genes-diferencialmente-expresados-chapdeg.html#selección-de-genes-diferencialmente-expresados-chapdeg"><span class="toc-section-number">6</span> Selección de genes diferencialmente expresados {# chapDEG}</a>
+<li><a href="6-chapDEG.html#chapDEG"><span class="toc-section-number">6</span> Selección de genes diferencialmente expresados</a>
 <ul>
 <li><a href="6-1-introducción-1.html#introducción-1"><span class="toc-section-number">6.1</span> Introducción</a></li>
 <li><a href="6-2-selección-de-genes-diferencialmente-expresados.html#selección-de-genes-diferencialmente-expresados"><span class="toc-section-number">6.2</span> Selección de genes diferencialmente expresados</a>
@@ -360,7 +360,7 @@ Affymetrix sintetiza las sondas directamente sobre el chip mediante un proceso l
 Este proceso consiste en la adición cíclica de los cuatro nucleótidos (adenina, timina, citosina y guanina)
 sobre la superficie rígida, donde existen ancladas unas especies químicas reactivas que se protegen y desprotegen para añadir el
 nucleótido deseado, mediante ciclos de luz y oscuridad. Así se consigue la síntesis de oligonucleótidos de unos 25-mer (“mer”=bases) de longitud.
-En la figura <span class="citation">(<span class="citeproc-not-found" data-reference-id="ref"><strong>???</strong></span>)</span>(fig:c01affymetryxsynthesis)
+En la figura <span class="citation">(<strong>ref?</strong>)</span>(fig:c01affymetryxsynthesis)
 se esquematiza el proceso.</p>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-1"></span>
 <img src="epsimages/c01affymetryxsynthesis.png" alt="Esquema del proceso de fabricación de arrays de oligonucleótidos" width="310" />
@@ -368,11 +368,11 @@ se esquematiza el proceso.</p>
 Figure 2.3: Esquema del proceso de fabricación de arrays de oligonucleótidos
 </p>
 </div>
-<p>Cada oligonucleótido sintetizado de 25-mer (es decir 25 bases) se denomina sonda (“probe”). Alrededor de 40x107 de estas sondas se agrupan en una celda llamada “probe cell”.
-Las “probe cell” estan organizadas en parejas, “probe pairs”, donde se
+<p>Cada oligonucleótido sintetizado de 25-mer (es decir 25 bases) se denomina sonda (“probe”). Alrededor de 40x107 de estas sondas se agrupan en una celda llamada “probe cell.”
+Las “probe cell” estan organizadas en parejas, “probe pairs,” donde se
 combinan un “Perfect Match” (PM) -cuya secuencia de 25-mer coincide perfectamente con una parte del gen-y un “Mismatch” (MM)
 -idéntico al PM, escepto en el nucléotido central que no coincide (ver la figura <a href="`{r anchorLoc('c01affy-PM-MM')`">here</a>)</p>
-<p>De 11 a 20 “probe pairs” se agrupan para formar un “probe set”.
+<p>De 11 a 20 “probe pairs” se agrupan para formar un “probe set.”
 Diferentes “probe sets” se distribuyen a lo largo del array, y son las que definen a qué gen se unen y las que definen los niveles de
 expresión detectados.</p>
 <p>El Mismatch (MM) se creo originalmente para que proporcionara una medida de la unión inespecífica (es decir lo que se hibridara con esta secuencia “parecida” pero distinta a la original se consideraría ruído). Aunque algunos algoritmos originales de Affymetrix todavía lo utilizan, hoy en día ha caído en desuso, muchos algoritmos modernos como RMA –que se explicará más adelnat– ya no lo utilizan y en las nuevas versiones de los arrays (mudelos “Hugene” por ejemplo) ya no se incluyó.</p>
@@ -392,7 +392,7 @@ el material de partida es el ARN. Es muy importante controlar la calidad y la ca
 <p>Posteriormente el ARN es marcado con una
 molécula fluorescente (ficoeritrina en este caso) y fragmentado en trozos más pequeños que se puedan unir a las “probes” fijadas en el array,
 mediante el proceso de hibridación. Al igual que en los arrays de dos colores, el array hibridado es iluminado en un escáner mediante un láser,
-para que la ficoeritrina emita luz fluorescente. La fluorescencia registrada de cada “probe set”, es directamente proporcional a la cantidad de ARN presente en la muestra inicial de cada gen. La figura <a href="`{r anchorLoc('01affymetrixMicroArrays')`">here</a> es una representación esquemática del uso de microarrays de un color.</p>
+para que la ficoeritrina emita luz fluorescente. La fluorescencia registrada de cada “probe set,” es directamente proporcional a la cantidad de ARN presente en la muestra inicial de cada gen. La figura <a href="`{r anchorLoc('01affymetrixMicroArrays')`">here</a> es una representación esquemática del uso de microarrays de un color.</p>
 <div class="figure" style="text-align: center"><span id="fig:c01affymetrixMicroArrays"></span>
 <img src="epsimages/c01affymetrixMicroArrays.png" alt="Esquema del funcionamiento de un microarrays de Affymetrix o de un sólo color" width="394" />
 <p class="caption">
@@ -439,7 +439,7 @@ Figure 2.6: Esquema del tratamiento de las imágenes para su cuantificación
 </p>
 </div>
 <p>La tabla <a href="`{r anchorLoc('tabexpresRel')`">here</a> muestra de forma simplificada el aspecto que puede tener una matriz de expresión relativa en en la que para estudiar 6 muestras apareadas, tres de tejidos sanos y tres tumorales, se ha hibridado cada tumor contra su control “normal” dando lugar a una matriz de expresión de 5 genes y 3 columnas de expresiones relativas.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="2-3-cómo-funcionan-los-microarrays.html#cb1-1"></a>kableExtra<span class="op">::</span><span class="kw">kable</span>(tabexpresRel)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="2-3-cómo-funcionan-los-microarrays.html#cb1-1" aria-hidden="true" tabindex="-1"></a>kableExtra<span class="sc">::</span><span class="fu">kable</span>(tabexpresRel)</span></code></pre></div>
 <table>
 <thead>
 <tr>
@@ -546,7 +546,7 @@ donde <span class="math inline">\(A\)</span> es el conjunto de pares de sondas c
 de tres veces de la desviación estandar de la principal intensidad entre todas
 las sondas.</p>
 <p>La tabla <a href="`{r anchorLoc('tabexpresAbs')`">here</a> muestra de forma simplificada el aspecto que puede tener una matriz de expresión relativa en en la que para estudiar 6 muestras apareadas, tres de tejidos sanos y tres tumorales, se ha hibridado cada tumor y cada control “normal” en un array separado dando lugar a una matriz de expresión de 5 filas (una por gen) y 6 columnas de expresiones absolutas.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="2-3-cómo-funcionan-los-microarrays.html#cb2-1"></a>kableExtra<span class="op">::</span><span class="kw">kable</span>(tablexpresAbs)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="2-3-cómo-funcionan-los-microarrays.html#cb2-1" aria-hidden="true" tabindex="-1"></a>kableExtra<span class="sc">::</span><span class="fu">kable</span>(tablexpresAbs)</span></code></pre></div>
 <table>
 <thead>
 <tr>

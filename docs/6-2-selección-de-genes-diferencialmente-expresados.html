@@ -22,7 +22,7 @@ MathJax.Hub.Config({
   TeX: { equationNumbers: { autoNumber: "AMS" } }
 });
 </script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" type="text/javascript"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <meta name="description" content="6.2 Selección de genes diferencialmente expresados | Analisis de datos omicos">
 
@@ -45,7 +45,6 @@ MathJax.Hub.Config({
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
 <script src="libs/navigation-1.1/tabsets.js"></script>
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 
 
 <style type="text/css">code{white-space: pre;}</style>
@@ -53,6 +52,7 @@ MathJax.Hub.Config({
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
@@ -241,7 +241,7 @@ img {
 </ul></li>
 <li><a href="5-5-filtraje-no-específico.html#filtraje-no-específico"><span class="toc-section-number">5.5</span> Filtraje no específico</a></li>
 </ul></li>
-<li><a href="6-selección-de-genes-diferencialmente-expresados-chapdeg.html#selección-de-genes-diferencialmente-expresados-chapdeg"><span class="toc-section-number">6</span> Selección de genes diferencialmente expresados {# chapDEG}</a>
+<li><a href="6-chapDEG.html#chapDEG"><span class="toc-section-number">6</span> Selección de genes diferencialmente expresados</a>
 <ul>
 <li><a href="6-1-introducción-1.html#introducción-1"><span class="toc-section-number">6.1</span> Introducción</a></li>
 <li><a href="6-2-selección-de-genes-diferencialmente-expresados.html#selección-de-genes-diferencialmente-expresados"><span class="toc-section-number">6.2</span> Selección de genes diferencialmente expresados</a>
@@ -352,20 +352,13 @@ Se discutirá más adelante como precisar esto pero de momento nos quedaremos co
 a “cero” porque estamos hablando de logaritmos de razones: si la expresión es la misma en ambas condiciones el
 cociente es uno y su logaritmo es cero.</p>
 <p>Vale la pena insistir en el concepto de expresión <em>diferencial</em>: no nos preocupa cual es la expresión del gen en una u otra muestra sinó <em>si son distintas</em>.</p>
-<!-- \begin{figure}[htp]--->
-<!-- ?--->
-<!-- \centering--->
-<!-- <img src="Selecciondegenesdiferencialmenteexpresados-img002.eps" width="50%">--->
-<!-- \end{figure}--->
-<!-- ?--->
-<!-- ?--->
 <p>La tabla anterior sugiere que podría considerarse el gen A está diferencialmente expresado (promedio y t–test altos)
 mientras que el gen B o el D no lo están (promedio y test-t próximos a cero). Los genes C y D pueden llevar a
 conclusiones contradictoria según nos basemos en el promedio o el test t.</p>
 <p>Si se observan los valores del test t del gen C se concluye que el gen no aparenta estar diferencialmente expresado. Si
 en cambio se observa su promedio parece que si que lo esté.</p>
 <p>En el gen E pasa exctamente lo opuesto. La explicación de estas aparentes contradicciones se halla en el error
-estándar. En el gen C es muy elevado, debido a que el valor (20) es probablemente un “outlier”. En el gen D el
+estándar. En el gen C es muy elevado, debido a que el valor (20) es probablemente un “outlier.” En el gen D el
 error estándar es muy bajo por lo que, al encontrarse en el denominador del t-test aumenta artificialmente su valor.</p>
 </div>
 <div id="selección-de-genes-usando-tests-estadísticos" class="section level3" number="6.2.3">
@@ -421,25 +414,25 @@ selección de genes diferencialmente expresados.</p>
 <h4><span class="header-section-number">6.2.3.1</span> Ejemplo de utilización del test-t</h4>
 <p>Como ejemplo utilizaremos el conjunto de datos <tt>celltypes</tt> y supondremos que disponemos ya de los datos normalizados y filtrados almacenados en un objeto <tt>expressionSet</tt>.</p>
 <p>Este proceso es sencillo de hacer siguiendo los pasos del capiítulo anterior. Para simplificar el ejemplo una vez cargados y normalizados filtraremos los datos usando funcion <code>nSFilter</code> de la librería <code>genefilter</code> con sus opciones por defecto, lo que nos dejara un total de 10254 sondas en vez de las 45101 originales.</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="6-2-selección-de-genes-diferencialmente-expresados.html#cb28-1"></a><span class="kw">library</span>(affy)</span>
-<span id="cb28-2"><a href="6-2-selección-de-genes-diferencialmente-expresados.html#cb28-2"></a><span class="kw">library</span>(genefilter)</span>
-<span id="cb28-3"><a href="6-2-selección-de-genes-diferencialmente-expresados.html#cb28-3"></a>affyPath&lt;-<span class="st"> &quot;datos/celltypes/celfiles&quot;</span></span>
-<span id="cb28-4"><a href="6-2-selección-de-genes-diferencialmente-expresados.html#cb28-4"></a>cellTypesTargets&lt;-<span class="st">  </span><span class="kw">read.AnnotatedDataFrame</span>(<span class="st">&quot;targets.txt&quot;</span>, <span class="dt">sep=</span><span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>,  <span class="dt">path=</span>affyPath)</span>
-<span id="cb28-5"><a href="6-2-selección-de-genes-diferencialmente-expresados.html#cb28-5"></a>cellTypesTargets<span class="op">$</span>filename =<span class="st"> </span><span class="kw">file.path</span>(affyPath, <span class="kw">row.names</span>(cellTypesTargets))</span>
-<span id="cb28-6"><a href="6-2-selección-de-genes-diferencialmente-expresados.html#cb28-6"></a>cellTypesRaw &lt;-<span class="st"> </span><span class="kw">read.affybatch</span>(cellTypesTargets<span class="op">$</span>filename, <span class="dt">phenoData=</span>cellTypesTargets)</span>
-<span id="cb28-7"><a href="6-2-selección-de-genes-diferencialmente-expresados.html#cb28-7"></a>eset_rma &lt;-<span class="st"> </span><span class="kw">rma</span>(cellTypesRaw)</span>
-<span id="cb28-8"><a href="6-2-selección-de-genes-diferencialmente-expresados.html#cb28-8"></a>Filtered &lt;-<span class="st"> </span><span class="kw">nsFilter</span>(eset_rma)</span>
-<span id="cb28-9"><a href="6-2-selección-de-genes-diferencialmente-expresados.html#cb28-9"></a>eset_rma_filtered &lt;-<span class="st"> </span>Filtered[[<span class="st">&quot;eset&quot;</span>]]</span>
-<span id="cb28-10"><a href="6-2-selección-de-genes-diferencialmente-expresados.html#cb28-10"></a><span class="kw">save</span>(eset_rma, eset_rma_filtered, <span class="dt">file=</span><span class="st">&quot;datos/celltypes/celltypes-normalized.rma.Rda&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="6-2-selección-de-genes-diferencialmente-expresados.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(affy)</span>
+<span id="cb28-2"><a href="6-2-selección-de-genes-diferencialmente-expresados.html#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(genefilter)</span>
+<span id="cb28-3"><a href="6-2-selección-de-genes-diferencialmente-expresados.html#cb28-3" aria-hidden="true" tabindex="-1"></a>affyPath<span class="ot">&lt;-</span> <span class="st">&quot;datos/celltypes/celfiles&quot;</span></span>
+<span id="cb28-4"><a href="6-2-selección-de-genes-diferencialmente-expresados.html#cb28-4" aria-hidden="true" tabindex="-1"></a>cellTypesTargets<span class="ot">&lt;-</span>  <span class="fu">read.AnnotatedDataFrame</span>(<span class="st">&quot;targets.txt&quot;</span>, <span class="at">sep=</span><span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>,  <span class="at">path=</span>affyPath)</span>
+<span id="cb28-5"><a href="6-2-selección-de-genes-diferencialmente-expresados.html#cb28-5" aria-hidden="true" tabindex="-1"></a>cellTypesTargets<span class="sc">$</span>filename <span class="ot">=</span> <span class="fu">file.path</span>(affyPath, <span class="fu">row.names</span>(cellTypesTargets))</span>
+<span id="cb28-6"><a href="6-2-selección-de-genes-diferencialmente-expresados.html#cb28-6" aria-hidden="true" tabindex="-1"></a>cellTypesRaw <span class="ot">&lt;-</span> <span class="fu">read.affybatch</span>(cellTypesTargets<span class="sc">$</span>filename, <span class="at">phenoData=</span>cellTypesTargets)</span>
+<span id="cb28-7"><a href="6-2-selección-de-genes-diferencialmente-expresados.html#cb28-7" aria-hidden="true" tabindex="-1"></a>eset_rma <span class="ot">&lt;-</span> <span class="fu">rma</span>(cellTypesRaw)</span>
+<span id="cb28-8"><a href="6-2-selección-de-genes-diferencialmente-expresados.html#cb28-8" aria-hidden="true" tabindex="-1"></a>Filtered <span class="ot">&lt;-</span> <span class="fu">nsFilter</span>(eset_rma)</span>
+<span id="cb28-9"><a href="6-2-selección-de-genes-diferencialmente-expresados.html#cb28-9" aria-hidden="true" tabindex="-1"></a>eset_rma_filtered <span class="ot">&lt;-</span> Filtered[[<span class="st">&quot;eset&quot;</span>]]</span>
+<span id="cb28-10"><a href="6-2-selección-de-genes-diferencialmente-expresados.html#cb28-10" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(eset_rma, eset_rma_filtered, <span class="at">file=</span><span class="st">&quot;datos/celltypes/celltypes-normalized.rma.Rda&quot;</span>)</span></code></pre></div>
 <p>Si consideramos que el campo <em>treat</em> del objeto contiene la información de los grupos a comparar (ratones estimulados con LPS frente a los que no han sido tratados), podemos realizar un primer análisis utilizando el test-t. Para ello utilizaremos el la función
 <tt>rowttests</tt> del paquete <tt>genefilter</tt> que realiza un test <span class="math inline">\(t\)</span> sobre cada una de las filas (genes) de una matriz de expresión.</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="6-2-selección-de-genes-diferencialmente-expresados.html#cb29-1"></a><span class="kw">stopifnot</span>(<span class="kw">require</span>(Biobase))</span>
-<span id="cb29-2"><a href="6-2-selección-de-genes-diferencialmente-expresados.html#cb29-2"></a><span class="kw">load</span> (<span class="dt">file=</span><span class="st">&quot;./datos/celltypes/celltypes-normalized.rma.Rda&quot;</span>)</span>
-<span id="cb29-3"><a href="6-2-selección-de-genes-diferencialmente-expresados.html#cb29-3"></a>my.eset &lt;-<span class="st"> </span>eset_rma_filtered</span>
-<span id="cb29-4"><a href="6-2-selección-de-genes-diferencialmente-expresados.html#cb29-4"></a>grupo_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">as.factor</span>(<span class="kw">pData</span>(my.eset)<span class="op">$</span>treat)</span>
-<span id="cb29-5"><a href="6-2-selección-de-genes-diferencialmente-expresados.html#cb29-5"></a><span class="kw">stopifnot</span>(<span class="kw">require</span>(genefilter))</span>
-<span id="cb29-6"><a href="6-2-selección-de-genes-diferencialmente-expresados.html#cb29-6"></a>teststat &lt;-<span class="kw">rowttests</span>(my.eset, <span class="st">&quot;treat&quot;</span>)</span>
-<span id="cb29-7"><a href="6-2-selección-de-genes-diferencialmente-expresados.html#cb29-7"></a><span class="kw">print</span>(teststat[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>,])</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="6-2-selección-de-genes-diferencialmente-expresados.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">require</span>(Biobase))</span>
+<span id="cb29-2"><a href="6-2-selección-de-genes-diferencialmente-expresados.html#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span> (<span class="at">file=</span><span class="st">&quot;./datos/celltypes/celltypes-normalized.rma.Rda&quot;</span>)</span>
+<span id="cb29-3"><a href="6-2-selección-de-genes-diferencialmente-expresados.html#cb29-3" aria-hidden="true" tabindex="-1"></a>my.eset <span class="ot">&lt;-</span> eset_rma_filtered</span>
+<span id="cb29-4"><a href="6-2-selección-de-genes-diferencialmente-expresados.html#cb29-4" aria-hidden="true" tabindex="-1"></a>grupo_1 <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(<span class="fu">pData</span>(my.eset)<span class="sc">$</span>treat)</span>
+<span id="cb29-5"><a href="6-2-selección-de-genes-diferencialmente-expresados.html#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">require</span>(genefilter))</span>
+<span id="cb29-6"><a href="6-2-selección-de-genes-diferencialmente-expresados.html#cb29-6" aria-hidden="true" tabindex="-1"></a>teststat <span class="ot">&lt;-</span><span class="fu">rowttests</span>(my.eset, <span class="st">&quot;treat&quot;</span>)</span>
+<span id="cb29-7"><a href="6-2-selección-de-genes-diferencialmente-expresados.html#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(teststat[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,])</span></code></pre></div>
 <pre><code>##                statistic         dm      p.value
 ## 1424378_at   -10.6739944 -1.1113660 8.715342e-07
 ## 1417675_a_at  20.7390631  0.9451576 1.504712e-09

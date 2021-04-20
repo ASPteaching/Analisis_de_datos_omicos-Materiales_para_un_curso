@@ -5,7 +5,7 @@
 <meta charset="utf-8" />
 <meta name="generator" content="pandoc" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta property="og:title" content="5.3 Normalización de arrays de dos colores | Analisis de datos omicos" />
+<meta property="og:title" content="Capítulo 6 Selección de genes diferencialmente expresados | Analisis de datos omicos" />
 <meta property="og:type" content="book" />
 
 
@@ -24,9 +24,9 @@ MathJax.Hub.Config({
 </script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<meta name="description" content="5.3 Normalización de arrays de dos colores | Analisis de datos omicos">
+<meta name="description" content="Capítulo 6 Selección de genes diferencialmente expresados | Analisis de datos omicos">
 
-<title>5.3 Normalización de arrays de dos colores | Analisis de datos omicos</title>
+<title>Capítulo 6 Selección de genes diferencialmente expresados | Analisis de datos omicos</title>
 
 <script src="libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="libs/jquery-1.11.3/jquery.min.js"></script>
@@ -312,51 +312,12 @@ img {
 </div>
 <div class="row">
 <div class="col-sm-12">
-<div id="normalización-de-arrays-de-dos-colores" class="section level2" number="5.3">
-<h2><span class="header-section-number">5.3</span> Normalización de arrays de dos colores</h2>
-<p>La palabra <em>normalización</em> describe las técnicas utilizadas para transformar adecuadamente los datos antes de que sean analizados.
-El objetivo es corregir diferencias sistemáticas entre muestras, en la misma o entre imágenes, lo que no representa
-una verdadera variación entre las muestras biológicas.</p>
-<p>Estas diferencias sistemáticas pueden deberse, entre otras, a:</p>
-<ul>
-<li>Cambios en la tinción que producen sesgos la intensidad del <em>spot</em>.</li>
-<li>La ubicación en el array que puede afectar el proceso de lectura.</li>
-<li>Un problem en la placa de origen.</li>
-<li>La existencia de diferencias en la calidad de la impresión: pueden presentarse variaciones en los pins y el tiempo de impresión</li>
-<li>Camio en los parámetros de la digitalización (escaneo).</li>
-</ul>
-<p>A veces puede ser difícil detectar estos problemas , aunque existen algunas formas de saber si es necesaria realizar una normalización. Aqui destacamos dos posibilidades:</p>
-<ol style="list-style-type: decimal">
-<li>Realizar una auto-hibridación. Si hibridamos una muestra con
-ella misma, las intensidades deberían ser las mismas en ambos
-canales. Cualquier desviación de esta igualdad, significa que hay
-un sesgo sistemático.</li>
-<li>Detectar artefactos espaciales en la imagen o en la tinción de
-los gráficos de diagnóstico</li>
-</ol>
-<div id="normalización-global" class="section level3" number="5.3.1">
-<h3><span class="header-section-number">5.3.1</span> Normalización global</h3>
-<p>Este método esta basado en un ajuste global, es decir en modificar todos los valores una cantidad <em>c</em>, estimada de acuerdo a algún criterio.
-<span class="math display">\[\begin{equation}
- \log_2 R/G \rightarrow \log_2 R/G-c=\log_2 R/(Gk)
-\end{equation}\]</span>
-opciones para <span class="math inline">\(k\)</span> o <span class="math inline">\(c= \log_2k\)</span> son</p>
-<p><span class="math inline">\(c\)</span>= mediana o media de log ratio para un conjunto concreto de genes o genes control o genes housekeeping.</p>
-<p>La intensidad total de la normalización</p>
-<p><span class="math inline">\(k=\sum R_i/\sum G_i\)</span></p>
-</div>
-<div id="normalización-dependiente-de-la-intensidad" class="section level3" number="5.3.2">
-<h3><span class="header-section-number">5.3.2</span> Normalización dependiente de la intensidad</h3>
-<p>En este caso se realiza una modificación específica para cada valor. Esta modificación se obtiene como una función de la intensidad total del gen (<span class="math inline">\(c=c(A)\)</span>).
-<span class="math display">\[\begin{equation}
- \log_2 R/G \rightarrow \log_2 R/G-c(A)=\log_2 R/(Gk(A))
-\end{equation}\]</span></p>
-<p>Una posible estimación de esta función puede hacerse utilizando la función <em>lowess</em> (LOcally WEighted Scatterplot Smoothing).</p>
-</div>
+<div id="chapDEG" class="section level1" number="6">
+<h1><span class="header-section-number">Capítulo 6</span> Selección de genes diferencialmente expresados</h1>
 </div>
 <p style="text-align: center;">
-<a href="5-2-exploración-y-control-de-calidad.html"><button class="btn btn-default">Previous</button></a>
-<a href="5-4-resumen-y-normalización-de-microarrays-de-affymetrix.html"><button class="btn btn-default">Next</button></a>
+<a href="5-5-filtraje-no-específico.html"><button class="btn btn-default">Previous</button></a>
+<a href="6-1-introducción-1.html"><button class="btn btn-default">Next</button></a>
 </p>
 </div>
 </div>
