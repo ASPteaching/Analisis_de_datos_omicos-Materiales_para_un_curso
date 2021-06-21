@@ -995,7 +995,7 @@ Una vez se ha expresado el experimento como un modelo lineal:
 $$
 \mathbf{E(y_g)=X\alpha_g},\quad \text{var}(y_g)=W_g\sigma_g,
 $$
-es posible usar _la teoría estándar del modelo lineal_ (ver @Faraway:2004)
+es posible usar _la teoría estándar del modelo lineal_ (ver @faraway:2004)
 para obtener:
 
 * Estimación de los parámetros: $\hat \alpha_g( \approx \mathbf{\alpha})$.

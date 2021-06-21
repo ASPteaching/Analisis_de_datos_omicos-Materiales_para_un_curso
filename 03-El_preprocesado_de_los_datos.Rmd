@@ -196,7 +196,7 @@ Siguiendo el esquema presentado en la tabla \@ref{tab:tablaDiagnosticos} se pres
 
 Estos gráficos permite hacerse una idea de si las distribuciones de los distintos arrays son similares en forma y posición. La figura \@ref(fig:plotAffyHist) muestra los histogramas correspondientes a los 9 arrays del conjunto de datos \texttt{estrogen}.
 
-```{r plotAffyHist,echo=TRUE}
+```{r fig:plotAffyHist,echo=TRUE}
 affySampleNames <- rownames(pData(allAffyRaw))
 affyColores <- c(1,2,2,3,3,4,4,8,8)
 affyLineas <- c(1,2,2,2,2,3,3,3,3)

@@ -177,8 +177,8 @@ cont.matrix
 ## ----linearmodelfit2------------------------------------------------
 require(limma)
 fit<-lmFit(eset_rma, design)
-fit.main<-contrasts.fit(fit, cont.matrix)
-fit.main<-eBayes(fit.main)
+fit.main0<-contrasts.fit(fit, cont.matrix)
+fit.main<-eBayes(fit.main0)
 
 
 ## ----print=FALSE, echo=TRUE-----------------------------------------
