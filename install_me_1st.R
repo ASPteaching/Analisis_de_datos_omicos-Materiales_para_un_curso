@@ -15,6 +15,7 @@ bioCifnot <- function (packageName){
 }
 installifnot("knitr")
 installifnot("ggrepel")
+installifnot("kableExtra")
 bioCifnot ("affy")
 bioCifnot ("genefilter")
 bioCifnot ("multtest")
@@ -33,6 +34,14 @@ bioCifnot ("hgu133a.db")
 bioCifnot ("mouse4302.db")
 bioCifnot ("GO.db")
 bioCifnot ("KEGG.db")
-bioCifnot ("Reactome.db")
+# bioCifnot ("Reactome.db")
 bioCifnot ("GOstats")
-```
+
+#########################################################3
+library(bookdown)
+render <- FALSE
+if (render)
+  render_book(input = ".", output_format = NULL, clean = TRUE,
+              envir = parent.frame(), clean_envir = !interactive(),
+              output_dir = NULL, new_session = NA, preview = FALSE,
+              config_file = "_bookdown.yml")

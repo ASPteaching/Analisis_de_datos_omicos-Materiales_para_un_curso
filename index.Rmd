@@ -1,5 +1,5 @@
 ---
-title: "Analisis de datos omicos"
+title: "Analisis de datos ómicos"
 author: 
 - Alex Sánchez-Pla$^{1,2}$ y Ricardo Gonzalo Sanz$^2$
 - $^1$ Departament de Genètica, Microbiologia i Estadística. Universitat de Barcelona (UB).
