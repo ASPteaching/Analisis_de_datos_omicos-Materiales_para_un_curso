@@ -213,10 +213,10 @@ Estos informes contienen gráficos, y explicaciones de como interpretarlos. Los 
 
 En el código de ejemplo hemos realizado dos veces el análisis, una con los datos "buenos" y otra incluyendo el array defectuoso ("bad.cel"). Como puede verse en las tablas resumen, y en los directorios de resultados el array defectuoso es detectado por la mayoría de pruebas.
 
-La figuras \@ref(fig:arrayQuality1) y \@ref(fig:arrayQuality2) presenta una tabla que resumen algunas de las pruebas (no todas) realizadas e indica si, para cada criterio, puede considerarse que un array dado es un outlier.
+<!-- La figuras \@ref(fig:arrayQuality1) y \@ref(fig:arrayQuality2) presenta una tabla que resumen algunas de las pruebas (no todas) realizadas e indica si, para cada criterio, puede considerarse que un array dado es un outlier. -->
 
-Para concluir con esta seccion merece la pena recordar que
-todos estos graficos son exploratorios.  Raramente se descarta un array si solo un grafico lo sugiere.
+Para concluir con esta sección merece la pena recordar que
+todos estos gráficos son exploratorios.  Raramente se descarta un array si tan sólo un grafico lo sugiere.
 
 
 ### Normalizacion y Filtraje

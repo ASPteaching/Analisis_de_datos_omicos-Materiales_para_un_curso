@@ -12,12 +12,17 @@ fig:c04variabilitySources
 fig:c04replicas
 fig:c04dyelabels
 fig:c04referencevsloop
+fig:plotAffyHist
+fig:plotAffyBoxplot
+fig:plotPCA2D1
+fig:plotPCA2D2
 fig:plotDendro
 fig:c05normScatterMA
 fig:c05normScatterMA2
 fig:c05signalNoise
 fig:c05plotAffy
 fig:c05MAPlotAffy
+fig:plotPLM
 fig:c06quantilNorm
 fig:venn01
 presentación

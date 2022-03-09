@@ -196,7 +196,7 @@ Siguiendo el esquema presentado en la tabla \@ref{tab:tablaDiagnosticos} se pres
 
 Estos gráficos permite hacerse una idea de si las distribuciones de los distintos arrays son similares en forma y posición. La figura \@ref(fig:plotAffyHist) muestra los histogramas correspondientes a los 9 arrays del conjunto de datos \texttt{estrogen}.
 
-```{r plotAffyHist,echo=TRUE}
+```{r plotAffyHist, fig.cap="La distribución de las expresiones se ve afectada globalmente lo que sugiere más un efecto técnico que biológico"}
 affySampleNames <- rownames(pData(allAffyRaw))
 affyColores <- c(1,2,2,3,3,4,4,8,8)
 affyLineas <- c(1,2,2,2,2,3,3,3,3)
@@ -204,12 +204,14 @@ hist(allAffyRaw, main="Signal distribution", col=affyColores, lty=affyLineas)
 legend (x="topright", legend=affySampleNames , col=affyColores, lty=affyLineas, cex=0.7)
 ```
 
+Tanto los gráficos de densidad como los diagramas de cajas de la figura siguiente muestran un _desplazamiento global_ de los valores en todas las muestras del grupo de 48 horas lo que sugiere un efecto técnico, puesto que no es biológicamente plausible que todas los genes se vean más afectados por la mayor tiempo de exposición.
+
 #### Diagramas de caja o "boxplots"
 
 Como los histogramas los diagramas de caja --basados en los distintos cuantiles de las valores-- dan una idea de la distribución de las intensidades.  La figura \@ref(fig:plotAffyBoxplot) muestra los diagramas de caja correspondientes a los 9 arrays del conjunto de datos \texttt{estrogen}.
 
-```{r plotAffyBoxplot}
-boxplot(allAffyRaw, main="Signal distribution", col=affyColores, las=2)
+```{r plotAffyBoxplot, fig.cap="Las distribuciónes de las expresiones se encuentran desplazadas en todas las muestras del grupo de 48"}
+boxplot(allAffyRaw, main="Distribución de las expresiones", col=affyColores, las=2)
 ```
 
 #### Gráficos de componentes principales
@@ -229,7 +231,8 @@ plotPCA <- function ( X, labels=NULL, colors=NULL, dataDesc="", scale=FALSE)
        ylim=c(min(pcX$x[,2])-10, max(pcX$x[,2])+10),
        )
   text(pcX$x[,1],pcX$x[,2], labels, pos=3, cex=0.8)
-  title(paste("Plot of first 2 PCs for expressions in", dataDesc, sep=" "), cex=0.8)
+  titulo <- ifelse(dataDesc=="", "Visualización de las dos primeras componentes", dataDesc)
+  title(titulo, cex=0.8)
 }
 ``` 
 
@@ -243,17 +246,16 @@ if (!file.exists("datos/affyNorm")){
 }
 ``` 
 
-La figura  \@ref(fig:plotPCA2D) muestra dos diagramas de compnentes principales realizados a partir de los datos normalizados del conjunto de datos \texttt{estrogen}. El gráfico de la parte superior que incluye el array defectuoso ilustra que la principal fuente de variabilidad es la diferencia de este array con el resto. Cuando se repite el análisis omitiendo esta muestra puede verse como la principal fuente de variación (eje X) se asocia con el tiempo de exposición (alto a la derecha, bajo (10h) a la izquierda, mientras que la segunda fuente de variación se asocia con la exposición a los estrógenos (alto arriba, bajo abajo).
+Las figuras  \@ref(fig:plotPCA2D1) y  \@ref(fig:plotPCA2D2) muestran dos diagramas de componentes principales realizados a partir de los datos normalizados del conjunto de datos \texttt{estrogen}. El gráfico de la parte superior que incluye el array defectuoso ilustra que la principal fuente de variabilidad es la diferencia de este array con el resto. Cuando se repite el análisis omitiendo esta muestra puede verse como la principal fuente de variación (eje X) se asocia con el tiempo de exposición (alto a la derecha, bajo (10h) a la izquierda, mientras que la segunda fuente de variación se asocia con la exposición a los estrógenos (alto arriba, bajo abajo).
 
-El gráfico de la parte inferior en el que este array se ha eliminado antes de calcular las componentes principales muestra dos agrupaciones claras de arrays "derecha e izquierda" y "arriba y abajo" de la figura. El hecho de que los grupos no se correspondan con los tratamientos sugiere que puede haber alguna fuente adicional de variación que ha de tenerse en cuenta.
 
-```{r plotPCA2D1, echo=TRUE}
-plotPCA(exprs(allAffyNorm), labels=affySampleNames, dataDesc="Grafico con todos los arrays\nIncluye muestra defectuosa")
+```{r plotPCA2D1, fig.cap="La principal fuente de variabilidad si se incluye la muestra defectuos, es la diferencia entre ésta y el resto de observaciones"}
+plotPCA(exprs(allAffyNorm), labels=affySampleNames)
 ```
 
 
-```{r plotPCA2D2, echo=TRUE}
-plotPCA(exprs(affyNorm), labels=colnames(exprs(affyNorm)), dataDesc="Grafico con todos los arrays\nSin la muestra defectuosa")
+```{r plotPCA2D2, echo=TRUE,  fig.cap="Sin la muestra defectuos puede asociarse la primera componente a la diferencia entre 48h y 10h y la segunda a la diferencia 'high' vs 'low'"}
+plotPCA(exprs(affyNorm), labels=colnames(exprs(affyNorm)))
 ```
 
 #### Imagen del chip
@@ -307,7 +309,7 @@ rojo frente al verde en un array de dos colores. En concreto se trata del primer
 
 El hecho de que los datos estén centrados alrededor de la diagonal sugiere que puede no ser necesario normalizar los datos.
 
-Una representación muy popular que ayuda a visualizar mejor esta relación es lo que se conoce como  _MA-plot_, que aparece en la parte derecha (b) de la figura\@ref(fig:c05normScatterMA). Geométricamente representa una rotación del gráfico de dispersión, en la que el significado de los nuevos ejes es:
+Una representación muy popular que ayuda a visualizar mejor esta relación es lo que se conoce como  _MA-plot_, que aparece en la parte derecha (b) de la figura \@ref(fig:c05normScatterMA). Geométricamente representa una rotación del gráfico de dispersión, en la que el significado de los nuevos ejes es:
 
 - $A=\displaystyle \frac{1}{2}(\log_2 (R*G))$: El logaritmo de la
   intensidad media de los dos canales,
@@ -397,7 +399,7 @@ knitr::include_graphics("figures/c05plotAffy.png")
 
 #### Gráfico "M-A"
 
-En los chips de dos colores el MA--plot se utliza para comparar los dos canales en cada array (rojo y verde). En cambio, en los chips de Affymetrics, en que sólo hay un canal en cada array,  la única forma de definir M (el log ratio) es a partir de la comparación  entre pares de de valores, ya sea los arrays dos a dos o bien cada array respecto un valor de referencia que puede ser la mediana, punto a punto, de todos los arrays (véase por ejemplo la figure \ref{c05MAPlotAffy}).
+En los chips de dos colores el MA--plot se utliza para comparar los dos canales en cada array (rojo y verde). En cambio, en los chips de Affymetrics, en que sólo hay un canal en cada array,  la única forma de definir M (el log ratio) es a partir de la comparación  entre pares de de valores, ya sea los arrays dos a dos o bien cada array respecto un valor de referencia que puede ser la mediana, punto a punto, de todos los arrays (véase por ejemplo la figura \@ref(fig:c05MAPlotAffy)).
 
 ```{r c05MAPlotAffy, fig.cap="En los chips de Affymetrix la única forma de definir M (el log ratio) es comparar entre diferentes arrays", echo=FALSE}
 knitr::include_graphics("figures/c05MAPlotAffy.png")
@@ -427,9 +429,9 @@ stopifnot(require(affyPLM))
 Pset<- fitPLM(allAffyRaw)
 ```
 
-La figura \@ref(c06plotAffy5) muestra los gráficos RLE y NUSE para el conjunto de datos estrogen. En ambos gráficos puede verse como el array defectuoso "\texttt{bad.cel}" queda claramente diferenciado del resto.
+La figura \@ref(fig:plotPLM) muestra los gráficos RLE y NUSE para el conjunto de datos estrogen. En ambos gráficos puede verse como el array defectuoso "\texttt{bad.cel}" queda claramente diferenciado del resto.
 
-```{r plotPLM ,fig.cap ="Graficos de diagnóstico calculados a nivel de sondas PLM", echo=TRUE}
+```{r plotPLM, fig.cap ="Graficos de diagnóstico calculados a nivel de sondas PLM", echo=TRUE}
 opt<- par(mfrow=c(2,1))
 RLE(Pset, main = "Relative Log Expression (RLE)", 
     names=rownames(pData(allAffyRaw)), las=2, cex.axis=0.6)
@@ -446,7 +448,7 @@ una verdadera variación entre las muestras biológicas.
 
 Estas  diferencias sistemáticas pueden deberse, entre otras, a:
 
- - Cambios en la tinción que producen sesgos  la intensidad del _spot_.
+ - Cambios en la tinción que modifican la intensidad del _spot_.
 - La ubicación en el array que puede afectar el proceso de lectura.
 - Un problem en la placa de origen.
 - La existencia de diferencias en la calidad de la impresión: pueden presentarse  variaciones en  los pins y el tiempo de impresión
