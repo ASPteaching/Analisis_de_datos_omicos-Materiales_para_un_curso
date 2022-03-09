@@ -4,26 +4,26 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Capítulo 4 Diseño de experimentos de microarrays | Analisis de datos omicos</title>
-  <meta name="description" content="Capítulo 4 Diseño de experimentos de microarrays | Analisis de datos omicos" />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <title>Capítulo 4 Diseño de experimentos de microarrays | Analisis de datos ómicos</title>
+  <meta name="description" content="Capítulo 4 Diseño de experimentos de microarrays | Analisis de datos ómicos" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Capítulo 4 Diseño de experimentos de microarrays | Analisis de datos omicos" />
+  <meta property="og:title" content="Capítulo 4 Diseño de experimentos de microarrays | Analisis de datos ómicos" />
   <meta property="og:type" content="book" />
   
   
   
-  
+  <meta name="github-repo" content="https://github.com/ASPteaching/Analisis_de_datos_omicos-Materiales_para_un_curso" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Capítulo 4 Diseño de experimentos de microarrays | Analisis de datos omicos" />
+  <meta name="twitter:title" content="Capítulo 4 Diseño de experimentos de microarrays | Analisis de datos ómicos" />
   
   
   
 
 <meta name="author" content="Alex Sánchez-Pla^{1,2} y Ricardo Gonzalo Sanz^2" />
 <meta name="author" content="^1 Departament de Genètica, Microbiologia i Estadística. Universitat de Barcelona (UB)." />
-<meta name="author" content="^2 Unitat d’Estadística i Bioinformàtica. Vall d’Hebron Institut de Recerca (VHIR)." />
+<meta name="author" content="^2 Unitat de Estadística i Bioinformàtica. Vall d’Hebron Institut de Recerca (VHIR)." />
 
 
 
@@ -34,8 +34,9 @@
   
 <link rel="prev" href="MDAProcess.html"/>
 <link rel="next" href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"/>
-<script src="libs/header-attrs-2.7/header-attrs.js"></script>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -51,7 +52,8 @@
 
 
 
-
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -117,6 +119,29 @@ code span.st { color: #4070a0; } /* String */
 code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
 </style>
 
 </head>
@@ -249,28 +274,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.5.6" data-path="chapDEG.html"><a href="chapDEG.html#implementación-y-ejemplos"><i class="fa fa-check"></i><b>6.5.6</b> Implementación y ejemplos</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html"><i class="fa fa-check"></i><b>7</b> Caso “Estrógeno”: Selección de genes diferencialmente expresados asociados con la resistencia a estrógenos.</a>
+<li class="chapter" data-level="7" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><i class="fa fa-check"></i><b>7</b> Caso “Estrógeno”: Selección de genes diferencialmente expresados asociados con la resistencia a estrógenos.</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html#introducción-2"><i class="fa fa-check"></i><b>7.1</b> Introducción</a></li>
-<li class="chapter" data-level="7.2" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html#el-estudio-estrógeno"><i class="fa fa-check"></i><b>7.2</b> El estudio “Estrógeno”</a>
+<li class="chapter" data-level="7.1" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#introducción-2"><i class="fa fa-check"></i><b>7.1</b> Introducción</a></li>
+<li class="chapter" data-level="7.2" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#el-estudio-estrógeno"><i class="fa fa-check"></i><b>7.2</b> El estudio “Estrógeno”</a>
 <ul>
-<li class="chapter" data-level="7.2.1" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html#directorios-y-opciones-de-trabajo"><i class="fa fa-check"></i><b>7.2.1</b> Directorios y opciones de trabajo</a></li>
+<li class="chapter" data-level="7.2.1" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#directorios-y-opciones-de-trabajo"><i class="fa fa-check"></i><b>7.2.1</b> Directorios y opciones de trabajo</a></li>
 </ul></li>
-<li class="chapter" data-level="7.3" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html#obtención-y-lectura-de-los-datos"><i class="fa fa-check"></i><b>7.3</b> Obtención y lectura de los datos</a>
+<li class="chapter" data-level="7.3" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#obtención-y-lectura-de-los-datos"><i class="fa fa-check"></i><b>7.3</b> Obtención y lectura de los datos</a>
 <ul>
-<li class="chapter" data-level="7.3.1" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html#los-datos"><i class="fa fa-check"></i><b>7.3.1</b> Los datos</a></li>
-<li class="chapter" data-level="7.3.2" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html#lectura-de-los-datos"><i class="fa fa-check"></i><b>7.3.2</b> Lectura de los datos</a></li>
+<li class="chapter" data-level="7.3.1" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#los-datos"><i class="fa fa-check"></i><b>7.3.1</b> Los datos</a></li>
+<li class="chapter" data-level="7.3.2" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#lectura-de-los-datos"><i class="fa fa-check"></i><b>7.3.2</b> Lectura de los datos</a></li>
 </ul></li>
-<li class="chapter" data-level="7.4" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html#exploración-control-de-calidad-y-normalización"><i class="fa fa-check"></i><b>7.4</b> Exploración, Control de Calidad y Normalización</a>
+<li class="chapter" data-level="7.4" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#exploración-control-de-calidad-y-normalización"><i class="fa fa-check"></i><b>7.4</b> Exploración, Control de Calidad y Normalización</a>
 <ul>
-<li class="chapter" data-level="7.4.1" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html#exploración-y-visualización"><i class="fa fa-check"></i><b>7.4.1</b> Exploración y visualización</a></li>
-<li class="chapter" data-level="7.4.2" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html#control-de-calidad"><i class="fa fa-check"></i><b>7.4.2</b> Control de calidad</a></li>
-<li class="chapter" data-level="7.4.3" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html#normalizacion-y-filtraje"><i class="fa fa-check"></i><b>7.4.3</b> Normalizacion y Filtraje</a></li>
+<li class="chapter" data-level="7.4.1" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#exploración-y-visualización"><i class="fa fa-check"></i><b>7.4.1</b> Exploración y visualización</a></li>
+<li class="chapter" data-level="7.4.2" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#control-de-calidad"><i class="fa fa-check"></i><b>7.4.2</b> Control de calidad</a></li>
+<li class="chapter" data-level="7.4.3" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#normalizacion-y-filtraje"><i class="fa fa-check"></i><b>7.4.3</b> Normalizacion y Filtraje</a></li>
 </ul></li>
-<li class="chapter" data-level="7.5" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html#selección-de-genes-diferencialmente-expresados-1"><i class="fa fa-check"></i><b>7.5</b> Selección de genes diferencialmente expresados</a>
+<li class="chapter" data-level="7.5" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#selección-de-genes-diferencialmente-expresados-1"><i class="fa fa-check"></i><b>7.5</b> Selección de genes diferencialmente expresados</a>
 <ul>
-<li class="chapter" data-level="7.5.1" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html#análisis-basado-en-modelos-lineales"><i class="fa fa-check"></i><b>7.5.1</b> Análisis basado en modelos lineales</a></li>
-<li class="chapter" data-level="7.5.2" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html#comparaciones-múltiples"><i class="fa fa-check"></i><b>7.5.2</b> Comparaciones múltiples</a></li>
+<li class="chapter" data-level="7.5.1" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#análisis-basado-en-modelos-lineales"><i class="fa fa-check"></i><b>7.5.1</b> Análisis basado en modelos lineales</a></li>
+<li class="chapter" data-level="7.5.2" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#comparaciones-múltiples"><i class="fa fa-check"></i><b>7.5.2</b> Comparaciones múltiples</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="después-de-la-selección-análisis-de-listas-de-genes.html"><a href="después-de-la-selección-análisis-de-listas-de-genes.html"><i class="fa fa-check"></i><b>8</b> Después de la selección: Análisis de listas de genes</a>
@@ -298,7 +323,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Analisis de datos omicos</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Analisis de datos ómicos</a>
           </h1>
         </div>
 
@@ -312,8 +337,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 crucial para una buena recogida de información, sino que marca todo el proceso desde el preprocesado al análisis final.</p>
 <div id="fuentes-de-variabilidad" class="section level2" number="4.1">
 <h2><span class="header-section-number">4.1</span> Fuentes de variabilidad</h2>
-<p>Los datos genómicos son muy variables. La figura <a href="MDAExpDesign.html#fig:c04variabilitySources">4.1</a>, tomada de <span class="citation">Geschwind and Gregg (2002)</span> ilustra algunas posibles fuentes de variabilidad, desde que se inicia el experimento hasta que se lee la información con el escáner. Sin tener que entrar en cómo influye cada una de estas fuents o cuan grande es su influencia lo que muestra esta figura es que este tipo de experimentos se enfrenta a múltiples fuentes de error, por lo que puede beneficiarse de un correcto diseño de experimentos.</p>
-<div class="figure"><span id="fig:c04variabilitySources"></span>
+<p>Los datos genómicos son muy variables. La figura <a href="MDAExpDesign.html#fig:c04variabilitySources">4.1</a>, tomada de <span class="citation"><a href="#ref-geschwind:2002" role="doc-biblioref">Geschwind and Gregg</a> (<a href="#ref-geschwind:2002" role="doc-biblioref">2002</a>)</span> ilustra algunas posibles fuentes de variabilidad, desde que se inicia el experimento hasta que se lee la información con el escáner. Sin tener que entrar en cómo influye cada una de estas fuents o cuan grande es su influencia lo que muestra esta figura es que este tipo de experimentos se enfrenta a múltiples fuentes de error, por lo que puede beneficiarse de un correcto diseño de experimentos.</p>
+<div class="figure"><span style="display:block;" id="fig:c04variabilitySources"></span>
 <img src="figures/c04variabilitySources.png" alt="Proceso de análisis de microarrays" width="500" />
 <p class="caption">
 Figure 4.1: Proceso de análisis de microarrays
@@ -369,7 +394,7 @@ contexto, hablaremos de “normalización,” que se tratará más adelante, en 
 <li><p>La replicación <em>biológica</em> se da cuando se toman medidas sobre muestras independientes, normalmente sobre individuos diferentes.</p></li>
 </ul>
 <p>La replicación técnica permite la estimación del error a nivel de medida, mientras que la replicación biológica permite estimar la variabilidad a nivel de población.</p>
-<div class="figure"><span id="fig:c04replicas"></span>
+<div class="figure"><span style="display:block;" id="fig:c04replicas"></span>
 <img src="figures/c04replicas.png" alt="Replicas biológicas vs réplicas técnicas" width="641" />
 <p class="caption">
 Figure 4.2: Replicas biológicas vs réplicas técnicas
@@ -380,7 +405,7 @@ Figure 4.2: Replicas biológicas vs réplicas técnicas
 <p>Sorprendentemente, los primeros experimentos de microarrays utilizaban pocas o ninguna replica biológica. La principal explicación para este hecho, además de la falta de conocimiento estadístico, fue el alto coste de cada microarray.</p>
 <p>En pocos años, la necesidad de las réplicas ha llegado a ser indiscutible, y al mismo tiempo, el coste de los chips ha disminuido considerablemente. Actualmente, es normal la utilización de, al menos, tres a cinco replicas por condición experimental, aunque a este consenso se ha llegado más por razones empíricas que por la disponibilidad de modelos apropiados para el análisis de la potencia y tamaño de la muestra.</p>
 <p>Recientemente, se ha producido una importante afluencia de artículos describiendo métodos para el análisis de la potencia y tamaño de la muestra. A pesar de su variedad, ningún método aparece como candidato claro para ser utilizado en situaciones prácticas. Esto se debe, probablemente, a la complejidad de los datos de microarrays, básicamente por que los genes no son independientes. Por tanto, estas estructuras de correlación existen en los datos, pero la mayor parte de las dependencias son desconocidas por lo que la estimación de estas estructuras es muy complicada.</p>
-<p>Como indicaba Allison <span class="citation">Allison et al. (2006)</span>, aunque no hay consenso sobre que
+<p>Como indicaba Allison <span class="citation"><a href="#ref-Allison:2006a" role="doc-biblioref">Allison et al.</a> (<a href="#ref-Allison:2006a" role="doc-biblioref">2006</a>)</span>, aunque no hay consenso sobre que
 procedimiento es mejor para determinar el tamaño de las muestras, sí que lo hay sobre la conveniencia de realizar el análisis de la potencia, y, por supuesto, sobre el hecho de que un mayor número de replicas generalmente proporcionan una mayor potencia.</p>
 </div>
 <div id="pooling" class="section level4" number="4.4.1.2">
@@ -388,9 +413,9 @@ procedimiento es mejor para determinar el tamaño de las muestras, sí que lo ha
 <p>En el contexto de los microarrays, llamamos “pooling” a la combinación del RNA de diferentes casos en una única muestra.</p>
 <p>Hay dos razones a favor de ello, una, es que, a veces, no hay suficiente ARN disponible y esta es la única forma de conseguir suficiente material para construir los arrays, otra, más controvertida,
 es la creencia que la variabilidad entre arrays puede reducirse por “pooling.”
-La justificación es que combinar muestras equivale a promediar expresiones, y como ya se conoce, el promedio es menos variable que los valores individuales. A pesar de la debilidad de este argumento, es verdad que en ciertas situaciones el <em>pooling</em> puede ser apropiado y, recientemente, muchos estadísticos han dedicado sus esfuerzos para tratar de responder la pregunta “to pool or not to pool” <span class="citation">(Kerr and Churchill 2001)</span>. Por ejemplo, si la variabilidad biológica está altamente relacionada con el error en las medidas, y las muestras biológicas tienen un coste mínimo en comparación con el de los arrays, una apropiada estrategia de “pooling” puede ser claramente eficiente en costes.</p>
+La justificación es que combinar muestras equivale a promediar expresiones, y como ya se conoce, el promedio es menos variable que los valores individuales. A pesar de la debilidad de este argumento, es verdad que en ciertas situaciones el <em>pooling</em> puede ser apropiado y, recientemente, muchos estadísticos han dedicado sus esfuerzos para tratar de responder la pregunta “to pool or not to pool” <span class="citation">(<a href="#ref-Kerr:2001a" role="doc-biblioref">Kerr and Churchill 2001</a>)</span>. Por ejemplo, si la variabilidad biológica está altamente relacionada con el error en las medidas, y las muestras biológicas tienen un coste mínimo en comparación con el de los arrays, una apropiada estrategia de “pooling” puede ser claramente eficiente en costes.</p>
 <p>De todos modos, el “pooling” no se debería usar en cualquier tipo de estudios.
-Si el objetivo es comparar expresiones medias (ver más adelante " comparación de clases"), puede funcionar adecuadamente, pero se debería claramente evitar cuando el objetivo del experimento es construir predictores que se basen en
+Si el objetivo es comparar expresiones medias (ver más adelante ” comparación de clases”), puede funcionar adecuadamente, pero se debería claramente evitar cuando el objetivo del experimento es construir predictores que se basen en
 características individuales.</p>
 </div>
 </div>
@@ -431,7 +456,7 @@ dye-swapping que consiste en utilizar para una misma comparación dos
 arrays con dyes cambiados, es decir, si en el primer array la muestra 1 se marca
 con Cy3 y la muestra 2 con Cy5, con las muestras del segundo array se hace al
 revés (ver figura <a href="MDAExpDesign.html#fig:c04dyelabels">4.3</a>.</p>
-<div class="figure"><span id="fig:c04dyelabels"></span>
+<div class="figure"><span style="display:block;" id="fig:c04dyelabels"></span>
 <img src="figures/c04dyelabels.png" alt="Representación simplificada de dos diseños" width="500" />
 <p class="caption">
 Figure 4.3: Representación simplificada de dos diseños
@@ -444,7 +469,7 @@ estudiado de forma exhaustiva.</p>
 <p>El diseño utilizado más comúnmente en la comunidad biológica es el
 diseño de referencia en el que cada condición de interés se compara
 con muestras tomadas de alguna referencia estándar común a todos las arrays, (ver figura <a href="MDAExpDesign.html#fig:c04referencevsloop">4.4</a>, imagen (a)).</p>
-<div class="figure"><span id="fig:c04referencevsloop"></span>
+<div class="figure"><span style="display:block;" id="fig:c04referencevsloop"></span>
 <img src="figures/c04referencevsloop.png" alt="(a) diseño de referencia.  (b) diseño en loop." width="500" />
 <p class="caption">
 Figure 4.4: (a) diseño de referencia. (b) diseño en loop.
@@ -454,6 +479,18 @@ Figure 4.4: (a) diseño de referencia. (b) diseño en loop.
 condiciones de interés. La crítica más importante a esta aproximación es que el 50 de las fuentes de hibridación se utilizan para producir la señal del grupo control, de un interés no intrínseco para los biólogos.
 En contraste, un diseño en loop compara dos condiciones a través de otra cadena de condiciones, por lo que elimina la necesidad de una muestra de referencia.</p>
 
+</div>
+</div>
+<h3> Referencias</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-Allison:2006a" class="csl-entry">
+Allison, David B, Xiangqin Cui, Grier P Page, and Mahyar Sabripour. 2006. <span>“Microarray Data Analysis: From Disarray to Consolidation and Consensus.”</span> <em>Nat Rev Genet</em> 7 (1): 55–65.
+</div>
+<div id="ref-geschwind:2002" class="csl-entry">
+Geschwind, D. H., and J. P. Gregg. 2002. <em><span class="nocase">Microarrays for the neurosciences: an essential guide</span></em>. MIT Press.
+</div>
+<div id="ref-Kerr:2001a" class="csl-entry">
+Kerr, M K, and G A Churchill. 2001. <span>“Experimental Design for Gene Expression Microarrays.”</span> <em>Biostatistics</em>.
 </div>
 </div>
             </section>
@@ -466,7 +503,6 @@ En contraste, un diseño en loop compara dos condiciones a través de otra caden
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -485,6 +521,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
@@ -505,6 +542,10 @@ gitbook.start({
 "text": null
 },
 "download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "subsection"
 }

@@ -4,26 +4,26 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Capítulo 5 Exploración de los datos, control de calidad y preprocesado | Analisis de datos omicos</title>
-  <meta name="description" content="Capítulo 5 Exploración de los datos, control de calidad y preprocesado | Analisis de datos omicos" />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <title>Capítulo 5 Exploración de los datos, control de calidad y preprocesado | Analisis de datos ómicos</title>
+  <meta name="description" content="Capítulo 5 Exploración de los datos, control de calidad y preprocesado | Analisis de datos ómicos" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Capítulo 5 Exploración de los datos, control de calidad y preprocesado | Analisis de datos omicos" />
+  <meta property="og:title" content="Capítulo 5 Exploración de los datos, control de calidad y preprocesado | Analisis de datos ómicos" />
   <meta property="og:type" content="book" />
   
   
   
-  
+  <meta name="github-repo" content="https://github.com/ASPteaching/Analisis_de_datos_omicos-Materiales_para_un_curso" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Capítulo 5 Exploración de los datos, control de calidad y preprocesado | Analisis de datos omicos" />
+  <meta name="twitter:title" content="Capítulo 5 Exploración de los datos, control de calidad y preprocesado | Analisis de datos ómicos" />
   
   
   
 
 <meta name="author" content="Alex Sánchez-Pla^{1,2} y Ricardo Gonzalo Sanz^2" />
 <meta name="author" content="^1 Departament de Genètica, Microbiologia i Estadística. Universitat de Barcelona (UB)." />
-<meta name="author" content="^2 Unitat d’Estadística i Bioinformàtica. Vall d’Hebron Institut de Recerca (VHIR)." />
+<meta name="author" content="^2 Unitat de Estadística i Bioinformàtica. Vall d’Hebron Institut de Recerca (VHIR)." />
 
 
 
@@ -34,8 +34,9 @@
   
 <link rel="prev" href="MDAExpDesign.html"/>
 <link rel="next" href="chapDEG.html"/>
-<script src="libs/header-attrs-2.7/header-attrs.js"></script>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -51,7 +52,8 @@
 
 
 
-
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -117,6 +119,29 @@ code span.st { color: #4070a0; } /* String */
 code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
 </style>
 
 </head>
@@ -249,28 +274,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.5.6" data-path="chapDEG.html"><a href="chapDEG.html#implementación-y-ejemplos"><i class="fa fa-check"></i><b>6.5.6</b> Implementación y ejemplos</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html"><i class="fa fa-check"></i><b>7</b> Caso “Estrógeno”: Selección de genes diferencialmente expresados asociados con la resistencia a estrógenos.</a>
+<li class="chapter" data-level="7" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><i class="fa fa-check"></i><b>7</b> Caso “Estrógeno”: Selección de genes diferencialmente expresados asociados con la resistencia a estrógenos.</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html#introducción-2"><i class="fa fa-check"></i><b>7.1</b> Introducción</a></li>
-<li class="chapter" data-level="7.2" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html#el-estudio-estrógeno"><i class="fa fa-check"></i><b>7.2</b> El estudio “Estrógeno”</a>
+<li class="chapter" data-level="7.1" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#introducción-2"><i class="fa fa-check"></i><b>7.1</b> Introducción</a></li>
+<li class="chapter" data-level="7.2" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#el-estudio-estrógeno"><i class="fa fa-check"></i><b>7.2</b> El estudio “Estrógeno”</a>
 <ul>
-<li class="chapter" data-level="7.2.1" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html#directorios-y-opciones-de-trabajo"><i class="fa fa-check"></i><b>7.2.1</b> Directorios y opciones de trabajo</a></li>
+<li class="chapter" data-level="7.2.1" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#directorios-y-opciones-de-trabajo"><i class="fa fa-check"></i><b>7.2.1</b> Directorios y opciones de trabajo</a></li>
 </ul></li>
-<li class="chapter" data-level="7.3" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html#obtención-y-lectura-de-los-datos"><i class="fa fa-check"></i><b>7.3</b> Obtención y lectura de los datos</a>
+<li class="chapter" data-level="7.3" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#obtención-y-lectura-de-los-datos"><i class="fa fa-check"></i><b>7.3</b> Obtención y lectura de los datos</a>
 <ul>
-<li class="chapter" data-level="7.3.1" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html#los-datos"><i class="fa fa-check"></i><b>7.3.1</b> Los datos</a></li>
-<li class="chapter" data-level="7.3.2" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html#lectura-de-los-datos"><i class="fa fa-check"></i><b>7.3.2</b> Lectura de los datos</a></li>
+<li class="chapter" data-level="7.3.1" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#los-datos"><i class="fa fa-check"></i><b>7.3.1</b> Los datos</a></li>
+<li class="chapter" data-level="7.3.2" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#lectura-de-los-datos"><i class="fa fa-check"></i><b>7.3.2</b> Lectura de los datos</a></li>
 </ul></li>
-<li class="chapter" data-level="7.4" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html#exploración-control-de-calidad-y-normalización"><i class="fa fa-check"></i><b>7.4</b> Exploración, Control de Calidad y Normalización</a>
+<li class="chapter" data-level="7.4" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#exploración-control-de-calidad-y-normalización"><i class="fa fa-check"></i><b>7.4</b> Exploración, Control de Calidad y Normalización</a>
 <ul>
-<li class="chapter" data-level="7.4.1" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html#exploración-y-visualización"><i class="fa fa-check"></i><b>7.4.1</b> Exploración y visualización</a></li>
-<li class="chapter" data-level="7.4.2" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html#control-de-calidad"><i class="fa fa-check"></i><b>7.4.2</b> Control de calidad</a></li>
-<li class="chapter" data-level="7.4.3" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html#normalizacion-y-filtraje"><i class="fa fa-check"></i><b>7.4.3</b> Normalizacion y Filtraje</a></li>
+<li class="chapter" data-level="7.4.1" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#exploración-y-visualización"><i class="fa fa-check"></i><b>7.4.1</b> Exploración y visualización</a></li>
+<li class="chapter" data-level="7.4.2" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#control-de-calidad"><i class="fa fa-check"></i><b>7.4.2</b> Control de calidad</a></li>
+<li class="chapter" data-level="7.4.3" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#normalizacion-y-filtraje"><i class="fa fa-check"></i><b>7.4.3</b> Normalizacion y Filtraje</a></li>
 </ul></li>
-<li class="chapter" data-level="7.5" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html#selección-de-genes-diferencialmente-expresados-1"><i class="fa fa-check"></i><b>7.5</b> Selección de genes diferencialmente expresados</a>
+<li class="chapter" data-level="7.5" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#selección-de-genes-diferencialmente-expresados-1"><i class="fa fa-check"></i><b>7.5</b> Selección de genes diferencialmente expresados</a>
 <ul>
-<li class="chapter" data-level="7.5.1" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html#análisis-basado-en-modelos-lineales"><i class="fa fa-check"></i><b>7.5.1</b> Análisis basado en modelos lineales</a></li>
-<li class="chapter" data-level="7.5.2" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html#comparaciones-múltiples"><i class="fa fa-check"></i><b>7.5.2</b> Comparaciones múltiples</a></li>
+<li class="chapter" data-level="7.5.1" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#análisis-basado-en-modelos-lineales"><i class="fa fa-check"></i><b>7.5.1</b> Análisis basado en modelos lineales</a></li>
+<li class="chapter" data-level="7.5.2" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#comparaciones-múltiples"><i class="fa fa-check"></i><b>7.5.2</b> Comparaciones múltiples</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="después-de-la-selección-análisis-de-listas-de-genes.html"><a href="después-de-la-selección-análisis-de-listas-de-genes.html"><i class="fa fa-check"></i><b>8</b> Después de la selección: Análisis de listas de genes</a>
@@ -298,7 +323,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Analisis de datos omicos</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Analisis de datos ómicos</a>
           </h1>
         </div>
 
@@ -872,7 +897,7 @@ obtener información sobre cómo se deben preprocesar los datos y comprobar, fin
 <p>La figura <a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#fig:plotDendro">5.1</a> muestra como se agrupan los datos del conjunto  en base a un cluster jerárquico. Como en el caso de las componentes principales tras eliminar el array defectuoso las muestras se separan, primero por el tiempo de exposición y luego por niveles de estrógeno suministrado.</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb20-1" aria-hidden="true" tabindex="-1"></a>clust.euclid.average <span class="ot">&lt;-</span> <span class="fu">hclust</span>(<span class="fu">dist</span>(<span class="fu">t</span>(<span class="fu">exprs</span>(affyNorm))),<span class="at">method=</span><span class="st">&quot;average&quot;</span>)</span>
 <span id="cb20-2"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(clust.euclid.average, <span class="at">labels=</span><span class="fu">colnames</span>(<span class="fu">exprs</span>(affyNorm)), <span class="at">main=</span><span class="st">&quot;Hierarchical clustering of samples&quot;</span>,  <span class="at">hang=</span><span class="sc">-</span><span class="dv">1</span>, <span class="at">cex=</span><span class="fl">0.7</span>)</span></code></pre></div>
-<div class="figure"><span id="fig:plotDendro"></span>
+<div class="figure"><span style="display:block;" id="fig:plotDendro"></span>
 <img src="Analisis_de_Datos_de_Microarrays_y_otras_Omicas_files/figure-html/plotDendro-1.png" alt="Un cluster jerárquico sirve para determinar si las muestras se agrupan de forma natural según los grupos experimentales o si lo hacen de otra forma" width="672" />
 <p class="caption">
 Figure 5.1: Un cluster jerárquico sirve para determinar si las muestras se agrupan de forma natural según los grupos experimentales o si lo hacen de otra forma
@@ -889,7 +914,7 @@ en la imagen y en diferentes tipos de gráficos.</p>
 <p>La normalización discutida en este mismo capítulo es un punto
 clave en el proceso de análisis de microarrays y se ha dedicado un
 gran esfuerzo a desarrollar y probar diferentes métodos
-(<span class="citation">Quackenbush (2002)</span>,<span class="citation">Yang et al. (2002)</span>). Una razón para ello es que
+(<span class="citation"><a href="#ref-Quackenbush:2003" role="doc-biblioref">Quackenbush</a> (<a href="#ref-Quackenbush:2003" role="doc-biblioref">2002</a>)</span>,<span class="citation"><a href="#ref-Yang:2002a" role="doc-biblioref">Yang et al.</a> (<a href="#ref-Yang:2002a" role="doc-biblioref">2002</a>)</span>). Una razón para ello es que
 hay diferentes artefactos técnicos que deben ser corregidos para
 poder ser utilizados, y no cualquier método puede funcionar con
 todos ellos.</p>
@@ -930,7 +955,7 @@ ambos canales (normalmente conocido como “log–ratio”).</li>
 <span id="cb21-9"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="fu">lm</span>(logR<span class="sc">~</span>logG), <span class="at">col=</span><span class="st">&quot;yellow&quot;</span>)</span>
 <span id="cb21-10"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb21-10" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(M<span class="sc">~</span>A, <span class="at">main=</span> <span class="st">&quot;MA-Plot&quot;</span>)</span>
 <span id="cb21-11"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb21-11" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h=</span><span class="dv">0</span>, <span class="at">col=</span><span class="st">&quot;yellow&quot;</span>)</span></code></pre></div>
-<div class="figure"><span id="fig:c05normScatterMA"></span>
+<div class="figure"><span style="display:block;" id="fig:c05normScatterMA"></span>
 <img src="Analisis_de_Datos_de_Microarrays_y_otras_Omicas_files/figure-html/c05normScatterMA-1.png" alt="(a) Gráfico de  un canal frente al otro  (b) MA-plot (intensidad frente log-ratio)" width="672" />
 <p class="caption">
 Figure 5.2: (a) Gráfico de un canal frente al otro (b) MA-plot (intensidad frente log-ratio)
@@ -953,7 +978,7 @@ Figure 5.2: (a) Gráfico de un canal frente al otro (b) MA-plot (intensidad fren
 <span id="cb23-11"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb23-11" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="fu">lm</span>(logR<span class="sc">~</span>logG), <span class="at">col=</span><span class="st">&quot;yellow&quot;</span>)</span>
 <span id="cb23-12"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb23-12" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(M<span class="sc">~</span>A, <span class="at">main=</span> <span class="st">&quot;MA-Plot&quot;</span>)</span>
 <span id="cb23-13"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb23-13" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h=</span><span class="dv">0</span>, <span class="at">col=</span><span class="st">&quot;yellow&quot;</span>)</span></code></pre></div>
-<div class="figure"><span id="fig:c05normScatterMA2"></span>
+<div class="figure"><span style="display:block;" id="fig:c05normScatterMA2"></span>
 <img src="Analisis_de_Datos_de_Microarrays_y_otras_Omicas_files/figure-html/c05normScatterMA2-1.png" alt="(a) Gráfico de  un canal frente al otro  (b) MA-plot (intensidad frente log-ratio). Estos gráficos sugieren la necesidad de normalizar los datos" width="672" />
 <p class="caption">
 Figure 5.3: (a) Gráfico de un canal frente al otro (b) MA-plot (intensidad frente log-ratio). Estos gráficos sugieren la necesidad de normalizar los datos
@@ -974,7 +999,7 @@ polvo o pequeñas marcas (rasguños).</p>
 <div id="histogramas-de-señales-y-de-la-relación-señalruído" class="section level4" number="5.2.2.3">
 <h4><span class="header-section-number">5.2.2.3</span> Histogramas de señales y de la relación señal–ruído</h4>
 <p>Estos gráficos (véase la figura <a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#fig:c05signalNoise">5.4</a>, derecha) son útiles para detectar posibles anormalidades o un background excesivamente alto .</p>
-<div class="figure"><span id="fig:c05signalNoise"></span>
+<div class="figure"><span style="display:block;" id="fig:c05signalNoise"></span>
 <img src="figures/c05signalNoise.png" alt="La relación señal ruido sirve para detectar posibles anormalidades o un background excesivamente alto como medida de calidad" width="660" />
 <p class="caption">
 Figure 5.4: La relación señal ruido sirve para detectar posibles anormalidades o un background excesivamente alto como medida de calidad
@@ -998,7 +1023,7 @@ cajas “dentro de arrays” (entre distintos sectores del mismo chip) y
 <h4><span class="header-section-number">5.2.3.1</span> Imagen del chip</h4>
 <p>Los arrays de affymetrix contienen millones de sondas por lo que no pueden examinarse a simple vista. A pesar de ello hay diversas formas de obtener una imagen que, en caso de presentar irregularidades pueden indicar algún tipo de problemas como burbujas, arañazos, etc. La figura @ref(c06plotAffy} muestra algunas de las imágenes</p>
 <p>La imagen del array de Affymetrix sólo es útil para evidenciar grandes problemas como burbujas, arañazos, etc. En este ejemplo los dos arrays de la izquierda se considerarían aceptables y los de la derecha defectuosos.</p>
-<div class="figure"><span id="fig:c05plotAffy"></span>
+<div class="figure"><span style="display:block;" id="fig:c05plotAffy"></span>
 <img src="figures/c05plotAffy.png" alt="Imágenes de cuatro microarrays de Affymetrix" width="819" />
 <p class="caption">
 Figure 5.5: Imágenes de cuatro microarrays de Affymetrix
@@ -1008,7 +1033,7 @@ Figure 5.5: Imágenes de cuatro microarrays de Affymetrix
 <div id="gráfico-m-a" class="section level4" number="5.2.3.2">
 <h4><span class="header-section-number">5.2.3.2</span> Gráfico “M-A”</h4>
 <p>En los chips de dos colores el MA–plot se utliza para comparar los dos canales en cada array (rojo y verde). En cambio, en los chips de Affymetrics, en que sólo hay un canal en cada array, la única forma de definir M (el log ratio) es a partir de la comparación entre pares de de valores, ya sea los arrays dos a dos o bien cada array respecto un valor de referencia que puede ser la mediana, punto a punto, de todos los arrays (véase por ejemplo la figure ).</p>
-<div class="figure"><span id="fig:c05MAPlotAffy"></span>
+<div class="figure"><span style="display:block;" id="fig:c05MAPlotAffy"></span>
 <img src="figures/c05MAPlotAffy.png" alt="En los chips de Affymetrix la única forma de definir M (el log ratio) es comparar entre diferentes arrays" width="774" />
 <p class="caption">
 Figure 5.6: En los chips de Affymetrix la única forma de definir M (el log ratio) es comparar entre diferentes arrays
@@ -1026,7 +1051,7 @@ Si los errores no presentan ningún patrón especial supondremos que el modelo s
 Si, en cambio, observamos desviaciones de esta presunta aleatoriedad querrá decir que el modelo no explica bien las observaciones, lo cual se atribuirá a la existencia de algún problema con los datos.</p>
 <p>Con los valores ajustados del modelo se calculan dos medidas:</p>
 <ul>
-<li>La expresión relativa en escala logarítmica " Relative Log Expression" (RLE) es una medida estandarizada de la expresión.
+<li>La expresión relativa en escala logarítmica ” Relative Log Expression” (RLE) es una medida estandarizada de la expresión.
 No es de gran utilidad pero debería presentar una distribución similar en todos los arrays.</li>
 <li>El error no estandarizado y normalizado o “NUSE” es el más informativo ya que representa la distribucián de los residuos a la que
 hacíamos referencia más arriba.
@@ -1038,7 +1063,7 @@ Si un array es problemático la caja correspondiente en el boxplot aparece despl
 <div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb26-1" aria-hidden="true" tabindex="-1"></a>opt<span class="ot">&lt;-</span> <span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">1</span>))</span>
 <span id="cb26-2"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">RLE</span>(Pset, <span class="at">main =</span> <span class="st">&quot;Relative Log Expression (RLE)&quot;</span>, </span>
 <span id="cb26-3"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb26-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">names=</span><span class="fu">rownames</span>(<span class="fu">pData</span>(allAffyRaw)), <span class="at">las=</span><span class="dv">2</span>, <span class="at">cex.axis=</span><span class="fl">0.6</span>)</span>
-<span id="cb26-4"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="fu">NUSE</span>(Pset, <span class="at">main =</span> <span class="st">&quot;Normalized Unscaled Standard Errors (NUSE)&quot;</span>, <span class="at">las=</span><span class="dv">2</span>, </span>
+<span id="cb26-4"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="fu">NUSE</span>(Pset, <span class="at">main =</span> <span class="st">&quot;Normalized Unscaled Standard Errors (NUSE)&quot;</span>,  </span>
 <span id="cb26-5"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb26-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">names=</span><span class="fu">rownames</span>(<span class="fu">pData</span>(allAffyRaw)), <span class="at">las=</span><span class="dv">2</span>, <span class="at">cex.axis=</span><span class="fl">0.6</span>)</span></code></pre></div>
 <div class="figure">
 <img src="Analisis_de_Datos_de_Microarrays_y_otras_Omicas_files/figure-html/plotPLM%20-1.png" alt="Graficos de diagnóstico calculados a nivel de sondas PLM" width="672" />
@@ -1106,7 +1131,7 @@ En el caso de estos arrays sabemos que cada valor no corresponde a la expresión
 <li>Una que coincidía exactamente con el fragmento del gen al que corresponde la sonda y que se denominaba “perfect match.”</li>
 <li>Otra, que coincidía con la anterior salvo por el valor central que se sustituía por el nucleótido complementario. Esta segunda sonda se denominaba un “mismatch.”</li>
 </ul>
-<p>La idea original consistía en utilizar estos “mismatches’ para tener una medida de hibridación no específica pero en las versiones más recientes se han abandonado, por lo que también se ha abandonado la utilización de los métodos”MAS-4" y “MAS-5” que utilizaban estos valores.</p>
+<p>La idea original consistía en utilizar estos “mismatches’ para tener una medida de hibridación no específica pero en las versiones más recientes se han abandonado, por lo que también se ha abandonado la utilización de los métodos”MAS-4” y “MAS-5” que utilizaban estos valores.</p>
 <p>El proceso que convierte las señales individuales en valores de expresión normalizados para cada gen consta de tres etapas:</p>
 <ol style="list-style-type: decimal">
 <li>Corrección del ruido de fondo o “background”</li>
@@ -1137,7 +1162,7 @@ a una regresión robusta denominada “pulido de medianas” (median polish) sob
 de sondas en columnas.</li>
 </ol>
 <p>Como resultado final de todos los pasos anteriores se obtiene la matriz con los datos sumarizados y normalizados. A pesar de no estar exento de críticas como la que afirma que este procedimiento “compacta” los valores reduciendo su variabilidad natural, este método se ha convertido en el estándar “de facto” actualmente por muchos usuarios de Bioconductor.</p>
-<div class="figure"><span id="fig:c06quantilNorm"></span>
+<div class="figure"><span style="display:block;" id="fig:c06quantilNorm"></span>
 <img src="figures/c06quantilNorm.png" alt="El método RMA incluye una normalización por cuantiles como la representada esquemáticamente en esta figura" width="534" />
 <p class="caption">
 Figure 5.7: El método RMA incluye una normalización por cuantiles como la representada esquemáticamente en esta figura
@@ -1158,6 +1183,15 @@ Figure 5.7: El método RMA incluye una normalización por cuantiles como la repr
 
 </div>
 </div>
+<h3> Referencias</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-Quackenbush:2003" class="csl-entry">
+Quackenbush, J. 2002. <span>“Microarray Data Normalization and Transformation.”</span> <em>Nature Genet.</em> 32: 496–501.
+</div>
+<div id="ref-Yang:2002a" class="csl-entry">
+Yang, Y. H., M. J. Buckley, S. Dudoit, and T. P. Speed. 2002. <span>“Comparison of Methods for Image Analysis on c<span>DNA</span> Microarray Data.”</span> <em>Journal of Computational and Graphical Statistic</em> 11 (1).
+</div>
+</div>
             </section>
 
           </div>
@@ -1168,7 +1202,6 @@ Figure 5.7: El método RMA incluye una normalización por cuantiles como la repr
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -1187,6 +1220,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
@@ -1207,6 +1241,10 @@ gitbook.start({
 "text": null
 },
 "download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "subsection"
 }

@@ -10,11 +10,11 @@
 
 
 
-
+<meta name="github-repo" content="https://github.com/ASPteaching/Analisis_de_datos_omicos-Materiales_para_un_curso" />
 
 <meta name="author" content="Alex Sánchez-Pla^{1,2} y Ricardo Gonzalo Sanz^2" />
 <meta name="author" content="^1 Departament de Genètica, Microbiologia i Estadística. Universitat de Barcelona (UB)." />
-<meta name="author" content="^2 Unitat d’Estadística i Bioinformàtica. Vall d’Hebron Institut de Recerca (VHIR)." />
+<meta name="author" content="^2 Unitat de Estadística i Bioinformàtica. Vall d’Hebron Institut de Recerca (VHIR)." />
 
 
 <script type="text/x-mathjax-config">
@@ -510,7 +510,7 @@ y de cada gen individual y obtener estimaciones de error mejoradas.</p>
 <span class="math inline">\(t\)</span>-moderados o <span class="math inline">\(p\)</span>-valores ajustados que se utilizan para ordenar los genes de mas a menos diferencialmente expresados.</p>
 <p>A fin de controlar el porcentaje de falsos positivos que puedan resultar del alto numero de contrastes realizados simultaneamente
 los p–valores se ajustan de forma que tengamos control sobre la tasa de falsos positivos utilizando el metodo
-de Benjamini y Hochberg (<span class="citation">Benjamini and Hochberg (1995)</span>).</p>
+de Benjamini y Hochberg (<span class="citation"><a href="#ref-Benjamini&amp;Hochberg95" role="doc-biblioref">Benjamini and Hochberg</a> (<a href="#ref-Benjamini&amp;Hochberg95" role="doc-biblioref">1995</a>)</span>).</p>
 <p>La funcion <tt>topTable</tt> genera para cada contraste una lista de genes
 ordenados de mas a menos diferencialmente expresados.</p>
 <div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="7.5-selección-de-genes-diferencialmente-expresados-1.html#cb79-1" aria-hidden="true" tabindex="-1"></a>topTabEstro10 <span class="ot">&lt;-</span> <span class="fu">topTable</span> (fit.main, <span class="at">number=</span><span class="fu">nrow</span>(fit.main), <span class="at">coef=</span><span class="st">&quot;Estro10&quot;</span>, <span class="at">adjust=</span><span class="st">&quot;fdr&quot;</span>)</span>
@@ -550,6 +550,12 @@ un 0 (si no hay cambio significativo) o un -1
 </div>
 </div>
 <!-- </div> -->
+<h3> Referencias</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-Benjamini&amp;Hochberg95" class="csl-entry">
+Benjamini, Y., and Y. Hochberg. 1995. <span>“Controlling the False Discovery Rate: <span>A</span> Practical and Powerful Approach to Multiple Testing.”</span> <em>Journal of the Royal Statistical Society B</em> 57: 289–300.
+</div>
+</div>
 <p style="text-align: center;">
 <a href="7.4-exploración-control-de-calidad-y-normalización.html"><button class="btn btn-default">Previous</button></a>
 <a href="8-después-de-la-selección-análisis-de-listas-de-genes.html"><button class="btn btn-default">Next</button></a>

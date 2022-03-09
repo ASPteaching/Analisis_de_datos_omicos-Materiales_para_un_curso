@@ -433,7 +433,7 @@ La figura \@ref(c06plotAffy5) muestra los gráficos RLE y NUSE para el conjunto 
 opt<- par(mfrow=c(2,1))
 RLE(Pset, main = "Relative Log Expression (RLE)", 
     names=rownames(pData(allAffyRaw)), las=2, cex.axis=0.6)
-NUSE(Pset, main = "Normalized Unscaled Standard Errors (NUSE)", las=2, 
+NUSE(Pset, main = "Normalized Unscaled Standard Errors (NUSE)",  
      names=rownames(pData(allAffyRaw)), las=2, cex.axis=0.6)
 par(opt)
 ```

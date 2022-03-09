@@ -10,11 +10,11 @@
 
 
 
-
+<meta name="github-repo" content="https://github.com/ASPteaching/Analisis_de_datos_omicos-Materiales_para_un_curso" />
 
 <meta name="author" content="Alex Sánchez-Pla^{1,2} y Ricardo Gonzalo Sanz^2" />
 <meta name="author" content="^1 Departament de Genètica, Microbiologia i Estadística. Universitat de Barcelona (UB)." />
-<meta name="author" content="^2 Unitat d’Estadística i Bioinformàtica. Vall d’Hebron Institut de Recerca (VHIR)." />
+<meta name="author" content="^2 Unitat de Estadística i Bioinformàtica. Vall d’Hebron Institut de Recerca (VHIR)." />
 
 
 <script type="text/x-mathjax-config">
@@ -385,7 +385,7 @@ de manera que la regulación positiva o negativa se representa de forma simétri
 de forma que los p–valores más pequeños aparecen mayores.</p>
 <p>Así pues puede considerarse que el primer eje indica impacto biológico del cambio (a más efecto biológico mayor “fold-change”) y el segundo muestra la evidencia estadística, o la fiabilidad del cambio.</p>
 <p>Como veremos más adelante en esta sección, el paquete <code>limma</code> permite realizar volcano-plots de forma sencilla a partir de los resultados de un anàlisis, pero para hacer un volcano plot tan sólo se necesita una lista de p-valores y los efectos (“fold-change”) asociados.</p>
-<p>La figura <span class="citation">(<strong>ref?</strong>)</span>(fig:volcano0) muestra un “volcano-plot” para este ejemplo de los “celltypes” para la comparación “LPS” frente a “Medium.”</p>
+<p>La figura <span class="citation">(<a href="#ref-ref" role="doc-biblioref"><strong>ref?</strong></a>)</span>(fig:volcano0) muestra un “volcano-plot” para este ejemplo de los “celltypes” para la comparación “LPS” frente a “Medium.”</p>
 <div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="6.3-significación-estadística-y-expresión-diferencial.html#cb34-1" aria-hidden="true" tabindex="-1"></a>FC <span class="ot">&lt;-</span> teststat<span class="sc">$</span>statistic</span>
 <span id="cb34-2"><a href="6.3-significación-estadística-y-expresión-diferencial.html#cb34-2" aria-hidden="true" tabindex="-1"></a>pVal<span class="ot">&lt;-</span>teststat<span class="sc">$</span>p.value</span>
 <span id="cb34-3"><a href="6.3-significación-estadística-y-expresión-diferencial.html#cb34-3" aria-hidden="true" tabindex="-1"></a>Y <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fu">log</span>(pVal)</span>
@@ -424,7 +424,7 @@ probabilidad de error de tipo I.</p>
 <p>En el caso de los microarrays se han desarrollado diversas fórmulas
 para realizar cálculos de este tipo, pero la compleja estructura de
 los datos microarrays hace que sean relativamente <em>discutibles</em>.</p>
-<p>Simon (<span class="citation">Simon et al. (2003)</span>) sugiere la fórmula siguiente que es una
+<p>Simon (<span class="citation"><a href="#ref-Simon:2003" role="doc-biblioref">Simon et al.</a> (<a href="#ref-Simon:2003" role="doc-biblioref">2003</a>)</span>) sugiere la fórmula siguiente que es una
 generalización de las fórmulas clásicas para problemas de dos
 muestras:</p>
 <p>El tamaño total requerido para detectar genes diferencialmente expresados en al menos una diferencia <span class="math inline">\(\delta\)</span> con una
@@ -437,13 +437,25 @@ desviación estandar de un gen dentro de una clase (de un grupo). Obviamente <em
 sin una muestra piloto con que estimarla el calculo e más imaginativo que realista.</p>
 <p>Además de esto, el número de arrays usualmente recomendado queda
 lejos de la cantidad asequible para la mayor parte de los experimentos
-(<span class="citation">Lee and Whitmore (2002)</span>,<span class="citation">Tibshirani (2006)</span>). Lo que muchos usuarios hacen a la
+(<span class="citation"><a href="#ref-lee:2002" role="doc-biblioref">Lee and Whitmore</a> (<a href="#ref-lee:2002" role="doc-biblioref">2002</a>)</span>,<span class="citation"><a href="#ref-Tibshirani:2006" role="doc-biblioref">Tibshirani</a> (<a href="#ref-Tibshirani:2006" role="doc-biblioref">2006</a>)</span>). Lo que muchos usuarios hacen a la
 práctica, es buscar un equilibrio entre los costes y la
 reproducibilidad y, de hecho, tienden a usar una cantidad fija de
 arrays tal como 3 o 5 sin consideraciones adicionales.</p>
 <p>Por ejemplo si ponemos <span class="math inline">\(\alpha=0.001\)</span>, <span class="math inline">\(1-\beta=0.95\)</span>, <span class="math inline">\(\delta=1\)</span> y
 estimamos <span class="math inline">\(\sigma\)</span> entre todas las muestras el número de réplicas
 biológicas que necesitaremos será de 35.8.</p>
+</div>
+</div>
+<h3> Referencias</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-lee:2002" class="csl-entry">
+Lee, M. L. T., and GA Whitmore. 2002. <span>“<span class="nocase">Power and sample size for DNA microarray studies</span>.”</span> <em>Statistics in Medicine</em> 21 (23): 3543–70.
+</div>
+<div id="ref-Simon:2003" class="csl-entry">
+Simon, Richard M., Edward L. Korn, Lisa M. McShane, Michael D. Radmacher, George W. Wright, and Yingdong Zhao. 2003. <em>Design and Analysis of DNA Microarray Investigations</em>. Springer-Verlag.
+</div>
+<div id="ref-Tibshirani:2006" class="csl-entry">
+Tibshirani, R. 2006. <span>“<span class="nocase">A simple method for assessing sample sizes in microarray experiments</span>.”</span> <em>BMC Bioinformatics</em> 7 (1): 106.
 </div>
 </div>
 <p style="text-align: center;">

@@ -4,26 +4,26 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Capítulo 2 Introduccion a los microarrays y otras tecnologías omicas | Analisis de datos omicos</title>
-  <meta name="description" content="Capítulo 2 Introduccion a los microarrays y otras tecnologías omicas | Analisis de datos omicos" />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <title>Capítulo 2 Introduccion a los microarrays y otras tecnologías omicas | Analisis de datos ómicos</title>
+  <meta name="description" content="Capítulo 2 Introduccion a los microarrays y otras tecnologías omicas | Analisis de datos ómicos" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Capítulo 2 Introduccion a los microarrays y otras tecnologías omicas | Analisis de datos omicos" />
+  <meta property="og:title" content="Capítulo 2 Introduccion a los microarrays y otras tecnologías omicas | Analisis de datos ómicos" />
   <meta property="og:type" content="book" />
   
   
   
-  
+  <meta name="github-repo" content="https://github.com/ASPteaching/Analisis_de_datos_omicos-Materiales_para_un_curso" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Capítulo 2 Introduccion a los microarrays y otras tecnologías omicas | Analisis de datos omicos" />
+  <meta name="twitter:title" content="Capítulo 2 Introduccion a los microarrays y otras tecnologías omicas | Analisis de datos ómicos" />
   
   
   
 
 <meta name="author" content="Alex Sánchez-Pla^{1,2} y Ricardo Gonzalo Sanz^2" />
 <meta name="author" content="^1 Departament de Genètica, Microbiologia i Estadística. Universitat de Barcelona (UB)." />
-<meta name="author" content="^2 Unitat d’Estadística i Bioinformàtica. Vall d’Hebron Institut de Recerca (VHIR)." />
+<meta name="author" content="^2 Unitat de Estadística i Bioinformàtica. Vall d’Hebron Institut de Recerca (VHIR)." />
 
 
 
@@ -34,8 +34,9 @@
   
 <link rel="prev" href="index.html"/>
 <link rel="next" href="MDAProcess.html"/>
-<script src="libs/header-attrs-2.7/header-attrs.js"></script>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -51,7 +52,8 @@
 
 
 
-
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -117,6 +119,29 @@ code span.st { color: #4070a0; } /* String */
 code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
 </style>
 
 </head>
@@ -249,28 +274,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.5.6" data-path="chapDEG.html"><a href="chapDEG.html#implementación-y-ejemplos"><i class="fa fa-check"></i><b>6.5.6</b> Implementación y ejemplos</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html"><i class="fa fa-check"></i><b>7</b> Caso “Estrógeno”: Selección de genes diferencialmente expresados asociados con la resistencia a estrógenos.</a>
+<li class="chapter" data-level="7" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><i class="fa fa-check"></i><b>7</b> Caso “Estrógeno”: Selección de genes diferencialmente expresados asociados con la resistencia a estrógenos.</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html#introducción-2"><i class="fa fa-check"></i><b>7.1</b> Introducción</a></li>
-<li class="chapter" data-level="7.2" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html#el-estudio-estrógeno"><i class="fa fa-check"></i><b>7.2</b> El estudio “Estrógeno”</a>
+<li class="chapter" data-level="7.1" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#introducción-2"><i class="fa fa-check"></i><b>7.1</b> Introducción</a></li>
+<li class="chapter" data-level="7.2" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#el-estudio-estrógeno"><i class="fa fa-check"></i><b>7.2</b> El estudio “Estrógeno”</a>
 <ul>
-<li class="chapter" data-level="7.2.1" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html#directorios-y-opciones-de-trabajo"><i class="fa fa-check"></i><b>7.2.1</b> Directorios y opciones de trabajo</a></li>
+<li class="chapter" data-level="7.2.1" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#directorios-y-opciones-de-trabajo"><i class="fa fa-check"></i><b>7.2.1</b> Directorios y opciones de trabajo</a></li>
 </ul></li>
-<li class="chapter" data-level="7.3" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html#obtención-y-lectura-de-los-datos"><i class="fa fa-check"></i><b>7.3</b> Obtención y lectura de los datos</a>
+<li class="chapter" data-level="7.3" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#obtención-y-lectura-de-los-datos"><i class="fa fa-check"></i><b>7.3</b> Obtención y lectura de los datos</a>
 <ul>
-<li class="chapter" data-level="7.3.1" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html#los-datos"><i class="fa fa-check"></i><b>7.3.1</b> Los datos</a></li>
-<li class="chapter" data-level="7.3.2" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html#lectura-de-los-datos"><i class="fa fa-check"></i><b>7.3.2</b> Lectura de los datos</a></li>
+<li class="chapter" data-level="7.3.1" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#los-datos"><i class="fa fa-check"></i><b>7.3.1</b> Los datos</a></li>
+<li class="chapter" data-level="7.3.2" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#lectura-de-los-datos"><i class="fa fa-check"></i><b>7.3.2</b> Lectura de los datos</a></li>
 </ul></li>
-<li class="chapter" data-level="7.4" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html#exploración-control-de-calidad-y-normalización"><i class="fa fa-check"></i><b>7.4</b> Exploración, Control de Calidad y Normalización</a>
+<li class="chapter" data-level="7.4" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#exploración-control-de-calidad-y-normalización"><i class="fa fa-check"></i><b>7.4</b> Exploración, Control de Calidad y Normalización</a>
 <ul>
-<li class="chapter" data-level="7.4.1" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html#exploración-y-visualización"><i class="fa fa-check"></i><b>7.4.1</b> Exploración y visualización</a></li>
-<li class="chapter" data-level="7.4.2" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html#control-de-calidad"><i class="fa fa-check"></i><b>7.4.2</b> Control de calidad</a></li>
-<li class="chapter" data-level="7.4.3" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html#normalizacion-y-filtraje"><i class="fa fa-check"></i><b>7.4.3</b> Normalizacion y Filtraje</a></li>
+<li class="chapter" data-level="7.4.1" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#exploración-y-visualización"><i class="fa fa-check"></i><b>7.4.1</b> Exploración y visualización</a></li>
+<li class="chapter" data-level="7.4.2" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#control-de-calidad"><i class="fa fa-check"></i><b>7.4.2</b> Control de calidad</a></li>
+<li class="chapter" data-level="7.4.3" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#normalizacion-y-filtraje"><i class="fa fa-check"></i><b>7.4.3</b> Normalizacion y Filtraje</a></li>
 </ul></li>
-<li class="chapter" data-level="7.5" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html#selección-de-genes-diferencialmente-expresados-1"><i class="fa fa-check"></i><b>7.5</b> Selección de genes diferencialmente expresados</a>
+<li class="chapter" data-level="7.5" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#selección-de-genes-diferencialmente-expresados-1"><i class="fa fa-check"></i><b>7.5</b> Selección de genes diferencialmente expresados</a>
 <ul>
-<li class="chapter" data-level="7.5.1" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html#análisis-basado-en-modelos-lineales"><i class="fa fa-check"></i><b>7.5.1</b> Análisis basado en modelos lineales</a></li>
-<li class="chapter" data-level="7.5.2" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html#comparaciones-múltiples"><i class="fa fa-check"></i><b>7.5.2</b> Comparaciones múltiples</a></li>
+<li class="chapter" data-level="7.5.1" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#análisis-basado-en-modelos-lineales"><i class="fa fa-check"></i><b>7.5.1</b> Análisis basado en modelos lineales</a></li>
+<li class="chapter" data-level="7.5.2" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#comparaciones-múltiples"><i class="fa fa-check"></i><b>7.5.2</b> Comparaciones múltiples</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="después-de-la-selección-análisis-de-listas-de-genes.html"><a href="después-de-la-selección-análisis-de-listas-de-genes.html"><i class="fa fa-check"></i><b>8</b> Después de la selección: Análisis de listas de genes</a>
@@ -298,7 +323,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Analisis de datos omicos</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Analisis de datos ómicos</a>
           </h1>
         </div>
 
@@ -315,7 +340,7 @@ el nivel de expresión de los genes integrados en el genoma humano. Para ello di
 <p>Especial interés ha tenido siempre sobre las otras biomoléculas el estudio de los niveles del ARN transcrito. Hace unos años se
 acuñó el término de <em>transcriptómica</em> para referirse al estudio del ARN en cada una de sus formas.
 La transcriptómica ha contribuído a tener una mejor comprensión de la patogénesis de las enfermedades.</p>
-<p>En el año 2009 Wang y colaboradores (<span class="citation">Wang, Gerstein, and Snyder (2009)</span>) definieron el transcriptoma como <em>el conjunto completo de tránscritos en una célula y su cantidad en un momento determinado del desarrollo o en una determinada condición fisiológica</em>.
+<p>En el año 2009 Wang y colaboradores (<span class="citation"><a href="#ref-Wang:2009" role="doc-biblioref">Wang, Gerstein, and Snyder</a> (<a href="#ref-Wang:2009" role="doc-biblioref">2009</a>)</span>) definieron el transcriptoma como <em>el conjunto completo de tránscritos en una célula y su cantidad en un momento determinado del desarrollo o en una determinada condición fisiológica</em>.
 Como objetivos de la transcriptómica se han definido tres principales:</p>
 <ol style="list-style-type: decimal">
 <li><p>Catalogar todas las especies de tránscritos, incluyendo ARNm, ARN no codificante y pequeños ARNs.</p></li>
@@ -332,7 +357,7 @@ sino también en el desarrollo de nuevos métodos de extraer la gran cantidad de
 <p>Un <em>microarray</em> es un artefacto para la realización de experimentos que permite estudiar simultáneamente múltiples unidades,
 b que representan los genes, proteínas o metabolitos, sobre un sustrato sólido de cristal,
 plástico o sílice, y expuestos a la acción de las moléculas diana cuya expresión se desea analizar (ver Figura <a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#fig:c01microarray">2.1</a>.</p>
-<div class="figure" style="text-align: center"><span id="fig:c01microarray"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:c01microarray"></span>
 <img src="epsimages/c01microarray.png" alt="Imagen de un microarray" width="168" />
 <p class="caption">
 Figure 2.1: Imagen de un microarray
@@ -350,10 +375,10 @@ pueden estudiar muchísimos genes a la vez, pero en contrapartida con mucho meno
 esclerosis múltiple al de los ritmos circadianos de las frutas.
 Entre otros temas los microarrays se han aplicado a:</p>
 <ul>
-<li>Estudio de genes que se expresan diferencialmente entre varias condiciones (sanos vs enfermos, mutantes vs salvajes, tratados vs no tratados) (<span class="citation">Callow et al. (2000)</span>, <span class="citation">Hedenfalk et al. (2002)</span>, <span class="citation">Kupin (2005)</span>).</li>
-<li>Clasificación mólecular en enfermedades complejas (<span class="citation">Golub et al. (1999)</span>, <span class="citation">Barrier et al. (2007)</span>).</li>
-<li>Identificación de genes caracerísticos de una patología (firma o “signature”) (<span class="citation">Dyrskjøt et al. (2002)</span>).</li>
-<li>Predicción de respuesta a un tratamiento (<span class="citation">Lin, Devakumar, and Kibbe (2006)</span>).</li>
+<li>Estudio de genes que se expresan diferencialmente entre varias condiciones (sanos vs enfermos, mutantes vs salvajes, tratados vs no tratados) (<span class="citation"><a href="#ref-Callow:2000" role="doc-biblioref">Callow et al.</a> (<a href="#ref-Callow:2000" role="doc-biblioref">2000</a>)</span>, <span class="citation"><a href="#ref-Hedenfalk:2002" role="doc-biblioref">Hedenfalk et al.</a> (<a href="#ref-Hedenfalk:2002" role="doc-biblioref">2002</a>)</span>, <span class="citation"><a href="#ref-Kupin:2006" role="doc-biblioref">Kupin</a> (<a href="#ref-Kupin:2006" role="doc-biblioref">2005</a>)</span>).</li>
+<li>Clasificación mólecular en enfermedades complejas (<span class="citation"><a href="#ref-Golub:1999" role="doc-biblioref">Golub et al.</a> (<a href="#ref-Golub:1999" role="doc-biblioref">1999</a>)</span>, <span class="citation"><a href="#ref-Barrier:2005" role="doc-biblioref">Barrier et al.</a> (<a href="#ref-Barrier:2005" role="doc-biblioref">2007</a>)</span>).</li>
+<li>Identificación de genes caracerísticos de una patología (firma o “signature”) (<span class="citation"><a href="#ref-dyrskjot:2002" role="doc-biblioref">Dyrskjøt et al.</a> (<a href="#ref-dyrskjot:2002" role="doc-biblioref">2002</a>)</span>).</li>
+<li>Predicción de respuesta a un tratamiento (<span class="citation"><a href="#ref-Lin2006" role="doc-biblioref">Lin, Devakumar, and Kibbe</a> (<a href="#ref-Lin2006" role="doc-biblioref">2006</a>)</span>).</li>
 <li>y una gran variedad de otros temas</li>
 </ul>
 </div>
@@ -373,11 +398,11 @@ al final del capítulo se hace mención de algunos de los otros tipos de microar
 </ol>
 <div id="microarrays-de-dos-colores" class="section level3" number="2.3.1">
 <h3><span class="header-section-number">2.3.1</span> Microarrays de dos colores</h3>
-<p>Estos arrays aparecieron a mediados de los años 90 (<span class="citation">Schena (1999)</span>)
+<p>Estos arrays aparecieron a mediados de los años 90 (<span class="citation"><a href="#ref-Schena:1999" role="doc-biblioref">Schena</a> (<a href="#ref-Schena:1999" role="doc-biblioref">1999</a>)</span>)
 y están basados en la <em>hibridación competitiva</em> de dos muestras, cada una de las cuales ha sido marcada con un marcador fluorescente
 diferente (normalmente Cy3 y Cy5, verde y rojo respectivamente).</p>
 <p>En el array se imprimen las sondas (una sonda<span class="math inline">\(\simeq\)</span> un gen) cuyas secuencias se obtienen de información almacenada en bases de datos de secuencias como <tt>GenBank</tt>, <tt>dbEST</tt>, etc.</p>
-<div class="figure" style="text-align: center"><span id="fig:c01microarray2col"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:c01microarray2col"></span>
 <img src="epsimages/c01microarray2col.png" alt="En los microrrays de dos colores las sondas son sintetizadas _in vitro_ y depositadas directamente sobre una superficie de cristal" width="310" />
 <p class="caption">
 Figure 2.2: En los microrrays de dos colores las sondas son sintetizadas <em>in vitro</em> y depositadas directamente sobre una superficie de cristal
@@ -406,9 +431,9 @@ Affymetrix sintetiza las sondas directamente sobre el chip mediante un proceso l
 Este proceso consiste en la adición cíclica de los cuatro nucleótidos (adenina, timina, citosina y guanina)
 sobre la superficie rígida, donde existen ancladas unas especies químicas reactivas que se protegen y desprotegen para añadir el
 nucleótido deseado, mediante ciclos de luz y oscuridad. Así se consigue la síntesis de oligonucleótidos de unos 25-mer (“mer”=bases) de longitud.
-En la figura <span class="citation">(<strong>ref?</strong>)</span>(fig:c01affymetryxsynthesis)
+En la figura <span class="citation">(<a href="#ref-ref" role="doc-biblioref"><strong>ref?</strong></a>)</span>(fig:c01affymetryxsynthesis)
 se esquematiza el proceso.</p>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-1"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-1"></span>
 <img src="epsimages/c01affymetryxsynthesis.png" alt="Esquema del proceso de fabricación de arrays de oligonucleótidos" width="310" />
 <p class="caption">
 Figure 2.3: Esquema del proceso de fabricación de arrays de oligonucleótidos
@@ -422,7 +447,7 @@ combinan un “Perfect Match” (PM) -cuya secuencia de 25-mer coincide perfecta
 Diferentes “probe sets” se distribuyen a lo largo del array, y son las que definen a qué gen se unen y las que definen los niveles de
 expresión detectados.</p>
 <p>El Mismatch (MM) se creo originalmente para que proporcionara una medida de la unión inespecífica (es decir lo que se hibridara con esta secuencia “parecida” pero distinta a la original se consideraría ruído). Aunque algunos algoritmos originales de Affymetrix todavía lo utilizan, hoy en día ha caído en desuso, muchos algoritmos modernos como RMA –que se explicará más adelnat– ya no lo utilizan y en las nuevas versiones de los arrays (mudelos “Hugene” por ejemplo) ya no se incluyó.</p>
-<div class="figure" style="text-align: center"><span id="fig:c01affy-PM-MM"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:c01affy-PM-MM"></span>
 <img src="epsimages/c01affy-PM-MM.png" alt="Estructura de un grupo de sondas (`probe sets`) de un array antiguo de Affymetrix en el que se muestra los distintos términos definidos: `probe-set`, `probe-pair`, `Perfect-Match`, `Mismatch`" width="416" />
 <p class="caption">
 Figure 2.4: Estructura de un grupo de sondas (<code>probe sets</code>) de un array antiguo de Affymetrix en el que se muestra los distintos términos definidos: <code>probe-set</code>, <code>probe-pair</code>, <code>Perfect-Match</code>, <code>Mismatch</code>
@@ -439,7 +464,7 @@ el material de partida es el ARN. Es muy importante controlar la calidad y la ca
 molécula fluorescente (ficoeritrina en este caso) y fragmentado en trozos más pequeños que se puedan unir a las “probes” fijadas en el array,
 mediante el proceso de hibridación. Al igual que en los arrays de dos colores, el array hibridado es iluminado en un escáner mediante un láser,
 para que la ficoeritrina emita luz fluorescente. La fluorescencia registrada de cada “probe set,” es directamente proporcional a la cantidad de ARN presente en la muestra inicial de cada gen. La figura <a href="`{r anchorLoc('01affymetrixMicroArrays')`">here</a> es una representación esquemática del uso de microarrays de un color.</p>
-<div class="figure" style="text-align: center"><span id="fig:c01affymetrixMicroArrays"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:c01affymetrixMicroArrays"></span>
 <img src="epsimages/c01affymetrixMicroArrays.png" alt="Esquema del funcionamiento de un microarrays de Affymetrix o de un sólo color" width="394" />
 <p class="caption">
 Figure 2.5: Esquema del funcionamiento de un microarrays de Affymetrix o de un sólo color
@@ -451,7 +476,7 @@ Figure 2.5: Esquema del funcionamiento de un microarrays de Affymetrix o de un s
 <p>Los microarrays permiten cuantificar la expresión de los genes a través de la
 intensidad de la fluorescencia que es capturada por los escáneres. Las imágenes
 se convierten en valores por un proceso que no es objeto de discusión en este
-curso, pero que puede ser considerado relativamente fiable y estable (véase, por ejemplo <span class="citation">Schena (1999)</span>).</p>
+curso, pero que puede ser considerado relativamente fiable y estable (véase, por ejemplo <span class="citation"><a href="#ref-Schena:1999" role="doc-biblioref">Schena</a> (<a href="#ref-Schena:1999" role="doc-biblioref">1999</a>)</span>).</p>
 <p>Cada tecnología genera diferentes tipos de imágenes y éstas generan diferentes valores que deben ser tratados adecuadamente para proporcionar
 alguna clase de estimaciones de una misma variable: la <em>expresión génica</em>.</p>
 <p>Tal como se ha indicado anteriormente una de las principales diferencias entre arrays de uno y dos colores es que estos últimos se basan en la <em>hibridación competitiva</em> de las dos muestras mientras que los de un color sólo miden cuanta muestra se hibrida con las sondas del chip. En consecuencia en los arrays de dos colores se mide <em>cuánto se expresa un gen en una muestra respecto a la otra</em> lo que tiene un sentido biológico en términos de “sobre–expresión” (por ejemplo, si un gen se expresa dos veces más en una condición que en la otra puede deducirse que está activado o sobre–expresado) o “sub–regulación” (si el gen se expresa la mitad en una condición que en otra puede deucirse que está inhibido o regulado negativamente). En los arrays de un color en cambio tan s’olo se mide <em>cuánto se expresa un gen</em> en una escala que carece de sentido biológico.</p>
@@ -478,7 +503,7 @@ resultado final de <em>expresión relativa</em>. Esto se debe principalemte a do
 motivos: por un lado, los datos de expresión se aproximan mejor con una
 distribución log–normal, y por otro lado, la utilización de logaritmos simetriza
 las diferencias haciendo más fácil la interpretación.</p>
-<div class="figure" style="text-align: center"><span id="fig:c01cDNAImageQuantitation"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:c01cDNAImageQuantitation"></span>
 <img src="epsimages/c01cDNAImageQuantitation.png" alt="Esquema del tratamiento de las imágenes para su cuantificación" width="310" />
 <p class="caption">
 Figure 2.6: Esquema del tratamiento de las imágenes para su cuantificación
@@ -898,7 +923,7 @@ Debido a esta medida de conservación el mapa de SNPs sirve como un excelente ma
 <p>Los arrays SNP son un tipo de chips de ADN para detectar polimorfismos dentro de las poblaciones. Estos trabajan bajo los mismos principios
 básicos que arrays de expresión, pero cada sonda está diseñada para detectar las diferentes variaciones de polimorfismos de nucleótido
 único para cada SNP conocidos.</p>
-<div class="figure" style="text-align: center"><span id="fig:c01SNParray"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:c01SNParray"></span>
 <img src="epsimages/c01SNParray.png" alt="Utilización de arrays de genotipado" width="310" />
 <p class="caption">
 Figure 2.7: Utilización de arrays de genotipado
@@ -934,7 +959,7 @@ extensión en la que la resta no es distintas variantes de un solo tipo de molé
 </div>
 <div id="extensiones-2-ngs-nextnow-generation-sequencing" class="section level2" number="2.6">
 <h2><span class="header-section-number">2.6</span> Extensiones (2): <em>NGS: Next(Now) Generation Sequencing</em></h2>
-<p>A finales de la primera década del siglo XXI parece ser que la revolución de los microarrays está llegando a su fin (<span class="citation">(<strong>ledford:2008?</strong>)</span>, frantz:2005)
+<p>A finales de la primera década del siglo XXI parece ser que la revolución de los microarrays está llegando a su fin (<span class="citation">(<a href="#ref-ledford:2008" role="doc-biblioref"><strong>ledford:2008?</strong></a>)</span>, frantz:2005)
 y una nueva tecnología está inundando las revistas y congresos
 científicos. Se trata de la ultrasecuenciación también llamada “Next Generation Sequencing” o “Now Generation
 Sequencing.”</p>
@@ -1067,7 +1092,7 @@ precisión posiciones de variabilidad (variantes).</li>
 <p>Aunque las plataformas incluidas en nuestra categoría de interés
 <em>(cyclic-array sequencing)</em> difieren en su bioquímica, el flujo
 de trabajo es conceptualmente similar (Fig.
-<span class="citation">(<strong>ref?</strong>)</span>(fig:sangevsngs) a). Hay varias aproximaciones para la generación
+<span class="citation">(<a href="#ref-ref" role="doc-biblioref"><strong>ref?</strong></a>)</span>(fig:sangevsngs) a). Hay varias aproximaciones para la generación
 de los clusters de clones <em>(polonies)</em>, pero todas ellas suponen
 que al final los derivados PCR de una única molécula de la
 librería acaben clusterizados en un soporte espacial. Entre ellas
@@ -1075,10 +1100,10 @@ están las <em>in situ polonies</em> (sujeción de localización
 única), <em>bridge</em> PCR (sujeción a sustrato plano) y
 <em>emulsion</em> PCR (sujeción a gotas (<em>beads</em>) de tamaño en
 torno al micrómetro (<span class="math inline">\(10^{-6}\)</span>m) o <em>micron</em>). El proceso de
-secuenciación (véase fig: <span class="citation">(<strong>ref?</strong>)</span>(fig:sangevsngs) b) consiste en general en
+secuenciación (véase fig: <span class="citation">(<a href="#ref-ref" role="doc-biblioref"><strong>ref?</strong></a>)</span>(fig:sangevsngs) b) consiste en general en
 alternar ciclos de irrigación enzimática con adquisición de
 datos basada en procesado de imagen.</p>
-<div class="figure" style="text-align: center"><span id="fig:sangevsngs"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:sangevsngs"></span>
 <img src="epsimages/c10SangerVSngs.eps" alt="Comparación entre la secuenciación Sanger y la ultrasecuenciación"  />
 <p class="caption">
 Figure 2.8: Comparación entre la secuenciación Sanger y la ultrasecuenciación
@@ -1086,6 +1111,36 @@ Figure 2.8: Comparación entre la secuenciación Sanger y la ultrasecuenciación
 </div>
 
 </div>
+</div>
+</div>
+<h3> Referencias</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-Barrier:2005" class="csl-entry">
+Barrier, Alain, Pierre-Yves Boelle, Antoinette Lemoine, Antoine Flahault, Sandrine Dudoit, and Michel Huguier. 2007. <span>“[Gene Expression Profiling in Colon Cancer].”</span> <em>Bull Acad Natl Med</em> 191 (6): 1091-101; discussion 1102-3.
+</div>
+<div id="ref-Callow:2000" class="csl-entry">
+Callow, M. J., S. Dudoit, E. L. Gong, T. P. Speed, and E. M. Rubin. 2000. <span>“<span class="nocase">Microarray Expression Profiling Identifies Genes with Altered Expression in HDL-Deficient Mice</span>.”</span> <em>Genome Research</em>.
+</div>
+<div id="ref-dyrskjot:2002" class="csl-entry">
+Dyrskjøt, L., T. Thykjaer, M. Kruhøffer, J. L. Jensen, N. Marcussen, S. Hamilton-Dutoit, H. Wolf, and T. F. Ørntoft. 2002. <span>“<span class="nocase">Identifying distinct classes of bladder carcinoma using microarrays</span>.”</span> <em>Nature Genetics</em> 33: 90–96.
+</div>
+<div id="ref-Golub:1999" class="csl-entry">
+Golub, T. R., D. K. Slonim, P. Tamayo, C. Huard, M. Gaasenbeek, J. P. Mesirov, H. Coller, et al. 1999. <span>“Molecular Classification of Cancer: <span>C</span>lass Discovery and Class Prediction by Gene Expression Monitoring.”</span> <em>Science</em> 286: 531–37.
+</div>
+<div id="ref-Hedenfalk:2002" class="csl-entry">
+Hedenfalk, I. A., M. Ringnér, J. M. Trent, and A. Borg. 2002. <span>“Gene Expression in Inherited Breast Cancer.”</span> <em>Adv Cancer Res</em> 84: 1–34. <a href="http://view.ncbi.nlm.nih.gov/pubmed/11883525">http://view.ncbi.nlm.nih.gov/pubmed/11883525</a>.
+</div>
+<div id="ref-Kupin:2006" class="csl-entry">
+Kupin, Isabelle Lesur. 2005. <span>“Study of the Transcriptome of the Prematurely Aging <em>Dna-2</em> Yeast Mutant Using a New System Allowing Comparative DNA Microarray Analysis.”</span> PhD thesis, Universite Bordeaux I.
+</div>
+<div id="ref-Lin2006" class="csl-entry">
+Lin, Simon M, Jyothi Devakumar, and Warren A Kibbe. 2006. <span>“Improved Prediction of Treatment Response Using Microarrays and Existing Biological Knowledge.”</span> <em>Pharmacogenomics</em> 7 (3): 495–501. <a href="https://doi.org/10.2217/14622416.7.3.495">https://doi.org/10.2217/14622416.7.3.495</a>.
+</div>
+<div id="ref-Schena:1999" class="csl-entry">
+Schena, M. 1999. <em>Microarray Analysis.</em> J. Wiley &amp; Sons, Hoboken, NJ.
+</div>
+<div id="ref-Wang:2009" class="csl-entry">
+Wang, Zhong, Mark Gerstein, and Michael Snyder. 2009. <span>“<span>RNA-Seq:</span> A Revolutionary Tool for Transcriptomics.”</span> <em>Nat Rev Genet</em> 10 (1): 57–63. <a href="https://doi.org/10.1038/nrg2484">https://doi.org/10.1038/nrg2484</a>.
 </div>
 </div>
             </section>
@@ -1098,7 +1153,6 @@ Figure 2.8: Comparación entre la secuenciación Sanger y la ultrasecuenciación
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -1117,6 +1171,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
@@ -1137,6 +1192,10 @@ gitbook.start({
 "text": null
 },
 "download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "subsection"
 }

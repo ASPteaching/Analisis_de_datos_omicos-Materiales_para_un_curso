@@ -10,11 +10,11 @@
 
 
 
-
+<meta name="github-repo" content="https://github.com/ASPteaching/Analisis_de_datos_omicos-Materiales_para_un_curso" />
 
 <meta name="author" content="Alex Sánchez-Pla^{1,2} y Ricardo Gonzalo Sanz^2" />
 <meta name="author" content="^1 Departament de Genètica, Microbiologia i Estadística. Universitat de Barcelona (UB)." />
-<meta name="author" content="^2 Unitat d’Estadística i Bioinformàtica. Vall d’Hebron Institut de Recerca (VHIR)." />
+<meta name="author" content="^2 Unitat de Estadística i Bioinformàtica. Vall d’Hebron Institut de Recerca (VHIR)." />
 
 
 <script type="text/x-mathjax-config">
@@ -366,7 +366,7 @@ Figure 4.2: Replicas biológicas vs réplicas técnicas
 <p>Sorprendentemente, los primeros experimentos de microarrays utilizaban pocas o ninguna replica biológica. La principal explicación para este hecho, además de la falta de conocimiento estadístico, fue el alto coste de cada microarray.</p>
 <p>En pocos años, la necesidad de las réplicas ha llegado a ser indiscutible, y al mismo tiempo, el coste de los chips ha disminuido considerablemente. Actualmente, es normal la utilización de, al menos, tres a cinco replicas por condición experimental, aunque a este consenso se ha llegado más por razones empíricas que por la disponibilidad de modelos apropiados para el análisis de la potencia y tamaño de la muestra.</p>
 <p>Recientemente, se ha producido una importante afluencia de artículos describiendo métodos para el análisis de la potencia y tamaño de la muestra. A pesar de su variedad, ningún método aparece como candidato claro para ser utilizado en situaciones prácticas. Esto se debe, probablemente, a la complejidad de los datos de microarrays, básicamente por que los genes no son independientes. Por tanto, estas estructuras de correlación existen en los datos, pero la mayor parte de las dependencias son desconocidas por lo que la estimación de estas estructuras es muy complicada.</p>
-<p>Como indicaba Allison <span class="citation">Allison et al. (2006)</span>, aunque no hay consenso sobre que
+<p>Como indicaba Allison <span class="citation"><a href="#ref-Allison:2006a" role="doc-biblioref">Allison et al.</a> (<a href="#ref-Allison:2006a" role="doc-biblioref">2006</a>)</span>, aunque no hay consenso sobre que
 procedimiento es mejor para determinar el tamaño de las muestras, sí que lo hay sobre la conveniencia de realizar el análisis de la potencia, y, por supuesto, sobre el hecho de que un mayor número de replicas generalmente proporcionan una mayor potencia.</p>
 </div>
 <div id="pooling" class="section level4" number="4.4.1.2">
@@ -374,7 +374,7 @@ procedimiento es mejor para determinar el tamaño de las muestras, sí que lo ha
 <p>En el contexto de los microarrays, llamamos “pooling” a la combinación del RNA de diferentes casos en una única muestra.</p>
 <p>Hay dos razones a favor de ello, una, es que, a veces, no hay suficiente ARN disponible y esta es la única forma de conseguir suficiente material para construir los arrays, otra, más controvertida,
 es la creencia que la variabilidad entre arrays puede reducirse por “pooling.”
-La justificación es que combinar muestras equivale a promediar expresiones, y como ya se conoce, el promedio es menos variable que los valores individuales. A pesar de la debilidad de este argumento, es verdad que en ciertas situaciones el <em>pooling</em> puede ser apropiado y, recientemente, muchos estadísticos han dedicado sus esfuerzos para tratar de responder la pregunta “to pool or not to pool” <span class="citation">(Kerr and Churchill 2001)</span>. Por ejemplo, si la variabilidad biológica está altamente relacionada con el error en las medidas, y las muestras biológicas tienen un coste mínimo en comparación con el de los arrays, una apropiada estrategia de “pooling” puede ser claramente eficiente en costes.</p>
+La justificación es que combinar muestras equivale a promediar expresiones, y como ya se conoce, el promedio es menos variable que los valores individuales. A pesar de la debilidad de este argumento, es verdad que en ciertas situaciones el <em>pooling</em> puede ser apropiado y, recientemente, muchos estadísticos han dedicado sus esfuerzos para tratar de responder la pregunta “to pool or not to pool” <span class="citation">(<a href="#ref-Kerr:2001a" role="doc-biblioref">Kerr and Churchill 2001</a>)</span>. Por ejemplo, si la variabilidad biológica está altamente relacionada con el error en las medidas, y las muestras biológicas tienen un coste mínimo en comparación con el de los arrays, una apropiada estrategia de “pooling” puede ser claramente eficiente en costes.</p>
 <p>De todos modos, el “pooling” no se debería usar en cualquier tipo de estudios.
 Si el objetivo es comparar expresiones medias (ver más adelante ” comparación de clases”), puede funcionar adecuadamente, pero se debería claramente evitar cuando el objetivo del experimento es construir predictores que se basen en
 características individuales.</p>
@@ -395,6 +395,15 @@ características individuales.</p>
 <p>Hace referencia a dividir o particionar las unidades experimentales en grupos llamados <em>bloques</em> de modo que las observaciones realizadas en cada bloque se realicen bajo condiciones experimentales lo más parecidas posibles.
 A diferencia de lo que ocurre con los factores tratamiento, el experimentador <em>no está interesado en investigar las posibles diferencias de la respuesta entre los niveles de los factores bloque</em>.</p>
 <p>Bloquear es una buena estrategia siempre y cuando sea posible dividir las unidades experimentales en grupos de unidades similares. La ventaja de bloquear un factor que se supone que tiene una clara influencia en la respuesta, pero en el que no se está interesado, es que convierte la variabilidad sistemática no planificada en variabilidad sistemática planificada.</p>
+</div>
+</div>
+<h3> Referencias</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-Allison:2006a" class="csl-entry">
+Allison, David B, Xiangqin Cui, Grier P Page, and Mahyar Sabripour. 2006. <span>“Microarray Data Analysis: From Disarray to Consolidation and Consensus.”</span> <em>Nat Rev Genet</em> 7 (1): 55–65.
+</div>
+<div id="ref-Kerr:2001a" class="csl-entry">
+Kerr, M K, and G A Churchill. 2001. <span>“Experimental Design for Gene Expression Microarrays.”</span> <em>Biostatistics</em>.
 </div>
 </div>
 <p style="text-align: center;">

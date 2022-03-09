@@ -10,11 +10,11 @@
 
 
 
-
+<meta name="github-repo" content="https://github.com/ASPteaching/Analisis_de_datos_omicos-Materiales_para_un_curso" />
 
 <meta name="author" content="Alex Sánchez-Pla^{1,2} y Ricardo Gonzalo Sanz^2" />
 <meta name="author" content="^1 Departament de Genètica, Microbiologia i Estadística. Universitat de Barcelona (UB)." />
-<meta name="author" content="^2 Unitat d’Estadística i Bioinformàtica. Vall d’Hebron Institut de Recerca (VHIR)." />
+<meta name="author" content="^2 Unitat de Estadística i Bioinformàtica. Vall d’Hebron Institut de Recerca (VHIR)." />
 
 
 <script type="text/x-mathjax-config">
@@ -355,14 +355,14 @@ desea exponer o por su accesibilidad.</p>
 <div id="celltypes" class="section level3" number="3.2.1">
 <h3><span class="header-section-number">3.2.1</span> Estudio de procesos regulados por citoquinas</h3>
 <p></p>
-<p>Este conjunto de datos, que se denominará “celltypes,” corresponde a un estudio realizado por Chelvarajan y sus colegas (<span class="citation">Chelvarajan et al. (2006)</span>) que analizaron el efecto de la estimulación con lipopolisacáridos en la regulación por parte de citoquinas de ciertos procesos biológicos relacionados con la inflamación.</p>
+<p>Este conjunto de datos, que se denominará “celltypes,” corresponde a un estudio realizado por Chelvarajan y sus colegas (<span class="citation"><a href="#ref-Chelvarajan:2006" role="doc-biblioref">Chelvarajan et al.</a> (<a href="#ref-Chelvarajan:2006" role="doc-biblioref">2006</a>)</span>) que analizaron el efecto de la estimulación con lipopolisacáridos en la regulación por parte de citoquinas de ciertos procesos biológicos relacionados con la inflamación.</p>
 <p>Este estudio es del tipo “class comparison” es decir su principal objetivo es la obtención de genes diferencialmente expresados entre dos o más condiciones.</p>
 <p>Los datos se encuentran disponibles en la base de datos pública <code>GEne Expression Omnibus</code> mantenida por el <em>National Institute of Health (NIH)</em>, pero pueden descargarse de la página de materiales del curso para garantizar su disponibilidad.</p>
 </div>
 <div id="golub" class="section level3" number="3.2.2">
 <h3><span class="header-section-number">3.2.2</span> Clasificación molecular de la leucemia</h3>
 <p></p>
-<p>A finales de los años 90, Todd Golub y sus colaboradores (<span class="citation">Golub et al. (1999)</span>) realizaron uno de los estudios más populares hasta el momento con datos de microarrays. En él utilizaron microarrays de oligonucleótidos para 6817 genes humanos para mirar de encontrar una forma de distinguir (clasificar) tumores de pacientes con leucemia linfoblástica aguda (ALL) de aquellos que sufrían de leucemia mieloide aguda (AML).
+<p>A finales de los años 90, Todd Golub y sus colaboradores (<span class="citation"><a href="#ref-Golub:1999" role="doc-biblioref">Golub et al.</a> (<a href="#ref-Golub:1999" role="doc-biblioref">1999</a>)</span>) realizaron uno de los estudios más populares hasta el momento con datos de microarrays. En él utilizaron microarrays de oligonucleótidos para 6817 genes humanos para mirar de encontrar una forma de distinguir (clasificar) tumores de pacientes con leucemia linfoblástica aguda (ALL) de aquellos que sufrían de leucemia mieloide aguda (AML).
 Además se interesaba por la posibilidad de descubrir subgrupos de forma que pudieran definirse variantes de cada una de estas patologías a nivel molecular.</p>
 <p>La diversidad de objetivos del estudio lleva a clasificarlo tanto entre los del tipo de predicción de clase como entre los que buscan descubrir nuievas clases o grupos en los datos.</p>
 <p>Los datos de este estudio se encuentran disponibles en la web del instituto Broad, en donde se llevó a cabo (<a href="http://www.broadinstitute.org">http://www.broadinstitute.org</a>). También se encuentra disponible un paquete de <code>R</code> denominado <code>ALL</code> que permite utilizarlos directamente usando <code>R</code> y Bioconductor.</p>
@@ -370,7 +370,7 @@ Además se interesaba por la posibilidad de descubrir subgrupos de forma que pud
 <div id="estrogen" class="section level3" number="3.2.3">
 <h3><span class="header-section-number">3.2.3</span> Efecto del estrogeno y el tiempo de administración</h3>
 <p></p>
-<p>Scholtens y colegas (<span class="citation">Scholtens et al. (2004)</span>) describen un estudio sobre el efecto de un tratamiento con estrógenos y del tiempo transcurrido desde el tratamiento en la expresión génica en pacientes de cáncer de mama. Los investigadores supusieron que los genes asociados con una respuesta temprana podrían considerarse dianas directas del tratamiento,
+<p>Scholtens y colegas (<span class="citation"><a href="#ref-Scholtens:2004" role="doc-biblioref">Scholtens et al.</a> (<a href="#ref-Scholtens:2004" role="doc-biblioref">2004</a>)</span>) describen un estudio sobre el efecto de un tratamiento con estrógenos y del tiempo transcurrido desde el tratamiento en la expresión génica en pacientes de cáncer de mama. Los investigadores supusieron que los genes asociados con una respuesta temprana podrían considerarse dianas directas del tratamiento,
 mientras que los que tardaron más en hacerlo podrían considerarse objetivos secundarios correspondientes a dianas más alejadas en las
 vías metabólicas.</p>
 <p>Estos datos han sido utilizados multitud de veces en los cursos de análisis de microarrays realizados por el proyecto Bioconductor y se encuentran disponibles en forma de paquete de <code>R</code>, el paquete <code>estrogen</code>. Una cracaterística importante de este paquetes es el hecho de que en vez de los datos procesados proporciona los datos “crudos”en forma de archivos .CEL de Affymetrix. Esto permite una mayor flexibilidad a la hora de reutilizarlos lo que explica su popularidad.</p>
@@ -444,6 +444,18 @@ Los datos de este ejemplo denominado <code>yeast</code> son datos ya normalizado
 </tr>
 </tbody>
 </table>
+</div>
+</div>
+<h3> Referencias</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-Chelvarajan:2006" class="csl-entry">
+Chelvarajan, R. L., Y. Liu, D. Popa, M. L. Getchell, T. V. Getchell, A. J. Stromberg, and S. Bondada. 2006. <span>“<span class="nocase">Molecular basis of age-associated cytokine dysregulation in LPS-stimulated macrophages</span>.”</span> <em>Journal of Leukocyte Biology</em> 79 (6): 1314.
+</div>
+<div id="ref-Golub:1999" class="csl-entry">
+Golub, T. R., D. K. Slonim, P. Tamayo, C. Huard, M. Gaasenbeek, J. P. Mesirov, H. Coller, et al. 1999. <span>“Molecular Classification of Cancer: <span>C</span>lass Discovery and Class Prediction by Gene Expression Monitoring.”</span> <em>Science</em> 286: 531–37.
+</div>
+<div id="ref-Scholtens:2004" class="csl-entry">
+Scholtens, Denise, Alexander Miron, Faisal M. Merchant, Arden Miller, Penelope L. Miron, J. Dirk Iglehart, and Robert Gentleman. 2004. <span>“Analyzing Factorial Designed Microarray Experiments.”</span> <em>J. Multivar. Anal.</em> 90 (1): 19–43. https://doi.org/<a href="http://dx.doi.org/10.1016/j.jmva.2004.02.004">http://dx.doi.org/10.1016/j.jmva.2004.02.004</a>.
 </div>
 </div>
 <p style="text-align: center;">

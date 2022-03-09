@@ -10,11 +10,11 @@
 
 
 
-
+<meta name="github-repo" content="https://github.com/ASPteaching/Analisis_de_datos_omicos-Materiales_para_un_curso" />
 
 <meta name="author" content="Alex Sánchez-Pla^{1,2} y Ricardo Gonzalo Sanz^2" />
 <meta name="author" content="^1 Departament de Genètica, Microbiologia i Estadística. Universitat de Barcelona (UB)." />
-<meta name="author" content="^2 Unitat d’Estadística i Bioinformàtica. Vall d’Hebron Institut de Recerca (VHIR)." />
+<meta name="author" content="^2 Unitat de Estadística i Bioinformàtica. Vall d’Hebron Institut de Recerca (VHIR)." />
 
 
 <script type="text/x-mathjax-config">
@@ -419,7 +419,7 @@ en la imagen y en diferentes tipos de gráficos.</p>
 <p>La normalización discutida en este mismo capítulo es un punto
 clave en el proceso de análisis de microarrays y se ha dedicado un
 gran esfuerzo a desarrollar y probar diferentes métodos
-(<span class="citation">Quackenbush (2002)</span>,<span class="citation">Yang et al. (2002)</span>). Una razón para ello es que
+(<span class="citation"><a href="#ref-Quackenbush:2003" role="doc-biblioref">Quackenbush</a> (<a href="#ref-Quackenbush:2003" role="doc-biblioref">2002</a>)</span>,<span class="citation"><a href="#ref-Yang:2002a" role="doc-biblioref">Yang et al.</a> (<a href="#ref-Yang:2002a" role="doc-biblioref">2002</a>)</span>). Una razón para ello es que
 hay diferentes artefactos técnicos que deben ser corregidos para
 poder ser utilizados, y no cualquier método puede funcionar con
 todos ellos.</p>
@@ -568,7 +568,7 @@ Si un array es problemático la caja correspondiente en el boxplot aparece despl
 <div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="5.2-exploración-y-control-de-calidad.html#cb26-1" aria-hidden="true" tabindex="-1"></a>opt<span class="ot">&lt;-</span> <span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">1</span>))</span>
 <span id="cb26-2"><a href="5.2-exploración-y-control-de-calidad.html#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">RLE</span>(Pset, <span class="at">main =</span> <span class="st">&quot;Relative Log Expression (RLE)&quot;</span>, </span>
 <span id="cb26-3"><a href="5.2-exploración-y-control-de-calidad.html#cb26-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">names=</span><span class="fu">rownames</span>(<span class="fu">pData</span>(allAffyRaw)), <span class="at">las=</span><span class="dv">2</span>, <span class="at">cex.axis=</span><span class="fl">0.6</span>)</span>
-<span id="cb26-4"><a href="5.2-exploración-y-control-de-calidad.html#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="fu">NUSE</span>(Pset, <span class="at">main =</span> <span class="st">&quot;Normalized Unscaled Standard Errors (NUSE)&quot;</span>, <span class="at">las=</span><span class="dv">2</span>, </span>
+<span id="cb26-4"><a href="5.2-exploración-y-control-de-calidad.html#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="fu">NUSE</span>(Pset, <span class="at">main =</span> <span class="st">&quot;Normalized Unscaled Standard Errors (NUSE)&quot;</span>,  </span>
 <span id="cb26-5"><a href="5.2-exploración-y-control-de-calidad.html#cb26-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">names=</span><span class="fu">rownames</span>(<span class="fu">pData</span>(allAffyRaw)), <span class="at">las=</span><span class="dv">2</span>, <span class="at">cex.axis=</span><span class="fl">0.6</span>)</span></code></pre></div>
 <div class="figure">
 <img src="Analisis_de_Datos_de_Microarrays_y_otras_Omicas_files/figure-html/plotPLM%20-1.png" alt="Graficos de diagnóstico calculados a nivel de sondas PLM" width="672" />
@@ -578,6 +578,15 @@ Si un array es problemático la caja correspondiente en el boxplot aparece despl
 </div>
 <div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="5.2-exploración-y-control-de-calidad.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(opt)</span></code></pre></div>
 </div>
+</div>
+</div>
+<h3> Referencias</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-Quackenbush:2003" class="csl-entry">
+Quackenbush, J. 2002. <span>“Microarray Data Normalization and Transformation.”</span> <em>Nature Genet.</em> 32: 496–501.
+</div>
+<div id="ref-Yang:2002a" class="csl-entry">
+Yang, Y. H., M. J. Buckley, S. Dudoit, and T. P. Speed. 2002. <span>“Comparison of Methods for Image Analysis on c<span>DNA</span> Microarray Data.”</span> <em>Journal of Computational and Graphical Statistic</em> 11 (1).
 </div>
 </div>
 <p style="text-align: center;">

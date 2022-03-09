@@ -10,11 +10,11 @@
 
 
 
-
+<meta name="github-repo" content="https://github.com/ASPteaching/Analisis_de_datos_omicos-Materiales_para_un_curso" />
 
 <meta name="author" content="Alex Sánchez-Pla^{1,2} y Ricardo Gonzalo Sanz^2" />
 <meta name="author" content="^1 Departament de Genètica, Microbiologia i Estadística. Universitat de Barcelona (UB)." />
-<meta name="author" content="^2 Unitat d’Estadística i Bioinformàtica. Vall d’Hebron Institut de Recerca (VHIR)." />
+<meta name="author" content="^2 Unitat de Estadística i Bioinformàtica. Vall d’Hebron Institut de Recerca (VHIR)." />
 
 
 <script type="text/x-mathjax-config">
@@ -350,7 +350,7 @@ erroneamente al menos un gen diferencialmente expresado va en aumento,
 y si no se realiza algún tipo de ajuste el número de falsos
 positivos será tanto más alto cuantos más genes estemos
 analizando.</p>
-<p>Hay muchas formas de intentar controlar estas probabilidades de error y puede verse un excelente revisión en Dudoit <span class="citation">Dudoit, Shaffer, and Boldrick (2003)</span>).</p>
+<p>Hay muchas formas de intentar controlar estas probabilidades de error y puede verse un excelente revisión en Dudoit <span class="citation"><a href="#ref-Dudoit:2003" role="doc-biblioref">Dudoit, Shaffer, and Boldrick</a> (<a href="#ref-Dudoit:2003" role="doc-biblioref">2003</a>)</span>).</p>
 <p>De forma simplificada consideramos las dos aproximaciones más utilizadas.</p>
 <p>Una posibilidad es mirar de controlar la probabilidad de obtener
 <em>al menos un falso positivo</em> o “Family-wise-error-rate
@@ -396,17 +396,30 @@ Benjamini &amp; Yekutieli (BY, FDR).</p>
 <pre><code>## [1] &quot;adjp&quot;    &quot;index&quot;   &quot;h0.ABH&quot;  &quot;h0.TSBH&quot;</code></pre>
 <div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="6.4-el-problema-de-la-múltiplicidad-de-tests-multiple-testing.html#cb38-1" aria-hidden="true" tabindex="-1"></a>ranked.adjusted<span class="ot">&lt;-</span><span class="fu">cbind</span>(ranked, adjPvalues<span class="sc">$</span>adjp)</span>
 <span id="cb38-2"><a href="6.4-el-problema-de-la-múltiplicidad-de-tests-multiple-testing.html#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(ranked.adjusted)</span></code></pre></div>
-<pre><code>##              statistic        dm      p.value         rawp   Bonferroni           BH           BY
-## 1449383_at   -48.61014 -2.044928 3.276616e-13 3.276616e-13 3.359842e-09 3.359842e-09 3.296908e-08
-## 1451421_a_at -40.72173 -1.445182 1.909283e-12 1.909283e-12 1.957778e-08 8.255283e-09 8.100651e-08
-## 1415929_at   -39.77036 -0.812879 2.415238e-12 2.415238e-12 2.476585e-08 8.255283e-09 8.100651e-08
-## 1450826_a_at  37.62239  5.147992 4.193941e-12 4.193941e-12 4.300467e-08 1.075117e-08 1.054978e-07
-## 1448303_at   -31.92365 -2.283765 2.140612e-11 2.140612e-11 2.194983e-07 4.389966e-08 4.307737e-07
-## 1418645_at   -28.74611 -4.126867 6.044555e-11 6.044555e-11 6.198087e-07 1.033014e-07 1.013665e-06</code></pre>
+<pre><code>##              statistic        dm      p.value         rawp   Bonferroni
+## 1449383_at   -48.61014 -2.044928 3.276616e-13 3.276616e-13 3.359842e-09
+## 1451421_a_at -40.72173 -1.445182 1.909283e-12 1.909283e-12 1.957778e-08
+## 1415929_at   -39.77036 -0.812879 2.415238e-12 2.415238e-12 2.476585e-08
+## 1450826_a_at  37.62239  5.147992 4.193941e-12 4.193941e-12 4.300467e-08
+## 1448303_at   -31.92365 -2.283765 2.140612e-11 2.140612e-11 2.194983e-07
+## 1418645_at   -28.74611 -4.126867 6.044555e-11 6.044555e-11 6.198087e-07
+##                        BH           BY
+## 1449383_at   3.359842e-09 3.296908e-08
+## 1451421_a_at 8.255283e-09 8.100651e-08
+## 1415929_at   8.255283e-09 8.100651e-08
+## 1450826_a_at 1.075117e-08 1.054978e-07
+## 1448303_at   4.389966e-08 4.307737e-07
+## 1418645_at   1.033014e-07 1.013665e-06</code></pre>
 <p>Si seleccionamos los genes en base a su p–valor ajustado por ejemplo por le método de Banjamini y Yekutieli se obtienen los siguientes genes</p>
 <div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="6.4-el-problema-de-la-múltiplicidad-de-tests-multiple-testing.html#cb40-1" aria-hidden="true" tabindex="-1"></a>selectedAdjusted<span class="ot">&lt;-</span>ranked.adjusted[ranked.adjusted<span class="sc">$</span>BY<span class="sc">&lt;</span><span class="fl">0.001</span>,]</span>
 <span id="cb40-2"><a href="6.4-el-problema-de-la-múltiplicidad-de-tests-multiple-testing.html#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(selectedAdjusted)</span></code></pre></div>
 <pre><code>## [1] 420</code></pre>
+</div>
+<h3> Referencias</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-Dudoit:2003" class="csl-entry">
+Dudoit, S., J. P. Shaffer, and J. C. Boldrick. 2003. <span>“Multiple Hypothesis Testing in Microarray Experiments.”</span> <em>Statistical Science</em> 18: 71–103.
+</div>
 </div>
 <p style="text-align: center;">
 <a href="6.3-significación-estadística-y-expresión-diferencial.html"><button class="btn btn-default">Previous</button></a>

@@ -4,26 +4,26 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Capítulo 8 Después de la selección: Análisis de listas de genes | Analisis de datos omicos</title>
-  <meta name="description" content="Capítulo 8 Después de la selección: Análisis de listas de genes | Analisis de datos omicos" />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <title>Capítulo 8 Después de la selección: Análisis de listas de genes | Analisis de datos ómicos</title>
+  <meta name="description" content="Capítulo 8 Después de la selección: Análisis de listas de genes | Analisis de datos ómicos" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Capítulo 8 Después de la selección: Análisis de listas de genes | Analisis de datos omicos" />
+  <meta property="og:title" content="Capítulo 8 Después de la selección: Análisis de listas de genes | Analisis de datos ómicos" />
   <meta property="og:type" content="book" />
   
   
   
-  
+  <meta name="github-repo" content="https://github.com/ASPteaching/Analisis_de_datos_omicos-Materiales_para_un_curso" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Capítulo 8 Después de la selección: Análisis de listas de genes | Analisis de datos omicos" />
+  <meta name="twitter:title" content="Capítulo 8 Después de la selección: Análisis de listas de genes | Analisis de datos ómicos" />
   
   
   
 
 <meta name="author" content="Alex Sánchez-Pla^{1,2} y Ricardo Gonzalo Sanz^2" />
 <meta name="author" content="^1 Departament de Genètica, Microbiologia i Estadística. Universitat de Barcelona (UB)." />
-<meta name="author" content="^2 Unitat d’Estadística i Bioinformàtica. Vall d’Hebron Institut de Recerca (VHIR)." />
+<meta name="author" content="^2 Unitat de Estadística i Bioinformàtica. Vall d’Hebron Institut de Recerca (VHIR)." />
 
 
 
@@ -32,10 +32,11 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html"/>
+<link rel="prev" href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"/>
 <link rel="next" href="referencias.html"/>
-<script src="libs/header-attrs-2.7/header-attrs.js"></script>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -51,7 +52,8 @@
 
 
 
-
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -117,6 +119,29 @@ code span.st { color: #4070a0; } /* String */
 code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
 </style>
 
 </head>
@@ -249,28 +274,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.5.6" data-path="chapDEG.html"><a href="chapDEG.html#implementación-y-ejemplos"><i class="fa fa-check"></i><b>6.5.6</b> Implementación y ejemplos</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html"><i class="fa fa-check"></i><b>7</b> Caso “Estrógeno”: Selección de genes diferencialmente expresados asociados con la resistencia a estrógenos.</a>
+<li class="chapter" data-level="7" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><i class="fa fa-check"></i><b>7</b> Caso “Estrógeno”: Selección de genes diferencialmente expresados asociados con la resistencia a estrógenos.</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html#introducción-2"><i class="fa fa-check"></i><b>7.1</b> Introducción</a></li>
-<li class="chapter" data-level="7.2" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html#el-estudio-estrógeno"><i class="fa fa-check"></i><b>7.2</b> El estudio “Estrógeno”</a>
+<li class="chapter" data-level="7.1" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#introducción-2"><i class="fa fa-check"></i><b>7.1</b> Introducción</a></li>
+<li class="chapter" data-level="7.2" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#el-estudio-estrógeno"><i class="fa fa-check"></i><b>7.2</b> El estudio “Estrógeno”</a>
 <ul>
-<li class="chapter" data-level="7.2.1" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html#directorios-y-opciones-de-trabajo"><i class="fa fa-check"></i><b>7.2.1</b> Directorios y opciones de trabajo</a></li>
+<li class="chapter" data-level="7.2.1" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#directorios-y-opciones-de-trabajo"><i class="fa fa-check"></i><b>7.2.1</b> Directorios y opciones de trabajo</a></li>
 </ul></li>
-<li class="chapter" data-level="7.3" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html#obtención-y-lectura-de-los-datos"><i class="fa fa-check"></i><b>7.3</b> Obtención y lectura de los datos</a>
+<li class="chapter" data-level="7.3" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#obtención-y-lectura-de-los-datos"><i class="fa fa-check"></i><b>7.3</b> Obtención y lectura de los datos</a>
 <ul>
-<li class="chapter" data-level="7.3.1" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html#los-datos"><i class="fa fa-check"></i><b>7.3.1</b> Los datos</a></li>
-<li class="chapter" data-level="7.3.2" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html#lectura-de-los-datos"><i class="fa fa-check"></i><b>7.3.2</b> Lectura de los datos</a></li>
+<li class="chapter" data-level="7.3.1" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#los-datos"><i class="fa fa-check"></i><b>7.3.1</b> Los datos</a></li>
+<li class="chapter" data-level="7.3.2" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#lectura-de-los-datos"><i class="fa fa-check"></i><b>7.3.2</b> Lectura de los datos</a></li>
 </ul></li>
-<li class="chapter" data-level="7.4" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html#exploración-control-de-calidad-y-normalización"><i class="fa fa-check"></i><b>7.4</b> Exploración, Control de Calidad y Normalización</a>
+<li class="chapter" data-level="7.4" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#exploración-control-de-calidad-y-normalización"><i class="fa fa-check"></i><b>7.4</b> Exploración, Control de Calidad y Normalización</a>
 <ul>
-<li class="chapter" data-level="7.4.1" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html#exploración-y-visualización"><i class="fa fa-check"></i><b>7.4.1</b> Exploración y visualización</a></li>
-<li class="chapter" data-level="7.4.2" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html#control-de-calidad"><i class="fa fa-check"></i><b>7.4.2</b> Control de calidad</a></li>
-<li class="chapter" data-level="7.4.3" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html#normalizacion-y-filtraje"><i class="fa fa-check"></i><b>7.4.3</b> Normalizacion y Filtraje</a></li>
+<li class="chapter" data-level="7.4.1" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#exploración-y-visualización"><i class="fa fa-check"></i><b>7.4.1</b> Exploración y visualización</a></li>
+<li class="chapter" data-level="7.4.2" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#control-de-calidad"><i class="fa fa-check"></i><b>7.4.2</b> Control de calidad</a></li>
+<li class="chapter" data-level="7.4.3" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#normalizacion-y-filtraje"><i class="fa fa-check"></i><b>7.4.3</b> Normalizacion y Filtraje</a></li>
 </ul></li>
-<li class="chapter" data-level="7.5" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html#selección-de-genes-diferencialmente-expresados-1"><i class="fa fa-check"></i><b>7.5</b> Selección de genes diferencialmente expresados</a>
+<li class="chapter" data-level="7.5" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#selección-de-genes-diferencialmente-expresados-1"><i class="fa fa-check"></i><b>7.5</b> Selección de genes diferencialmente expresados</a>
 <ul>
-<li class="chapter" data-level="7.5.1" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html#análisis-basado-en-modelos-lineales"><i class="fa fa-check"></i><b>7.5.1</b> Análisis basado en modelos lineales</a></li>
-<li class="chapter" data-level="7.5.2" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html#comparaciones-múltiples"><i class="fa fa-check"></i><b>7.5.2</b> Comparaciones múltiples</a></li>
+<li class="chapter" data-level="7.5.1" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#análisis-basado-en-modelos-lineales"><i class="fa fa-check"></i><b>7.5.1</b> Análisis basado en modelos lineales</a></li>
+<li class="chapter" data-level="7.5.2" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#comparaciones-múltiples"><i class="fa fa-check"></i><b>7.5.2</b> Comparaciones múltiples</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="después-de-la-selección-análisis-de-listas-de-genes.html"><a href="después-de-la-selección-análisis-de-listas-de-genes.html"><i class="fa fa-check"></i><b>8</b> Después de la selección: Análisis de listas de genes</a>
@@ -298,7 +323,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Analisis de datos omicos</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Analisis de datos ómicos</a>
           </h1>
         </div>
 
@@ -359,7 +384,7 @@ y cada comparación contiene un 1 (si el gen esta sobre-expresado o
 ## Up              77           88   230</code></pre>
 <p>Un diagrama de Venn permite visualizar la tabla anterior sin diferenciar entre genes “up” o “down” regulados.</p>
 <div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vennDiagram</span> (res.selected[,<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>], <span class="at">main=</span><span class="st">&quot;Genes in common #1&quot;</span>, <span class="at">cex=</span><span class="fl">0.9</span>)</span></code></pre></div>
-<div class="figure"><span id="fig:venn01"></span>
+<div class="figure"><span style="display:block;" id="fig:venn01"></span>
 <img src="Analisis_de_Datos_de_Microarrays_y_otras_Omicas_files/figure-html/venn01-1.png" alt="Número de genes seleccionado en cada comparación" width="672" />
 <p class="caption">
 Figure 8.1: Número de genes seleccionado en cada comparación
@@ -391,44 +416,43 @@ Esta tabla debería ser proporcionada por las companñias que producen los array
 ##  [4] &quot;This package has the following mappings:&quot;                    
 ##  [5] &quot;&quot;                                                            
 ##  [6] &quot;mouse4302ACCNUM has 45101 mapped keys (of 45101 keys)&quot;       
-##  [7] &quot;mouse4302ALIAS2PROBE has 71766 mapped keys (of 145969 keys)&quot; 
-##  [8] &quot;mouse4302CHR has 38149 mapped keys (of 45101 keys)&quot;          
+##  [7] &quot;mouse4302ALIAS2PROBE has 81336 mapped keys (of 156785 keys)&quot; 
+##  [8] &quot;mouse4302CHR has 37432 mapped keys (of 45101 keys)&quot;          
 ##  [9] &quot;mouse4302CHRLENGTHS has 66 mapped keys (of 66 keys)&quot;         
-## [10] &quot;mouse4302CHRLOC has 34760 mapped keys (of 45101 keys)&quot;       
-## [11] &quot;mouse4302CHRLOCEND has 34760 mapped keys (of 45101 keys)&quot;    
-## [12] &quot;mouse4302ENSEMBL has 34226 mapped keys (of 45101 keys)&quot;      
-## [13] &quot;mouse4302ENSEMBL2PROBE has 17669 mapped keys (of 27643 keys)&quot;
-## [14] &quot;mouse4302ENTREZID has 38208 mapped keys (of 45101 keys)&quot;     
-## [15] &quot;mouse4302ENZYME has 4518 mapped keys (of 45101 keys)&quot;        
+## [10] &quot;mouse4302CHRLOC has 34742 mapped keys (of 45101 keys)&quot;       
+## [11] &quot;mouse4302CHRLOCEND has 34742 mapped keys (of 45101 keys)&quot;    
+## [12] &quot;mouse4302ENSEMBL has 34432 mapped keys (of 45101 keys)&quot;      
+## [13] &quot;mouse4302ENSEMBL2PROBE has 18067 mapped keys (of 33358 keys)&quot;
+## [14] &quot;mouse4302ENTREZID has 37466 mapped keys (of 45101 keys)&quot;     
+## [15] &quot;mouse4302ENZYME has 4480 mapped keys (of 45101 keys)&quot;        
 ## [16] &quot;mouse4302ENZYME2PROBE has 954 mapped keys (of 971 keys)&quot;     
-## [17] &quot;mouse4302GENENAME has 38208 mapped keys (of 45101 keys)&quot;     
-## [18] &quot;mouse4302GO has 34369 mapped keys (of 45101 keys)&quot;           
-## [19] &quot;mouse4302GO2ALLPROBES has 20474 mapped keys (of 22546 keys)&quot; 
-## [20] &quot;mouse4302GO2PROBE has 16215 mapped keys (of 18068 keys)&quot;     
-## [21] &quot;mouse4302MGI has 38123 mapped keys (of 45101 keys)&quot;          
-## [22] &quot;mouse4302MGI2PROBE has 20656 mapped keys (of 65865 keys)&quot;    
-## [23] &quot;mouse4302PATH has 10770 mapped keys (of 45101 keys)&quot;         
+## [17] &quot;mouse4302GENENAME has 37466 mapped keys (of 45101 keys)&quot;     
+## [18] &quot;mouse4302GO has 34021 mapped keys (of 45101 keys)&quot;           
+## [19] &quot;mouse4302GO2ALLPROBES has 22446 mapped keys (of 22649 keys)&quot; 
+## [20] &quot;mouse4302GO2PROBE has 18283 mapped keys (of 18511 keys)&quot;     
+## [21] &quot;mouse4302MGI has 37455 mapped keys (of 45101 keys)&quot;          
+## [22] &quot;mouse4302MGI2PROBE has 20485 mapped keys (of 70076 keys)&quot;    
+## [23] &quot;mouse4302PATH has 10731 mapped keys (of 45101 keys)&quot;         
 ## [24] &quot;mouse4302PATH2PROBE has 225 mapped keys (of 225 keys)&quot;       
-## [25] &quot;mouse4302PMID has 38010 mapped keys (of 45101 keys)&quot;         
-## [26] &quot;mouse4302PMID2PROBE has 237878 mapped keys (of 312857 keys)&quot; 
-## [27] &quot;mouse4302REFSEQ has 35767 mapped keys (of 45101 keys)&quot;       
-## [28] &quot;mouse4302SYMBOL has 38208 mapped keys (of 45101 keys)&quot;       
-## [29] &quot;mouse4302UNIGENE has 36482 mapped keys (of 45101 keys)&quot;      
-## [30] &quot;mouse4302UNIPROT has 33299 mapped keys (of 45101 keys)&quot;      
+## [25] &quot;mouse4302PMID has 37302 mapped keys (of 45101 keys)&quot;         
+## [26] &quot;mouse4302PMID2PROBE has 327939 mapped keys (of 340004 keys)&quot; 
+## [27] &quot;mouse4302REFSEQ has 35206 mapped keys (of 45101 keys)&quot;       
+## [28] &quot;mouse4302SYMBOL has 37466 mapped keys (of 45101 keys)&quot;       
+## [29] &quot;mouse4302UNIPROT has 33001 mapped keys (of 45101 keys)&quot;      
+## [30] &quot;&quot;                                                            
 ## [31] &quot;&quot;                                                            
-## [32] &quot;&quot;                                                            
-## [33] &quot;Additional Information about this package:&quot;                  
-## [34] &quot;&quot;                                                            
-## [35] &quot;DB schema: MOUSECHIP_DB&quot;                                     
-## [36] &quot;DB schema version: 2.1&quot;                                      
-## [37] &quot;Organism: Mus musculus&quot;                                      
-## [38] &quot;Date for NCBI data: 2015-Sep27&quot;                              
-## [39] &quot;Date for GO data: 20150919&quot;                                  
-## [40] &quot;Date for KEGG data: 2011-Mar15&quot;                              
-## [41] &quot;Date for Golden Path data: 2012-Mar8&quot;                        
-## [42] &quot;Date for Ensembl data: 2015-Jul16&quot;</code></pre>
+## [32] &quot;Additional Information about this package:&quot;                  
+## [33] &quot;&quot;                                                            
+## [34] &quot;DB schema: MOUSECHIP_DB&quot;                                     
+## [35] &quot;DB schema version: 2.1&quot;                                      
+## [36] &quot;Organism: Mus musculus&quot;                                      
+## [37] &quot;Date for NCBI data: 2021-Apr14&quot;                              
+## [38] &quot;Date for GO data: 2021-02-01&quot;                                
+## [39] &quot;Date for KEGG data: 2011-Mar15&quot;                              
+## [40] &quot;Date for Golden Path data: 2021-Feb16&quot;                       
+## [41] &quot;Date for Ensembl data: 2021-Feb16&quot;</code></pre>
 <div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> (<span class="st">&quot;... output continues until &quot;</span>, <span class="fu">length</span>(anotData), <span class="st">&quot; lines.</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
-<pre><code>## ... output continues until  42  lines.</code></pre>
+<pre><code>## ... output continues until  41  lines.</code></pre>
 <p>Si en vez del paquetes del microarray usáramos el paquete de organismo, en este caso del ratón.</p>
 <div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span>(<span class="fu">require</span>(org.Mm.eg.db))){</span>
 <span id="cb92-2"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb92-2" aria-hidden="true" tabindex="-1"></a>        <span class="fu">biocLite</span>(<span class="st">&quot;org.Mm.eg.db&quot;</span>)</span>
@@ -441,18 +465,18 @@ Esta tabla debería ser proporcionada por las companñias que producen los array
 ##  [3] &quot;&quot;                                                          
 ##  [4] &quot;This package has the following mappings:&quot;                  
 ##  [5] &quot;&quot;                                                          
-##  [6] &quot;org.Mm.egACCNUM has 45544 mapped keys (of 72692 keys)&quot;     
-##  [7] &quot;org.Mm.egACCNUM2EG has 590433 mapped keys (of 590433 keys)&quot;
-##  [8] &quot;org.Mm.egALIAS2EG has 145969 mapped keys (of 145969 keys)&quot; 
-##  [9] &quot;org.Mm.egCHR has 71830 mapped keys (of 72692 keys)&quot;        
+##  [6] &quot;org.Mm.egACCNUM has 46208 mapped keys (of 73083 keys)&quot;     
+##  [7] &quot;org.Mm.egACCNUM2EG has 606678 mapped keys (of 606678 keys)&quot;
+##  [8] &quot;org.Mm.egALIAS2EG has 156785 mapped keys (of 156785 keys)&quot; 
+##  [9] &quot;org.Mm.egCHR has 72225 mapped keys (of 73083 keys)&quot;        
 ## [10] &quot;org.Mm.egCHRLENGTHS has 66 mapped keys (of 66 keys)&quot;       
-## [11] &quot;org.Mm.egCHRLOC has 25133 mapped keys (of 72692 keys)&quot;     
-## [12] &quot;org.Mm.egCHRLOCEND has 25133 mapped keys (of 72692 keys)&quot;  
-## [13] &quot;org.Mm.egENSEMBL has 27449 mapped keys (of 72692 keys)&quot;    
-## [14] &quot;org.Mm.egENSEMBL2EG has 27643 mapped keys (of 27643 keys)&quot; 
-## [15] &quot;org.Mm.egENSEMBLPROT has 10294 mapped keys (of 72692 keys)&quot;</code></pre>
+## [11] &quot;org.Mm.egCHRLOC has 26193 mapped keys (of 73083 keys)&quot;     
+## [12] &quot;org.Mm.egCHRLOCEND has 26193 mapped keys (of 73083 keys)&quot;  
+## [13] &quot;org.Mm.egENSEMBL has 33468 mapped keys (of 73083 keys)&quot;    
+## [14] &quot;org.Mm.egENSEMBL2EG has 33358 mapped keys (of 33358 keys)&quot; 
+## [15] &quot;org.Mm.egENSEMBLPROT has 9437 mapped keys (of 73083 keys)&quot;</code></pre>
 <div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> (<span class="st">&quot;... output continues until &quot;</span>, <span class="fu">length</span>(anotData), <span class="st">&quot; lines.</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
-<pre><code>## ... output continues until  49  lines.</code></pre>
+<pre><code>## ... output continues until  48  lines.</code></pre>
 <p>Cada tabla de asociación puede consultarse de diversas formas,</p>
 <ul>
 <li>Con las funciones <tt>get</tt> o <tt>mget</tt>.</li>
@@ -530,7 +554,7 @@ han resultado diferencialmente expresados en alguna de las tres comparaciones.</
 <h2><span class="header-section-number">8.5</span> Análisis de significación biológica</h2>
 <p>En las secciones anteriores se ha visto como encontrar los identificadores de los genes en distintas bases de datos, lo que permite por ejemplo conocer sus nombres comunes (“gene symbol”).</p>
 <p>Otra aproximación razonable es estudiar las funciones de los genes buscando sus anotaciones en bases de datos de <em>anotación funcional</em> como la <em>Gene Ontology</em> (GO), o la <em>Kyoto Encyclopedia of Genes and Genomes</em>.</p>
-<p>Por ejemplo las anotaciones en GO para los cinco primeros genes de la lista analizada en &lt;a href=``<code>{r anchorLoc('anotExample')</code>"&gt;here</a> serian:</p>
+<p>Por ejemplo las anotaciones en GO para los cinco primeros genes de la lista analizada en &lt;a href=``<code>{r anchorLoc('anotExample')</code>“&gt;here</a> serian:</p>
 <div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb112-1" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(annotate)</span>
 <span id="cb112-2"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#cb112-2" aria-hidden="true" tabindex="-1"></a>(top1 <span class="ot">&lt;-</span><span class="fu">rownames</span>(topTab_LPS.in.AGED)[<span class="dv">1</span>])</span></code></pre></div>
 <pre><code>## [1] &quot;1450826_a_at&quot;</code></pre>
@@ -549,19 +573,16 @@ han resultado diferencialmente expresados en alguna de las tres comparaciones.</
 ## 1450826_a_at Saa3 GO:0009617 response to bacterium 
 ## 1450826_a_at Saa3 GO:0035634 response to stilbenoid 
 ## 1450826_a_at Saa3 GO:0060326 cell chemotaxis 
-## 1450826_a_at Saa3 GO:0060326 cell chemotaxis 
 ## 1450826_a_at Saa3 GO:0071347 cellular response to interleuk 
 ## 1450826_a_at Saa3 GO:0005576 extracellular region 
 ## 1450826_a_at Saa3 GO:0005615 extracellular space 
-## 1450826_a_at Saa3 GO:0005615 extracellular space 
 ## 1450826_a_at Saa3 GO:0034364 high-density lipoprotein parti 
 ## 1450826_a_at Saa3 GO:0035662 Toll-like receptor 4 binding 
-## 1450826_a_at Saa3 GO:0042056 chemoattractant activity 
 ## 1450826_a_at Saa3 GO:0042056 chemoattractant activity</code></pre>
 <p>Como se ve en el ejemplo el número de anotaciones para un gen en la Gene Ontology es muy alto, aparte de que, aunque aquí no se muestra, no todas las anotaciones tienen la misma fiabilidad.</p>
 <p>Aparte del problema de lo extenso de las anotaciones está el hecho de que antes de empezar a hacer inferencias sobre el significado de una anotación debería poderse establecer si dicha anotación está relacionada con el proceso que se está estudiando o aparece por azar entre la muchas anotaciones de los genes de la lista.
 Hay diferentes métodos y modelos para hacer esto (ver Draghici y colegas,
-<span class="citation">Khatri and Drăghici (2005)</span> o Mosquera and Sánchez–Pla, <span class="citation">Mosquera and Sánchez-Pla (2005)</span>,Sanchez:2007b) pero aquí se presentará brevemente lo que se conoce por <em>Análisis de enriquecimiento</em>.</p>
+<span class="citation"><a href="#ref-Khatri:2005" role="doc-biblioref">Khatri and Drăghici</a> (<a href="#ref-Khatri:2005" role="doc-biblioref">2005</a>)</span> o Mosquera and Sánchez–Pla, <span class="citation"><a href="#ref-Mosquera:2005" role="doc-biblioref">Mosquera and Sánchez-Pla</a> (<a href="#ref-Mosquera:2005" role="doc-biblioref">2005</a>)</span>,Sanchez:2007b) pero aquí se presentará brevemente lo que se conoce por <em>Análisis de enriquecimiento</em>.</p>
 <div id="análisis-de-enriquecimiento" class="section level3" number="8.5.1">
 <h3><span class="header-section-number">8.5.1</span> Análisis de enriquecimiento <a name="GEA"></a></h3>
 <p>El objetivo del análisis de enriquecimiento es establecer si una
@@ -658,17 +679,25 @@ más/menos representado en cada conjunto seleccionado.</li>
 </div>
 </div>
 </div>
+<h3> Referencias</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-Khatri:2005" class="csl-entry">
+Khatri, P., and S. Drăghici. 2005. <span>“Ontological Analysis of Gene Expression Data: Current Tools, Limitations, and Problems.”</span> <em>Bioinformatics</em> 18: 3587–95.
+</div>
+<div id="ref-Mosquera:2005" class="csl-entry">
+Mosquera, J-L., and A. Sánchez-Pla. 2005. <span>“A Comparative Study of GO Mining Programs.”</span> In <em>X Conferencia Espa<span>ñ</span>ola de Biometr<span>í</span>a</em>. Sociedad Espa<span>ñ</span>ola de Biometr<span>í</span>a.
+</div>
+</div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos-.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="referencias.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -687,6 +716,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
@@ -707,6 +737,10 @@ gitbook.start({
 "text": null
 },
 "download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "subsection"
 }

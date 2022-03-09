@@ -7,15 +7,15 @@ La biología molecular ha estado interesada desde sus comienzos en poder determi
 
 Especial interés ha tenido siempre sobre las otras biomoléculas el estudio de los niveles del ARN transcrito. Hace unos años se
 acuñó el término de _transcriptómica_ para referirse al estudio del ARN en cada una de sus formas.
-La transcriptómica ha contribuído a tener una mejor comprensión de la patogénesis de las enfermedades.
+La transcriptómica ha contribuido a tener una mejor comprensión de la patogénesis de las enfermedades.
 
-En el año 2009 Wang y colaboradores (@Wang:2009) definieron el transcriptoma como _el conjunto completo de tránscritos en una célula y su cantidad en un momento determinado  del desarrollo o en una determinada condición fisiológica_. 
+En el año 2009 Wang y colaboradores (@Wang:2009) definieron el transcriptoma como _el conjunto completo de transcritos en una célula y su cantidad en un momento determinado  del desarrollo o en una determinada condición fisiológica_. 
 Como objetivos de la transcriptómica se han definido tres principales:
 
-1. Catalogar todas las especies de tránscritos, incluyendo ARNm, ARN no codificante y pequeños ARNs.
+1. Catalogar todas las especies de transcritos, incluyendo ARNm, ARN no codificante y pequeños ARNs.
 
 1. Determinar la estructura transcripcional de los genes, en términos de sus puntos 5' de inicio y 3' de finalización,
-las modificaciones post-transcripcionales y los patrones de splicing.
+las modificaciones pos-transcripcionales y los patrones de splicing.
 
 1. Cuantificar los diferentes niveles de expresión de cada tránscrito durante el desarrollo y bajo diferentes condiciones.
 
@@ -29,7 +29,7 @@ sino también en el desarrollo de nuevos métodos de extraer la gran cantidad de
 Una de las técnicas que revolucionó el estudio del transcriptoma fueron los microarrays.
 
 Un _microarray_ es un artefacto para la realización de experimentos que permite estudiar simultáneamente múltiples unidades,
-b que representan los genes, proteínas o metabolitos, sobre un sustrato sólido de cristal,
+que que representan los genes, proteínas o metabolitos, sobre un sustrato sólido de cristal,
 plástico o sílice, y expuestos a la acción de las moléculas diana cuya expresión se desea analizar (ver Figura \@ref(fig:c01microarray).
 
 
@@ -43,7 +43,7 @@ dando a conocer múltiples mapas de expresión génica, encontrar biomarcadores 
 
 Lo que caracteriza a los nuevos métodos utilizados para estudiar el transcriptoma no es lo que pueden medir, sino la cantidad de mediciones
 simultáneas que pueden realizar.  Mientras que hasta hace apenas una década se estudiaban los genes uno a uno en profundidad, a partir del uso de estas nuevas tecnologías se
-pueden estudiar muchísimos genes a la vez, pero en contrapartida con mucho menos detalle y más ruído.
+pueden estudiar muchísimos genes a la vez, pero en contrapartida con mucho menos detalle y más ruido.
 
 Los microarrays, hoy una metodología bien consolidada, han sido cruciales para concebir una nueva manera de estudiar el transcriptoma, especialmente en el campo de la expresión génica. Después de ellos han venido otras técnicas que tienen en común con ellos el "alto rendimiento" es decir la capacidad para medir muchas variables --cientos o miles-- a la vez. Entre estas técnicas podemos destacar los arrays de SNPs, los microRNAs, la metilación y especialmente la secuenciación de nueva generación.
 
@@ -54,8 +54,8 @@ esclerosis múltiple al de los ritmos circadianos de las frutas.
 Entre otros temas los microarrays se han aplicado a:
 
 * Estudio de genes que se expresan diferencialmente entre varias condiciones (sanos vs enfermos, mutantes vs salvajes, tratados vs no tratados) (@Callow:2000, @Hedenfalk:2002, @Kupin:2006).
-* Clasificación mólecular en enfermedades complejas (@Golub:1999, @Barrier:2005).
-* Identificación de genes caracerísticos de una patología (firma o "signature") (@dyrskjot:2002).
+* Clasificación molecular en enfermedades complejas (@Golub:1999, @Barrier:2005).
+* Identificación de genes característicos de una patología (firma o "signature") (@dyrskjot:2002).
 * Predicción de respuesta a un tratamiento (@Lin2006).
 * y una gran variedad de otros temas
 
@@ -67,7 +67,7 @@ En términos generales los microarrays funcionan mediante la hibridación de una
 La hibridación que ha tenido lugar se detecta mediante fluorescencia y se visualiza con la ayuda de un escáner. Los niveles de fluorescencia
 detectados reflejan la cantidad de moléculas diana presentes en la muestra problema.
 
-Existen diferentes tipos de microarrays según la naturaleza del "target" que se está estudiando. Podemos encontrar microarrays de protéinas,
+Existen diferentes tipos de microarrays según la naturaleza del "target" que se está estudiando. Podemos encontrar microarrays de proteínas,
 de tejidos, de ADN o de ARN (también llamados de expresión). En este curso nos centraremos en los microarrays de expresión génica aunque
 al final del capítulo se hace mención de algunos de los otros tipos de microarrays que existen.
 
@@ -106,7 +106,7 @@ representa el nivel de expresión de una muestra respecto a la otra por lo que s
 
 Como su propio nombre indica, en estos arrays las muestras están marcadas únicamente con un marcador fluorescente.
 En cada array solamente se hibrida una muestra, por lo que no se da la hibridación competitiva como pasaba en los arrays de dos colores.
-El valor que se obtiene después de iluminar el array con el láser es una medida numérica que se obtiene directamente del escaner, es decir no está referida al valor de otra muestra por lo que recibe el nombre de expresión _absoluta_.
+El valor que se obtiene después de iluminar el array con el láser es una medida numérica que se obtiene directamente del escáner, es decir no está referida al valor de otra muestra por lo que recibe el nombre de expresión _absoluta_.
 
 
 #### Fabricación de los arrays de oligonucleótidos
@@ -134,7 +134,7 @@ De 11 a 20 "probe pairs" se agrupan para formar un "probe set".
 Diferentes "probe sets" se distribuyen a lo largo del array, y son las que definen a qué gen se unen y las que definen los niveles de
 expresión detectados.
 
-El Mismatch (MM) se creo originalmente para que proporcionara una medida de la unión inespecífica (es decir lo que se hibridara con esta secuencia "parecida" pero distinta a la original se consideraría ruído). Aunque algunos algoritmos originales de Affymetrix todavía lo utilizan, hoy en día ha caído en desuso, muchos algoritmos modernos como RMA --que se explicará más adelnat-- ya no lo utilizan y en las nuevas versiones de los arrays (mudelos "Hugene" por ejemplo) ya no se incluyó.
+El Mismatch (MM) se creo originalmente para que proporcionara una medida de la unión inespecífica (es decir lo que se hibridara con esta secuencia "parecida" pero distinta a la original se consideraría ruído). Aunque algunos algoritmos originales de Affymetrix todavía lo utilizan, hoy en día ha caído en desuso, muchos algoritmos modernos como RMA --que se explicará más adelnate-- ya no lo utilizan y __en las versiones de arrays posteriores a 2005 ya no se incluyen__.
 
 
 ```{r c01affy-PM-MM,  fig.align='center', fig.cap="Estructura de un grupo de sondas (`probe sets`) de un array antiguo de Affymetrix en el que se muestra los distintos términos definidos: `probe-set`, `probe-pair`, `Perfect-Match`, `Mismatch`", echo=FALSE}
@@ -636,7 +636,7 @@ sin renunciar a la precisión del método tradicional.
 Aunque las plataformas incluidas en nuestra categoría de interés
 _(cyclic-array sequencing)_ difieren en su bioquímica, el flujo
 de trabajo es conceptualmente similar (Fig.
- @ref(fig:sangevsngs) a). Hay varias aproximaciones para la generación
+@ref(fig:sangevsngs) a). Hay varias aproximaciones para la generación
 de los clusters de clones _(polonies)_, pero todas ellas suponen
 que al final los derivados PCR de una única molécula de la
 librería acaben clusterizados en un soporte espacial. Entre ellas

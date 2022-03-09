@@ -10,11 +10,11 @@
 
 
 
-
+<meta name="github-repo" content="https://github.com/ASPteaching/Analisis_de_datos_omicos-Materiales_para_un_curso" />
 
 <meta name="author" content="Alex Sánchez-Pla^{1,2} y Ricardo Gonzalo Sanz^2" />
 <meta name="author" content="^1 Departament de Genètica, Microbiologia i Estadística. Universitat de Barcelona (UB)." />
-<meta name="author" content="^2 Unitat d’Estadística i Bioinformàtica. Vall d’Hebron Institut de Recerca (VHIR)." />
+<meta name="author" content="^2 Unitat de Estadística i Bioinformàtica. Vall d’Hebron Institut de Recerca (VHIR)." />
 
 
 <script type="text/x-mathjax-config">
@@ -356,7 +356,7 @@ al final del capítulo se hace mención de algunos de los otros tipos de microar
 </ol>
 <div id="microarrays-de-dos-colores" class="section level3" number="2.3.1">
 <h3><span class="header-section-number">2.3.1</span> Microarrays de dos colores</h3>
-<p>Estos arrays aparecieron a mediados de los años 90 (<span class="citation">Schena (1999)</span>)
+<p>Estos arrays aparecieron a mediados de los años 90 (<span class="citation"><a href="#ref-Schena:1999" role="doc-biblioref">Schena</a> (<a href="#ref-Schena:1999" role="doc-biblioref">1999</a>)</span>)
 y están basados en la <em>hibridación competitiva</em> de dos muestras, cada una de las cuales ha sido marcada con un marcador fluorescente
 diferente (normalmente Cy3 y Cy5, verde y rojo respectivamente).</p>
 <p>En el array se imprimen las sondas (una sonda<span class="math inline">\(\simeq\)</span> un gen) cuyas secuencias se obtienen de información almacenada en bases de datos de secuencias como <tt>GenBank</tt>, <tt>dbEST</tt>, etc.</p>
@@ -389,7 +389,7 @@ Affymetrix sintetiza las sondas directamente sobre el chip mediante un proceso l
 Este proceso consiste en la adición cíclica de los cuatro nucleótidos (adenina, timina, citosina y guanina)
 sobre la superficie rígida, donde existen ancladas unas especies químicas reactivas que se protegen y desprotegen para añadir el
 nucleótido deseado, mediante ciclos de luz y oscuridad. Así se consigue la síntesis de oligonucleótidos de unos 25-mer (“mer”=bases) de longitud.
-En la figura <span class="citation">(<strong>ref?</strong>)</span>(fig:c01affymetryxsynthesis)
+En la figura <span class="citation">(<a href="#ref-ref" role="doc-biblioref"><strong>ref?</strong></a>)</span>(fig:c01affymetryxsynthesis)
 se esquematiza el proceso.</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-1"></span>
 <img src="epsimages/c01affymetryxsynthesis.png" alt="Esquema del proceso de fabricación de arrays de oligonucleótidos" width="310" />
@@ -434,7 +434,7 @@ Figure 2.5: Esquema del funcionamiento de un microarrays de Affymetrix o de un s
 <p>Los microarrays permiten cuantificar la expresión de los genes a través de la
 intensidad de la fluorescencia que es capturada por los escáneres. Las imágenes
 se convierten en valores por un proceso que no es objeto de discusión en este
-curso, pero que puede ser considerado relativamente fiable y estable (véase, por ejemplo <span class="citation">Schena (1999)</span>).</p>
+curso, pero que puede ser considerado relativamente fiable y estable (véase, por ejemplo <span class="citation"><a href="#ref-Schena:1999" role="doc-biblioref">Schena</a> (<a href="#ref-Schena:1999" role="doc-biblioref">1999</a>)</span>).</p>
 <p>Cada tecnología genera diferentes tipos de imágenes y éstas generan diferentes valores que deben ser tratados adecuadamente para proporcionar
 alguna clase de estimaciones de una misma variable: la <em>expresión génica</em>.</p>
 <p>Tal como se ha indicado anteriormente una de las principales diferencias entre arrays de uno y dos colores es que estos últimos se basan en la <em>hibridación competitiva</em> de las dos muestras mientras que los de un color sólo miden cuanta muestra se hibrida con las sondas del chip. En consecuencia en los arrays de dos colores se mide <em>cuánto se expresa un gen en una muestra respecto a la otra</em> lo que tiene un sentido biológico en términos de “sobre–expresión” (por ejemplo, si un gen se expresa dos veces más en una condición que en la otra puede deducirse que está activado o sobre–expresado) o “sub–regulación” (si el gen se expresa la mitad en una condición que en otra puede deucirse que está inhibido o regulado negativamente). En los arrays de un color en cambio tan s’olo se mide <em>cuánto se expresa un gen</em> en una escala que carece de sentido biológico.</p>
@@ -727,6 +727,12 @@ cada condición, en los arrays de dos colores se trabaja con una medida de la ex
 relativa entre dos condiciones. Aunque Affymetrix permite estimaciones más
 precisas, les expresiones relativas tienen una mejor interpretación intuitiva.</p>
 </div>
+</div>
+</div>
+<h3> Referencias</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-Schena:1999" class="csl-entry">
+Schena, M. 1999. <em>Microarray Analysis.</em> J. Wiley &amp; Sons, Hoboken, NJ.
 </div>
 </div>
 <p style="text-align: center;">

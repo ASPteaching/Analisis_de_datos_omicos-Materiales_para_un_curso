@@ -10,11 +10,11 @@
 
 
 
-
+<meta name="github-repo" content="https://github.com/ASPteaching/Analisis_de_datos_omicos-Materiales_para_un_curso" />
 
 <meta name="author" content="Alex Sánchez-Pla^{1,2} y Ricardo Gonzalo Sanz^2" />
 <meta name="author" content="^1 Departament de Genètica, Microbiologia i Estadística. Universitat de Barcelona (UB)." />
-<meta name="author" content="^2 Unitat d’Estadística i Bioinformàtica. Vall d’Hebron Institut de Recerca (VHIR)." />
+<meta name="author" content="^2 Unitat de Estadística i Bioinformàtica. Vall d’Hebron Institut de Recerca (VHIR)." />
 
 
 <script type="text/x-mathjax-config">
@@ -725,39 +725,87 @@ y una fila por gen (mismas filas que archivos “.gpr”).</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="5.1-introducción.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(RG)</span></code></pre></div>
 <pre><code>## An object of class &quot;RGList&quot;
 ## $R
-##      DMSCCl319 DMSCCl320 DMSCCl321 DMSCCl329 CClDMS330 CClDMS331 CClDMS332 DMSCCl333 CClDMS379 CClDMS380 CClDMS381 DMSCCl382 DMSCCl384 DMSCCl389 DMSCCl390 CClDMS391 CClDMS393 CClDMS394
-## [1,]        47        46        40        59        56        40        45        70        46        65        43        59        46        63        77        40        91        32
-## [2,]      1095        46        39        54        56        40        47        69        45        61        43        62        48        68        71        41        85        32
-## [3,]        47        46        41        55        52        39        46        81        44        57        41        58        50        63        70        40        39        32
-## [4,]        46        45        41        56        54        43        47        78        44        60        42        59        48        62        81        41        51        32
-## [5,]        55        53        45        61        71        47        63        91        51        83        56        71        52        69        81        57        95        37
+##      DMSCCl319 DMSCCl320 DMSCCl321 DMSCCl329 CClDMS330 CClDMS331 CClDMS332
+## [1,]        47        46        40        59        56        40        45
+## [2,]      1095        46        39        54        56        40        47
+## [3,]        47        46        41        55        52        39        46
+## [4,]        46        45        41        56        54        43        47
+## [5,]        55        53        45        61        71        47        63
+##      DMSCCl333 CClDMS379 CClDMS380 CClDMS381 DMSCCl382 DMSCCl384 DMSCCl389
+## [1,]        70        46        65        43        59        46        63
+## [2,]        69        45        61        43        62        48        68
+## [3,]        81        44        57        41        58        50        63
+## [4,]        78        44        60        42        59        48        62
+## [5,]        91        51        83        56        71        52        69
+##      DMSCCl390 CClDMS391 CClDMS393 CClDMS394
+## [1,]        77        40        91        32
+## [2,]        71        41        85        32
+## [3,]        70        40        39        32
+## [4,]        81        41        51        32
+## [5,]        81        57        95        37
 ## 44285 more rows ...
 ## 
 ## $G
-##      DMSCCl319 DMSCCl320 DMSCCl321 DMSCCl329 CClDMS330 CClDMS331 CClDMS332 DMSCCl333 CClDMS379 CClDMS380 CClDMS381 DMSCCl382 DMSCCl384 DMSCCl389 DMSCCl390 CClDMS391 CClDMS393 CClDMS394
-## [1,]        77        78        45        45        87        65       128       107        57        90        99        84        56        68        71        74        83        59
-## [2,]      4558        79        44        47        81        66       131       110        54        89        96       168        54        72        71        75        81        60
-## [3,]        79        75        46        47        84        66       122       114        54        84        93        78        55        71        73        78        62        59
-## [4,]        78        82        44        71        86        63       135       113       118        84        97        83        56        75        79        77        70        61
-## [5,]        93        95        92        57        86        66       132       133        59        95        99       102        64        84        99        83        92        63
+##      DMSCCl319 DMSCCl320 DMSCCl321 DMSCCl329 CClDMS330 CClDMS331 CClDMS332
+## [1,]        77        78        45        45        87        65       128
+## [2,]      4558        79        44        47        81        66       131
+## [3,]        79        75        46        47        84        66       122
+## [4,]        78        82        44        71        86        63       135
+## [5,]        93        95        92        57        86        66       132
+##      DMSCCl333 CClDMS379 CClDMS380 CClDMS381 DMSCCl382 DMSCCl384 DMSCCl389
+## [1,]       107        57        90        99        84        56        68
+## [2,]       110        54        89        96       168        54        72
+## [3,]       114        54        84        93        78        55        71
+## [4,]       113       118        84        97        83        56        75
+## [5,]       133        59        95        99       102        64        84
+##      DMSCCl390 CClDMS391 CClDMS393 CClDMS394
+## [1,]        71        74        83        59
+## [2,]        71        75        81        60
+## [3,]        73        78        62        59
+## [4,]        79        77        70        61
+## [5,]        99        83        92        63
 ## 44285 more rows ...
 ## 
 ## $Rb
-##      DMSCCl319 DMSCCl320 DMSCCl321 DMSCCl329 CClDMS330 CClDMS331 CClDMS332 DMSCCl333 CClDMS379 CClDMS380 CClDMS381 DMSCCl382 DMSCCl384 DMSCCl389 DMSCCl390 CClDMS391 CClDMS393 CClDMS394
-## [1,]        41        39        35        47        44        36        40        55        39        49        37        46        42        50        60        36        34        30
-## [2,]        43        39        35        46        44        36        39        55        37        50        37        46        41        52        59        36        35        31
-## [3,]        41        40        35        48        44        35        39        59        39        47        37        46        41        52        55        35        35        30
-## [4,]        40        40        35        49        43        35        39        63        39        48        36        46        41        52        58        36        34        30
-## [5,]        41        40        36        48        44        35        39        60        39        47        37        46        41        52        56        36        35        30
+##      DMSCCl319 DMSCCl320 DMSCCl321 DMSCCl329 CClDMS330 CClDMS331 CClDMS332
+## [1,]        41        39        35        47        44        36        40
+## [2,]        43        39        35        46        44        36        39
+## [3,]        41        40        35        48        44        35        39
+## [4,]        40        40        35        49        43        35        39
+## [5,]        41        40        36        48        44        35        39
+##      DMSCCl333 CClDMS379 CClDMS380 CClDMS381 DMSCCl382 DMSCCl384 DMSCCl389
+## [1,]        55        39        49        37        46        42        50
+## [2,]        55        37        50        37        46        41        52
+## [3,]        59        39        47        37        46        41        52
+## [4,]        63        39        48        36        46        41        52
+## [5,]        60        39        47        37        46        41        52
+##      DMSCCl390 CClDMS391 CClDMS393 CClDMS394
+## [1,]        60        36        34        30
+## [2,]        59        36        35        31
+## [3,]        55        35        35        30
+## [4,]        58        36        34        30
+## [5,]        56        36        35        30
 ## 44285 more rows ...
 ## 
 ## $Gb
-##      DMSCCl319 DMSCCl320 DMSCCl321 DMSCCl329 CClDMS330 CClDMS331 CClDMS332 DMSCCl333 CClDMS379 CClDMS380 CClDMS381 DMSCCl382 DMSCCl384 DMSCCl389 DMSCCl390 CClDMS391 CClDMS393 CClDMS394
-## [1,]        44        44        32        34        40        39        48        47        35        50        50        45        37        38        38        40        37        36
-## [2,]        46        43        32        35        41        38        48        48        35        50        49        45        37        38        38        40        37        36
-## [3,]        43        43        32        35        40        38        49        48        35        51        49        45        37        38        39        40        37        36
-## [4,]        43        43        32        35        41        38        49        49        35        51        49        46        37        37        38        40        37        36
-## [5,]        43        42        32        35        41        38        48        49        35        50        49        45        37        38        39        40        37        36
+##      DMSCCl319 DMSCCl320 DMSCCl321 DMSCCl329 CClDMS330 CClDMS331 CClDMS332
+## [1,]        44        44        32        34        40        39        48
+## [2,]        46        43        32        35        41        38        48
+## [3,]        43        43        32        35        40        38        49
+## [4,]        43        43        32        35        41        38        49
+## [5,]        43        42        32        35        41        38        48
+##      DMSCCl333 CClDMS379 CClDMS380 CClDMS381 DMSCCl382 DMSCCl384 DMSCCl389
+## [1,]        47        35        50        50        45        37        38
+## [2,]        48        35        50        49        45        37        38
+## [3,]        48        35        51        49        45        37        38
+## [4,]        49        35        51        49        46        37        37
+## [5,]        49        35        50        49        45        37        38
+##      DMSCCl390 CClDMS391 CClDMS393 CClDMS394
+## [1,]        38        40        37        36
+## [2,]        38        40        37        36
+## [3,]        39        40        37        36
+## [4,]        38        40        37        36
+## [5,]        39        40        37        36
 ## 44285 more rows ...
 ## 
 ## $targets
