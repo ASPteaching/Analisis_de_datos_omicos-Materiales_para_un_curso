@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="2.6 Extensiones (2): NGS: Next(Now) Generation Sequencing | Analisis de datos ómicos" />
+<meta property="og:type" content="book" />
+
+
+
+
+
+<meta name="author" content="Alex Sánchez-Pla^{1,2} y Ricardo Gonzalo Sanz^2" />
+<meta name="author" content="^1 Departament de Genètica, Microbiologia i Estadística. Universitat de Barcelona (UB)." />
+<meta name="author" content="^2 Unitat d’Estadística i Bioinformàtica. Vall d’Hebron Institut de Recerca (VHIR)." />
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<meta name="description" content="2.6 Extensiones (2): NGS: Next(Now) Generation Sequencing | Analisis de datos ómicos">
+
+<title>2.6 Extensiones (2): NGS: Next(Now) Generation Sequencing | Analisis de datos ómicos</title>
+
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="libs/navigation-1.1/tabsets.js"></script>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+/* show arrow before summary tag as in bootstrap
+TODO: remove if boostrap in updated in html_document (rmarkdown#1485) */
+details > summary {
+  display: list-item;
+  cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container-fluid main-container">
+
+
+<div class="row">
+<div class="col-sm-12">
+<div id="TOC">
+<ul>
+<li><a href="index.html#presentación"><span class="toc-section-number">1</span> Presentación</a>
+<ul>
+<li><a href="1.1-instalación-de-paquetes-de-r-y-código-de-los-capítulos.html#instalación-de-paquetes-de-r-y-código-de-los-capítulos"><span class="toc-section-number">1.1</span> Instalación de paquetes de R y código de los capítulos</a></li>
+</ul></li>
+<li><a href="2-introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#introduccion-a-los-microarrays-y-otras-tecnologías-omicas"><span class="toc-section-number">2</span> Introduccion a los microarrays y otras tecnologías omicas</a>
+<ul>
+<li><a href="2.1-antecedentes-históricos.html#antecedentes-históricos"><span class="toc-section-number">2.1</span> Antecedentes históricos</a></li>
+<li><a href="2.2-los-microarrays.html#los-microarrays"><span class="toc-section-number">2.2</span> Los microarrays</a>
+<ul>
+<li><a href="2.2-los-microarrays.html#aplicaciones-de-los-microarrays"><span class="toc-section-number">2.2.1</span> Aplicaciones de los microarrays</a></li>
+</ul></li>
+<li><a href="2.3-cómo-funcionan-los-microarrays.html#cómo-funcionan-los-microarrays"><span class="toc-section-number">2.3</span> Cómo funcionan los microarrays</a>
+<ul>
+<li><a href="2.3-cómo-funcionan-los-microarrays.html#microarrays-de-dos-colores"><span class="toc-section-number">2.3.1</span> Microarrays de dos colores</a></li>
+<li><a href="2.3-cómo-funcionan-los-microarrays.html#microarrays-de-un-color"><span class="toc-section-number">2.3.2</span> Microarrays de un color</a></li>
+<li><a href="2.3-cómo-funcionan-los-microarrays.html#realización-de-un-experimento-de-microarrays"><span class="toc-section-number">2.3.3</span> Realización de un experimento de microarrays</a></li>
+<li><a href="2.3-cómo-funcionan-los-microarrays.html#como-se-mide-la-expresión"><span class="toc-section-number">2.3.4</span> Como se mide la expresión</a></li>
+</ul></li>
+<li><a href="2.4-bioinformática-de-microarrays.html#bioinformática-de-microarrays"><span class="toc-section-number">2.4</span> Bioinformática de Microarrays<a name="Bioinformática"></a></a>
+<ul>
+<li><a href="2.4-bioinformática-de-microarrays.html#software-para-el-análisis-de-datos-de-microarrays"><span class="toc-section-number">2.4.1</span> Software para el análisis de datos de microarrays</a></li>
+<li><a href="2.4-bioinformática-de-microarrays.html#bases-de-datos-de-microarrays"><span class="toc-section-number">2.4.2</span> Bases de datos de Microarrays</a></li>
+</ul></li>
+<li><a href="2.5-extensiones-1-otros-tipos-de-microarrays.html#extensiones-1-otros-tipos-de-microarrays"><span class="toc-section-number">2.5</span> Extensiones (1): Otros tipos de microarrays<a name="extensions"></a></a>
+<ul>
+<li><a href="2.5-extensiones-1-otros-tipos-de-microarrays.html#otros-microarrays-de-adn"><span class="toc-section-number">2.5.1</span> Otros microarrays de ADN</a></li>
+<li><a href="2.5-extensiones-1-otros-tipos-de-microarrays.html#otros-tipos-de-microarrays-proteínas-o-carbohidratos"><span class="toc-section-number">2.5.2</span> Otros tipos de microarrays: Proteínas o carbohidratos</a></li>
+</ul></li>
+<li><a href="2.6-extensiones-2-ngs-nextnow-generation-sequencing.html#extensiones-2-ngs-nextnow-generation-sequencing"><span class="toc-section-number">2.6</span> Extensiones (2): <em>NGS: Next(Now) Generation Sequencing</em></a>
+<ul>
+<li><a href="2.6-extensiones-2-ngs-nextnow-generation-sequencing.html#visión-global-de-las-tecnologías-de-secuenciación"><span class="toc-section-number">2.6.1</span> Visión global de las tecnologías de secuenciación</a></li>
+<li><a href="2.6-extensiones-2-ngs-nextnow-generation-sequencing.html#de-la-secuenciación-sanger-a-la-ultrasecuenciación"><span class="toc-section-number">2.6.2</span> De la secuenciación Sanger a la ultrasecuenciación</a></li>
+<li><a href="2.6-extensiones-2-ngs-nextnow-generation-sequencing.html#tecnologías-de-ultrasecuenciación"><span class="toc-section-number">2.6.3</span> Tecnologías de ultrasecuenciación</a></li>
+</ul></li>
+</ul></li>
+<li><a href="3-MDAProcess.html#MDAProcess"><span class="toc-section-number">3</span> El proceso de análisis de microarrays</a>
+<ul>
+<li><a href="3.1-tipos-de-estudios.html#tipos-de-estudios"><span class="toc-section-number">3.1</span> Tipos de estudios</a>
+<ul>
+<li><a href="3.1-tipos-de-estudios.html#comparación-de-grupos-o-class-comparison"><span class="toc-section-number">3.1.1</span> Comparación de grupos o “Class comparison”</a></li>
+<li><a href="3.1-tipos-de-estudios.html#predicción-de-clase-o-class-prediction"><span class="toc-section-number">3.1.2</span> Predicción de clase o “Class prediction”</a></li>
+<li><a href="3.1-tipos-de-estudios.html#descubrimiento-de-clases-o-class-discovery"><span class="toc-section-number">3.1.3</span> Descubrimiento de clases o “Class discovery”</a></li>
+<li><a href="3.1-tipos-de-estudios.html#otros-tipos-de-estudios"><span class="toc-section-number">3.1.4</span> Otros tipos de estudios</a></li>
+</ul></li>
+<li><a href="3.2-c4examples.html#c4examples"><span class="toc-section-number">3.2</span> Algunos ejemplos concretos</a>
+<ul>
+<li><a href="3.2-c4examples.html#celltypes"><span class="toc-section-number">3.2.1</span> Estudio de procesos regulados por citoquinas</a></li>
+<li><a href="3.2-c4examples.html#golub"><span class="toc-section-number">3.2.2</span> Clasificación molecular de la leucemia</a></li>
+<li><a href="3.2-c4examples.html#estrogen"><span class="toc-section-number">3.2.3</span> Efecto del estrogeno y el tiempo de administración</a></li>
+<li><a href="3.2-c4examples.html#CCL4"><span class="toc-section-number">3.2.4</span> Efecto del CCL4 en la expresión génica</a></li>
+<li><a href="3.2-c4examples.html#swirl"><span class="toc-section-number">3.2.5</span> Estudio de la mutación “swirl” en el desarrollo del pez cebra</a></li>
+<li><a href="3.2-c4examples.html#yeast"><span class="toc-section-number">3.2.6</span> Análisis de patrones en el ciclo celular</a></li>
+<li><a href="3.2-c4examples.html#recapitulación"><span class="toc-section-number">3.2.7</span> Recapitulación</a></li>
+</ul></li>
+<li><a href="3.3-el-proceso-de-análisis-de-microarrays.html#el-proceso-de-análisis-de-microarrays"><span class="toc-section-number">3.3</span> El proceso de análisis de microarrays</a></li>
+</ul></li>
+<li><a href="4-MDAExpDesign.html#MDAExpDesign"><span class="toc-section-number">4</span> Diseño de experimentos de microarrays</a>
+<ul>
+<li><a href="4.1-fuentes-de-variabilidad.html#fuentes-de-variabilidad"><span class="toc-section-number">4.1</span> Fuentes de variabilidad</a></li>
+<li><a href="4.2-tipos-de-variabilidad.html#tipos-de-variabilidad"><span class="toc-section-number">4.2</span> Tipos de variabilidad</a></li>
+<li><a href="4.3-conceptos-básicos-de-diseño-de-experimentos.html#conceptos-básicos-de-diseño-de-experimentos"><span class="toc-section-number">4.3</span> Conceptos básicos de diseño de Experimentos</a></li>
+<li><a href="4.4-principios-de-diseño-de-experimentos.html#principios-de-diseño-de-experimentos"><span class="toc-section-number">4.4</span> Principios de diseño de experimentos</a>
+<ul>
+<li><a href="4.4-principios-de-diseño-de-experimentos.html#replicación"><span class="toc-section-number">4.4.1</span> Replicación</a></li>
+<li><a href="4.4-principios-de-diseño-de-experimentos.html#aleatorización"><span class="toc-section-number">4.4.2</span> Aleatorización</a></li>
+<li><a href="4.4-principios-de-diseño-de-experimentos.html#bloqueo-o-control-local"><span class="toc-section-number">4.4.3</span> Bloqueo o control local</a></li>
+</ul></li>
+<li><a href="4.5-diseños-experimentales-para-microarrays-de-dos-colores.html#diseños-experimentales-para-microarrays-de-dos-colores"><span class="toc-section-number">4.5</span> Diseños experimentales para microarrays de dos colores</a></li>
+</ul></li>
+<li><a href="5-exploración-de-los-datos-control-de-calidad-y-preprocesado.html#exploración-de-los-datos-control-de-calidad-y-preprocesado"><span class="toc-section-number">5</span> Exploración de los datos, control de calidad y preprocesado</a>
+<ul>
+<li><a href="5.1-introducción.html#introducción"><span class="toc-section-number">5.1</span> Introducción</a>
+<ul>
+<li><a href="5.1-introducción.html#nivel-de-análisis-y-tipo-de-microarray"><span class="toc-section-number">5.1.1</span> Nivel de análisis y tipo de microarray</a></li>
+<li><a href="5.1-introducción.html#datos-de-partida"><span class="toc-section-number">5.1.2</span> Datos de partida</a></li>
+</ul></li>
+<li><a href="5.2-exploración-y-control-de-calidad.html#exploración-y-control-de-calidad"><span class="toc-section-number">5.2</span> Exploración y control de calidad</a>
+<ul>
+<li><a href="5.2-exploración-y-control-de-calidad.html#control-de-calidad-con-gráficos-estadísticos-generales"><span class="toc-section-number">5.2.1</span> Control de calidad con gráficos estadísticos generales</a></li>
+<li><a href="5.2-exploración-y-control-de-calidad.html#gráficos-de-diagnóstico-para-microarrays-de-dos-colores"><span class="toc-section-number">5.2.2</span> Gráficos de diagnóstico para microarrays de dos colores</a></li>
+<li><a href="5.2-exploración-y-control-de-calidad.html#gráficos-de-diagnóstico-para-microarrays-de-un-color"><span class="toc-section-number">5.2.3</span> Gráficos de diagnóstico para microarrays de un color</a></li>
+</ul></li>
+<li><a href="5.3-normalización-de-arrays-de-dos-colores.html#normalización-de-arrays-de-dos-colores"><span class="toc-section-number">5.3</span> Normalización de arrays de dos colores</a>
+<ul>
+<li><a href="5.3-normalización-de-arrays-de-dos-colores.html#normalización-global"><span class="toc-section-number">5.3.1</span> Normalización global</a></li>
+<li><a href="5.3-normalización-de-arrays-de-dos-colores.html#normalización-dependiente-de-la-intensidad"><span class="toc-section-number">5.3.2</span> Normalización dependiente de la intensidad</a></li>
+</ul></li>
+<li><a href="5.4-resumen-y-normalización-de-microarrays-de-affymetrix.html#resumen-y-normalización-de-microarrays-de-affymetrix"><span class="toc-section-number">5.4</span> Resumen y normalización de microarrays de Affymetrix</a>
+<ul>
+<li><a href="5.4-resumen-y-normalización-de-microarrays-de-affymetrix.html#el-método-rma-robust-multi-array-average"><span class="toc-section-number">5.4.1</span> El método RMA (Robust Multi-Array Average)</a></li>
+</ul></li>
+<li><a href="5.5-filtraje-no-específico.html#filtraje-no-específico"><span class="toc-section-number">5.5</span> Filtraje no específico</a></li>
+</ul></li>
+<li><a href="6-chapDEG.html#chapDEG"><span class="toc-section-number">6</span> Selección de genes diferencialmente expresados</a>
+<ul>
+<li><a href="6.1-introducción-1.html#introducción-1"><span class="toc-section-number">6.1</span> Introducción</a></li>
+<li><a href="6.2-selección-de-genes-diferencialmente-expresados.html#selección-de-genes-diferencialmente-expresados"><span class="toc-section-number">6.2</span> Selección de genes diferencialmente expresados</a>
+<ul>
+<li><a href="6.2-selección-de-genes-diferencialmente-expresados.html#medidas-naturales-para-comparar-dos-muestras"><span class="toc-section-number">6.2.1</span> Medidas <em>naturales</em> para comparar dos muestras</a></li>
+<li><a href="6.2-selección-de-genes-diferencialmente-expresados.html#un-primer-ejemplo"><span class="toc-section-number">6.2.2</span> Un primer ejemplo</a></li>
+<li><a href="6.2-selección-de-genes-diferencialmente-expresados.html#selección-de-genes-usando-tests-estadísticos"><span class="toc-section-number">6.2.3</span> Selección de genes usando tests estadísticos</a></li>
+</ul></li>
+<li><a href="6.3-significación-estadística-y-expresión-diferencial.html#significación-estadística-y-expresión-diferencial"><span class="toc-section-number">6.3</span> Significación estadística y expresión diferencial</a>
+<ul>
+<li><a href="6.3-significación-estadística-y-expresión-diferencial.html#volcano-plots"><span class="toc-section-number">6.3.1</span> “Volcano plots”</a></li>
+<li><a href="6.3-significación-estadística-y-expresión-diferencial.html#potencia-y-tamaño-muestral"><span class="toc-section-number">6.3.2</span> Potencia y tamaño muestral</a></li>
+</ul></li>
+<li><a href="6.4-el-problema-de-la-múltiplicidad-de-tests-multiple-testing.html#el-problema-de-la-múltiplicidad-de-tests-multiple-testing"><span class="toc-section-number">6.4</span> El problema de la múltiplicidad de tests (“multiple testing”)</a></li>
+<li><a href="6.5-modelos-lineales-para-la-selección-de-genes-limma.html#modelos-lineales-para-la-selección-de-genes-limma"><span class="toc-section-number">6.5</span> Modelos lineales para la selección de genes: <tt>limma </tt></a>
+<ul>
+<li><a href="6.5-modelos-lineales-para-la-selección-de-genes-limma.html#el-modelo-lineal-general"><span class="toc-section-number">6.5.1</span> El modelo lineal general</a></li>
+<li><a href="6.5-modelos-lineales-para-la-selección-de-genes-limma.html#ejemplos-de-situaciones-modelizables-linealmente"><span class="toc-section-number">6.5.2</span> Ejemplos de situaciones <em>modelizables linealmente</em></a></li>
+<li><a href="6.5-modelos-lineales-para-la-selección-de-genes-limma.html#ejemplo-2-comparación-de-tres-grupos"><span class="toc-section-number">6.5.3</span> Ejemplo 2: Comparación de tres grupos</a></li>
+<li><a href="6.5-modelos-lineales-para-la-selección-de-genes-limma.html#estimación-e-inferencia-con-el-modelo-lineal"><span class="toc-section-number">6.5.4</span> Estimación e inferencia con el modelo lineal</a></li>
+<li><a href="6.5-modelos-lineales-para-la-selección-de-genes-limma.html#modelos-lineales-para-microarrays"><span class="toc-section-number">6.5.5</span> Modelos lineales para Microarrays</a></li>
+<li><a href="6.5-modelos-lineales-para-la-selección-de-genes-limma.html#implementación-y-ejemplos"><span class="toc-section-number">6.5.6</span> Implementación y ejemplos</a></li>
+</ul></li>
+</ul></li>
+<li><a href="7-caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos."><span class="toc-section-number">7</span> Caso “Estrógeno”: Selección de genes diferencialmente expresados asociados con la resistencia a estrógenos.</a>
+<ul>
+<li><a href="7.1-introducción-2.html#introducción-2"><span class="toc-section-number">7.1</span> Introducción</a></li>
+<li><a href="7.2-el-estudio-estrógeno.html#el-estudio-estrógeno"><span class="toc-section-number">7.2</span> El estudio “Estrógeno”</a>
+<ul>
+<li><a href="7.2-el-estudio-estrógeno.html#directorios-y-opciones-de-trabajo"><span class="toc-section-number">7.2.1</span> Directorios y opciones de trabajo</a></li>
+</ul></li>
+<li><a href="7.3-obtención-y-lectura-de-los-datos.html#obtención-y-lectura-de-los-datos"><span class="toc-section-number">7.3</span> Obtención y lectura de los datos</a>
+<ul>
+<li><a href="7.3-obtención-y-lectura-de-los-datos.html#los-datos"><span class="toc-section-number">7.3.1</span> Los datos</a></li>
+<li><a href="7.3-obtención-y-lectura-de-los-datos.html#lectura-de-los-datos"><span class="toc-section-number">7.3.2</span> Lectura de los datos</a></li>
+</ul></li>
+<li><a href="7.4-exploración-control-de-calidad-y-normalización.html#exploración-control-de-calidad-y-normalización"><span class="toc-section-number">7.4</span> Exploración, Control de Calidad y Normalización</a>
+<ul>
+<li><a href="7.4-exploración-control-de-calidad-y-normalización.html#exploración-y-visualización"><span class="toc-section-number">7.4.1</span> Exploración y visualización</a></li>
+<li><a href="7.4-exploración-control-de-calidad-y-normalización.html#control-de-calidad"><span class="toc-section-number">7.4.2</span> Control de calidad</a></li>
+<li><a href="7.4-exploración-control-de-calidad-y-normalización.html#normalizacion-y-filtraje"><span class="toc-section-number">7.4.3</span> Normalizacion y Filtraje</a></li>
+</ul></li>
+<li><a href="7.5-selección-de-genes-diferencialmente-expresados-1.html#selección-de-genes-diferencialmente-expresados-1"><span class="toc-section-number">7.5</span> Selección de genes diferencialmente expresados</a>
+<ul>
+<li><a href="7.5-selección-de-genes-diferencialmente-expresados-1.html#análisis-basado-en-modelos-lineales"><span class="toc-section-number">7.5.1</span> Análisis basado en modelos lineales</a></li>
+<li><a href="7.5-selección-de-genes-diferencialmente-expresados-1.html#comparaciones-múltiples"><span class="toc-section-number">7.5.2</span> Comparaciones múltiples</a></li>
+</ul></li>
+</ul></li>
+<li><a href="8-después-de-la-selección-análisis-de-listas-de-genes.html#después-de-la-selección-análisis-de-listas-de-genes"><span class="toc-section-number">8</span> Después de la selección: Análisis de listas de genes</a>
+<ul>
+<li><a href="8.1-introducción-3.html#introducción-3"><span class="toc-section-number">8.1</span> Introducción</a></li>
+<li><a href="8.2-análisis-comparativo-de-listas-de-genes.html#análisis-comparativo-de-listas-de-genes"><span class="toc-section-number">8.2</span> Análisis comparativo de listas de genes</a>
+<ul>
+<li><a href="8.2-análisis-comparativo-de-listas-de-genes.html#ejemplo-comparación-de-listas-en-el-caso-celltypes"><span class="toc-section-number">8.2.1</span> Ejemplo: comparación de listas en el caso <tt>celltypes</tt></a></li>
+</ul></li>
+<li><a href="8.3-anotación-de-los-resultados.html#anotación-de-los-resultados"><span class="toc-section-number">8.3</span> Anotación de los resultados</a></li>
+<li><a href="8.4-visualización-de-los-perfiles-de-expresión.html#visualización-de-los-perfiles-de-expresión"><span class="toc-section-number">8.4</span> Visualización de los perfiles de expresión</a></li>
+<li><a href="8.5-análisis-de-significación-biológica.html#análisis-de-significación-biológica"><span class="toc-section-number">8.5</span> Análisis de significación biológica</a>
+<ul>
+<li><a href="8.5-análisis-de-significación-biológica.html#análisis-de-enriquecimiento"><span class="toc-section-number">8.5.1</span> Análisis de enriquecimiento <a name="GEA"></a></a></li>
+<li><a href="8.5-análisis-de-significación-biológica.html#análisis-de-enriquecimiento-con-bioconductor"><span class="toc-section-number">8.5.2</span> Análisis de enriquecimiento con Bioconductor</a></li>
+</ul></li>
+</ul></li>
+<li><a href="9-referencias.html#referencias"><span class="toc-section-number">9</span> Referencias</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12">
+<div id="extensiones-2-ngs-nextnow-generation-sequencing" class="section level2" number="2.6">
+<h2><span class="header-section-number">2.6</span> Extensiones (2): <em>NGS: Next(Now) Generation Sequencing</em></h2>
+<p>A finales de la primera década del siglo XXI parece ser que la revolución de los microarrays está llegando a su fin (<span class="citation">(<strong>ledford:2008?</strong>)</span>, frantz:2005)
+y una nueva tecnología está inundando las revistas y congresos
+científicos. Se trata de la ultrasecuenciación también llamada “Next Generation Sequencing” o “Now Generation
+Sequencing.”</p>
+<p>Básicamente la ultrasecuenciación permite hacer lo mismo que la secuenciación tradicional o “Sanger,”
+es decir obtener la secuencia de una cadena de ADN o ARN que se ha preparado previamente para ello mediante creación de
+un cierto número de copias o “librerías.” La diferencia, una vez más, está en la cantidad de secuencias que es
+posible obtener. Mientras que la secuenciación tradicional suele poder producir XXX pares de bases por día la capacidad
+de los nuevos métodos es órdenes de magnitud superior lo que significa el acceso rápido y económico a la capacidad de
+secuenciar genomas de eucariotas en un tiempo breve -semanas o días en 2012- a un coste ínfimo de secuenciar.</p>
+<p>Este gran incremento en la capacidad de producir secuencias ha representado, de nuevo, un cambio de paradigma en la
+resolución de muchos problemas científicos. Hoy es posible considerar una aproximación directa al estudio de múltiples
+problemas (“Si quieres saber como va secuéncialo”) y la secuenciación se aplica a un gran número de campos desde la
+metagenómica que estudia a nivel genómico la diversidad de los ecosistemas bacterianos como lagos o intestinos, al
+análisis de variantes estructurales en exomas o genomas -y su posible asociación con enfermedades herediatarias como el
+autismo o el cáncer de mama. Una variante de la secuenciación de ADN ha sido el RNA-seq que, secuenciando ADN
+complementario permite abordar un estudio mucho más fino de la expresión génica de la que se pueda hacer con
+microarrays, dado que permite cuantificar directamente el producto de la expresión -podemos secuenciar el ARN y contar
+los transcritos para saber cuanta expresión se ha dado- a la vez que es posible obtener información acerca de
+secuencias no identificadas previamente -por lo que no se habían podido poner en los microarrays.</p>
+<p>En esta sección se presenta una visión general de la ultrasecuenciación, las tecnologías que funcionan en 2011, los
+problemas bioinformáticos y computacionales que aparecen y como se resuelven y algunos de los problemas que pueden
+abordarse con estas técnicas con un sesgo hacia los aspectos bioinformáticos y de análisis de datos que no dejan de ser
+el objeto de este curso.</p>
+<div id="visión-global-de-las-tecnologías-de-secuenciación" class="section level3" number="2.6.1">
+<h3><span class="header-section-number">2.6.1</span> Visión global de las tecnologías de secuenciación</h3>
+<p>El ADN no puede ser secuenciado de golpe, ha de ser fragmentado suficientemente, secuenciado a trozos y finalmente
+reensamblado. La característica básica presente, tanto en el paradigma tradicional (Sanger) como en
+ultrasecuenciación es que, previa fragmentación de ADN a secuenciar, cada fragmento deberá ser
+amplificado o clonado. Debido a este paso previo de fragmentación y amplificación se puede acuñar a las
+tecnologías de secuenciación en general con el término <em>shotgun sequencing</em> o <em>shotgun cloning</em>.
+En cierto modo mayor amplificación implica mayor precisión de lectura. Dado un fragmento concreto a
+secuenciar y un cliclo de proceso, se intervendrá químicamente en su colonia o grupo de cadenas clones
+asociada <em>(polony)</em> de una manera particular dependiendo de la tecnología concreta.
+La primera diferencia entre la tecnología convencional (Sanger) y las NGS es qe la primera necesita que el
+resultado de la intervención sea diferente para cada cadena de la <em>polony</em>, mientras que las segundas
+todo lo contrario. Al final de este capítulo entenderemos que la precisión del resultado depende de la
+eficiencia conseguida en uno u otro sentido.</p>
+<p>Desde principios de los 90, la producción de secuenciación de ADN ha sido llevada a cabo casi exclusivamente
+mediante implantaciones automáticas, y con escasa capacidad de procesamiento paralelo, de la bioquímica de Sanger. [4, 5].</p>
+</div>
+<div id="de-la-secuenciación-sanger-a-la-ultrasecuenciación" class="section level3" number="2.6.2">
+<h3><span class="header-section-number">2.6.2</span> De la secuenciación Sanger a la ultrasecuenciación</h3>
+<p>El método Sanger evolucionó desde su versión más artesanal
+hasta su versión automatizada actual. La clave principal del
+método de Sanger artesanal fue el uso de didesoxinucletidos
+trifosfato (ddNTPs) como terminadores de cadena, motivo por el cual
+también se hace referencia a éste con el término . Para la lectura de un solo fragmento, deben
+realizarse por separado, cuatro mezclas de reacción. Cada mezcla de
+reacción contiene los cuatro nucleótidos trifosfato (dATP, dCTP,
+dTTP . dGTP), ADN polimerasa I, un cebador o <em>primer</em> marcado
+radiactivamente (permite el acoplamiento de la polimerasa e inicio de
+la reacción en ese punto) y un nucleótido didesoxi ddNTP (A,C,G, o
+T), a una concentración baja. El nucleótido didesoxi utilizado
+competirá con su homólogo por incorporarse a los clones del
+fragmento dado, produciendo la terminación de la síntesis en el
+momento y lugar donde se incorpora, ya que al carecer de grupo 3’-OH
+no es posible el enlace fosfodiester con el siguiente nucleótido.
+Por este sistema, en cada mezcla de reacción se producen una serie
+de moléculas de ADN de nueva síntesis de diferente longitud que
+terminan todas en el mismo tipo de nucleótido y marcadas todas
+radiactivamente por el extremo 5’ (todas contienen en el extremo 5’ el
+<em>primer</em> utilizado).</p>
+<p>Las secuecnias de ADN de nueva síntesis obtenidos en cada mezcla de
+reacción se separan por tamaños mediante electrofresis en geles
+verticales de acrilamida muy finos (0.5 mm de espesor) y de gran
+longitud (cerca de 50 cm) que permiten distinguir secuencias de ADN
+que se diferencian en un solo nucleótido. Los productos de cada una
+de las cuatro mezclas de reacción se insertan en cuatro carriles
+diferentes del gel.</p>
+<p>Una vez terminada la electrofresis, el gel se pone en contacto con una
+película fotográfica de autorradiografía. La aparición de una
+banda en una posición concreta de la autorradiografía en uno de
+los cuatro carriles nos indica que en ese punto de la secuencia del
+ADN de nueva síntesis (complementario al ADN molde) está la base
+correspondiente al nucleótido didesoxi utilizado en la mezcla de
+reacción correspondiente.</p>
+<p>Teniendo en cuenta que el ADN de nueva síntesis crece en la
+dirección 5’ -3’, si comenzamos a leer el gen por las secuencias de
+menos tamaño (extremo 5’) y avanzamos aumentando el tamaño de las
+secuencias (hacia 3’), obtendremos la secuencia completa del ADN de
+nueva síntesis en la dirección 5’ -3’ del fragmento dado.</p>
+<p>La principal diferencia entre el método enzimático de
+terminación de cadena y el método automático de secuenciación
+radica, en primer lugar, en el tipo de marcaje. En el método
+automático en vez de radiactividad se utiliza fluorescencia y lo
+habitual es realizar cuatro mezclas de reacción, cada una con
+nucleótido trifosfato (dTTP) marcado con un fluorocromo
+distinto. Este sistema permite automatizar el proceso de manera que es
+posible leer al mismo tiempo los ADNs de nueva síntesis producto de
+las cuatro mezclas de reacción.</p>
+<p>Después de tres décadas de perfeccionamiento gradual, la bioquímica Sanger puede ser aplicada actualmente
+para alcanzar longitudes de lectura de hasta 1000 pares de bases (“bp”) y precisiones crudas por base de hasta un 99.999% aunque
+con un coste de 0.5 $ por kilobase.</p>
+</div>
+<div id="tecnologías-de-ultrasecuenciación" class="section level3" number="2.6.3">
+<h3><span class="header-section-number">2.6.3</span> Tecnologías de ultrasecuenciación</h3>
+<p>Las distintas estrategias NGS pueden ser agrupadas dentro de varias
+categorías. Nosotros centramos nuestro interés en el desarrollo
+posterior únicamente en la categoría . El resto de categorías corresponden a tecnologías
+en desarrollo y quedarán muy brevemente introducidas en la siguiente
+lista:</p>
+<ul>
+<li><em>Microchip-based electrophoretic sequencing</em>: se trata de un intento de incremento de automatización
+y paralelismo de los métodos tradicionales; todavía en desarrollo, idealmente, se pretende integrar todos los
+aspectos del procesado de muestras, lo que reduciría sustancialmente el tiempo de proceso y el consumo de reactivos
+sin renunciar a la precisión del método tradicional.</li>
+<li><em>Real-time observation of single molecules</em>: una de las
+aproximaciones en este sentido viene de la mano de Pacific
+Biosciences; debido a la restricción de las reacciones de
+iluminación acopladas a la actividad de la polimerasa a un volumen
+del orden del zeptolitro (<span class="math inline">\(10^{-21}\)</span>L), están consiguiendo que la
+incorporación de los nucleótidos pueda ser observada con muy
+bajo ruido; incluye un potencial de longitud de lectura mayor que el
+de Sanger con una capacidad enorme de paralelismo.</li>
+<li><em>Sequencing by hybridization</em> : el concepto básico de
+esta aproximación es que las diferencias de hibridación de
+ciertos fragmentos de ADN etiquetados contra un array de sondas de
+oligonucleótidos pueden ser usadas para identificar con
+precisión posiciones de variabilidad (variantes).</li>
+<li><em>Cyclic-array sequencing</em>:
+<ul>
+<li>secuenciación 454 (usada en los 454 Genome Sequencers, Roche Applied Science; Basel).</li>
+<li>tecnología Solexa (usada en el Illuminia (San Diego) Genome Analyzer).</li>
+<li>la plataforma SOLiD (Applied Biosystems; Foster City, CA, USA).</li>
+<li>Polonator (Dover/Harvard).</li>
+<li>tecnología HeliScope Single Molecule Sequencer (Helicos; Cambridge, MA, USA).
+}</li>
+</ul></li>
+</ul>
+<p>Aunque las plataformas incluidas en nuestra categoría de interés
+<em>(cyclic-array sequencing)</em> difieren en su bioquímica, el flujo
+de trabajo es conceptualmente similar (Fig.
+<span class="citation">(<strong>ref?</strong>)</span>(fig:sangevsngs) a). Hay varias aproximaciones para la generación
+de los clusters de clones <em>(polonies)</em>, pero todas ellas suponen
+que al final los derivados PCR de una única molécula de la
+librería acaben clusterizados en un soporte espacial. Entre ellas
+están las <em>in situ polonies</em> (sujeción de localización
+única), <em>bridge</em> PCR (sujeción a sustrato plano) y
+<em>emulsion</em> PCR (sujeción a gotas (<em>beads</em>) de tamaño en
+torno al micrómetro (<span class="math inline">\(10^{-6}\)</span>m) o <em>micron</em>). El proceso de
+secuenciación (véase fig: <span class="citation">(<strong>ref?</strong>)</span>(fig:sangevsngs) b) consiste en general en
+alternar ciclos de irrigación enzimática con adquisición de
+datos basada en procesado de imagen.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:sangevsngs"></span>
+<img src="epsimages/c10SangerVSngs.eps" alt="Comparación entre la secuenciación Sanger y la ultrasecuenciación"  />
+<p class="caption">
+Figure 2.8: Comparación entre la secuenciación Sanger y la ultrasecuenciación
+</p>
+</div>
+
+</div>
+</div>
+<!-- </div> -->
+<p style="text-align: center;">
+<a href="2.5-extensiones-1-otros-tipos-de-microarrays.html"><button class="btn btn-default">Previous</button></a>
+<a href="3-MDAProcess.html"><button class="btn btn-default">Next</button></a>
+</p>
+</div>
+</div>
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+$(document).ready(function () {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+});
+
+</script>
+
+</body>
+</html>
