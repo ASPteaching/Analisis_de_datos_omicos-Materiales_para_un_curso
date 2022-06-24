@@ -6,4 +6,4 @@ Los materiales pueden servir de texto o simplemente como complemento para un cur
 
 Si lo único que se desea es acceder a los contenidos puede hacerse a través de [este enlace](https://aspteaching.github.io/Analisis_de_datos_omicos-Materiales_para_un_curso/).
 
-
+Este material puede ser citado de la manera siguiente: Alex Sánchez Pla. (2022). Analisis de Datos Ómicos. Materiales para un curso. (v1.0.0). Zenodo. https://doi.org/10.5281/zenodo.6710257
