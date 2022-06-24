@@ -1,9 +1,9 @@
 # Análisis de datos ómicos
 
-Este repositorio contiene los materiales para construir en formato `bookdown` una versión actualizada -en varios sentidos- de unos materiales de la asignatura _Análisis de microarrays_ del posgrado de Bioinformática de la Universitat Oberta de Catalunya que posteriormente evolucionó al actual Master Interuniversitario de Bioinformática y Bioestadística.
+Este repositorio contiene una versión actualizada -en formato bookdown- de unos materiales de la asignatura _Análisis de microarrays_ del posgrado de Bioinformática de la Universitat Oberta de Catalunya que posteriormente evolucionó al actual Master Interuniversitario de Bioinformática y Bioestadística.
 
-El objetivo de mantenerlo desde un repositorio de github es facilitar la actualización y re-utilización por lo que cualquiera que lo desee puede clonar este repositorio y disponer de los materiales.
+Los materiales pueden servir de texto o simplemente como complemento para un curso de análisis de datos ómicos y pueden utilizarse libremente por cualquiera que lo desee. El objetivo de mantenerlo desde un repositorio de github es precisamente facilitar la actualización y re-utilización por lo que, clonando el repositorio se tendrá acceso, no sólo al contenido sino a todo el material, datos, código R, etc.
 
-Para acceder al documento completo debe abrirse el archivo [index.html](./docs/index.html) desde el directorio (carpeta) "docs" de el repositorio.
+Si lo único que se desea es acceder a los contenidos puede hacerse a través de [este enlace](https://aspteaching.github.io/Analisis_de_datos_omicos-Materiales_para_un_curso/).
 
 
