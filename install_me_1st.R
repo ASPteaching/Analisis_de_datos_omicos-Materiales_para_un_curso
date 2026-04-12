@@ -37,7 +37,7 @@ bioCifnot ("KEGG.db")
 # bioCifnot ("Reactome.db")
 bioCifnot ("GOstats")
 
-#########################################################3
+#########################################################
 library(bookdown)
 render <- TRUE
 if (render)

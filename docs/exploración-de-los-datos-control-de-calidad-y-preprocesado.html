@@ -2,50 +2,58 @@
 <html lang="" xml:lang="">
 <head>
 
-<meta charset="utf-8" />
-<meta name="generator" content="pandoc" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta property="og:title" content="Capítulo 5 Exploración de los datos, control de calidad y preprocesado | Analisis de datos ómicos" />
-<meta property="og:type" content="book" />
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Capítulo 5 Exploración de los datos, control de calidad y preprocesado | Analisis de datos ómicos</title>
+  <meta name="description" content="Capítulo 5 Exploración de los datos, control de calidad y preprocesado | Analisis de datos ómicos" />
+  <meta name="generator" content="bookdown 0.46 and GitBook 2.6.7" />
 
+  <meta property="og:title" content="Capítulo 5 Exploración de los datos, control de calidad y preprocesado | Analisis de datos ómicos" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta name="github-repo" content="https://github.com/ASPteaching/Analisis_de_datos_omicos-Materiales_para_un_curso" />
 
-<meta name="github-repo" content="https://github.com/ASPteaching/Analisis_de_datos_omicos-Materiales_para_un_curso" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capítulo 5 Exploración de los datos, control de calidad y preprocesado | Analisis de datos ómicos" />
+  
+  
+  
 
-<meta name="author" content="Alex Sánchez-Pla^{1,2} y Ricardo Gonzalo Sanz^2" />
+<meta name="author" content="Alex Sánchez-Pla^{1}" />
 <meta name="author" content="^1 Departament de Genètica, Microbiologia i Estadística. Universitat de Barcelona (UB)." />
-<meta name="author" content="^2 Unitat de Estadística i Bioinformàtica. Vall d’Hebron Institut de Recerca (VHIR)." />
 
 
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  TeX: { equationNumbers: { autoNumber: "AMS" } }
-});
-</script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<meta name="description" content="Capítulo 5 Exploración de los datos, control de calidad y preprocesado | Analisis de datos ómicos">
-
-<title>Capítulo 5 Exploración de los datos, control de calidad y preprocesado | Analisis de datos ómicos</title>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="MDAExpDesign.html"/>
+<link rel="next" href="chapDEG.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
-<script src="libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
-<script src="libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
-<script src="libs/bootstrap-3.3.5/shim/respond.min.js"></script>
-<style>h1 {font-size: 34px;}
-       h1.title {font-size: 38px;}
-       h2 {font-size: 30px;}
-       h3 {font-size: 24px;}
-       h4 {font-size: 18px;}
-       h5 {font-size: 16px;}
-       h6 {font-size: 12px;}
-       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
-       pre:not([class]) { background-color: white }</style>
-<script src="libs/navigation-1.1/tabsets.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
 
 
-<style type="text/css">code{white-space: pre;}</style>
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
 <style type="text/css">
 html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
@@ -53,7 +61,6 @@ pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -112,13 +119,11 @@ code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
+
 <style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 </style>
-
-
 <style type="text/css">
 /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
 div.csl-bib-body { }
@@ -143,208 +148,197 @@ div.csl-indent {
 }
 </style>
 
-<link rel="stylesheet" href="style.css" type="text/css" />
-
-<style type = "text/css">
-.main-container {
-  max-width: 940px;
-  margin-left: auto;
-  margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
-}
-img {
-  max-width:100%;
-  height: auto;
-}
-/* show arrow before summary tag as in bootstrap
-TODO: remove if bootstrap in updated in html_document (rmarkdown#1485) */
-details > summary {
-  display: list-item;
-  cursor: pointer;
-}
-</style>
 </head>
 
 <body>
 
-<div class="container-fluid main-container">
 
 
-<div class="row">
-<div class="col-sm-12">
-<div id="TOC">
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Presentación</a>
 <ul>
-<li class="has-sub"><a href="index.html#presentaci%C3%B3n" id="toc-presentación"><span class="toc-section-number">1</span> Presentación</a>
-<ul>
-<li><a href="index.html#instalaci%C3%B3n-de-paquetes-de-r-y-c%C3%B3digo-de-los-cap%C3%ADtulos" id="toc-instalación-de-paquetes-de-r-y-código-de-los-capítulos"><span class="toc-section-number">1.1</span> Instalación de paquetes de R y código de los capítulos</a></li>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#instalaci%C3%B3n-de-paquetes-de-r-y-c%C3%B3digo-de-los-cap%C3%ADtulos"><i class="fa fa-check"></i><b>1.1</b> Instalación de paquetes de R y código de los capítulos</a></li>
 </ul></li>
-<li class="has-sub"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#introduccion-a-los-microarrays-y-otras-tecnolog%C3%ADas-omicas" id="toc-introduccion-a-los-microarrays-y-otras-tecnologías-omicas"><span class="toc-section-number">2</span> Introduccion a los microarrays y otras tecnologías omicas</a>
+<li class="chapter" data-level="2" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><i class="fa fa-check"></i><b>2</b> Introduccion a los microarrays y otras tecnologías omicas</a>
 <ul>
-<li><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#antecedentes-hist%C3%B3ricos" id="toc-antecedentes-históricos"><span class="toc-section-number">2.1</span> Antecedentes históricos</a></li>
-<li class="has-sub"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#los-microarrays" id="toc-los-microarrays"><span class="toc-section-number">2.2</span> Los microarrays</a>
+<li class="chapter" data-level="2.1" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#antecedentes-hist%C3%B3ricos"><i class="fa fa-check"></i><b>2.1</b> Antecedentes históricos</a></li>
+<li class="chapter" data-level="2.2" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#los-microarrays"><i class="fa fa-check"></i><b>2.2</b> Los microarrays</a>
 <ul>
-<li><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#aplicaciones-de-los-microarrays" id="toc-aplicaciones-de-los-microarrays"><span class="toc-section-number">2.2.1</span> Aplicaciones de los microarrays</a></li>
+<li class="chapter" data-level="2.2.1" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#aplicaciones-de-los-microarrays"><i class="fa fa-check"></i><b>2.2.1</b> Aplicaciones de los microarrays</a></li>
 </ul></li>
-<li class="has-sub"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#c%C3%B3mo-funcionan-los-microarrays" id="toc-cómo-funcionan-los-microarrays"><span class="toc-section-number">2.3</span> Cómo funcionan los microarrays</a>
+<li class="chapter" data-level="2.3" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#c%C3%B3mo-funcionan-los-microarrays"><i class="fa fa-check"></i><b>2.3</b> Cómo funcionan los microarrays</a>
 <ul>
-<li><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#microarrays-de-dos-colores" id="toc-microarrays-de-dos-colores"><span class="toc-section-number">2.3.1</span> Microarrays de dos colores</a></li>
-<li><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#microarrays-de-un-color" id="toc-microarrays-de-un-color"><span class="toc-section-number">2.3.2</span> Microarrays de un color</a></li>
-<li><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#realizaci%C3%B3n-de-un-experimento-de-microarrays" id="toc-realización-de-un-experimento-de-microarrays"><span class="toc-section-number">2.3.3</span> Realización de un experimento de microarrays</a></li>
-<li><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#como-se-mide-la-expresi%C3%B3n" id="toc-como-se-mide-la-expresión"><span class="toc-section-number">2.3.4</span> Como se mide la expresión</a></li>
+<li class="chapter" data-level="2.3.1" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#microarrays-de-dos-colores"><i class="fa fa-check"></i><b>2.3.1</b> Microarrays de dos colores</a></li>
+<li class="chapter" data-level="2.3.2" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#microarrays-de-un-color"><i class="fa fa-check"></i><b>2.3.2</b> Microarrays de un color</a></li>
+<li class="chapter" data-level="2.3.3" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#realizaci%C3%B3n-de-un-experimento-de-microarrays"><i class="fa fa-check"></i><b>2.3.3</b> Realización de un experimento de microarrays</a></li>
+<li class="chapter" data-level="2.3.4" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#como-se-mide-la-expresi%C3%B3n"><i class="fa fa-check"></i><b>2.3.4</b> Como se mide la expresión</a></li>
 </ul></li>
-<li class="has-sub"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#bioinform%C3%A1tica-de-microarrays" id="toc-bioinformática-de-microarrays"><span class="toc-section-number">2.4</span> Bioinformática de Microarrays<a name="Bioinformática"></a></a>
+<li class="chapter" data-level="2.4" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#bioinform%C3%A1tica-de-microarrays"><i class="fa fa-check"></i><b>2.4</b> Bioinformática de Microarrays<a name="Bioinformática"></a></a>
 <ul>
-<li><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#software-para-el-an%C3%A1lisis-de-datos-de-microarrays" id="toc-software-para-el-análisis-de-datos-de-microarrays"><span class="toc-section-number">2.4.1</span> Software para el análisis de datos de microarrays</a></li>
-<li><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#bases-de-datos-de-microarrays" id="toc-bases-de-datos-de-microarrays"><span class="toc-section-number">2.4.2</span> Bases de datos de Microarrays</a></li>
+<li class="chapter" data-level="2.4.1" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#software-para-el-an%C3%A1lisis-de-datos-de-microarrays"><i class="fa fa-check"></i><b>2.4.1</b> Software para el análisis de datos de microarrays</a></li>
+<li class="chapter" data-level="2.4.2" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#bases-de-datos-de-microarrays"><i class="fa fa-check"></i><b>2.4.2</b> Bases de datos de Microarrays</a></li>
 </ul></li>
-<li class="has-sub"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#extensiones-1-otros-tipos-de-microarrays" id="toc-extensiones-1-otros-tipos-de-microarrays"><span class="toc-section-number">2.5</span> Extensiones (1): Otros tipos de microarrays<a name="extensions"></a></a>
+<li class="chapter" data-level="2.5" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#extensiones-1-otros-tipos-de-microarrays"><i class="fa fa-check"></i><b>2.5</b> Extensiones (1): Otros tipos de microarrays<a name="extensions"></a></a>
 <ul>
-<li><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#otros-microarrays-de-adn" id="toc-otros-microarrays-de-adn"><span class="toc-section-number">2.5.1</span> Otros microarrays de ADN</a></li>
-<li><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#otros-tipos-de-microarrays-prote%C3%ADnas-o-carbohidratos" id="toc-otros-tipos-de-microarrays-proteínas-o-carbohidratos"><span class="toc-section-number">2.5.2</span> Otros tipos de microarrays: Proteínas o carbohidratos</a></li>
+<li class="chapter" data-level="2.5.1" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#otros-microarrays-de-adn"><i class="fa fa-check"></i><b>2.5.1</b> Otros microarrays de ADN</a></li>
+<li class="chapter" data-level="2.5.2" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#otros-tipos-de-microarrays-prote%C3%ADnas-o-carbohidratos"><i class="fa fa-check"></i><b>2.5.2</b> Otros tipos de microarrays: Proteínas o carbohidratos</a></li>
 </ul></li>
-<li class="has-sub"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#extensiones-2-ngs-nextnow-generation-sequencing" id="toc-extensiones-2-ngs-nextnow-generation-sequencing"><span class="toc-section-number">2.6</span> Extensiones (2): <em>NGS: Next(Now) Generation Sequencing</em></a>
+<li class="chapter" data-level="2.6" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#extensiones-2-ngs-nextnow-generation-sequencing"><i class="fa fa-check"></i><b>2.6</b> Extensiones (2): <em>NGS: Next(Now) Generation Sequencing</em></a>
 <ul>
-<li><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#visi%C3%B3n-global-de-las-tecnolog%C3%ADas-de-secuenciaci%C3%B3n" id="toc-visión-global-de-las-tecnologías-de-secuenciación"><span class="toc-section-number">2.6.1</span> Visión global de las tecnologías de secuenciación</a></li>
-<li><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#de-la-secuenciaci%C3%B3n-sanger-a-la-ultrasecuenciaci%C3%B3n" id="toc-de-la-secuenciación-sanger-a-la-ultrasecuenciación"><span class="toc-section-number">2.6.2</span> De la secuenciación Sanger a la ultrasecuenciación</a></li>
-<li><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#tecnolog%C3%ADas-de-ultrasecuenciaci%C3%B3n" id="toc-tecnologías-de-ultrasecuenciación"><span class="toc-section-number">2.6.3</span> Tecnologías de ultrasecuenciación</a></li>
-</ul></li>
-</ul></li>
-<li class="has-sub"><a href="MDAProcess.html#MDAProcess" id="toc-MDAProcess"><span class="toc-section-number">3</span> El proceso de análisis de microarrays</a>
-<ul>
-<li class="has-sub"><a href="MDAProcess.html#tipos-de-estudios" id="toc-tipos-de-estudios"><span class="toc-section-number">3.1</span> Tipos de estudios</a>
-<ul>
-<li><a href="MDAProcess.html#comparaci%C3%B3n-de-grupos-o-class-comparison" id="toc-comparación-de-grupos-o-class-comparison"><span class="toc-section-number">3.1.1</span> Comparación de grupos o “Class comparison”</a></li>
-<li><a href="MDAProcess.html#predicci%C3%B3n-de-clase-o-class-prediction" id="toc-predicción-de-clase-o-class-prediction"><span class="toc-section-number">3.1.2</span> Predicción de clase o “Class prediction”</a></li>
-<li><a href="MDAProcess.html#descubrimiento-de-clases-o-class-discovery" id="toc-descubrimiento-de-clases-o-class-discovery"><span class="toc-section-number">3.1.3</span> Descubrimiento de clases o “Class discovery”</a></li>
-<li><a href="MDAProcess.html#otros-tipos-de-estudios" id="toc-otros-tipos-de-estudios"><span class="toc-section-number">3.1.4</span> Otros tipos de estudios</a></li>
-</ul></li>
-<li class="has-sub"><a href="MDAProcess.html#c4examples" id="toc-c4examples"><span class="toc-section-number">3.2</span> Algunos ejemplos concretos</a>
-<ul>
-<li><a href="MDAProcess.html#celltypes" id="toc-celltypes"><span class="toc-section-number">3.2.1</span> Estudio de procesos regulados por citoquinas</a></li>
-<li><a href="MDAProcess.html#golub" id="toc-golub"><span class="toc-section-number">3.2.2</span> Clasificación molecular de la leucemia</a></li>
-<li><a href="MDAProcess.html#estrogen" id="toc-estrogen"><span class="toc-section-number">3.2.3</span> Efecto del estrogeno y el tiempo de administración</a></li>
-<li><a href="MDAProcess.html#CCL4" id="toc-CCL4"><span class="toc-section-number">3.2.4</span> Efecto del CCL4 en la expresión génica</a></li>
-<li><a href="MDAProcess.html#swirl" id="toc-swirl"><span class="toc-section-number">3.2.5</span> Estudio de la mutación “swirl” en el desarrollo del pez cebra</a></li>
-<li><a href="MDAProcess.html#yeast" id="toc-yeast"><span class="toc-section-number">3.2.6</span> Análisis de patrones en el ciclo celular</a></li>
-<li><a href="MDAProcess.html#recapitulaci%C3%B3n" id="toc-recapitulación"><span class="toc-section-number">3.2.7</span> Recapitulación</a></li>
-</ul></li>
-<li><a href="MDAProcess.html#el-proceso-de-an%C3%A1lisis-de-microarrays" id="toc-el-proceso-de-análisis-de-microarrays"><span class="toc-section-number">3.3</span> El proceso de análisis de microarrays</a></li>
-</ul></li>
-<li class="has-sub"><a href="MDAExpDesign.html#MDAExpDesign" id="toc-MDAExpDesign"><span class="toc-section-number">4</span> Diseño de experimentos de microarrays</a>
-<ul>
-<li><a href="MDAExpDesign.html#fuentes-de-variabilidad" id="toc-fuentes-de-variabilidad"><span class="toc-section-number">4.1</span> Fuentes de variabilidad</a></li>
-<li><a href="MDAExpDesign.html#tipos-de-variabilidad" id="toc-tipos-de-variabilidad"><span class="toc-section-number">4.2</span> Tipos de variabilidad</a></li>
-<li><a href="MDAExpDesign.html#conceptos-b%C3%A1sicos-de-dise%C3%B1o-de-experimentos" id="toc-conceptos-básicos-de-diseño-de-experimentos"><span class="toc-section-number">4.3</span> Conceptos básicos de diseño de Experimentos</a></li>
-<li class="has-sub"><a href="MDAExpDesign.html#principios-de-dise%C3%B1o-de-experimentos" id="toc-principios-de-diseño-de-experimentos"><span class="toc-section-number">4.4</span> Principios de diseño de experimentos</a>
-<ul>
-<li><a href="MDAExpDesign.html#replicaci%C3%B3n" id="toc-replicación"><span class="toc-section-number">4.4.1</span> Replicación</a></li>
-<li><a href="MDAExpDesign.html#aleatorizaci%C3%B3n" id="toc-aleatorización"><span class="toc-section-number">4.4.2</span> Aleatorización</a></li>
-<li><a href="MDAExpDesign.html#bloqueo-o-control-local" id="toc-bloqueo-o-control-local"><span class="toc-section-number">4.4.3</span> Bloqueo o control local</a></li>
-</ul></li>
-<li><a href="MDAExpDesign.html#dise%C3%B1os-experimentales-para-microarrays-de-dos-colores" id="toc-diseños-experimentales-para-microarrays-de-dos-colores"><span class="toc-section-number">4.5</span> Diseños experimentales para microarrays de dos colores</a></li>
-</ul></li>
-<li class="has-sub"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#exploraci%C3%B3n-de-los-datos-control-de-calidad-y-preprocesado" id="toc-exploración-de-los-datos-control-de-calidad-y-preprocesado"><span class="toc-section-number">5</span> Exploración de los datos, control de calidad y preprocesado</a>
-<ul>
-<li class="has-sub"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#introducci%C3%B3n" id="toc-introducción"><span class="toc-section-number">5.1</span> Introducción</a>
-<ul>
-<li><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#nivel-de-an%C3%A1lisis-y-tipo-de-microarray" id="toc-nivel-de-análisis-y-tipo-de-microarray"><span class="toc-section-number">5.1.1</span> Nivel de análisis y tipo de microarray</a></li>
-<li><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#datos-de-partida" id="toc-datos-de-partida"><span class="toc-section-number">5.1.2</span> Datos de partida</a></li>
-</ul></li>
-<li class="has-sub"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#exploraci%C3%B3n-y-control-de-calidad" id="toc-exploración-y-control-de-calidad"><span class="toc-section-number">5.2</span> Exploración y control de calidad</a>
-<ul>
-<li><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#control-de-calidad-con-gr%C3%A1ficos-estad%C3%ADsticos-generales" id="toc-control-de-calidad-con-gráficos-estadísticos-generales"><span class="toc-section-number">5.2.1</span> Control de calidad con gráficos estadísticos generales</a></li>
-<li><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#gr%C3%A1ficos-de-diagn%C3%B3stico-para-microarrays-de-dos-colores" id="toc-gráficos-de-diagnóstico-para-microarrays-de-dos-colores"><span class="toc-section-number">5.2.2</span> Gráficos de diagnóstico para microarrays de dos colores</a></li>
-<li><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#gr%C3%A1ficos-de-diagn%C3%B3stico-para-microarrays-de-un-color" id="toc-gráficos-de-diagnóstico-para-microarrays-de-un-color"><span class="toc-section-number">5.2.3</span> Gráficos de diagnóstico para microarrays de un color</a></li>
-</ul></li>
-<li class="has-sub"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#normalizaci%C3%B3n-de-arrays-de-dos-colores" id="toc-normalización-de-arrays-de-dos-colores"><span class="toc-section-number">5.3</span> Normalización de arrays de dos colores</a>
-<ul>
-<li><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#normalizaci%C3%B3n-global" id="toc-normalización-global"><span class="toc-section-number">5.3.1</span> Normalización global</a></li>
-<li><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#normalizaci%C3%B3n-dependiente-de-la-intensidad" id="toc-normalización-dependiente-de-la-intensidad"><span class="toc-section-number">5.3.2</span> Normalización dependiente de la intensidad</a></li>
-</ul></li>
-<li class="has-sub"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#resumen-y-normalizaci%C3%B3n-de-microarrays-de-affymetrix" id="toc-resumen-y-normalización-de-microarrays-de-affymetrix"><span class="toc-section-number">5.4</span> Resumen y normalización de microarrays de Affymetrix</a>
-<ul>
-<li><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#el-m%C3%A9todo-rma-robust-multi-array-average" id="toc-el-método-rma-robust-multi-array-average"><span class="toc-section-number">5.4.1</span> El método RMA (Robust Multi-Array Average)</a></li>
-</ul></li>
-<li><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#filtraje-no-espec%C3%ADfico" id="toc-filtraje-no-específico"><span class="toc-section-number">5.5</span> Filtraje no específico</a></li>
-</ul></li>
-<li class="has-sub"><a href="chapDEG.html#chapDEG" id="toc-chapDEG"><span class="toc-section-number">6</span> Selección de genes diferencialmente expresados</a>
-<ul>
-<li><a href="chapDEG.html#introducci%C3%B3n-1" id="toc-introducción-1"><span class="toc-section-number">6.1</span> Introducción</a></li>
-<li class="has-sub"><a href="chapDEG.html#selecci%C3%B3n-de-genes-diferencialmente-expresados" id="toc-selección-de-genes-diferencialmente-expresados"><span class="toc-section-number">6.2</span> Selección de genes diferencialmente expresados</a>
-<ul>
-<li><a href="chapDEG.html#medidas-naturales-para-comparar-dos-muestras" id="toc-medidas-naturales-para-comparar-dos-muestras"><span class="toc-section-number">6.2.1</span> Medidas <em>naturales</em> para comparar dos muestras</a></li>
-<li><a href="chapDEG.html#un-primer-ejemplo" id="toc-un-primer-ejemplo"><span class="toc-section-number">6.2.2</span> Un primer ejemplo</a></li>
-<li><a href="chapDEG.html#selecci%C3%B3n-de-genes-usando-tests-estad%C3%ADsticos" id="toc-selección-de-genes-usando-tests-estadísticos"><span class="toc-section-number">6.2.3</span> Selección de genes usando tests estadísticos</a></li>
-</ul></li>
-<li class="has-sub"><a href="chapDEG.html#significaci%C3%B3n-estad%C3%ADstica-y-expresi%C3%B3n-diferencial" id="toc-significación-estadística-y-expresión-diferencial"><span class="toc-section-number">6.3</span> Significación estadística y expresión diferencial</a>
-<ul>
-<li><a href="chapDEG.html#volcano-plots" id="toc-volcano-plots"><span class="toc-section-number">6.3.1</span> “Volcano plots”</a></li>
-<li><a href="chapDEG.html#potencia-y-tama%C3%B1o-muestral" id="toc-potencia-y-tamaño-muestral"><span class="toc-section-number">6.3.2</span> Potencia y tamaño muestral</a></li>
-</ul></li>
-<li><a href="chapDEG.html#el-problema-de-la-m%C3%BAltiplicidad-de-tests-multiple-testing" id="toc-el-problema-de-la-múltiplicidad-de-tests-multiple-testing"><span class="toc-section-number">6.4</span> El problema de la múltiplicidad de tests (“multiple testing”)</a></li>
-<li class="has-sub"><a href="chapDEG.html#modelos-lineales-para-la-selecci%C3%B3n-de-genes-limma" id="toc-modelos-lineales-para-la-selección-de-genes-limma"><span class="toc-section-number">6.5</span> Modelos lineales para la selección de genes: <tt>limma </tt></a>
-<ul>
-<li><a href="chapDEG.html#el-modelo-lineal-general" id="toc-el-modelo-lineal-general"><span class="toc-section-number">6.5.1</span> El modelo lineal general</a></li>
-<li><a href="chapDEG.html#ejemplos-de-situaciones-modelizables-linealmente" id="toc-ejemplos-de-situaciones-modelizables-linealmente"><span class="toc-section-number">6.5.2</span> Ejemplos de situaciones <em>modelizables linealmente</em></a></li>
-<li><a href="chapDEG.html#ejemplo-2-comparaci%C3%B3n-de-tres-grupos" id="toc-ejemplo-2-comparación-de-tres-grupos"><span class="toc-section-number">6.5.3</span> Ejemplo 2: Comparación de tres grupos</a></li>
-<li><a href="chapDEG.html#estimaci%C3%B3n-e-inferencia-con-el-modelo-lineal" id="toc-estimación-e-inferencia-con-el-modelo-lineal"><span class="toc-section-number">6.5.4</span> Estimación e inferencia con el modelo lineal</a></li>
-<li><a href="chapDEG.html#modelos-lineales-para-microarrays" id="toc-modelos-lineales-para-microarrays"><span class="toc-section-number">6.5.5</span> Modelos lineales para Microarrays</a></li>
-<li><a href="chapDEG.html#implementaci%C3%B3n-y-ejemplos" id="toc-implementación-y-ejemplos"><span class="toc-section-number">6.5.6</span> Implementación y ejemplos</a></li>
+<li class="chapter" data-level="2.6.1" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#visi%C3%B3n-global-de-las-tecnolog%C3%ADas-de-secuenciaci%C3%B3n"><i class="fa fa-check"></i><b>2.6.1</b> Visión global de las tecnologías de secuenciación</a></li>
+<li class="chapter" data-level="2.6.2" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#de-la-secuenciaci%C3%B3n-sanger-a-la-ultrasecuenciaci%C3%B3n"><i class="fa fa-check"></i><b>2.6.2</b> De la secuenciación Sanger a la ultrasecuenciación</a></li>
+<li class="chapter" data-level="2.6.3" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#tecnolog%C3%ADas-de-ultrasecuenciaci%C3%B3n"><i class="fa fa-check"></i><b>2.6.3</b> Tecnologías de ultrasecuenciación</a></li>
 </ul></li>
 </ul></li>
-<li class="has-sub"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#caso-estr%C3%B3geno-selecci%C3%B3n-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estr%C3%B3genos." id="toc-caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos."><span class="toc-section-number">7</span> Caso “Estrógeno”: Selección de genes diferencialmente expresados asociados con la resistencia a estrógenos.</a>
+<li class="chapter" data-level="3" data-path="MDAProcess.html"><a href="MDAProcess.html"><i class="fa fa-check"></i><b>3</b> El proceso de análisis de microarrays</a>
 <ul>
-<li><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#introducci%C3%B3n-2" id="toc-introducción-2"><span class="toc-section-number">7.1</span> Introducción</a></li>
-<li class="has-sub"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#el-estudio-estr%C3%B3geno" id="toc-el-estudio-estrógeno"><span class="toc-section-number">7.2</span> El estudio “Estrógeno”</a>
+<li class="chapter" data-level="3.1" data-path="MDAProcess.html"><a href="MDAProcess.html#tipos-de-estudios"><i class="fa fa-check"></i><b>3.1</b> Tipos de estudios</a>
 <ul>
-<li><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#directorios-y-opciones-de-trabajo" id="toc-directorios-y-opciones-de-trabajo"><span class="toc-section-number">7.2.1</span> Directorios y opciones de trabajo</a></li>
+<li class="chapter" data-level="3.1.1" data-path="MDAProcess.html"><a href="MDAProcess.html#comparaci%C3%B3n-de-grupos-o-class-comparison"><i class="fa fa-check"></i><b>3.1.1</b> Comparación de grupos o “Class comparison”</a></li>
+<li class="chapter" data-level="3.1.2" data-path="MDAProcess.html"><a href="MDAProcess.html#predicci%C3%B3n-de-clase-o-class-prediction"><i class="fa fa-check"></i><b>3.1.2</b> Predicción de clase o “Class prediction”</a></li>
+<li class="chapter" data-level="3.1.3" data-path="MDAProcess.html"><a href="MDAProcess.html#descubrimiento-de-clases-o-class-discovery"><i class="fa fa-check"></i><b>3.1.3</b> Descubrimiento de clases o “Class discovery”</a></li>
+<li class="chapter" data-level="3.1.4" data-path="MDAProcess.html"><a href="MDAProcess.html#otros-tipos-de-estudios"><i class="fa fa-check"></i><b>3.1.4</b> Otros tipos de estudios</a></li>
 </ul></li>
-<li class="has-sub"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#obtenci%C3%B3n-y-lectura-de-los-datos" id="toc-obtención-y-lectura-de-los-datos"><span class="toc-section-number">7.3</span> Obtención y lectura de los datos</a>
+<li class="chapter" data-level="3.2" data-path="MDAProcess.html"><a href="MDAProcess.html#c4examples"><i class="fa fa-check"></i><b>3.2</b> Algunos ejemplos concretos</a>
 <ul>
-<li><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#los-datos" id="toc-los-datos"><span class="toc-section-number">7.3.1</span> Los datos</a></li>
-<li><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#lectura-de-los-datos" id="toc-lectura-de-los-datos"><span class="toc-section-number">7.3.2</span> Lectura de los datos</a></li>
+<li class="chapter" data-level="3.2.1" data-path="MDAProcess.html"><a href="MDAProcess.html#celltypes"><i class="fa fa-check"></i><b>3.2.1</b> Estudio de procesos regulados por citoquinas</a></li>
+<li class="chapter" data-level="3.2.2" data-path="MDAProcess.html"><a href="MDAProcess.html#golub"><i class="fa fa-check"></i><b>3.2.2</b> Clasificación molecular de la leucemia</a></li>
+<li class="chapter" data-level="3.2.3" data-path="MDAProcess.html"><a href="MDAProcess.html#estrogen"><i class="fa fa-check"></i><b>3.2.3</b> Efecto del estrogeno y el tiempo de administración</a></li>
+<li class="chapter" data-level="3.2.4" data-path="MDAProcess.html"><a href="MDAProcess.html#CCL4"><i class="fa fa-check"></i><b>3.2.4</b> Efecto del CCL4 en la expresión génica</a></li>
+<li class="chapter" data-level="3.2.5" data-path="MDAProcess.html"><a href="MDAProcess.html#swirl"><i class="fa fa-check"></i><b>3.2.5</b> Estudio de la mutación “swirl” en el desarrollo del pez cebra</a></li>
+<li class="chapter" data-level="3.2.6" data-path="MDAProcess.html"><a href="MDAProcess.html#yeast"><i class="fa fa-check"></i><b>3.2.6</b> Análisis de patrones en el ciclo celular</a></li>
+<li class="chapter" data-level="3.2.7" data-path="MDAProcess.html"><a href="MDAProcess.html#recapitulaci%C3%B3n"><i class="fa fa-check"></i><b>3.2.7</b> Recapitulación</a></li>
 </ul></li>
-<li class="has-sub"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#exploraci%C3%B3n-control-de-calidad-y-normalizaci%C3%B3n" id="toc-exploración-control-de-calidad-y-normalización"><span class="toc-section-number">7.4</span> Exploración, Control de Calidad y Normalización</a>
+<li class="chapter" data-level="3.3" data-path="MDAProcess.html"><a href="MDAProcess.html#el-proceso-de-an%C3%A1lisis-de-microarrays"><i class="fa fa-check"></i><b>3.3</b> El proceso de análisis de microarrays</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="MDAExpDesign.html"><a href="MDAExpDesign.html"><i class="fa fa-check"></i><b>4</b> Diseño de experimentos de microarrays</a>
 <ul>
-<li><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#exploraci%C3%B3n-y-visualizaci%C3%B3n" id="toc-exploración-y-visualización"><span class="toc-section-number">7.4.1</span> Exploración y visualización</a></li>
-<li><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#control-de-calidad" id="toc-control-de-calidad"><span class="toc-section-number">7.4.2</span> Control de calidad</a></li>
-<li><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#normalizacion-y-filtraje" id="toc-normalizacion-y-filtraje"><span class="toc-section-number">7.4.3</span> Normalizacion y Filtraje</a></li>
-</ul></li>
-<li class="has-sub"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#selecci%C3%B3n-de-genes-diferencialmente-expresados-1" id="toc-selección-de-genes-diferencialmente-expresados-1"><span class="toc-section-number">7.5</span> Selección de genes diferencialmente expresados</a>
+<li class="chapter" data-level="4.1" data-path="MDAExpDesign.html"><a href="MDAExpDesign.html#fuentes-de-variabilidad"><i class="fa fa-check"></i><b>4.1</b> Fuentes de variabilidad</a></li>
+<li class="chapter" data-level="4.2" data-path="MDAExpDesign.html"><a href="MDAExpDesign.html#tipos-de-variabilidad"><i class="fa fa-check"></i><b>4.2</b> Tipos de variabilidad</a></li>
+<li class="chapter" data-level="4.3" data-path="MDAExpDesign.html"><a href="MDAExpDesign.html#conceptos-b%C3%A1sicos-de-dise%C3%B1o-de-experimentos"><i class="fa fa-check"></i><b>4.3</b> Conceptos básicos de diseño de Experimentos</a></li>
+<li class="chapter" data-level="4.4" data-path="MDAExpDesign.html"><a href="MDAExpDesign.html#principios-de-dise%C3%B1o-de-experimentos"><i class="fa fa-check"></i><b>4.4</b> Principios de diseño de experimentos</a>
 <ul>
-<li><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#an%C3%A1lisis-basado-en-modelos-lineales" id="toc-análisis-basado-en-modelos-lineales"><span class="toc-section-number">7.5.1</span> Análisis basado en modelos lineales</a></li>
-<li><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#comparaciones-m%C3%BAltiples" id="toc-comparaciones-múltiples"><span class="toc-section-number">7.5.2</span> Comparaciones múltiples</a></li>
+<li class="chapter" data-level="4.4.1" data-path="MDAExpDesign.html"><a href="MDAExpDesign.html#replicaci%C3%B3n"><i class="fa fa-check"></i><b>4.4.1</b> Replicación</a></li>
+<li class="chapter" data-level="4.4.2" data-path="MDAExpDesign.html"><a href="MDAExpDesign.html#aleatorizaci%C3%B3n"><i class="fa fa-check"></i><b>4.4.2</b> Aleatorización</a></li>
+<li class="chapter" data-level="4.4.3" data-path="MDAExpDesign.html"><a href="MDAExpDesign.html#bloqueo-o-control-local"><i class="fa fa-check"></i><b>4.4.3</b> Bloqueo o control local</a></li>
 </ul></li>
+<li class="chapter" data-level="4.5" data-path="MDAExpDesign.html"><a href="MDAExpDesign.html#dise%C3%B1os-experimentales-para-microarrays-de-dos-colores"><i class="fa fa-check"></i><b>4.5</b> Diseños experimentales para microarrays de dos colores</a></li>
 </ul></li>
-<li class="has-sub"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#despu%C3%A9s-de-la-selecci%C3%B3n-an%C3%A1lisis-de-listas-de-genes" id="toc-después-de-la-selección-análisis-de-listas-de-genes"><span class="toc-section-number">8</span> Después de la selección: Análisis de listas de genes</a>
+<li class="chapter" data-level="5" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><i class="fa fa-check"></i><b>5</b> Exploración de los datos, control de calidad y preprocesado</a>
 <ul>
-<li><a href="después-de-la-selección-análisis-de-listas-de-genes.html#introducci%C3%B3n-3" id="toc-introducción-3"><span class="toc-section-number">8.1</span> Introducción</a></li>
-<li class="has-sub"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#an%C3%A1lisis-comparativo-de-listas-de-genes" id="toc-análisis-comparativo-de-listas-de-genes"><span class="toc-section-number">8.2</span> Análisis comparativo de listas de genes</a>
+<li class="chapter" data-level="5.1" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#introducci%C3%B3n"><i class="fa fa-check"></i><b>5.1</b> Introducción</a>
 <ul>
-<li><a href="después-de-la-selección-análisis-de-listas-de-genes.html#ejemplo-comparaci%C3%B3n-de-listas-en-el-caso-celltypes" id="toc-ejemplo-comparación-de-listas-en-el-caso-celltypes"><span class="toc-section-number">8.2.1</span> Ejemplo: comparación de listas en el caso <tt>celltypes</tt></a></li>
+<li class="chapter" data-level="5.1.1" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#nivel-de-an%C3%A1lisis-y-tipo-de-microarray"><i class="fa fa-check"></i><b>5.1.1</b> Nivel de análisis y tipo de microarray</a></li>
+<li class="chapter" data-level="5.1.2" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#datos-de-partida"><i class="fa fa-check"></i><b>5.1.2</b> Datos de partida</a></li>
 </ul></li>
-<li><a href="después-de-la-selección-análisis-de-listas-de-genes.html#anotaci%C3%B3n-de-los-resultados" id="toc-anotación-de-los-resultados"><span class="toc-section-number">8.3</span> Anotación de los resultados</a></li>
-<li><a href="después-de-la-selección-análisis-de-listas-de-genes.html#visualizaci%C3%B3n-de-los-perfiles-de-expresi%C3%B3n" id="toc-visualización-de-los-perfiles-de-expresión"><span class="toc-section-number">8.4</span> Visualización de los perfiles de expresión</a></li>
-<li class="has-sub"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#an%C3%A1lisis-de-significaci%C3%B3n-biol%C3%B3gica" id="toc-análisis-de-significación-biológica"><span class="toc-section-number">8.5</span> Análisis de significación biológica</a>
+<li class="chapter" data-level="5.2" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#exploraci%C3%B3n-y-control-de-calidad"><i class="fa fa-check"></i><b>5.2</b> Exploración y control de calidad</a>
 <ul>
-<li><a href="después-de-la-selección-análisis-de-listas-de-genes.html#an%C3%A1lisis-de-enriquecimiento" id="toc-análisis-de-enriquecimiento"><span class="toc-section-number">8.5.1</span> Análisis de enriquecimiento <a name="GEA"></a></a></li>
-<li><a href="después-de-la-selección-análisis-de-listas-de-genes.html#an%C3%A1lisis-de-enriquecimiento-con-bioconductor" id="toc-análisis-de-enriquecimiento-con-bioconductor"><span class="toc-section-number">8.5.2</span> Análisis de enriquecimiento con Bioconductor</a></li>
+<li class="chapter" data-level="5.2.1" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#control-de-calidad-con-gr%C3%A1ficos-estad%C3%ADsticos-generales"><i class="fa fa-check"></i><b>5.2.1</b> Control de calidad con gráficos estadísticos generales</a></li>
+<li class="chapter" data-level="5.2.2" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#gr%C3%A1ficos-de-diagn%C3%B3stico-para-microarrays-de-dos-colores"><i class="fa fa-check"></i><b>5.2.2</b> Gráficos de diagnóstico para microarrays de dos colores</a></li>
+<li class="chapter" data-level="5.2.3" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#gr%C3%A1ficos-de-diagn%C3%B3stico-para-microarrays-de-un-color"><i class="fa fa-check"></i><b>5.2.3</b> Gráficos de diagnóstico para microarrays de un color</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#normalizaci%C3%B3n-de-arrays-de-dos-colores"><i class="fa fa-check"></i><b>5.3</b> Normalización de arrays de dos colores</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#normalizaci%C3%B3n-global"><i class="fa fa-check"></i><b>5.3.1</b> Normalización global</a></li>
+<li class="chapter" data-level="5.3.2" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#normalizaci%C3%B3n-dependiente-de-la-intensidad"><i class="fa fa-check"></i><b>5.3.2</b> Normalización dependiente de la intensidad</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#resumen-y-normalizaci%C3%B3n-de-microarrays-de-affymetrix"><i class="fa fa-check"></i><b>5.4</b> Resumen y normalización de microarrays de Affymetrix</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#el-m%C3%A9todo-rma-robust-multi-array-average"><i class="fa fa-check"></i><b>5.4.1</b> El método RMA (Robust Multi-Array Average)</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#filtraje-no-espec%C3%ADfico"><i class="fa fa-check"></i><b>5.5</b> Filtraje no específico</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="chapDEG.html"><a href="chapDEG.html"><i class="fa fa-check"></i><b>6</b> Selección de genes diferencialmente expresados</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="chapDEG.html"><a href="chapDEG.html#introducci%C3%B3n-1"><i class="fa fa-check"></i><b>6.1</b> Introducción</a></li>
+<li class="chapter" data-level="6.2" data-path="chapDEG.html"><a href="chapDEG.html#selecci%C3%B3n-de-genes-diferencialmente-expresados"><i class="fa fa-check"></i><b>6.2</b> Selección de genes diferencialmente expresados</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="chapDEG.html"><a href="chapDEG.html#medidas-naturales-para-comparar-dos-muestras"><i class="fa fa-check"></i><b>6.2.1</b> Medidas <em>naturales</em> para comparar dos muestras</a></li>
+<li class="chapter" data-level="6.2.2" data-path="chapDEG.html"><a href="chapDEG.html#un-primer-ejemplo"><i class="fa fa-check"></i><b>6.2.2</b> Un primer ejemplo</a></li>
+<li class="chapter" data-level="6.2.3" data-path="chapDEG.html"><a href="chapDEG.html#selecci%C3%B3n-de-genes-usando-tests-estad%C3%ADsticos"><i class="fa fa-check"></i><b>6.2.3</b> Selección de genes usando tests estadísticos</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="chapDEG.html"><a href="chapDEG.html#significaci%C3%B3n-estad%C3%ADstica-y-expresi%C3%B3n-diferencial"><i class="fa fa-check"></i><b>6.3</b> Significación estadística y expresión diferencial</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="chapDEG.html"><a href="chapDEG.html#volcano-plots"><i class="fa fa-check"></i><b>6.3.1</b> “Volcano plots”</a></li>
+<li class="chapter" data-level="6.3.2" data-path="chapDEG.html"><a href="chapDEG.html#potencia-y-tama%C3%B1o-muestral"><i class="fa fa-check"></i><b>6.3.2</b> Potencia y tamaño muestral</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="chapDEG.html"><a href="chapDEG.html#el-problema-de-la-m%C3%BAltiplicidad-de-tests-multiple-testing"><i class="fa fa-check"></i><b>6.4</b> El problema de la múltiplicidad de tests (“multiple testing”)</a></li>
+<li class="chapter" data-level="6.5" data-path="chapDEG.html"><a href="chapDEG.html#modelos-lineales-para-la-selecci%C3%B3n-de-genes-limma"><i class="fa fa-check"></i><b>6.5</b> Modelos lineales para la selección de genes: <tt>limma </tt></a>
+<ul>
+<li class="chapter" data-level="6.5.1" data-path="chapDEG.html"><a href="chapDEG.html#el-modelo-lineal-general"><i class="fa fa-check"></i><b>6.5.1</b> El modelo lineal general</a></li>
+<li class="chapter" data-level="6.5.2" data-path="chapDEG.html"><a href="chapDEG.html#ejemplos-de-situaciones-modelizables-linealmente"><i class="fa fa-check"></i><b>6.5.2</b> Ejemplos de situaciones <em>modelizables linealmente</em></a></li>
+<li class="chapter" data-level="6.5.3" data-path="chapDEG.html"><a href="chapDEG.html#ejemplo-2-comparaci%C3%B3n-de-tres-grupos"><i class="fa fa-check"></i><b>6.5.3</b> Ejemplo 2: Comparación de tres grupos</a></li>
+<li class="chapter" data-level="6.5.4" data-path="chapDEG.html"><a href="chapDEG.html#estimaci%C3%B3n-e-inferencia-con-el-modelo-lineal"><i class="fa fa-check"></i><b>6.5.4</b> Estimación e inferencia con el modelo lineal</a></li>
+<li class="chapter" data-level="6.5.5" data-path="chapDEG.html"><a href="chapDEG.html#modelos-lineales-para-microarrays"><i class="fa fa-check"></i><b>6.5.5</b> Modelos lineales para Microarrays</a></li>
+<li class="chapter" data-level="6.5.6" data-path="chapDEG.html"><a href="chapDEG.html#implementaci%C3%B3n-y-ejemplos"><i class="fa fa-check"></i><b>6.5.6</b> Implementación y ejemplos</a></li>
 </ul></li>
 </ul></li>
-<li><a href="referencias.html#referencias" id="toc-referencias"><span class="toc-section-number">9</span> Referencias</a></li>
+<li class="chapter" data-level="7" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><i class="fa fa-check"></i><b>7</b> Caso “Estrógeno”: Selección de genes diferencialmente expresados asociados con la resistencia a estrógenos.</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#introducci%C3%B3n-2"><i class="fa fa-check"></i><b>7.1</b> Introducción</a></li>
+<li class="chapter" data-level="7.2" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#el-estudio-estr%C3%B3geno"><i class="fa fa-check"></i><b>7.2</b> El estudio “Estrógeno”</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#directorios-y-opciones-de-trabajo"><i class="fa fa-check"></i><b>7.2.1</b> Directorios y opciones de trabajo</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#obtenci%C3%B3n-y-lectura-de-los-datos"><i class="fa fa-check"></i><b>7.3</b> Obtención y lectura de los datos</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#los-datos"><i class="fa fa-check"></i><b>7.3.1</b> Los datos</a></li>
+<li class="chapter" data-level="7.3.2" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#lectura-de-los-datos"><i class="fa fa-check"></i><b>7.3.2</b> Lectura de los datos</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#exploraci%C3%B3n-control-de-calidad-y-normalizaci%C3%B3n"><i class="fa fa-check"></i><b>7.4</b> Exploración, Control de Calidad y Normalización</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#exploraci%C3%B3n-y-visualizaci%C3%B3n"><i class="fa fa-check"></i><b>7.4.1</b> Exploración y visualización</a></li>
+<li class="chapter" data-level="7.4.2" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#control-de-calidad"><i class="fa fa-check"></i><b>7.4.2</b> Control de calidad</a></li>
+<li class="chapter" data-level="7.4.3" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#normalizacion-y-filtraje"><i class="fa fa-check"></i><b>7.4.3</b> Normalizacion y Filtraje</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#selecci%C3%B3n-de-genes-diferencialmente-expresados-1"><i class="fa fa-check"></i><b>7.5</b> Selección de genes diferencialmente expresados</a>
+<ul>
+<li class="chapter" data-level="7.5.1" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#an%C3%A1lisis-basado-en-modelos-lineales"><i class="fa fa-check"></i><b>7.5.1</b> Análisis basado en modelos lineales</a></li>
+<li class="chapter" data-level="7.5.2" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#comparaciones-m%C3%BAltiples"><i class="fa fa-check"></i><b>7.5.2</b> Comparaciones múltiples</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="después-de-la-selección-análisis-de-listas-de-genes.html"><a href="después-de-la-selección-análisis-de-listas-de-genes.html"><i class="fa fa-check"></i><b>8</b> Después de la selección: Análisis de listas de genes</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="después-de-la-selección-análisis-de-listas-de-genes.html"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#introducci%C3%B3n-3"><i class="fa fa-check"></i><b>8.1</b> Introducción</a></li>
+<li class="chapter" data-level="8.2" data-path="después-de-la-selección-análisis-de-listas-de-genes.html"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#an%C3%A1lisis-comparativo-de-listas-de-genes"><i class="fa fa-check"></i><b>8.2</b> Análisis comparativo de listas de genes</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="después-de-la-selección-análisis-de-listas-de-genes.html"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#ejemplo-comparaci%C3%B3n-de-listas-en-el-caso-celltypes"><i class="fa fa-check"></i><b>8.2.1</b> Ejemplo: comparación de listas en el caso <tt>celltypes</tt></a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="después-de-la-selección-análisis-de-listas-de-genes.html"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#anotaci%C3%B3n-de-los-resultados"><i class="fa fa-check"></i><b>8.3</b> Anotación de los resultados</a></li>
+<li class="chapter" data-level="8.4" data-path="después-de-la-selección-análisis-de-listas-de-genes.html"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#visualizaci%C3%B3n-de-los-perfiles-de-expresi%C3%B3n"><i class="fa fa-check"></i><b>8.4</b> Visualización de los perfiles de expresión</a></li>
+<li class="chapter" data-level="8.5" data-path="después-de-la-selección-análisis-de-listas-de-genes.html"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#an%C3%A1lisis-de-significaci%C3%B3n-biol%C3%B3gica"><i class="fa fa-check"></i><b>8.5</b> Análisis de significación biológica</a>
+<ul>
+<li class="chapter" data-level="8.5.1" data-path="después-de-la-selección-análisis-de-listas-de-genes.html"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#an%C3%A1lisis-de-enriquecimiento"><i class="fa fa-check"></i><b>8.5.1</b> Análisis de enriquecimiento <a name="GEA"></a></a></li>
+<li class="chapter" data-level="8.5.2" data-path="después-de-la-selección-análisis-de-listas-de-genes.html"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#an%C3%A1lisis-de-enriquecimiento-con-bioconductor"><i class="fa fa-check"></i><b>8.5.2</b> Análisis de enriquecimiento con Bioconductor</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i><b>9</b> Referencias</a></li>
 </ul>
-</div>
-</div>
-</div>
-<div class="row">
-<div class="col-sm-12">
-<div id="exploración-de-los-datos-control-de-calidad-y-preprocesado" class="section level1" number="5">
-<h1><span class="header-section-number">Capítulo 5</span> Exploración de los datos, control de calidad y preprocesado</h1>
-<div id="introducción" class="section level2" number="5.1">
-<h2><span class="header-section-number">5.1</span> Introducción</h2>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Analisis de datos ómicos</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="exploración-de-los-datos-control-de-calidad-y-preprocesado" class="section level1 hasAnchor" number="5">
+<h1><span class="header-section-number">Capítulo 5</span> Exploración de los datos, control de calidad y preprocesado<a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#exploraci%C3%B3n-de-los-datos-control-de-calidad-y-preprocesado" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="introducción" class="section level2 hasAnchor" number="5.1">
+<h2><span class="header-section-number">5.1</span> Introducción<a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#introducci%C3%B3n" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Los estudios realizados con microarrays, sea cual sea la tecnología en que se basan, tienen una característica común: generan grandes cantidades de datos a través de una serie de procesos, que hacen que su significado no siempre sea completamente intuitivo.</p>
 <p>Como en todo tipo de análisis, antes de empezar a trabajar con los datos, debemos de asegurarnos de que éstos son fiables y completos y de que se encuentran en la escala apropiada para proporcionar la información que pretendemos obtener de ellos.</p>
 <p>En el caso de los microarrays solemos distinguir dos fases previas al análisis de los datos:</p>
@@ -362,8 +356,8 @@ que deben ser corregidas.</p></li>
 <li>“Transformados” de forma que la escala sea razonable y facilite el análisis.</li>
 </ul>
 <p>A menudo -por un cierto abuso de lenguaje- se denomina “normalización” al preprocesado descrito en las etapas anteriores.</p>
-<div id="nivel-de-análisis-y-tipo-de-microarray" class="section level3" number="5.1.1">
-<h3><span class="header-section-number">5.1.1</span> Nivel de análisis y tipo de microarray</h3>
+<div id="nivel-de-análisis-y-tipo-de-microarray" class="section level3 hasAnchor" number="5.1.1">
+<h3><span class="header-section-number">5.1.1</span> Nivel de análisis y tipo de microarray<a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#nivel-de-an%C3%A1lisis-y-tipo-de-microarray" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Desde la generalización del uso de los microarrays se han
 desarrollado muchas formas para visualizar los datos y decidir acerca
 de su calidad. Algunas trabajan sobre los datos obtenidos del
@@ -377,11 +371,11 @@ multitud de opciones podemos diferenciar:</p>
 </ul>
 <p>La exploración y el control de calidad pueden basarse en datos de bajo o de alto nivel. En cada caso se pueden aplicar ya sean técnicas generales de visualización de datos, como histogramas, diagramas de caja o visualización en dimensiones reducidas (PCA u otras), o bien técnicas “ad-hoc” para cada tipo de datos como el MA-Plot u otras que se discuten a continuación.</p>
 </div>
-<div id="datos-de-partida" class="section level3" number="5.1.2">
-<h3><span class="header-section-number">5.1.2</span> Datos de partida</h3>
+<div id="datos-de-partida" class="section level3 hasAnchor" number="5.1.2">
+<h3><span class="header-section-number">5.1.2</span> Datos de partida<a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#datos-de-partida" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>La estructura de los datos de microarrays de un color o de dos colores difiere considerablemente, tanto a nivel físico (los chips y las imágenes que de ellos se obtiene) como informático, es decir en la forma en que se representan.</p>
-<div id="arrays-de-dos-colores-o-de-cdna" class="section level4" number="5.1.2.1">
-<h4><span class="header-section-number">5.1.2.1</span> Arrays de dos colores (o de “cDNA”)</h4>
+<div id="arrays-de-dos-colores-o-de-cdna" class="section level4 hasAnchor" number="5.1.2.1">
+<h4><span class="header-section-number">5.1.2.1</span> Arrays de dos colores (o de “cDNA”)<a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#arrays-de-dos-colores-o-de-cdna" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Tradicionalmente los arrays de dos colores o de cDNA se realizaban de forma menos automatizada que los de un color o de Affymetrix.
 Esto implica que, tras obtener la imagen, el escaneado del archivo “.TIFF”
 resultante pudiera ser llevado a cabo mediante un software independiente
@@ -606,8 +600,8 @@ y una fila por gen (mismas filas que archivos “.gpr”).</p>
 </tbody>
 </table>
 </div>
-<div id="arrays-de-un-color-affymetrix" class="section level4" number="5.1.2.2">
-<h4><span class="header-section-number">5.1.2.2</span> Arrays de un color (Affymetrix)</h4>
+<div id="arrays-de-un-color-affymetrix" class="section level4 hasAnchor" number="5.1.2.2">
+<h4><span class="header-section-number">5.1.2.2</span> Arrays de un color (Affymetrix)<a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#arrays-de-un-color-affymetrix" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>El resultado de escanear la imagen de un array de affymetrix es un archivo de extensión “.CEL” que, a diferencia de los arrays de dos colores, está en formato binario es decir que solo puede ser leído con programas específicos para ello.</p>
 <p>De forma similar a los arrays de dos colores, existe un archivo “.CEL” por cada microarray.</p>
 <p>A partir de las intensidades de los archivos “.CEL” se genera la matriz de expresión, que contiene una columna por chip con los valores de intensidad absoluta, y una fila por grupo de sondas. En el caso de arrays de affymetrix existe una gran variedad de algoritmos de “sumarización” y, según cual se utilice, se obtendrá unos u otros valores de expresión. Ahora bien, éstos serán siempre medidas absolutas, es decir independientes del resto de muestras y en una escala arbitraria.</p>
@@ -675,8 +669,8 @@ y una fila por gen (mismas filas que archivos “.gpr”).</p>
 </tbody>
 </table>
 </div>
-<div id="datos-de-ejemplo" class="section level4" number="5.1.2.3">
-<h4><span class="header-section-number">5.1.2.3</span> Datos de ejemplo</h4>
+<div id="datos-de-ejemplo" class="section level4 hasAnchor" number="5.1.2.3">
+<h4><span class="header-section-number">5.1.2.3</span> Datos de ejemplo<a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#datos-de-ejemplo" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Los ejemplos de este capítulo se basarán en dos de los conjuntos de datos descritos en el capítulo <a href="MDAProcess.html#MDAProcess">3</a>.</p>
 <ul>
 <li>Por un lado, trabajaremos con los datos del conjunto referidos al efecto del tratamiento con estrógenos en cancer de mama descrito en @ref{estrogen}. La exploración se basará en los datos normalizados pero también en los datos “crudos”, de bajo nivel, contenidos en los archivos “.cel”. Estos datos pueden obtenerse directamente del paquete de Bioconductor . Un aspecto interesante de este conjunto de datos es que, junto con 8 muestras “buenas” se proporciona un array defectuoso, denominado “” que facilita el ver como aparecen ciertos gráficos cuando hay problemas.</li>
@@ -743,96 +737,150 @@ y una fila por gen (mismas filas que archivos “.gpr”).</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb12-1" tabindex="-1"></a><span class="fu">print</span>(RG)</span></code></pre></div>
 <pre><code>## An object of class &quot;RGList&quot;
 ## $R
-##      DMSCCl319 DMSCCl320 DMSCCl321 DMSCCl329 CClDMS330 CClDMS331 CClDMS332
-## [1,]        47        46        40        59        56        40        45
-## [2,]      1095        46        39        54        56        40        47
-## [3,]        47        46        41        55        52        39        46
-## [4,]        46        45        41        56        54        43        47
-## [5,]        55        53        45        61        71        47        63
-##      DMSCCl333 CClDMS379 CClDMS380 CClDMS381 DMSCCl382 DMSCCl384 DMSCCl389
-## [1,]        70        46        65        43        59        46        63
-## [2,]        69        45        61        43        62        48        68
-## [3,]        81        44        57        41        58        50        63
-## [4,]        78        44        60        42        59        48        62
-## [5,]        91        51        83        56        71        52        69
-##      DMSCCl390 CClDMS391 CClDMS393 CClDMS394
-## [1,]        77        40        91        32
-## [2,]        71        41        85        32
-## [3,]        70        40        39        32
-## [4,]        81        41        51        32
-## [5,]        81        57        95        37
+##      DMSCCl319 DMSCCl320 DMSCCl321 DMSCCl329
+## [1,]        47        46        40        59
+## [2,]      1095        46        39        54
+## [3,]        47        46        41        55
+## [4,]        46        45        41        56
+## [5,]        55        53        45        61
+##      CClDMS330 CClDMS331 CClDMS332 DMSCCl333
+## [1,]        56        40        45        70
+## [2,]        56        40        47        69
+## [3,]        52        39        46        81
+## [4,]        54        43        47        78
+## [5,]        71        47        63        91
+##      CClDMS379 CClDMS380 CClDMS381 DMSCCl382
+## [1,]        46        65        43        59
+## [2,]        45        61        43        62
+## [3,]        44        57        41        58
+## [4,]        44        60        42        59
+## [5,]        51        83        56        71
+##      DMSCCl384 DMSCCl389 DMSCCl390 CClDMS391
+## [1,]        46        63        77        40
+## [2,]        48        68        71        41
+## [3,]        50        63        70        40
+## [4,]        48        62        81        41
+## [5,]        52        69        81        57
+##      CClDMS393 CClDMS394
+## [1,]        91        32
+## [2,]        85        32
+## [3,]        39        32
+## [4,]        51        32
+## [5,]        95        37
 ## 44285 more rows ...
 ## 
 ## $G
-##      DMSCCl319 DMSCCl320 DMSCCl321 DMSCCl329 CClDMS330 CClDMS331 CClDMS332
-## [1,]        77        78        45        45        87        65       128
-## [2,]      4558        79        44        47        81        66       131
-## [3,]        79        75        46        47        84        66       122
-## [4,]        78        82        44        71        86        63       135
-## [5,]        93        95        92        57        86        66       132
-##      DMSCCl333 CClDMS379 CClDMS380 CClDMS381 DMSCCl382 DMSCCl384 DMSCCl389
-## [1,]       107        57        90        99        84        56        68
-## [2,]       110        54        89        96       168        54        72
-## [3,]       114        54        84        93        78        55        71
-## [4,]       113       118        84        97        83        56        75
-## [5,]       133        59        95        99       102        64        84
-##      DMSCCl390 CClDMS391 CClDMS393 CClDMS394
-## [1,]        71        74        83        59
-## [2,]        71        75        81        60
-## [3,]        73        78        62        59
-## [4,]        79        77        70        61
-## [5,]        99        83        92        63
+##      DMSCCl319 DMSCCl320 DMSCCl321 DMSCCl329
+## [1,]        77        78        45        45
+## [2,]      4558        79        44        47
+## [3,]        79        75        46        47
+## [4,]        78        82        44        71
+## [5,]        93        95        92        57
+##      CClDMS330 CClDMS331 CClDMS332 DMSCCl333
+## [1,]        87        65       128       107
+## [2,]        81        66       131       110
+## [3,]        84        66       122       114
+## [4,]        86        63       135       113
+## [5,]        86        66       132       133
+##      CClDMS379 CClDMS380 CClDMS381 DMSCCl382
+## [1,]        57        90        99        84
+## [2,]        54        89        96       168
+## [3,]        54        84        93        78
+## [4,]       118        84        97        83
+## [5,]        59        95        99       102
+##      DMSCCl384 DMSCCl389 DMSCCl390 CClDMS391
+## [1,]        56        68        71        74
+## [2,]        54        72        71        75
+## [3,]        55        71        73        78
+## [4,]        56        75        79        77
+## [5,]        64        84        99        83
+##      CClDMS393 CClDMS394
+## [1,]        83        59
+## [2,]        81        60
+## [3,]        62        59
+## [4,]        70        61
+## [5,]        92        63
 ## 44285 more rows ...
 ## 
 ## $Rb
-##      DMSCCl319 DMSCCl320 DMSCCl321 DMSCCl329 CClDMS330 CClDMS331 CClDMS332
-## [1,]        41        39        35        47        44        36        40
-## [2,]        43        39        35        46        44        36        39
-## [3,]        41        40        35        48        44        35        39
-## [4,]        40        40        35        49        43        35        39
-## [5,]        41        40        36        48        44        35        39
-##      DMSCCl333 CClDMS379 CClDMS380 CClDMS381 DMSCCl382 DMSCCl384 DMSCCl389
-## [1,]        55        39        49        37        46        42        50
-## [2,]        55        37        50        37        46        41        52
-## [3,]        59        39        47        37        46        41        52
-## [4,]        63        39        48        36        46        41        52
-## [5,]        60        39        47        37        46        41        52
-##      DMSCCl390 CClDMS391 CClDMS393 CClDMS394
-## [1,]        60        36        34        30
-## [2,]        59        36        35        31
-## [3,]        55        35        35        30
-## [4,]        58        36        34        30
-## [5,]        56        36        35        30
+##      DMSCCl319 DMSCCl320 DMSCCl321 DMSCCl329
+## [1,]        41        39        35        47
+## [2,]        43        39        35        46
+## [3,]        41        40        35        48
+## [4,]        40        40        35        49
+## [5,]        41        40        36        48
+##      CClDMS330 CClDMS331 CClDMS332 DMSCCl333
+## [1,]        44        36        40        55
+## [2,]        44        36        39        55
+## [3,]        44        35        39        59
+## [4,]        43        35        39        63
+## [5,]        44        35        39        60
+##      CClDMS379 CClDMS380 CClDMS381 DMSCCl382
+## [1,]        39        49        37        46
+## [2,]        37        50        37        46
+## [3,]        39        47        37        46
+## [4,]        39        48        36        46
+## [5,]        39        47        37        46
+##      DMSCCl384 DMSCCl389 DMSCCl390 CClDMS391
+## [1,]        42        50        60        36
+## [2,]        41        52        59        36
+## [3,]        41        52        55        35
+## [4,]        41        52        58        36
+## [5,]        41        52        56        36
+##      CClDMS393 CClDMS394
+## [1,]        34        30
+## [2,]        35        31
+## [3,]        35        30
+## [4,]        34        30
+## [5,]        35        30
 ## 44285 more rows ...
 ## 
 ## $Gb
-##      DMSCCl319 DMSCCl320 DMSCCl321 DMSCCl329 CClDMS330 CClDMS331 CClDMS332
-## [1,]        44        44        32        34        40        39        48
-## [2,]        46        43        32        35        41        38        48
-## [3,]        43        43        32        35        40        38        49
-## [4,]        43        43        32        35        41        38        49
-## [5,]        43        42        32        35        41        38        48
-##      DMSCCl333 CClDMS379 CClDMS380 CClDMS381 DMSCCl382 DMSCCl384 DMSCCl389
-## [1,]        47        35        50        50        45        37        38
-## [2,]        48        35        50        49        45        37        38
-## [3,]        48        35        51        49        45        37        38
-## [4,]        49        35        51        49        46        37        37
-## [5,]        49        35        50        49        45        37        38
-##      DMSCCl390 CClDMS391 CClDMS393 CClDMS394
-## [1,]        38        40        37        36
-## [2,]        38        40        37        36
-## [3,]        39        40        37        36
-## [4,]        38        40        37        36
-## [5,]        39        40        37        36
+##      DMSCCl319 DMSCCl320 DMSCCl321 DMSCCl329
+## [1,]        44        44        32        34
+## [2,]        46        43        32        35
+## [3,]        43        43        32        35
+## [4,]        43        43        32        35
+## [5,]        43        42        32        35
+##      CClDMS330 CClDMS331 CClDMS332 DMSCCl333
+## [1,]        40        39        48        47
+## [2,]        41        38        48        48
+## [3,]        40        38        49        48
+## [4,]        41        38        49        49
+## [5,]        41        38        48        49
+##      CClDMS379 CClDMS380 CClDMS381 DMSCCl382
+## [1,]        35        50        50        45
+## [2,]        35        50        49        45
+## [3,]        35        51        49        45
+## [4,]        35        51        49        46
+## [5,]        35        50        49        45
+##      DMSCCl384 DMSCCl389 DMSCCl390 CClDMS391
+## [1,]        37        38        38        40
+## [2,]        37        38        38        40
+## [3,]        37        38        39        40
+## [4,]        37        37        38        40
+## [5,]        37        38        39        40
+##      CClDMS393 CClDMS394
+## [1,]        37        36
+## [2,]        37        36
+## [3,]        37        36
+## [4,]        37        36
+## [5,]        37        36
 ## 44285 more rows ...
 ## 
 ## $targets
-##            Cy3  Cy5 RIN.Cy3 RIN.Cy5                      FileName
-## DMSCCl319 DMSO CCl4     9.0     9.7 251316214319_auto_479-628.gpr
-## DMSCCl320 DMSO CCl4     9.0     5.0 251316214320_auto_478-629.gpr
-## DMSCCl321 DMSO CCl4     9.0     2.5 251316214321_auto_410-592.gpr
-## DMSCCl329 DMSO CCl4     9.0     2.5 251316214329_auto_429-673.gpr
-## CClDMS330 CCl4 DMSO     9.7     9.0 251316214330_auto_457-658.gpr
+##            Cy3  Cy5 RIN.Cy3 RIN.Cy5
+## DMSCCl319 DMSO CCl4     9.0     9.7
+## DMSCCl320 DMSO CCl4     9.0     5.0
+## DMSCCl321 DMSO CCl4     9.0     2.5
+## DMSCCl329 DMSO CCl4     9.0     2.5
+## CClDMS330 CCl4 DMSO     9.7     9.0
+##                                FileName
+## DMSCCl319 251316214319_auto_479-628.gpr
+## DMSCCl320 251316214320_auto_478-629.gpr
+## DMSCCl321 251316214321_auto_410-592.gpr
+## DMSCCl329 251316214329_auto_429-673.gpr
+## CClDMS330 251316214330_auto_457-658.gpr
 ## 13 more rows ...
 ## 
 ## $genes
@@ -862,15 +910,15 @@ y una fila por gen (mismas filas que archivos “.gpr”).</p>
 </div>
 </div>
 </div>
-<div id="exploración-y-control-de-calidad" class="section level2" number="5.2">
-<h2><span class="header-section-number">5.2</span> Exploración y control de calidad</h2>
+<div id="exploración-y-control-de-calidad" class="section level2 hasAnchor" number="5.2">
+<h2><span class="header-section-number">5.2</span> Exploración y control de calidad<a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#exploraci%C3%B3n-y-control-de-calidad" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Los gráficos son útiles para comprobar la calidad de los datos de microarrays,
 obtener información sobre cómo se deben preprocesar los datos y comprobar, finalmente, que el preprocesado se haya realizado correctamente.</p>
 <p>Siguiendo el esquema presentado en la tabla @ref{tab:tablaDiagnosticos} se presentan a continuación los distintos gráficos utilizados con una breve descripción de lo que representa cada uno y como interpretarlos adecuadamente. El código para generarlos se presenta al final del capítulo como un apéndice.</p>
-<div id="control-de-calidad-con-gráficos-estadísticos-generales" class="section level3" number="5.2.1">
-<h3><span class="header-section-number">5.2.1</span> Control de calidad con gráficos estadísticos generales</h3>
-<div id="histogramas-y-gráficos-de-densidad" class="section level4" number="5.2.1.1">
-<h4><span class="header-section-number">5.2.1.1</span> Histogramas y gráficos de densidad</h4>
+<div id="control-de-calidad-con-gráficos-estadísticos-generales" class="section level3 hasAnchor" number="5.2.1">
+<h3><span class="header-section-number">5.2.1</span> Control de calidad con gráficos estadísticos generales<a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#control-de-calidad-con-gr%C3%A1ficos-estad%C3%ADsticos-generales" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="histogramas-y-gráficos-de-densidad" class="section level4 hasAnchor" number="5.2.1.1">
+<h4><span class="header-section-number">5.2.1.1</span> Histogramas y gráficos de densidad<a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#histogramas-y-gr%C3%A1ficos-de-densidad" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Estos gráficos permite hacerse una idea de si las distribuciones de los distintos arrays son similares en forma y posición. La figura <a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#fig:plotAffyHist">5.1</a> muestra los histogramas correspondientes a los 9 arrays del conjunto de datos .</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb14-1" tabindex="-1"></a>affySampleNames <span class="ot">&lt;-</span> <span class="fu">rownames</span>(<span class="fu">pData</span>(allAffyRaw))</span>
 <span id="cb14-2"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb14-2" tabindex="-1"></a>affyColores <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">8</span>,<span class="dv">8</span>)</span>
@@ -885,8 +933,8 @@ Figure 5.1: La distribución de las expresiones se ve afectada globalmente lo qu
 </div>
 <p>Tanto los gráficos de densidad como los diagramas de cajas de la figura siguiente muestran un <em>desplazamiento global</em> de los valores en todas las muestras del grupo de 48 horas lo que sugiere un efecto técnico, puesto que no es biológicamente plausible que todas los genes se vean más afectados por la mayor tiempo de exposición.</p>
 </div>
-<div id="diagramas-de-caja-o-boxplots" class="section level4" number="5.2.1.2">
-<h4><span class="header-section-number">5.2.1.2</span> Diagramas de caja o “boxplots”</h4>
+<div id="diagramas-de-caja-o-boxplots" class="section level4 hasAnchor" number="5.2.1.2">
+<h4><span class="header-section-number">5.2.1.2</span> Diagramas de caja o “boxplots”<a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#diagramas-de-caja-o-boxplots" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Como los histogramas los diagramas de caja –basados en los distintos cuantiles de las valores– dan una idea de la distribución de las intensidades. La figura <a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#fig:plotAffyBoxplot">5.2</a> muestra los diagramas de caja correspondientes a los 9 arrays del conjunto de datos .</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb15-1" tabindex="-1"></a><span class="fu">boxplot</span>(allAffyRaw, <span class="at">main=</span><span class="st">&quot;Distribución de las expresiones&quot;</span>, <span class="at">col=</span>affyColores, <span class="at">las=</span><span class="dv">2</span>)</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:plotAffyBoxplot"></span>
@@ -896,8 +944,8 @@ Figure 5.2: Las distribuciónes de las expresiones se encuentran desplazadas en 
 </p>
 </div>
 </div>
-<div id="gráficos-de-componentes-principales" class="section level4" number="5.2.1.3">
-<h4><span class="header-section-number">5.2.1.3</span> Gráficos de componentes principales</h4>
+<div id="gráficos-de-componentes-principales" class="section level4 hasAnchor" number="5.2.1.3">
+<h4><span class="header-section-number">5.2.1.3</span> Gráficos de componentes principales<a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#gr%C3%A1ficos-de-componentes-principales" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>El análisis de componentes principales puede servir para detectar si las muestras se agrupan de forma “natural” es decir con otras muestras provenientes del mismo grupo o si no hay correspondencia clara entre grupos experimentales y proximidad en este gráfico. Cuando esto sucede no significa necesariamente que haya un problema pero puede ser indicativo de efectos técnicos -como el conocido efecto “batch”- que podría ser necesario corregir.</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb16-1" tabindex="-1"></a>plotPCA <span class="ot">&lt;-</span> <span class="cf">function</span> ( X, <span class="at">labels=</span><span class="cn">NULL</span>, <span class="at">colors=</span><span class="cn">NULL</span>, <span class="at">dataDesc=</span><span class="st">&quot;&quot;</span>, <span class="at">scale=</span><span class="cn">FALSE</span>)</span>
 <span id="cb16-2"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb16-2" tabindex="-1"></a>{</span>
@@ -937,8 +985,8 @@ Figure 5.4: Sin la muestra defectuos puede asociarse la primera componente a la 
 </p>
 </div>
 </div>
-<div id="imagen-del-chip" class="section level4" number="5.2.1.4">
-<h4><span class="header-section-number">5.2.1.4</span> Imagen del chip</h4>
+<div id="imagen-del-chip" class="section level4 hasAnchor" number="5.2.1.4">
+<h4><span class="header-section-number">5.2.1.4</span> Imagen del chip<a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#imagen-del-chip" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Otra forma de ver si las muestras se agrupan según los grupos experimentales, o mediante otros criterios es usando un cluster jerárquico que realiza una agrupación básica de las muestras por grado de similaridad según la distancia que se utilice.</p>
 <p>Como en el caso de las componentes principales si las muestras se agrupan según las condiciones experimentales es una buena señal pero si no es así puede deberse a la presencia de otra fuente de variación o bien al hecho de que se trata de un gráfico basado en todo los datos y las condiciones experimentales pueden haber afectado un pequeño número de genes.</p>
 <p>La figura <a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#fig:plotDendro">5.5</a> muestra como se agrupan los datos del conjunto en base a un cluster jerárquico. Como en el caso de las componentes principales tras eliminar el array defectuoso las muestras se separan, primero por el tiempo de exposición y luego por niveles de estrógeno suministrado.</p>
@@ -952,12 +1000,12 @@ Figure 5.5: Un cluster jerárquico sirve para determinar si las muestras se agru
 </div>
 </div>
 </div>
-<div id="gráficos-de-diagnóstico-para-microarrays-de-dos-colores" class="section level3" number="5.2.2">
-<h3><span class="header-section-number">5.2.2</span> Gráficos de diagnóstico para microarrays de dos colores</h3>
+<div id="gráficos-de-diagnóstico-para-microarrays-de-dos-colores" class="section level3 hasAnchor" number="5.2.2">
+<h3><span class="header-section-number">5.2.2</span> Gráficos de diagnóstico para microarrays de dos colores<a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#gr%C3%A1ficos-de-diagn%C3%B3stico-para-microarrays-de-dos-colores" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>El diagnóstico de arrays de dos canales se basa principalmente
 en la imagen y en diferentes tipos de gráficos.</p>
-<div id="diagramas-de-dispersión-y-ma-plots" class="section level4" number="5.2.2.1">
-<h4><span class="header-section-number">5.2.2.1</span> Diagramas de dispersión y “MA-plots”</h4>
+<div id="diagramas-de-dispersión-y-ma-plots" class="section level4 hasAnchor" number="5.2.2.1">
+<h4><span class="header-section-number">5.2.2.1</span> Diagramas de dispersión y “MA-plots”<a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#diagramas-de-dispersi%C3%B3n-y-ma-plots" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>La normalización discutida en este mismo capítulo es un punto
 clave en el proceso de análisis de microarrays y se ha dedicado un
 gran esfuerzo a desarrollar y probar diferentes métodos
@@ -1034,8 +1082,8 @@ Figure 5.7: (a) Gráfico de un canal frente al otro (b) MA-plot (intensidad fren
 <div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#cb24-1" tabindex="-1"></a><span class="fu">par</span>(opt)</span></code></pre></div>
 <p>Aunque el diagrama de dispersión no lo muestra claramente, en el diagrama “MA” sí que se puede ver como los puntos estan claramente por debajo de lo que sería el eje de simetría horizontal</p>
 </div>
-<div id="imagen-del-array" class="section level4" number="5.2.2.2">
-<h4><span class="header-section-number">5.2.2.2</span> Imagen del array</h4>
+<div id="imagen-del-array" class="section level4 hasAnchor" number="5.2.2.2">
+<h4><span class="header-section-number">5.2.2.2</span> Imagen del array<a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#imagen-del-array" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>La imagen del chip (véase la figura <a href="#c05signalNoise"><strong>??</strong></a>,
 izquierda) ofrece una visión rápida de la calidad del array,
 proporcionando información acerca del balance del color, la
@@ -1043,8 +1091,8 @@ uniformidad en la hibridación y en los <em>spots</em>, de si el
 background es mayor del normal y dela existencia de artefactos como el
 polvo o pequeñas marcas (rasguños).</p>
 </div>
-<div id="histogramas-de-señales-y-de-la-relación-señalruído" class="section level4" number="5.2.2.3">
-<h4><span class="header-section-number">5.2.2.3</span> Histogramas de señales y de la relación señal–ruído</h4>
+<div id="histogramas-de-señales-y-de-la-relación-señalruído" class="section level4 hasAnchor" number="5.2.2.3">
+<h4><span class="header-section-number">5.2.2.3</span> Histogramas de señales y de la relación señal–ruído<a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#histogramas-de-se%C3%B1ales-y-de-la-relaci%C3%B3n-se%C3%B1alru%C3%ADdo" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Estos gráficos (véase la figura <a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#fig:c05signalNoise">5.8</a>, derecha) son útiles para detectar posibles anormalidades o un background excesivamente alto .</p>
 <div class="figure"><span style="display:block;" id="fig:c05signalNoise"></span>
 <img src="figures/c05signalNoise.png" alt="La relación señal ruido sirve para detectar posibles anormalidades o un background excesivamente alto como medida de calidad" width="660" />
@@ -1053,8 +1101,8 @@ Figure 5.8: La relación señal ruido sirve para detectar posibles anormalidades
 </p>
 </div>
 </div>
-<div id="boxplots" class="section level4" number="5.2.2.4">
-<h4><span class="header-section-number">5.2.2.4</span> Boxplots</h4>
+<div id="boxplots" class="section level4 hasAnchor" number="5.2.2.4">
+<h4><span class="header-section-number">5.2.2.4</span> Boxplots<a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#boxplots" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Un gráfico muy utilizado es el diagrama de cajas o “boxplot”
 múltiple con una caja por cada chip. Del alineamiento (o falta de
 él) y la semejanza (o disparidad) entre las cajas, se deduce si hace
@@ -1064,10 +1112,10 @@ cajas “dentro de arrays” (entre distintos sectores del mismo chip) y
 “entre arrays”.</p>
 </div>
 </div>
-<div id="gráficos-de-diagnóstico-para-microarrays-de-un-color" class="section level3" number="5.2.3">
-<h3><span class="header-section-number">5.2.3</span> Gráficos de diagnóstico para microarrays de un color</h3>
-<div id="imagen-del-chip-1" class="section level4" number="5.2.3.1">
-<h4><span class="header-section-number">5.2.3.1</span> Imagen del chip</h4>
+<div id="gráficos-de-diagnóstico-para-microarrays-de-un-color" class="section level3 hasAnchor" number="5.2.3">
+<h3><span class="header-section-number">5.2.3</span> Gráficos de diagnóstico para microarrays de un color<a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#gr%C3%A1ficos-de-diagn%C3%B3stico-para-microarrays-de-un-color" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="imagen-del-chip-1" class="section level4 hasAnchor" number="5.2.3.1">
+<h4><span class="header-section-number">5.2.3.1</span> Imagen del chip<a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#imagen-del-chip-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Los arrays de affymetrix contienen millones de sondas por lo que no pueden examinarse a simple vista. A pesar de ello hay diversas formas de obtener una imagen que, en caso de presentar irregularidades pueden indicar algún tipo de problemas como burbujas, arañazos, etc. La figura @ref(c06plotAffy} muestra algunas de las imágenes</p>
 <p>La imagen del array de Affymetrix sólo es útil para evidenciar grandes problemas como burbujas, arañazos, etc. En este ejemplo los dos arrays de la izquierda se considerarían aceptables y los de la derecha defectuosos.</p>
 <div class="figure"><span style="display:block;" id="fig:c05plotAffy"></span>
@@ -1077,8 +1125,8 @@ Figure 5.9: Imágenes de cuatro microarrays de Affymetrix
 </p>
 </div>
 </div>
-<div id="gráfico-m-a" class="section level4" number="5.2.3.2">
-<h4><span class="header-section-number">5.2.3.2</span> Gráfico “M-A”</h4>
+<div id="gráfico-m-a" class="section level4 hasAnchor" number="5.2.3.2">
+<h4><span class="header-section-number">5.2.3.2</span> Gráfico “M-A”<a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#gr%C3%A1fico-m-a" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>En los chips de dos colores el MA–plot se utliza para comparar los dos canales en cada array (rojo y verde). En cambio, en los chips de Affymetrics, en que sólo hay un canal en cada array, la única forma de definir M (el log ratio) es a partir de la comparación entre pares de de valores, ya sea los arrays dos a dos o bien cada array respecto un valor de referencia que puede ser la mediana, punto a punto, de todos los arrays (véase por ejemplo la figura <a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#fig:c05MAPlotAffy">5.10</a>).</p>
 <div class="figure"><span style="display:block;" id="fig:c05MAPlotAffy"></span>
 <img src="figures/c05MAPlotAffy.png" alt="En los chips de Affymetrix la única forma de definir M (el log ratio) es comparar entre diferentes arrays" width="774" />
@@ -1091,8 +1139,8 @@ Figure 5.10: En los chips de Affymetrix la única forma de definir M (el log rat
 Donde <span class="math inline">\(I_1\)</span> es la intensidad del array de estudio, e <span class="math inline">\(I_2\)</span> es la intensidad media de arrays.
 Por lo general, se espera que la distribución en el gráfico se concentre a lo largo del eje M = 0.</p>
 </div>
-<div id="modelos-de-bajo-nivel-probe-level-models-o-plm" class="section level4" number="5.2.3.3">
-<h4><span class="header-section-number">5.2.3.3</span> Modelos de bajo nivel (“Probe-Level-Models” o PLM)</h4>
+<div id="modelos-de-bajo-nivel-probe-level-models-o-plm" class="section level4 hasAnchor" number="5.2.3.3">
+<h4><span class="header-section-number">5.2.3.3</span> Modelos de bajo nivel (“Probe-Level-Models” o PLM)<a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#modelos-de-bajo-nivel-probe-level-models-o-plm" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Los modelos de bajo nivel (“Probe-Level-Models” o PLM) ajustan a los valores de intensidad –a nivel de sondas, no de valores totalizados de gen– un modelo explicativo. Los valores estimados por este modelo se comparan con los valores reales y se obtienen los errores o “residuos” del ajuste. El análisis de dichos residuos procede de forma similar a lo que se realiza al analizar un modelo de regresión:
 Si los errores no presentan ningún patrón especial supondremos que el modelo se ajusta relativamente bien.
 Si, en cambio, observamos desviaciones de esta presunta aleatoriedad querrá decir que el modelo no explica bien las observaciones, lo cual se atribuirá a la existencia de algún problema con los datos.</p>
@@ -1122,8 +1170,8 @@ Figure 5.11: Graficos de diagnóstico calculados a nivel de sondas PLM
 </div>
 </div>
 </div>
-<div id="normalización-de-arrays-de-dos-colores" class="section level2" number="5.3">
-<h2><span class="header-section-number">5.3</span> Normalización de arrays de dos colores</h2>
+<div id="normalización-de-arrays-de-dos-colores" class="section level2 hasAnchor" number="5.3">
+<h2><span class="header-section-number">5.3</span> Normalización de arrays de dos colores<a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#normalizaci%C3%B3n-de-arrays-de-dos-colores" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>La palabra <em>normalización</em> describe las técnicas utilizadas para transformar adecuadamente los datos antes de que sean analizados.
 El objetivo es corregir diferencias sistemáticas entre muestras, en la misma o entre imágenes, lo que no representa
 una verdadera variación entre las muestras biológicas.</p>
@@ -1144,8 +1192,8 @@ un sesgo sistemático.</li>
 <li>Detectar artefactos espaciales en la imagen o en la tinción de
 los gráficos de diagnóstico</li>
 </ol>
-<div id="normalización-global" class="section level3" number="5.3.1">
-<h3><span class="header-section-number">5.3.1</span> Normalización global</h3>
+<div id="normalización-global" class="section level3 hasAnchor" number="5.3.1">
+<h3><span class="header-section-number">5.3.1</span> Normalización global<a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#normalizaci%C3%B3n-global" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Este método esta basado en un ajuste global, es decir en modificar todos los valores una cantidad <em>c</em>, estimada de acuerdo a algún criterio.
 <span class="math display">\[\begin{equation}
 \log_2 R/G \rightarrow \log_2 R/G-c=\log_2 R/(Gk)
@@ -1155,8 +1203,8 @@ opciones para <span class="math inline">\(k\)</span> o <span class="math inline"
 <p>La intensidad total de la normalización</p>
 <p><span class="math inline">\(k=\sum R_i/\sum G_i\)</span></p>
 </div>
-<div id="normalización-dependiente-de-la-intensidad" class="section level3" number="5.3.2">
-<h3><span class="header-section-number">5.3.2</span> Normalización dependiente de la intensidad</h3>
+<div id="normalización-dependiente-de-la-intensidad" class="section level3 hasAnchor" number="5.3.2">
+<h3><span class="header-section-number">5.3.2</span> Normalización dependiente de la intensidad<a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#normalizaci%C3%B3n-dependiente-de-la-intensidad" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>En este caso se realiza una modificación específica para cada valor. Esta modificación se obtiene como una función de la intensidad total del gen (<span class="math inline">\(c=c(A)\)</span>).
 <span class="math display">\[\begin{equation}
 \log_2 R/G \rightarrow \log_2 R/G-c(A)=\log_2 R/(Gk(A))
@@ -1164,8 +1212,8 @@ opciones para <span class="math inline">\(k\)</span> o <span class="math inline"
 <p>Una posible estimación de esta función puede hacerse utilizando la función <em>lowess</em> (LOcally WEighted Scatterplot Smoothing).</p>
 </div>
 </div>
-<div id="resumen-y-normalización-de-microarrays-de-affymetrix" class="section level2" number="5.4">
-<h2><span class="header-section-number">5.4</span> Resumen y normalización de microarrays de Affymetrix</h2>
+<div id="resumen-y-normalización-de-microarrays-de-affymetrix" class="section level2 hasAnchor" number="5.4">
+<h2><span class="header-section-number">5.4</span> Resumen y normalización de microarrays de Affymetrix<a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#resumen-y-normalizaci%C3%B3n-de-microarrays-de-affymetrix" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>En los arrays de Affymetrix, como en todos los tipos de microarrays, tras escanear la imagen se obtiene una serie de valores de
 intensidad de cada elemento del chip.
 En el caso de estos arrays sabemos que cada valor no corresponde a la expresión de un gen:</p>
@@ -1192,8 +1240,8 @@ dado que cada chip se hibrida con un única muestra.</p>
 <p>Hay muchos métodos para estimar la expresión (más de 30 publicados).
 Cada método contempla de forma explícita o implícita las tres formas de preprocesado: corrección del fondo, normalización y resumen.</p>
 <p>Aquí nos centraremos únicamente en el método más popular que continua siendo utilizado trece años después de su introducción: El “Robust Multi-chip Average” o RMA</p>
-<div id="el-método-rma-robust-multi-array-average" class="section level3" number="5.4.1">
-<h3><span class="header-section-number">5.4.1</span> El método RMA (Robust Multi-Array Average)</h3>
+<div id="el-método-rma-robust-multi-array-average" class="section level3 hasAnchor" number="5.4.1">
+<h3><span class="header-section-number">5.4.1</span> El método RMA (Robust Multi-Array Average)<a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#el-m%C3%A9todo-rma-robust-multi-array-average" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Para compensar algunas deficiencias de los primeros métodos de
 resumen y normalización de arrays de Affymetrix, Irizarry y sus
 colegas introdujeron en 2003 (~) un método basado en la modelización de las intensidades de las sondas que, en vez de basarse en las distintas sondas de un gen dentro de un mismo array se basa en los distintos valores de la misma sonda entre todos los arrays disponibles,</p>
@@ -1217,8 +1265,8 @@ Figure 5.12: El método RMA incluye una normalización por cuantiles como la rep
 </div>
 </div>
 </div>
-<div id="filtraje-no-específico" class="section level2" number="5.5">
-<h2><span class="header-section-number">5.5</span> Filtraje no específico</h2>
+<div id="filtraje-no-específico" class="section level2 hasAnchor" number="5.5">
+<h2><span class="header-section-number">5.5</span> Filtraje no específico<a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#filtraje-no-espec%C3%ADfico" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>El objetivo del filtraje es eliminar aquellos genes o aquellos <em>spots</em> cuyas imágenes o señales sean erróneas por diferentes motivos, con el fin de reducir el ruído de fondo.</p>
 <p>Los principales procesos de filtrado son:</p>
 <ul>
@@ -1230,7 +1278,7 @@ Figure 5.12: El método RMA incluye una normalización por cuantiles como la rep
 
 </div>
 </div>
-<h3> Referencias</h3>
+<h3> Referencias<a href="referencias.html#referencias" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
 <div id="ref-Quackenbush:2003" class="csl-entry">
 Quackenbush, J. 2002. <span>“Microarray Data Normalization and Transformation.”</span> <em>Nature Genet.</em> 32: 496–501.
@@ -1239,24 +1287,80 @@ Quackenbush, J. 2002. <span>“Microarray Data Normalization and Transformation.
 Yang, Y. H., M. J. Buckley, S. Dudoit, and T. P. Speed. 2002. <span>“Comparison of Methods for Image Analysis on c<span>DNA</span> Microarray Data.”</span> <em>Journal of Computational and Graphical Statistic</em> 11 (1).
 </div>
 </div>
-<p style="text-align: center;">
-<a href="MDAExpDesign.html"><button class="btn btn-default">Previous</button></a>
-<a href="chapDEG.html"><button class="btn btn-default">Next</button></a>
-</p>
-</div>
-</div>
+            </section>
 
-
-</div>
-
+          </div>
+        </div>
+      </div>
+<a href="MDAExpDesign.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="chapDEG.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
-
-// add bootstrap table styles to pandoc tables
-$(document).ready(function () {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": null,
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  }
 });
-
+});
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
+
 </html>

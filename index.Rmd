@@ -1,9 +1,8 @@
 ---
 title: "Analisis de datos ómicos"
 author: 
-- Alex Sánchez-Pla$^{1,2}$ y Ricardo Gonzalo Sanz$^2$
+- Alex Sánchez-Pla$^{1}$
 - $^1$ Departament de Genètica, Microbiologia i Estadística. Universitat de Barcelona (UB).
-- $^2$ Unitat de Estadística i Bioinformàtica. Vall d'Hebron Institut de Recerca (VHIR).
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: MDAreview.bib
@@ -12,7 +11,6 @@ link-citations: yes
 github-repo: https://github.com/ASPteaching/Analisis_de_datos_omicos-Materiales_para_un_curso
 output:
   bookdown::gitbook: default
-  bookdown::html_document2: default
 
 ---
 
