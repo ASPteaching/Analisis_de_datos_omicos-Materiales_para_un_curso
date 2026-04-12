@@ -1,14 +1,14 @@
 
 installifnot <- function (packageName){
   if (!(require(packageName, character.only=TRUE))) {
-    install.packages(packageName, dep=TRUE)
+    install.packages(packageName, dep=TRUE, force=TRUE)
   }else{
     detach(paste ("package", packageName, sep=":"), character.only=TRUE)
   } 
 }
 bioCifnot <- function (packageName){
   if (!(require(packageName, character.only=TRUE))) {
-  BiocManager::install(packageName)
+  BiocManager::install(packageName, force=TRUE)
   }else{
     detach(paste ("package", packageName, sep=":"), character.only=TRUE)
   }  
@@ -39,7 +39,7 @@ bioCifnot ("GOstats")
 
 #########################################################3
 library(bookdown)
-render <- FALSE
+render <- TRUE
 if (render)
   render_book(input = ".", output_format = NULL, clean = TRUE,
               envir = parent.frame(), 

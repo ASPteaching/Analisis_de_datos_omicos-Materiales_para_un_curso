@@ -2,66 +2,58 @@
 <html lang="" xml:lang="">
 <head>
 
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Capítulo 6 Selección de genes diferencialmente expresados | Analisis de datos ómicos</title>
-  <meta name="description" content="Capítulo 6 Selección de genes diferencialmente expresados | Analisis de datos ómicos" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Capítulo 6 Selección de genes diferencialmente expresados | Analisis de datos ómicos" />
+<meta property="og:type" content="book" />
 
-  <meta property="og:title" content="Capítulo 6 Selección de genes diferencialmente expresados | Analisis de datos ómicos" />
-  <meta property="og:type" content="book" />
-  
-  
-  
-  <meta name="github-repo" content="https://github.com/ASPteaching/Analisis_de_datos_omicos-Materiales_para_un_curso" />
 
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Capítulo 6 Selección de genes diferencialmente expresados | Analisis de datos ómicos" />
-  
-  
-  
+<meta name="github-repo" content="https://github.com/ASPteaching/Analisis_de_datos_omicos-Materiales_para_un_curso" />
 
 <meta name="author" content="Alex Sánchez-Pla^{1,2} y Ricardo Gonzalo Sanz^2" />
 <meta name="author" content="^1 Departament de Genètica, Microbiologia i Estadística. Universitat de Barcelona (UB)." />
 <meta name="author" content="^2 Unitat de Estadística i Bioinformàtica. Vall d’Hebron Institut de Recerca (VHIR)." />
 
 
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-  
-  
-<link rel="prev" href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"/>
-<link rel="next" href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"/>
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<meta name="description" content="Capítulo 6 Selección de genes diferencialmente expresados | Analisis de datos ómicos">
+
+<title>Capítulo 6 Selección de genes diferencialmente expresados | Analisis de datos ómicos</title>
+
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
-<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="libs/navigation-1.1/tabsets.js"></script>
 
 
-
-
-
-
-
-
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
-
-
+<style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -94,7 +86,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -107,7 +99,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -120,12 +112,19 @@ code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
 
 <style type="text/css">
 /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
 .hanging div.csl-entry {
   margin-left:2em;
@@ -144,193 +143,204 @@ div.csl-indent {
 }
 </style>
 
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+/* show arrow before summary tag as in bootstrap
+TODO: remove if bootstrap in updated in html_document (rmarkdown#1485) */
+details > summary {
+  display: list-item;
+  cursor: pointer;
+}
+</style>
 </head>
 
 <body>
 
+<div class="container-fluid main-container">
 
 
-  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
-
-    <div class="book-summary">
-      <nav role="navigation">
-
-<ul class="summary">
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Presentación</a>
+<div class="row">
+<div class="col-sm-12">
+<div id="TOC">
 <ul>
-<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#instalación-de-paquetes-de-r-y-código-de-los-capítulos"><i class="fa fa-check"></i><b>1.1</b> Instalación de paquetes de R y código de los capítulos</a></li>
+<li class="has-sub"><a href="index.html#presentaci%C3%B3n" id="toc-presentación"><span class="toc-section-number">1</span> Presentación</a>
+<ul>
+<li><a href="index.html#instalaci%C3%B3n-de-paquetes-de-r-y-c%C3%B3digo-de-los-cap%C3%ADtulos" id="toc-instalación-de-paquetes-de-r-y-código-de-los-capítulos"><span class="toc-section-number">1.1</span> Instalación de paquetes de R y código de los capítulos</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><i class="fa fa-check"></i><b>2</b> Introduccion a los microarrays y otras tecnologías omicas</a>
+<li class="has-sub"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#introduccion-a-los-microarrays-y-otras-tecnolog%C3%ADas-omicas" id="toc-introduccion-a-los-microarrays-y-otras-tecnologías-omicas"><span class="toc-section-number">2</span> Introduccion a los microarrays y otras tecnologías omicas</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#antecedentes-históricos"><i class="fa fa-check"></i><b>2.1</b> Antecedentes históricos</a></li>
-<li class="chapter" data-level="2.2" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#los-microarrays"><i class="fa fa-check"></i><b>2.2</b> Los microarrays</a>
+<li><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#antecedentes-hist%C3%B3ricos" id="toc-antecedentes-históricos"><span class="toc-section-number">2.1</span> Antecedentes históricos</a></li>
+<li class="has-sub"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#los-microarrays" id="toc-los-microarrays"><span class="toc-section-number">2.2</span> Los microarrays</a>
 <ul>
-<li class="chapter" data-level="2.2.1" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#aplicaciones-de-los-microarrays"><i class="fa fa-check"></i><b>2.2.1</b> Aplicaciones de los microarrays</a></li>
+<li><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#aplicaciones-de-los-microarrays" id="toc-aplicaciones-de-los-microarrays"><span class="toc-section-number">2.2.1</span> Aplicaciones de los microarrays</a></li>
 </ul></li>
-<li class="chapter" data-level="2.3" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#cómo-funcionan-los-microarrays"><i class="fa fa-check"></i><b>2.3</b> Cómo funcionan los microarrays</a>
+<li class="has-sub"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#c%C3%B3mo-funcionan-los-microarrays" id="toc-cómo-funcionan-los-microarrays"><span class="toc-section-number">2.3</span> Cómo funcionan los microarrays</a>
 <ul>
-<li class="chapter" data-level="2.3.1" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#microarrays-de-dos-colores"><i class="fa fa-check"></i><b>2.3.1</b> Microarrays de dos colores</a></li>
-<li class="chapter" data-level="2.3.2" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#microarrays-de-un-color"><i class="fa fa-check"></i><b>2.3.2</b> Microarrays de un color</a></li>
-<li class="chapter" data-level="2.3.3" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#realización-de-un-experimento-de-microarrays"><i class="fa fa-check"></i><b>2.3.3</b> Realización de un experimento de microarrays</a></li>
-<li class="chapter" data-level="2.3.4" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#como-se-mide-la-expresión"><i class="fa fa-check"></i><b>2.3.4</b> Como se mide la expresión</a></li>
+<li><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#microarrays-de-dos-colores" id="toc-microarrays-de-dos-colores"><span class="toc-section-number">2.3.1</span> Microarrays de dos colores</a></li>
+<li><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#microarrays-de-un-color" id="toc-microarrays-de-un-color"><span class="toc-section-number">2.3.2</span> Microarrays de un color</a></li>
+<li><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#realizaci%C3%B3n-de-un-experimento-de-microarrays" id="toc-realización-de-un-experimento-de-microarrays"><span class="toc-section-number">2.3.3</span> Realización de un experimento de microarrays</a></li>
+<li><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#como-se-mide-la-expresi%C3%B3n" id="toc-como-se-mide-la-expresión"><span class="toc-section-number">2.3.4</span> Como se mide la expresión</a></li>
 </ul></li>
-<li class="chapter" data-level="2.4" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#bioinformática-de-microarrays"><i class="fa fa-check"></i><b>2.4</b> Bioinformática de Microarrays<a name="Bioinformática"></a></a>
+<li class="has-sub"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#bioinform%C3%A1tica-de-microarrays" id="toc-bioinformática-de-microarrays"><span class="toc-section-number">2.4</span> Bioinformática de Microarrays<a name="Bioinformática"></a></a>
 <ul>
-<li class="chapter" data-level="2.4.1" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#software-para-el-análisis-de-datos-de-microarrays"><i class="fa fa-check"></i><b>2.4.1</b> Software para el análisis de datos de microarrays</a></li>
-<li class="chapter" data-level="2.4.2" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#bases-de-datos-de-microarrays"><i class="fa fa-check"></i><b>2.4.2</b> Bases de datos de Microarrays</a></li>
+<li><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#software-para-el-an%C3%A1lisis-de-datos-de-microarrays" id="toc-software-para-el-análisis-de-datos-de-microarrays"><span class="toc-section-number">2.4.1</span> Software para el análisis de datos de microarrays</a></li>
+<li><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#bases-de-datos-de-microarrays" id="toc-bases-de-datos-de-microarrays"><span class="toc-section-number">2.4.2</span> Bases de datos de Microarrays</a></li>
 </ul></li>
-<li class="chapter" data-level="2.5" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#extensiones-1-otros-tipos-de-microarrays"><i class="fa fa-check"></i><b>2.5</b> Extensiones (1): Otros tipos de microarrays<a name="extensions"></a></a>
+<li class="has-sub"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#extensiones-1-otros-tipos-de-microarrays" id="toc-extensiones-1-otros-tipos-de-microarrays"><span class="toc-section-number">2.5</span> Extensiones (1): Otros tipos de microarrays<a name="extensions"></a></a>
 <ul>
-<li class="chapter" data-level="2.5.1" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#otros-microarrays-de-adn"><i class="fa fa-check"></i><b>2.5.1</b> Otros microarrays de ADN</a></li>
-<li class="chapter" data-level="2.5.2" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#otros-tipos-de-microarrays-proteínas-o-carbohidratos"><i class="fa fa-check"></i><b>2.5.2</b> Otros tipos de microarrays: Proteínas o carbohidratos</a></li>
+<li><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#otros-microarrays-de-adn" id="toc-otros-microarrays-de-adn"><span class="toc-section-number">2.5.1</span> Otros microarrays de ADN</a></li>
+<li><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#otros-tipos-de-microarrays-prote%C3%ADnas-o-carbohidratos" id="toc-otros-tipos-de-microarrays-proteínas-o-carbohidratos"><span class="toc-section-number">2.5.2</span> Otros tipos de microarrays: Proteínas o carbohidratos</a></li>
 </ul></li>
-<li class="chapter" data-level="2.6" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#extensiones-2-ngs-nextnow-generation-sequencing"><i class="fa fa-check"></i><b>2.6</b> Extensiones (2): <em>NGS: Next(Now) Generation Sequencing</em></a>
+<li class="has-sub"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#extensiones-2-ngs-nextnow-generation-sequencing" id="toc-extensiones-2-ngs-nextnow-generation-sequencing"><span class="toc-section-number">2.6</span> Extensiones (2): <em>NGS: Next(Now) Generation Sequencing</em></a>
 <ul>
-<li class="chapter" data-level="2.6.1" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#visión-global-de-las-tecnologías-de-secuenciación"><i class="fa fa-check"></i><b>2.6.1</b> Visión global de las tecnologías de secuenciación</a></li>
-<li class="chapter" data-level="2.6.2" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#de-la-secuenciación-sanger-a-la-ultrasecuenciación"><i class="fa fa-check"></i><b>2.6.2</b> De la secuenciación Sanger a la ultrasecuenciación</a></li>
-<li class="chapter" data-level="2.6.3" data-path="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html"><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#tecnologías-de-ultrasecuenciación"><i class="fa fa-check"></i><b>2.6.3</b> Tecnologías de ultrasecuenciación</a></li>
+<li><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#visi%C3%B3n-global-de-las-tecnolog%C3%ADas-de-secuenciaci%C3%B3n" id="toc-visión-global-de-las-tecnologías-de-secuenciación"><span class="toc-section-number">2.6.1</span> Visión global de las tecnologías de secuenciación</a></li>
+<li><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#de-la-secuenciaci%C3%B3n-sanger-a-la-ultrasecuenciaci%C3%B3n" id="toc-de-la-secuenciación-sanger-a-la-ultrasecuenciación"><span class="toc-section-number">2.6.2</span> De la secuenciación Sanger a la ultrasecuenciación</a></li>
+<li><a href="introduccion-a-los-microarrays-y-otras-tecnologías-omicas.html#tecnolog%C3%ADas-de-ultrasecuenciaci%C3%B3n" id="toc-tecnologías-de-ultrasecuenciación"><span class="toc-section-number">2.6.3</span> Tecnologías de ultrasecuenciación</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="MDAProcess.html"><a href="MDAProcess.html"><i class="fa fa-check"></i><b>3</b> El proceso de análisis de microarrays</a>
+<li class="has-sub"><a href="MDAProcess.html#MDAProcess" id="toc-MDAProcess"><span class="toc-section-number">3</span> El proceso de análisis de microarrays</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="MDAProcess.html"><a href="MDAProcess.html#tipos-de-estudios"><i class="fa fa-check"></i><b>3.1</b> Tipos de estudios</a>
+<li class="has-sub"><a href="MDAProcess.html#tipos-de-estudios" id="toc-tipos-de-estudios"><span class="toc-section-number">3.1</span> Tipos de estudios</a>
 <ul>
-<li class="chapter" data-level="3.1.1" data-path="MDAProcess.html"><a href="MDAProcess.html#comparación-de-grupos-o-class-comparison"><i class="fa fa-check"></i><b>3.1.1</b> Comparación de grupos o “Class comparison”</a></li>
-<li class="chapter" data-level="3.1.2" data-path="MDAProcess.html"><a href="MDAProcess.html#predicción-de-clase-o-class-prediction"><i class="fa fa-check"></i><b>3.1.2</b> Predicción de clase o “Class prediction”</a></li>
-<li class="chapter" data-level="3.1.3" data-path="MDAProcess.html"><a href="MDAProcess.html#descubrimiento-de-clases-o-class-discovery"><i class="fa fa-check"></i><b>3.1.3</b> Descubrimiento de clases o “Class discovery”</a></li>
-<li class="chapter" data-level="3.1.4" data-path="MDAProcess.html"><a href="MDAProcess.html#otros-tipos-de-estudios"><i class="fa fa-check"></i><b>3.1.4</b> Otros tipos de estudios</a></li>
+<li><a href="MDAProcess.html#comparaci%C3%B3n-de-grupos-o-class-comparison" id="toc-comparación-de-grupos-o-class-comparison"><span class="toc-section-number">3.1.1</span> Comparación de grupos o “Class comparison”</a></li>
+<li><a href="MDAProcess.html#predicci%C3%B3n-de-clase-o-class-prediction" id="toc-predicción-de-clase-o-class-prediction"><span class="toc-section-number">3.1.2</span> Predicción de clase o “Class prediction”</a></li>
+<li><a href="MDAProcess.html#descubrimiento-de-clases-o-class-discovery" id="toc-descubrimiento-de-clases-o-class-discovery"><span class="toc-section-number">3.1.3</span> Descubrimiento de clases o “Class discovery”</a></li>
+<li><a href="MDAProcess.html#otros-tipos-de-estudios" id="toc-otros-tipos-de-estudios"><span class="toc-section-number">3.1.4</span> Otros tipos de estudios</a></li>
 </ul></li>
-<li class="chapter" data-level="3.2" data-path="MDAProcess.html"><a href="MDAProcess.html#c4examples"><i class="fa fa-check"></i><b>3.2</b> Algunos ejemplos concretos</a>
+<li class="has-sub"><a href="MDAProcess.html#c4examples" id="toc-c4examples"><span class="toc-section-number">3.2</span> Algunos ejemplos concretos</a>
 <ul>
-<li class="chapter" data-level="3.2.1" data-path="MDAProcess.html"><a href="MDAProcess.html#celltypes"><i class="fa fa-check"></i><b>3.2.1</b> Estudio de procesos regulados por citoquinas</a></li>
-<li class="chapter" data-level="3.2.2" data-path="MDAProcess.html"><a href="MDAProcess.html#golub"><i class="fa fa-check"></i><b>3.2.2</b> Clasificación molecular de la leucemia</a></li>
-<li class="chapter" data-level="3.2.3" data-path="MDAProcess.html"><a href="MDAProcess.html#estrogen"><i class="fa fa-check"></i><b>3.2.3</b> Efecto del estrogeno y el tiempo de administración</a></li>
-<li class="chapter" data-level="3.2.4" data-path="MDAProcess.html"><a href="MDAProcess.html#CCL4"><i class="fa fa-check"></i><b>3.2.4</b> Efecto del CCL4 en la expresión génica</a></li>
-<li class="chapter" data-level="3.2.5" data-path="MDAProcess.html"><a href="MDAProcess.html#swirl"><i class="fa fa-check"></i><b>3.2.5</b> Estudio de la mutación “swirl” en el desarrollo del pez cebra</a></li>
-<li class="chapter" data-level="3.2.6" data-path="MDAProcess.html"><a href="MDAProcess.html#yeast"><i class="fa fa-check"></i><b>3.2.6</b> Análisis de patrones en el ciclo celular</a></li>
-<li class="chapter" data-level="3.2.7" data-path="MDAProcess.html"><a href="MDAProcess.html#recapitulación"><i class="fa fa-check"></i><b>3.2.7</b> Recapitulación</a></li>
+<li><a href="MDAProcess.html#celltypes" id="toc-celltypes"><span class="toc-section-number">3.2.1</span> Estudio de procesos regulados por citoquinas</a></li>
+<li><a href="MDAProcess.html#golub" id="toc-golub"><span class="toc-section-number">3.2.2</span> Clasificación molecular de la leucemia</a></li>
+<li><a href="MDAProcess.html#estrogen" id="toc-estrogen"><span class="toc-section-number">3.2.3</span> Efecto del estrogeno y el tiempo de administración</a></li>
+<li><a href="MDAProcess.html#CCL4" id="toc-CCL4"><span class="toc-section-number">3.2.4</span> Efecto del CCL4 en la expresión génica</a></li>
+<li><a href="MDAProcess.html#swirl" id="toc-swirl"><span class="toc-section-number">3.2.5</span> Estudio de la mutación “swirl” en el desarrollo del pez cebra</a></li>
+<li><a href="MDAProcess.html#yeast" id="toc-yeast"><span class="toc-section-number">3.2.6</span> Análisis de patrones en el ciclo celular</a></li>
+<li><a href="MDAProcess.html#recapitulaci%C3%B3n" id="toc-recapitulación"><span class="toc-section-number">3.2.7</span> Recapitulación</a></li>
 </ul></li>
-<li class="chapter" data-level="3.3" data-path="MDAProcess.html"><a href="MDAProcess.html#el-proceso-de-análisis-de-microarrays"><i class="fa fa-check"></i><b>3.3</b> El proceso de análisis de microarrays</a></li>
+<li><a href="MDAProcess.html#el-proceso-de-an%C3%A1lisis-de-microarrays" id="toc-el-proceso-de-análisis-de-microarrays"><span class="toc-section-number">3.3</span> El proceso de análisis de microarrays</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="MDAExpDesign.html"><a href="MDAExpDesign.html"><i class="fa fa-check"></i><b>4</b> Diseño de experimentos de microarrays</a>
+<li class="has-sub"><a href="MDAExpDesign.html#MDAExpDesign" id="toc-MDAExpDesign"><span class="toc-section-number">4</span> Diseño de experimentos de microarrays</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="MDAExpDesign.html"><a href="MDAExpDesign.html#fuentes-de-variabilidad"><i class="fa fa-check"></i><b>4.1</b> Fuentes de variabilidad</a></li>
-<li class="chapter" data-level="4.2" data-path="MDAExpDesign.html"><a href="MDAExpDesign.html#tipos-de-variabilidad"><i class="fa fa-check"></i><b>4.2</b> Tipos de variabilidad</a></li>
-<li class="chapter" data-level="4.3" data-path="MDAExpDesign.html"><a href="MDAExpDesign.html#conceptos-básicos-de-diseño-de-experimentos"><i class="fa fa-check"></i><b>4.3</b> Conceptos básicos de diseño de Experimentos</a></li>
-<li class="chapter" data-level="4.4" data-path="MDAExpDesign.html"><a href="MDAExpDesign.html#principios-de-diseño-de-experimentos"><i class="fa fa-check"></i><b>4.4</b> Principios de diseño de experimentos</a>
+<li><a href="MDAExpDesign.html#fuentes-de-variabilidad" id="toc-fuentes-de-variabilidad"><span class="toc-section-number">4.1</span> Fuentes de variabilidad</a></li>
+<li><a href="MDAExpDesign.html#tipos-de-variabilidad" id="toc-tipos-de-variabilidad"><span class="toc-section-number">4.2</span> Tipos de variabilidad</a></li>
+<li><a href="MDAExpDesign.html#conceptos-b%C3%A1sicos-de-dise%C3%B1o-de-experimentos" id="toc-conceptos-básicos-de-diseño-de-experimentos"><span class="toc-section-number">4.3</span> Conceptos básicos de diseño de Experimentos</a></li>
+<li class="has-sub"><a href="MDAExpDesign.html#principios-de-dise%C3%B1o-de-experimentos" id="toc-principios-de-diseño-de-experimentos"><span class="toc-section-number">4.4</span> Principios de diseño de experimentos</a>
 <ul>
-<li class="chapter" data-level="4.4.1" data-path="MDAExpDesign.html"><a href="MDAExpDesign.html#replicación"><i class="fa fa-check"></i><b>4.4.1</b> Replicación</a></li>
-<li class="chapter" data-level="4.4.2" data-path="MDAExpDesign.html"><a href="MDAExpDesign.html#aleatorización"><i class="fa fa-check"></i><b>4.4.2</b> Aleatorización</a></li>
-<li class="chapter" data-level="4.4.3" data-path="MDAExpDesign.html"><a href="MDAExpDesign.html#bloqueo-o-control-local"><i class="fa fa-check"></i><b>4.4.3</b> Bloqueo o control local</a></li>
+<li><a href="MDAExpDesign.html#replicaci%C3%B3n" id="toc-replicación"><span class="toc-section-number">4.4.1</span> Replicación</a></li>
+<li><a href="MDAExpDesign.html#aleatorizaci%C3%B3n" id="toc-aleatorización"><span class="toc-section-number">4.4.2</span> Aleatorización</a></li>
+<li><a href="MDAExpDesign.html#bloqueo-o-control-local" id="toc-bloqueo-o-control-local"><span class="toc-section-number">4.4.3</span> Bloqueo o control local</a></li>
 </ul></li>
-<li class="chapter" data-level="4.5" data-path="MDAExpDesign.html"><a href="MDAExpDesign.html#diseños-experimentales-para-microarrays-de-dos-colores"><i class="fa fa-check"></i><b>4.5</b> Diseños experimentales para microarrays de dos colores</a></li>
+<li><a href="MDAExpDesign.html#dise%C3%B1os-experimentales-para-microarrays-de-dos-colores" id="toc-diseños-experimentales-para-microarrays-de-dos-colores"><span class="toc-section-number">4.5</span> Diseños experimentales para microarrays de dos colores</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><i class="fa fa-check"></i><b>5</b> Exploración de los datos, control de calidad y preprocesado</a>
+<li class="has-sub"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#exploraci%C3%B3n-de-los-datos-control-de-calidad-y-preprocesado" id="toc-exploración-de-los-datos-control-de-calidad-y-preprocesado"><span class="toc-section-number">5</span> Exploración de los datos, control de calidad y preprocesado</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#introducción"><i class="fa fa-check"></i><b>5.1</b> Introducción</a>
+<li class="has-sub"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#introducci%C3%B3n" id="toc-introducción"><span class="toc-section-number">5.1</span> Introducción</a>
 <ul>
-<li class="chapter" data-level="5.1.1" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#nivel-de-análisis-y-tipo-de-microarray"><i class="fa fa-check"></i><b>5.1.1</b> Nivel de análisis y tipo de microarray</a></li>
-<li class="chapter" data-level="5.1.2" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#datos-de-partida"><i class="fa fa-check"></i><b>5.1.2</b> Datos de partida</a></li>
+<li><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#nivel-de-an%C3%A1lisis-y-tipo-de-microarray" id="toc-nivel-de-análisis-y-tipo-de-microarray"><span class="toc-section-number">5.1.1</span> Nivel de análisis y tipo de microarray</a></li>
+<li><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#datos-de-partida" id="toc-datos-de-partida"><span class="toc-section-number">5.1.2</span> Datos de partida</a></li>
 </ul></li>
-<li class="chapter" data-level="5.2" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#exploración-y-control-de-calidad"><i class="fa fa-check"></i><b>5.2</b> Exploración y control de calidad</a>
+<li class="has-sub"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#exploraci%C3%B3n-y-control-de-calidad" id="toc-exploración-y-control-de-calidad"><span class="toc-section-number">5.2</span> Exploración y control de calidad</a>
 <ul>
-<li class="chapter" data-level="5.2.1" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#control-de-calidad-con-gráficos-estadísticos-generales"><i class="fa fa-check"></i><b>5.2.1</b> Control de calidad con gráficos estadísticos generales</a></li>
-<li class="chapter" data-level="5.2.2" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#gráficos-de-diagnóstico-para-microarrays-de-dos-colores"><i class="fa fa-check"></i><b>5.2.2</b> Gráficos de diagnóstico para microarrays de dos colores</a></li>
-<li class="chapter" data-level="5.2.3" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#gráficos-de-diagnóstico-para-microarrays-de-un-color"><i class="fa fa-check"></i><b>5.2.3</b> Gráficos de diagnóstico para microarrays de un color</a></li>
+<li><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#control-de-calidad-con-gr%C3%A1ficos-estad%C3%ADsticos-generales" id="toc-control-de-calidad-con-gráficos-estadísticos-generales"><span class="toc-section-number">5.2.1</span> Control de calidad con gráficos estadísticos generales</a></li>
+<li><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#gr%C3%A1ficos-de-diagn%C3%B3stico-para-microarrays-de-dos-colores" id="toc-gráficos-de-diagnóstico-para-microarrays-de-dos-colores"><span class="toc-section-number">5.2.2</span> Gráficos de diagnóstico para microarrays de dos colores</a></li>
+<li><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#gr%C3%A1ficos-de-diagn%C3%B3stico-para-microarrays-de-un-color" id="toc-gráficos-de-diagnóstico-para-microarrays-de-un-color"><span class="toc-section-number">5.2.3</span> Gráficos de diagnóstico para microarrays de un color</a></li>
 </ul></li>
-<li class="chapter" data-level="5.3" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#normalización-de-arrays-de-dos-colores"><i class="fa fa-check"></i><b>5.3</b> Normalización de arrays de dos colores</a>
+<li class="has-sub"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#normalizaci%C3%B3n-de-arrays-de-dos-colores" id="toc-normalización-de-arrays-de-dos-colores"><span class="toc-section-number">5.3</span> Normalización de arrays de dos colores</a>
 <ul>
-<li class="chapter" data-level="5.3.1" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#normalización-global"><i class="fa fa-check"></i><b>5.3.1</b> Normalización global</a></li>
-<li class="chapter" data-level="5.3.2" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#normalización-dependiente-de-la-intensidad"><i class="fa fa-check"></i><b>5.3.2</b> Normalización dependiente de la intensidad</a></li>
+<li><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#normalizaci%C3%B3n-global" id="toc-normalización-global"><span class="toc-section-number">5.3.1</span> Normalización global</a></li>
+<li><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#normalizaci%C3%B3n-dependiente-de-la-intensidad" id="toc-normalización-dependiente-de-la-intensidad"><span class="toc-section-number">5.3.2</span> Normalización dependiente de la intensidad</a></li>
 </ul></li>
-<li class="chapter" data-level="5.4" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#resumen-y-normalización-de-microarrays-de-affymetrix"><i class="fa fa-check"></i><b>5.4</b> Resumen y normalización de microarrays de Affymetrix</a>
+<li class="has-sub"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#resumen-y-normalizaci%C3%B3n-de-microarrays-de-affymetrix" id="toc-resumen-y-normalización-de-microarrays-de-affymetrix"><span class="toc-section-number">5.4</span> Resumen y normalización de microarrays de Affymetrix</a>
 <ul>
-<li class="chapter" data-level="5.4.1" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#el-método-rma-robust-multi-array-average"><i class="fa fa-check"></i><b>5.4.1</b> El método RMA (Robust Multi-Array Average)</a></li>
+<li><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#el-m%C3%A9todo-rma-robust-multi-array-average" id="toc-el-método-rma-robust-multi-array-average"><span class="toc-section-number">5.4.1</span> El método RMA (Robust Multi-Array Average)</a></li>
 </ul></li>
-<li class="chapter" data-level="5.5" data-path="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#filtraje-no-específico"><i class="fa fa-check"></i><b>5.5</b> Filtraje no específico</a></li>
+<li><a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html#filtraje-no-espec%C3%ADfico" id="toc-filtraje-no-específico"><span class="toc-section-number">5.5</span> Filtraje no específico</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="chapDEG.html"><a href="chapDEG.html"><i class="fa fa-check"></i><b>6</b> Selección de genes diferencialmente expresados</a>
+<li class="has-sub"><a href="chapDEG.html#chapDEG" id="toc-chapDEG"><span class="toc-section-number">6</span> Selección de genes diferencialmente expresados</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="chapDEG.html"><a href="chapDEG.html#introducción-1"><i class="fa fa-check"></i><b>6.1</b> Introducción</a></li>
-<li class="chapter" data-level="6.2" data-path="chapDEG.html"><a href="chapDEG.html#selección-de-genes-diferencialmente-expresados"><i class="fa fa-check"></i><b>6.2</b> Selección de genes diferencialmente expresados</a>
+<li><a href="chapDEG.html#introducci%C3%B3n-1" id="toc-introducción-1"><span class="toc-section-number">6.1</span> Introducción</a></li>
+<li class="has-sub"><a href="chapDEG.html#selecci%C3%B3n-de-genes-diferencialmente-expresados" id="toc-selección-de-genes-diferencialmente-expresados"><span class="toc-section-number">6.2</span> Selección de genes diferencialmente expresados</a>
 <ul>
-<li class="chapter" data-level="6.2.1" data-path="chapDEG.html"><a href="chapDEG.html#medidas-naturales-para-comparar-dos-muestras"><i class="fa fa-check"></i><b>6.2.1</b> Medidas <em>naturales</em> para comparar dos muestras</a></li>
-<li class="chapter" data-level="6.2.2" data-path="chapDEG.html"><a href="chapDEG.html#un-primer-ejemplo"><i class="fa fa-check"></i><b>6.2.2</b> Un primer ejemplo</a></li>
-<li class="chapter" data-level="6.2.3" data-path="chapDEG.html"><a href="chapDEG.html#selección-de-genes-usando-tests-estadísticos"><i class="fa fa-check"></i><b>6.2.3</b> Selección de genes usando tests estadísticos</a></li>
+<li><a href="chapDEG.html#medidas-naturales-para-comparar-dos-muestras" id="toc-medidas-naturales-para-comparar-dos-muestras"><span class="toc-section-number">6.2.1</span> Medidas <em>naturales</em> para comparar dos muestras</a></li>
+<li><a href="chapDEG.html#un-primer-ejemplo" id="toc-un-primer-ejemplo"><span class="toc-section-number">6.2.2</span> Un primer ejemplo</a></li>
+<li><a href="chapDEG.html#selecci%C3%B3n-de-genes-usando-tests-estad%C3%ADsticos" id="toc-selección-de-genes-usando-tests-estadísticos"><span class="toc-section-number">6.2.3</span> Selección de genes usando tests estadísticos</a></li>
 </ul></li>
-<li class="chapter" data-level="6.3" data-path="chapDEG.html"><a href="chapDEG.html#significación-estadística-y-expresión-diferencial"><i class="fa fa-check"></i><b>6.3</b> Significación estadística y expresión diferencial</a>
+<li class="has-sub"><a href="chapDEG.html#significaci%C3%B3n-estad%C3%ADstica-y-expresi%C3%B3n-diferencial" id="toc-significación-estadística-y-expresión-diferencial"><span class="toc-section-number">6.3</span> Significación estadística y expresión diferencial</a>
 <ul>
-<li class="chapter" data-level="6.3.1" data-path="chapDEG.html"><a href="chapDEG.html#volcano-plots"><i class="fa fa-check"></i><b>6.3.1</b> “Volcano plots”</a></li>
-<li class="chapter" data-level="6.3.2" data-path="chapDEG.html"><a href="chapDEG.html#potencia-y-tamaño-muestral"><i class="fa fa-check"></i><b>6.3.2</b> Potencia y tamaño muestral</a></li>
+<li><a href="chapDEG.html#volcano-plots" id="toc-volcano-plots"><span class="toc-section-number">6.3.1</span> “Volcano plots”</a></li>
+<li><a href="chapDEG.html#potencia-y-tama%C3%B1o-muestral" id="toc-potencia-y-tamaño-muestral"><span class="toc-section-number">6.3.2</span> Potencia y tamaño muestral</a></li>
 </ul></li>
-<li class="chapter" data-level="6.4" data-path="chapDEG.html"><a href="chapDEG.html#el-problema-de-la-múltiplicidad-de-tests-multiple-testing"><i class="fa fa-check"></i><b>6.4</b> El problema de la múltiplicidad de tests (“multiple testing”)</a></li>
-<li class="chapter" data-level="6.5" data-path="chapDEG.html"><a href="chapDEG.html#modelos-lineales-para-la-selección-de-genes-limma"><i class="fa fa-check"></i><b>6.5</b> Modelos lineales para la selección de genes: <tt>limma </tt></a>
+<li><a href="chapDEG.html#el-problema-de-la-m%C3%BAltiplicidad-de-tests-multiple-testing" id="toc-el-problema-de-la-múltiplicidad-de-tests-multiple-testing"><span class="toc-section-number">6.4</span> El problema de la múltiplicidad de tests (“multiple testing”)</a></li>
+<li class="has-sub"><a href="chapDEG.html#modelos-lineales-para-la-selecci%C3%B3n-de-genes-limma" id="toc-modelos-lineales-para-la-selección-de-genes-limma"><span class="toc-section-number">6.5</span> Modelos lineales para la selección de genes: <tt>limma </tt></a>
 <ul>
-<li class="chapter" data-level="6.5.1" data-path="chapDEG.html"><a href="chapDEG.html#el-modelo-lineal-general"><i class="fa fa-check"></i><b>6.5.1</b> El modelo lineal general</a></li>
-<li class="chapter" data-level="6.5.2" data-path="chapDEG.html"><a href="chapDEG.html#ejemplos-de-situaciones-modelizables-linealmente"><i class="fa fa-check"></i><b>6.5.2</b> Ejemplos de situaciones <em>modelizables linealmente</em></a></li>
-<li class="chapter" data-level="6.5.3" data-path="chapDEG.html"><a href="chapDEG.html#ejemplo-2-comparación-de-tres-grupos"><i class="fa fa-check"></i><b>6.5.3</b> Ejemplo 2: Comparación de tres grupos</a></li>
-<li class="chapter" data-level="6.5.4" data-path="chapDEG.html"><a href="chapDEG.html#estimación-e-inferencia-con-el-modelo-lineal"><i class="fa fa-check"></i><b>6.5.4</b> Estimación e inferencia con el modelo lineal</a></li>
-<li class="chapter" data-level="6.5.5" data-path="chapDEG.html"><a href="chapDEG.html#modelos-lineales-para-microarrays"><i class="fa fa-check"></i><b>6.5.5</b> Modelos lineales para Microarrays</a></li>
-<li class="chapter" data-level="6.5.6" data-path="chapDEG.html"><a href="chapDEG.html#implementación-y-ejemplos"><i class="fa fa-check"></i><b>6.5.6</b> Implementación y ejemplos</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="7" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><i class="fa fa-check"></i><b>7</b> Caso “Estrógeno”: Selección de genes diferencialmente expresados asociados con la resistencia a estrógenos.</a>
-<ul>
-<li class="chapter" data-level="7.1" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#introducción-2"><i class="fa fa-check"></i><b>7.1</b> Introducción</a></li>
-<li class="chapter" data-level="7.2" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#el-estudio-estrógeno"><i class="fa fa-check"></i><b>7.2</b> El estudio “Estrógeno”</a>
-<ul>
-<li class="chapter" data-level="7.2.1" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#directorios-y-opciones-de-trabajo"><i class="fa fa-check"></i><b>7.2.1</b> Directorios y opciones de trabajo</a></li>
-</ul></li>
-<li class="chapter" data-level="7.3" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#obtención-y-lectura-de-los-datos"><i class="fa fa-check"></i><b>7.3</b> Obtención y lectura de los datos</a>
-<ul>
-<li class="chapter" data-level="7.3.1" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#los-datos"><i class="fa fa-check"></i><b>7.3.1</b> Los datos</a></li>
-<li class="chapter" data-level="7.3.2" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#lectura-de-los-datos"><i class="fa fa-check"></i><b>7.3.2</b> Lectura de los datos</a></li>
-</ul></li>
-<li class="chapter" data-level="7.4" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#exploración-control-de-calidad-y-normalización"><i class="fa fa-check"></i><b>7.4</b> Exploración, Control de Calidad y Normalización</a>
-<ul>
-<li class="chapter" data-level="7.4.1" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#exploración-y-visualización"><i class="fa fa-check"></i><b>7.4.1</b> Exploración y visualización</a></li>
-<li class="chapter" data-level="7.4.2" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#control-de-calidad"><i class="fa fa-check"></i><b>7.4.2</b> Control de calidad</a></li>
-<li class="chapter" data-level="7.4.3" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#normalizacion-y-filtraje"><i class="fa fa-check"></i><b>7.4.3</b> Normalizacion y Filtraje</a></li>
-</ul></li>
-<li class="chapter" data-level="7.5" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#selección-de-genes-diferencialmente-expresados-1"><i class="fa fa-check"></i><b>7.5</b> Selección de genes diferencialmente expresados</a>
-<ul>
-<li class="chapter" data-level="7.5.1" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#análisis-basado-en-modelos-lineales"><i class="fa fa-check"></i><b>7.5.1</b> Análisis basado en modelos lineales</a></li>
-<li class="chapter" data-level="7.5.2" data-path="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#comparaciones-múltiples"><i class="fa fa-check"></i><b>7.5.2</b> Comparaciones múltiples</a></li>
+<li><a href="chapDEG.html#el-modelo-lineal-general" id="toc-el-modelo-lineal-general"><span class="toc-section-number">6.5.1</span> El modelo lineal general</a></li>
+<li><a href="chapDEG.html#ejemplos-de-situaciones-modelizables-linealmente" id="toc-ejemplos-de-situaciones-modelizables-linealmente"><span class="toc-section-number">6.5.2</span> Ejemplos de situaciones <em>modelizables linealmente</em></a></li>
+<li><a href="chapDEG.html#ejemplo-2-comparaci%C3%B3n-de-tres-grupos" id="toc-ejemplo-2-comparación-de-tres-grupos"><span class="toc-section-number">6.5.3</span> Ejemplo 2: Comparación de tres grupos</a></li>
+<li><a href="chapDEG.html#estimaci%C3%B3n-e-inferencia-con-el-modelo-lineal" id="toc-estimación-e-inferencia-con-el-modelo-lineal"><span class="toc-section-number">6.5.4</span> Estimación e inferencia con el modelo lineal</a></li>
+<li><a href="chapDEG.html#modelos-lineales-para-microarrays" id="toc-modelos-lineales-para-microarrays"><span class="toc-section-number">6.5.5</span> Modelos lineales para Microarrays</a></li>
+<li><a href="chapDEG.html#implementaci%C3%B3n-y-ejemplos" id="toc-implementación-y-ejemplos"><span class="toc-section-number">6.5.6</span> Implementación y ejemplos</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="después-de-la-selección-análisis-de-listas-de-genes.html"><a href="después-de-la-selección-análisis-de-listas-de-genes.html"><i class="fa fa-check"></i><b>8</b> Después de la selección: Análisis de listas de genes</a>
+<li class="has-sub"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#caso-estr%C3%B3geno-selecci%C3%B3n-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estr%C3%B3genos." id="toc-caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos."><span class="toc-section-number">7</span> Caso “Estrógeno”: Selección de genes diferencialmente expresados asociados con la resistencia a estrógenos.</a>
 <ul>
-<li class="chapter" data-level="8.1" data-path="después-de-la-selección-análisis-de-listas-de-genes.html"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#introducción-3"><i class="fa fa-check"></i><b>8.1</b> Introducción</a></li>
-<li class="chapter" data-level="8.2" data-path="después-de-la-selección-análisis-de-listas-de-genes.html"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#análisis-comparativo-de-listas-de-genes"><i class="fa fa-check"></i><b>8.2</b> Análisis comparativo de listas de genes</a>
+<li><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#introducci%C3%B3n-2" id="toc-introducción-2"><span class="toc-section-number">7.1</span> Introducción</a></li>
+<li class="has-sub"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#el-estudio-estr%C3%B3geno" id="toc-el-estudio-estrógeno"><span class="toc-section-number">7.2</span> El estudio “Estrógeno”</a>
 <ul>
-<li class="chapter" data-level="8.2.1" data-path="después-de-la-selección-análisis-de-listas-de-genes.html"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#ejemplo-comparación-de-listas-en-el-caso-celltypes"><i class="fa fa-check"></i><b>8.2.1</b> Ejemplo: comparación de listas en el caso <tt>celltypes</tt></a></li>
+<li><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#directorios-y-opciones-de-trabajo" id="toc-directorios-y-opciones-de-trabajo"><span class="toc-section-number">7.2.1</span> Directorios y opciones de trabajo</a></li>
 </ul></li>
-<li class="chapter" data-level="8.3" data-path="después-de-la-selección-análisis-de-listas-de-genes.html"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#anotación-de-los-resultados"><i class="fa fa-check"></i><b>8.3</b> Anotación de los resultados</a></li>
-<li class="chapter" data-level="8.4" data-path="después-de-la-selección-análisis-de-listas-de-genes.html"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#visualización-de-los-perfiles-de-expresión"><i class="fa fa-check"></i><b>8.4</b> Visualización de los perfiles de expresión</a></li>
-<li class="chapter" data-level="8.5" data-path="después-de-la-selección-análisis-de-listas-de-genes.html"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#análisis-de-significación-biológica"><i class="fa fa-check"></i><b>8.5</b> Análisis de significación biológica</a>
+<li class="has-sub"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#obtenci%C3%B3n-y-lectura-de-los-datos" id="toc-obtención-y-lectura-de-los-datos"><span class="toc-section-number">7.3</span> Obtención y lectura de los datos</a>
 <ul>
-<li class="chapter" data-level="8.5.1" data-path="después-de-la-selección-análisis-de-listas-de-genes.html"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#análisis-de-enriquecimiento"><i class="fa fa-check"></i><b>8.5.1</b> Análisis de enriquecimiento <a name="GEA"></a></a></li>
-<li class="chapter" data-level="8.5.2" data-path="después-de-la-selección-análisis-de-listas-de-genes.html"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#análisis-de-enriquecimiento-con-bioconductor"><i class="fa fa-check"></i><b>8.5.2</b> Análisis de enriquecimiento con Bioconductor</a></li>
+<li><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#los-datos" id="toc-los-datos"><span class="toc-section-number">7.3.1</span> Los datos</a></li>
+<li><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#lectura-de-los-datos" id="toc-lectura-de-los-datos"><span class="toc-section-number">7.3.2</span> Lectura de los datos</a></li>
+</ul></li>
+<li class="has-sub"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#exploraci%C3%B3n-control-de-calidad-y-normalizaci%C3%B3n" id="toc-exploración-control-de-calidad-y-normalización"><span class="toc-section-number">7.4</span> Exploración, Control de Calidad y Normalización</a>
+<ul>
+<li><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#exploraci%C3%B3n-y-visualizaci%C3%B3n" id="toc-exploración-y-visualización"><span class="toc-section-number">7.4.1</span> Exploración y visualización</a></li>
+<li><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#control-de-calidad" id="toc-control-de-calidad"><span class="toc-section-number">7.4.2</span> Control de calidad</a></li>
+<li><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#normalizacion-y-filtraje" id="toc-normalizacion-y-filtraje"><span class="toc-section-number">7.4.3</span> Normalizacion y Filtraje</a></li>
+</ul></li>
+<li class="has-sub"><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#selecci%C3%B3n-de-genes-diferencialmente-expresados-1" id="toc-selección-de-genes-diferencialmente-expresados-1"><span class="toc-section-number">7.5</span> Selección de genes diferencialmente expresados</a>
+<ul>
+<li><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#an%C3%A1lisis-basado-en-modelos-lineales" id="toc-análisis-basado-en-modelos-lineales"><span class="toc-section-number">7.5.1</span> Análisis basado en modelos lineales</a></li>
+<li><a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html#comparaciones-m%C3%BAltiples" id="toc-comparaciones-múltiples"><span class="toc-section-number">7.5.2</span> Comparaciones múltiples</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i><b>9</b> Referencias</a></li>
+<li class="has-sub"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#despu%C3%A9s-de-la-selecci%C3%B3n-an%C3%A1lisis-de-listas-de-genes" id="toc-después-de-la-selección-análisis-de-listas-de-genes"><span class="toc-section-number">8</span> Después de la selección: Análisis de listas de genes</a>
+<ul>
+<li><a href="después-de-la-selección-análisis-de-listas-de-genes.html#introducci%C3%B3n-3" id="toc-introducción-3"><span class="toc-section-number">8.1</span> Introducción</a></li>
+<li class="has-sub"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#an%C3%A1lisis-comparativo-de-listas-de-genes" id="toc-análisis-comparativo-de-listas-de-genes"><span class="toc-section-number">8.2</span> Análisis comparativo de listas de genes</a>
+<ul>
+<li><a href="después-de-la-selección-análisis-de-listas-de-genes.html#ejemplo-comparaci%C3%B3n-de-listas-en-el-caso-celltypes" id="toc-ejemplo-comparación-de-listas-en-el-caso-celltypes"><span class="toc-section-number">8.2.1</span> Ejemplo: comparación de listas en el caso <tt>celltypes</tt></a></li>
+</ul></li>
+<li><a href="después-de-la-selección-análisis-de-listas-de-genes.html#anotaci%C3%B3n-de-los-resultados" id="toc-anotación-de-los-resultados"><span class="toc-section-number">8.3</span> Anotación de los resultados</a></li>
+<li><a href="después-de-la-selección-análisis-de-listas-de-genes.html#visualizaci%C3%B3n-de-los-perfiles-de-expresi%C3%B3n" id="toc-visualización-de-los-perfiles-de-expresión"><span class="toc-section-number">8.4</span> Visualización de los perfiles de expresión</a></li>
+<li class="has-sub"><a href="después-de-la-selección-análisis-de-listas-de-genes.html#an%C3%A1lisis-de-significaci%C3%B3n-biol%C3%B3gica" id="toc-análisis-de-significación-biológica"><span class="toc-section-number">8.5</span> Análisis de significación biológica</a>
+<ul>
+<li><a href="después-de-la-selección-análisis-de-listas-de-genes.html#an%C3%A1lisis-de-enriquecimiento" id="toc-análisis-de-enriquecimiento"><span class="toc-section-number">8.5.1</span> Análisis de enriquecimiento <a name="GEA"></a></a></li>
+<li><a href="después-de-la-selección-análisis-de-listas-de-genes.html#an%C3%A1lisis-de-enriquecimiento-con-bioconductor" id="toc-análisis-de-enriquecimiento-con-bioconductor"><span class="toc-section-number">8.5.2</span> Análisis de enriquecimiento con Bioconductor</a></li>
+</ul></li>
+</ul></li>
+<li><a href="referencias.html#referencias" id="toc-referencias"><span class="toc-section-number">9</span> Referencias</a></li>
 </ul>
-
-      </nav>
-    </div>
-
-    <div class="book-body">
-      <div class="body-inner">
-        <div class="book-header" role="navigation">
-          <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Analisis de datos ómicos</a>
-          </h1>
-        </div>
-
-        <div class="page-wrapper" tabindex="-1" role="main">
-          <div class="page-inner">
-
-            <section class="normal" id="section-">
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12">
 <div id="chapDEG" class="section level1" number="6">
 <h1><span class="header-section-number">Capítulo 6</span> Selección de genes diferencialmente expresados</h1>
 <div id="introducción-1" class="section level2" number="6.1">
@@ -383,7 +393,8 @@ expresiones absolutas:
 </ul></li>
 <li>Para comparaciones indirectas entre muestras independientes de expresiones relativas o absolutas:
 <ul>
-<li>Diferencia media <span class="math inline">\(\overline{R}_1-\overline{R}_2= \frac 1n_1 \sum_{i=1} ^{n_1}R_i- \frac 1n_2 \sum_{j=1} ^{n_2}R_j\)</span></li>
+<li>Diferencia media <span class="math inline">\(\overline{R}_1-\overline{R}_2= \frac 1n_1 \sum_{i=1} ^{n_1}R_i- \frac 1n_2 \sum_{j=1}
+^{n_2}R_j\)</span></li>
 <li>t-test (clásico) de dos muestras <span class="math inline">\(\frac{\overline{R}_1-\overline{R}_2} {SE_{12}\sqrt{\frac 1n_1 +\frac 1n_2 }}\)</span></li>
 <li>t-test robusto de dos muestras: Substituir en el anterior medidas robustas del error estándar</li>
 </ul></li>
@@ -406,7 +417,7 @@ conclusiones contradictoria según nos basemos en el promedio o el test t.</p>
 <p>Si se observan los valores del test t del gen C se concluye que el gen no aparenta estar diferencialmente expresado. Si
 en cambio se observa su promedio parece que si que lo esté.</p>
 <p>En el gen E pasa exctamente lo opuesto. La explicación de estas aparentes contradicciones se halla en el error
-estándar. En el gen C es muy elevado, debido a que el valor (20) es probablemente un “outlier.” En el gen D el
+estándar. En el gen C es muy elevado, debido a que el valor (20) es probablemente un “outlier”. En el gen D el
 error estándar es muy bajo por lo que, al encontrarse en el denominador del t-test aumenta artificialmente su valor.</p>
 </div>
 <div id="selección-de-genes-usando-tests-estadísticos" class="section level3" number="6.2.3">
@@ -456,37 +467,37 @@ utilizados en la bibliografía incorporan esta idea.</p>
 de todos los genes en el array para estimar el error estándar de
 cada gen se le denomina moderación de la varianza (“variance
 shrinkage”) y es una de las aproximaciones en que existe cierto
-consenso (<span class="citation"><a href="#ref-Allison:2006a" role="doc-biblioref">Allison et al.</a> (<a href="#ref-Allison:2006a" role="doc-biblioref">2006</a>)</span>) acerca de que sirven para mejorar la
+consenso (<span class="citation">Allison et al. (<a href="#ref-Allison:2006a">2006</a>)</span>) acerca de que sirven para mejorar la
 selección de genes diferencialmente expresados.</p>
 <div id="ejemplo-de-utilización-del-test-t" class="section level4" number="6.2.3.1">
 <h4><span class="header-section-number">6.2.3.1</span> Ejemplo de utilización del test-t</h4>
 <p>Como ejemplo utilizaremos el conjunto de datos <tt>celltypes</tt> y supondremos que disponemos ya de los datos normalizados y filtrados almacenados en un objeto <tt>expressionSet</tt>.</p>
 <p>Este proceso es sencillo de hacer siguiendo los pasos del capiítulo anterior. Para simplificar el ejemplo una vez cargados y normalizados filtraremos los datos usando funcion <code>nSFilter</code> de la librería <code>genefilter</code> con sus opciones por defecto, lo que nos dejara un total de 10254 sondas en vez de las 45101 originales.</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="chapDEG.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(affy)</span>
-<span id="cb28-2"><a href="chapDEG.html#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(genefilter)</span>
-<span id="cb28-3"><a href="chapDEG.html#cb28-3" aria-hidden="true" tabindex="-1"></a>affyPath<span class="ot">&lt;-</span> <span class="st">&quot;datos/celltypes/celfiles&quot;</span></span>
-<span id="cb28-4"><a href="chapDEG.html#cb28-4" aria-hidden="true" tabindex="-1"></a>cellTypesTargets<span class="ot">&lt;-</span>  <span class="fu">read.AnnotatedDataFrame</span>(<span class="st">&quot;targets.txt&quot;</span>, <span class="at">sep=</span><span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>,  <span class="at">path=</span>affyPath)</span>
-<span id="cb28-5"><a href="chapDEG.html#cb28-5" aria-hidden="true" tabindex="-1"></a>cellTypesTargets<span class="sc">$</span>filename <span class="ot">=</span> <span class="fu">file.path</span>(affyPath, <span class="fu">row.names</span>(cellTypesTargets))</span>
-<span id="cb28-6"><a href="chapDEG.html#cb28-6" aria-hidden="true" tabindex="-1"></a>cellTypesRaw <span class="ot">&lt;-</span> <span class="fu">read.affybatch</span>(cellTypesTargets<span class="sc">$</span>filename, <span class="at">phenoData=</span>cellTypesTargets)</span>
-<span id="cb28-7"><a href="chapDEG.html#cb28-7" aria-hidden="true" tabindex="-1"></a>eset_rma <span class="ot">&lt;-</span> <span class="fu">rma</span>(cellTypesRaw)</span>
-<span id="cb28-8"><a href="chapDEG.html#cb28-8" aria-hidden="true" tabindex="-1"></a>Filtered <span class="ot">&lt;-</span> <span class="fu">nsFilter</span>(eset_rma)</span>
-<span id="cb28-9"><a href="chapDEG.html#cb28-9" aria-hidden="true" tabindex="-1"></a>eset_rma_filtered <span class="ot">&lt;-</span> Filtered[[<span class="st">&quot;eset&quot;</span>]]</span>
-<span id="cb28-10"><a href="chapDEG.html#cb28-10" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(eset_rma, eset_rma_filtered, <span class="at">file=</span><span class="st">&quot;datos/celltypes/celltypes-normalized.rma.Rda&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="chapDEG.html#cb28-1" tabindex="-1"></a><span class="fu">library</span>(affy)</span>
+<span id="cb28-2"><a href="chapDEG.html#cb28-2" tabindex="-1"></a><span class="fu">library</span>(genefilter)</span>
+<span id="cb28-3"><a href="chapDEG.html#cb28-3" tabindex="-1"></a>affyPath<span class="ot">&lt;-</span> <span class="st">&quot;datos/celltypes/celfiles&quot;</span></span>
+<span id="cb28-4"><a href="chapDEG.html#cb28-4" tabindex="-1"></a>cellTypesTargets<span class="ot">&lt;-</span>  <span class="fu">read.AnnotatedDataFrame</span>(<span class="st">&quot;targets.txt&quot;</span>, <span class="at">sep=</span><span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>,  <span class="at">path=</span>affyPath)</span>
+<span id="cb28-5"><a href="chapDEG.html#cb28-5" tabindex="-1"></a>cellTypesTargets<span class="sc">$</span>filename <span class="ot">=</span> <span class="fu">file.path</span>(affyPath, <span class="fu">row.names</span>(cellTypesTargets))</span>
+<span id="cb28-6"><a href="chapDEG.html#cb28-6" tabindex="-1"></a>cellTypesRaw <span class="ot">&lt;-</span> <span class="fu">read.affybatch</span>(cellTypesTargets<span class="sc">$</span>filename, <span class="at">phenoData=</span>cellTypesTargets)</span>
+<span id="cb28-7"><a href="chapDEG.html#cb28-7" tabindex="-1"></a>eset_rma <span class="ot">&lt;-</span> <span class="fu">rma</span>(cellTypesRaw)</span>
+<span id="cb28-8"><a href="chapDEG.html#cb28-8" tabindex="-1"></a>Filtered <span class="ot">&lt;-</span> <span class="fu">nsFilter</span>(eset_rma)</span>
+<span id="cb28-9"><a href="chapDEG.html#cb28-9" tabindex="-1"></a>eset_rma_filtered <span class="ot">&lt;-</span> Filtered[[<span class="st">&quot;eset&quot;</span>]]</span>
+<span id="cb28-10"><a href="chapDEG.html#cb28-10" tabindex="-1"></a><span class="fu">save</span>(eset_rma, eset_rma_filtered, <span class="at">file=</span><span class="st">&quot;datos/celltypes/celltypes-normalized.rma.Rda&quot;</span>)</span></code></pre></div>
 <p>Si consideramos que el campo <em>treat</em> del objeto contiene la información de los grupos a comparar (ratones estimulados con LPS frente a los que no han sido tratados), podemos realizar un primer análisis utilizando el test-t. Para ello utilizaremos el la función
 <tt>rowttests</tt> del paquete <tt>genefilter</tt> que realiza un test <span class="math inline">\(t\)</span> sobre cada una de las filas (genes) de una matriz de expresión.</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="chapDEG.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">require</span>(Biobase))</span>
-<span id="cb29-2"><a href="chapDEG.html#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span> (<span class="at">file=</span><span class="st">&quot;./datos/celltypes/celltypes-normalized.rma.Rda&quot;</span>)</span>
-<span id="cb29-3"><a href="chapDEG.html#cb29-3" aria-hidden="true" tabindex="-1"></a>my.eset <span class="ot">&lt;-</span> eset_rma_filtered</span>
-<span id="cb29-4"><a href="chapDEG.html#cb29-4" aria-hidden="true" tabindex="-1"></a>grupo_1 <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(<span class="fu">pData</span>(my.eset)<span class="sc">$</span>treat)</span>
-<span id="cb29-5"><a href="chapDEG.html#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">require</span>(genefilter))</span>
-<span id="cb29-6"><a href="chapDEG.html#cb29-6" aria-hidden="true" tabindex="-1"></a>teststat <span class="ot">&lt;-</span><span class="fu">rowttests</span>(my.eset, <span class="st">&quot;treat&quot;</span>)</span>
-<span id="cb29-7"><a href="chapDEG.html#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(teststat[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,])</span></code></pre></div>
-<pre><code>##                statistic         dm      p.value
-## 1424378_at   -10.6739944 -1.1113660 8.715342e-07
-## 1417675_a_at  20.7390631  0.9451576 1.504712e-09
-## 1436530_at     9.2313983  1.4943922 3.291690e-06
-## 1428603_at    -3.4882096 -0.4013432 5.840466e-03
-## 1458888_at     0.7083721  0.2343463 4.948949e-01</code></pre>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="chapDEG.html#cb29-1" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">require</span>(Biobase))</span>
+<span id="cb29-2"><a href="chapDEG.html#cb29-2" tabindex="-1"></a><span class="fu">load</span> (<span class="at">file=</span><span class="st">&quot;./datos/celltypes/celltypes-normalized.rma.Rda&quot;</span>)</span>
+<span id="cb29-3"><a href="chapDEG.html#cb29-3" tabindex="-1"></a>my.eset <span class="ot">&lt;-</span> eset_rma_filtered</span>
+<span id="cb29-4"><a href="chapDEG.html#cb29-4" tabindex="-1"></a>grupo_1 <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(<span class="fu">pData</span>(my.eset)<span class="sc">$</span>treat)</span>
+<span id="cb29-5"><a href="chapDEG.html#cb29-5" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">require</span>(genefilter))</span>
+<span id="cb29-6"><a href="chapDEG.html#cb29-6" tabindex="-1"></a>teststat <span class="ot">&lt;-</span><span class="fu">rowttests</span>(my.eset, <span class="st">&quot;treat&quot;</span>)</span>
+<span id="cb29-7"><a href="chapDEG.html#cb29-7" tabindex="-1"></a><span class="fu">print</span>(teststat[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,])</span></code></pre></div>
+<pre><code>##              statistic       dm    p.value
+## 1424378_at   -10.67399 -1.11137 8.7153e-07
+## 1417675_a_at  20.73906  0.94516 1.5047e-09
+## 1436530_at     9.23140  1.49439 3.2917e-06
+## 1428603_at    -3.48821 -0.40134 5.8405e-03
+## 1458888_at     0.70837  0.23435 4.9489e-01</code></pre>
 <p>Cuanto mayor sea el valor absoluto del estadístico <span class="math inline">\(t\)</span> mayor es la probabilidad de que el gen esté diferencialmente expresado.</p>
 </div>
 </div>
@@ -494,7 +505,7 @@ selección de genes diferencialmente expresados.</p>
 <div id="significación-estadística-y-expresión-diferencial" class="section level2" number="6.3">
 <h2><span class="header-section-number">6.3</span> Significación estadística y expresión diferencial</h2>
 <p>Como hemos visto en la sección anterior dos medidas naturales para
-la selección de genes son el promedio de “log-ratios,” o la
+la selección de genes son el promedio de “log-ratios”, o la
 diferencia de promedios en el caso de muestras independientes, o el valor del estadístico de test (<span class="math inline">\(t\)</span>-test) de una o dos muestras según si se trata de
 muestras apareadas o independientes respectivamente. Los primeros
 estudios de microarrays eran muy costosos y se hacían con pocas o
@@ -514,16 +525,16 @@ p–valor del test sea inferior a un cierto umbral como 0.05 o 0.01.</p>
 <p>Como es sabido, un test estadístico procede decidiendo rechazar la hipótesis nula si el
 p–valor es más pequeño que el nivel de significación del test.</p>
 <p>Siguiendo con el ejemplo anterior podemos ordenar los resultados de los tests en base a los p–valores:</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="chapDEG.html#cb31-1" aria-hidden="true" tabindex="-1"></a>ranked <span class="ot">&lt;-</span>teststat[<span class="fu">order</span>(teststat<span class="sc">$</span>p.value),]</span>
-<span id="cb31-2"><a href="chapDEG.html#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(ranked[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,])</span></code></pre></div>
-<pre><code>##              statistic        dm      p.value
-## 1449383_at   -48.61014 -2.044928 3.276616e-13
-## 1451421_a_at -40.72173 -1.445182 1.909283e-12
-## 1415929_at   -39.77036 -0.812879 2.415238e-12
-## 1450826_a_at  37.62239  5.147992 4.193941e-12
-## 1448303_at   -31.92365 -2.283765 2.140612e-11</code></pre>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="chapDEG.html#cb31-1" tabindex="-1"></a>ranked <span class="ot">&lt;-</span>teststat[<span class="fu">order</span>(teststat<span class="sc">$</span>p.value),]</span>
+<span id="cb31-2"><a href="chapDEG.html#cb31-2" tabindex="-1"></a><span class="fu">print</span>(ranked[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,])</span></code></pre></div>
+<pre><code>##              statistic       dm    p.value
+## 1449383_at     -48.610 -2.04493 3.2766e-13
+## 1451421_a_at   -40.722 -1.44518 1.9093e-12
+## 1415929_at     -39.770 -0.81288 2.4152e-12
+## 1450826_a_at    37.622  5.14799 4.1939e-12
+## 1448303_at     -31.924 -2.28376 2.1406e-11</code></pre>
 <p>Ahora podríamos seleccionar, por ejemplo los genes cuyo p–valor fuera inferior a 0.01</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="chapDEG.html#cb33-1" aria-hidden="true" tabindex="-1"></a>selectedTeststat <span class="ot">&lt;-</span> ranked[ranked<span class="sc">$</span>p.value <span class="sc">&lt;</span> <span class="fl">0.01</span>,]</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="chapDEG.html#cb33-1" tabindex="-1"></a>selectedTeststat <span class="ot">&lt;-</span> ranked[ranked<span class="sc">$</span>p.value <span class="sc">&lt;</span> <span class="fl">0.01</span>,]</span></code></pre></div>
 <p>Esto deja un total de <code>{r} dim(selectedTeststat)[1]</code> con un p–valor inferior a 0.01</p>
 <div id="volcano-plots" class="section level3" number="6.3.1">
 <h3><span class="header-section-number">6.3.1</span> “Volcano plots”</h3>
@@ -535,30 +546,30 @@ de manera que la regulación positiva o negativa se representa de forma simétri
 de forma que los p–valores más pequeños aparecen mayores.</p>
 <p>Así pues puede considerarse que el primer eje indica impacto biológico del cambio (a más efecto biológico mayor “fold-change”) y el segundo muestra la evidencia estadística, o la fiabilidad del cambio.</p>
 <p>Como veremos más adelante en esta sección, el paquete <code>limma</code> permite realizar volcano-plots de forma sencilla a partir de los resultados de un anàlisis, pero para hacer un volcano plot tan sólo se necesita una lista de p-valores y los efectos (“fold-change”) asociados.</p>
-<p>La figura <span class="citation">(<a href="#ref-ref" role="doc-biblioref"><strong>ref?</strong></a>)</span>(fig:volcano0) muestra un “volcano-plot” para este ejemplo de los “celltypes” para la comparación “LPS” frente a “Medium.”</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="chapDEG.html#cb34-1" aria-hidden="true" tabindex="-1"></a>FC <span class="ot">&lt;-</span> teststat<span class="sc">$</span>statistic</span>
-<span id="cb34-2"><a href="chapDEG.html#cb34-2" aria-hidden="true" tabindex="-1"></a>pVal<span class="ot">&lt;-</span>teststat<span class="sc">$</span>p.value</span>
-<span id="cb34-3"><a href="chapDEG.html#cb34-3" aria-hidden="true" tabindex="-1"></a>Y <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fu">log</span>(pVal)</span>
-<span id="cb34-4"><a href="chapDEG.html#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Y<span class="sc">~</span>FC)</span></code></pre></div>
+<p>La figura <span class="citation">(<a href="#ref-ref"><strong>ref?</strong></a>)</span>(fig:volcano0) muestra un “volcano-plot” para este ejemplo de los “celltypes” para la comparación “LPS” frente a “Medium”.</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="chapDEG.html#cb34-1" tabindex="-1"></a>FC <span class="ot">&lt;-</span> teststat<span class="sc">$</span>statistic</span>
+<span id="cb34-2"><a href="chapDEG.html#cb34-2" tabindex="-1"></a>pVal<span class="ot">&lt;-</span>teststat<span class="sc">$</span>p.value</span>
+<span id="cb34-3"><a href="chapDEG.html#cb34-3" tabindex="-1"></a>Y <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fu">log</span>(pVal)</span>
+<span id="cb34-4"><a href="chapDEG.html#cb34-4" tabindex="-1"></a><span class="fu">plot</span>(Y<span class="sc">~</span>FC)</span></code></pre></div>
 <p><img src="Analisis_de_Datos_de_Microarrays_y_otras_Omicas_files/figure-html/volcano0-1.png" width="672" /></p>
 <p>También podemos adaptar alguna función “ad-hoc” como la siguiente, tomada de :<a href=""></a></p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="chapDEG.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggrepel)</span>
-<span id="cb35-2"><a href="chapDEG.html#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="co"># plot adding up all layers we have seen so far</span></span>
-<span id="cb35-3"><a href="chapDEG.html#cb35-3" aria-hidden="true" tabindex="-1"></a>volcanoP<span class="ot">&lt;-</span> <span class="cf">function</span> (de,log2FoldChange,  pvalue, </span>
-<span id="cb35-4"><a href="chapDEG.html#cb35-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">diffexpressed=</span><span class="cn">NULL</span>, <span class="at">col=</span><span class="cn">NULL</span>, <span class="at">delabel=</span><span class="cn">NULL</span>){</span>
-<span id="cb35-5"><a href="chapDEG.html#cb35-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">data=</span>de, <span class="fu">aes</span>(<span class="at">x=</span>log2FoldChange, <span class="at">y=</span><span class="sc">-</span><span class="fu">log10</span>(pvalue), <span class="at">col=</span>diffexpressed, <span class="at">label=</span>delabel)) <span class="sc">+</span></span>
-<span id="cb35-6"><a href="chapDEG.html#cb35-6" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb35-7"><a href="chapDEG.html#cb35-7" aria-hidden="true" tabindex="-1"></a>        <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb35-8"><a href="chapDEG.html#cb35-8" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_text_repel</span>() <span class="sc">+</span></span>
-<span id="cb35-9"><a href="chapDEG.html#cb35-9" aria-hidden="true" tabindex="-1"></a>        <span class="fu">scale_color_manual</span>(<span class="at">values=</span><span class="fu">c</span>(<span class="st">&quot;blue&quot;</span>, <span class="st">&quot;black&quot;</span>, <span class="st">&quot;red&quot;</span>)) <span class="sc">+</span></span>
-<span id="cb35-10"><a href="chapDEG.html#cb35-10" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_vline</span>(<span class="at">xintercept=</span><span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.6</span>, <span class="fl">0.6</span>), <span class="at">col=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
-<span id="cb35-11"><a href="chapDEG.html#cb35-11" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_hline</span>(<span class="at">yintercept=</span><span class="sc">-</span><span class="fu">log10</span>(<span class="fl">0.05</span>), <span class="at">col=</span><span class="st">&quot;red&quot;</span>)</span>
-<span id="cb35-12"><a href="chapDEG.html#cb35-12" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb35-13"><a href="chapDEG.html#cb35-13" aria-hidden="true" tabindex="-1"></a>diffexpressed <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">abs</span>(teststat<span class="sc">$</span>statistic)<span class="sc">&gt;</span><span class="dv">10</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>)</span>
-<span id="cb35-14"><a href="chapDEG.html#cb35-14" aria-hidden="true" tabindex="-1"></a>label <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="fu">length</span>(diffexpressed))</span>
-<span id="cb35-15"><a href="chapDEG.html#cb35-15" aria-hidden="true" tabindex="-1"></a>label[diffexpressed] <span class="ot">&lt;-</span> <span class="fu">rownames</span>(teststat)[diffexpressed]</span>
-<span id="cb35-16"><a href="chapDEG.html#cb35-16" aria-hidden="true" tabindex="-1"></a><span class="fu">volcanoP</span> (<span class="at">de=</span>teststat, <span class="at">log2FoldChange=</span>teststat<span class="sc">$</span>statistic,  <span class="at">pvalue=</span>teststat<span class="sc">$</span>p.value,</span>
-<span id="cb35-17"><a href="chapDEG.html#cb35-17" aria-hidden="true" tabindex="-1"></a>          <span class="at">diffexpressed =</span> diffexpressed, <span class="at">delabel =</span> label)</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="chapDEG.html#cb35-1" tabindex="-1"></a><span class="fu">library</span>(ggrepel)</span>
+<span id="cb35-2"><a href="chapDEG.html#cb35-2" tabindex="-1"></a><span class="co"># plot adding up all layers we have seen so far</span></span>
+<span id="cb35-3"><a href="chapDEG.html#cb35-3" tabindex="-1"></a>volcanoP<span class="ot">&lt;-</span> <span class="cf">function</span> (de,log2FoldChange,  pvalue, </span>
+<span id="cb35-4"><a href="chapDEG.html#cb35-4" tabindex="-1"></a>                     <span class="at">diffexpressed=</span><span class="cn">NULL</span>, <span class="at">col=</span><span class="cn">NULL</span>, <span class="at">delabel=</span><span class="cn">NULL</span>){</span>
+<span id="cb35-5"><a href="chapDEG.html#cb35-5" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">data=</span>de, <span class="fu">aes</span>(<span class="at">x=</span>log2FoldChange, <span class="at">y=</span><span class="sc">-</span><span class="fu">log10</span>(pvalue), <span class="at">col=</span>diffexpressed, <span class="at">label=</span>delabel)) <span class="sc">+</span></span>
+<span id="cb35-6"><a href="chapDEG.html#cb35-6" tabindex="-1"></a>        <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb35-7"><a href="chapDEG.html#cb35-7" tabindex="-1"></a>        <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb35-8"><a href="chapDEG.html#cb35-8" tabindex="-1"></a>        <span class="fu">geom_text_repel</span>() <span class="sc">+</span></span>
+<span id="cb35-9"><a href="chapDEG.html#cb35-9" tabindex="-1"></a>        <span class="fu">scale_color_manual</span>(<span class="at">values=</span><span class="fu">c</span>(<span class="st">&quot;blue&quot;</span>, <span class="st">&quot;black&quot;</span>, <span class="st">&quot;red&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb35-10"><a href="chapDEG.html#cb35-10" tabindex="-1"></a>        <span class="fu">geom_vline</span>(<span class="at">xintercept=</span><span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.6</span>, <span class="fl">0.6</span>), <span class="at">col=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
+<span id="cb35-11"><a href="chapDEG.html#cb35-11" tabindex="-1"></a>        <span class="fu">geom_hline</span>(<span class="at">yintercept=</span><span class="sc">-</span><span class="fu">log10</span>(<span class="fl">0.05</span>), <span class="at">col=</span><span class="st">&quot;red&quot;</span>)</span>
+<span id="cb35-12"><a href="chapDEG.html#cb35-12" tabindex="-1"></a>}</span>
+<span id="cb35-13"><a href="chapDEG.html#cb35-13" tabindex="-1"></a>diffexpressed <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">abs</span>(teststat<span class="sc">$</span>statistic)<span class="sc">&gt;</span><span class="dv">10</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>)</span>
+<span id="cb35-14"><a href="chapDEG.html#cb35-14" tabindex="-1"></a>label <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="fu">length</span>(diffexpressed))</span>
+<span id="cb35-15"><a href="chapDEG.html#cb35-15" tabindex="-1"></a>label[diffexpressed] <span class="ot">&lt;-</span> <span class="fu">rownames</span>(teststat)[diffexpressed]</span>
+<span id="cb35-16"><a href="chapDEG.html#cb35-16" tabindex="-1"></a><span class="fu">volcanoP</span> (<span class="at">de=</span>teststat, <span class="at">log2FoldChange=</span>teststat<span class="sc">$</span>statistic,  <span class="at">pvalue=</span>teststat<span class="sc">$</span>p.value,</span>
+<span id="cb35-17"><a href="chapDEG.html#cb35-17" tabindex="-1"></a>          <span class="at">diffexpressed =</span> diffexpressed, <span class="at">delabel =</span> label)</span></code></pre></div>
 </div>
 <div id="potencia-y-tamaño-muestral" class="section level3" number="6.3.2">
 <h3><span class="header-section-number">6.3.2</span> Potencia y tamaño muestral</h3>
@@ -574,7 +585,7 @@ probabilidad de error de tipo I.</p>
 <p>En el caso de los microarrays se han desarrollado diversas fórmulas
 para realizar cálculos de este tipo, pero la compleja estructura de
 los datos microarrays hace que sean relativamente <em>discutibles</em>.</p>
-<p>Simon (<span class="citation"><a href="#ref-Simon:2003" role="doc-biblioref">Simon et al.</a> (<a href="#ref-Simon:2003" role="doc-biblioref">2003</a>)</span>) sugiere la fórmula siguiente que es una
+<p>Simon (<span class="citation">Simon et al. (<a href="#ref-Simon:2003">2003</a>)</span>) sugiere la fórmula siguiente que es una
 generalización de las fórmulas clásicas para problemas de dos
 muestras:</p>
 <p>El tamaño total requerido para detectar genes diferencialmente expresados en al menos una diferencia <span class="math inline">\(\delta\)</span> con una
@@ -587,7 +598,7 @@ desviación estandar de un gen dentro de una clase (de un grupo). Obviamente <em
 sin una muestra piloto con que estimarla el calculo e más imaginativo que realista.</p>
 <p>Además de esto, el número de arrays usualmente recomendado queda
 lejos de la cantidad asequible para la mayor parte de los experimentos
-(<span class="citation"><a href="#ref-lee:2002" role="doc-biblioref">Lee and Whitmore</a> (<a href="#ref-lee:2002" role="doc-biblioref">2002</a>)</span>,<span class="citation"><a href="#ref-Tibshirani:2006" role="doc-biblioref">Tibshirani</a> (<a href="#ref-Tibshirani:2006" role="doc-biblioref">2006</a>)</span>). Lo que muchos usuarios hacen a la
+(<span class="citation">Lee and Whitmore (<a href="#ref-lee:2002">2002</a>)</span>,<span class="citation">Tibshirani (<a href="#ref-Tibshirani:2006">2006</a>)</span>). Lo que muchos usuarios hacen a la
 práctica, es buscar un equilibrio entre los costes y la
 reproducibilidad y, de hecho, tienden a usar una cantidad fija de
 arrays tal como 3 o 5 sin consideraciones adicionales.</p>
@@ -605,11 +616,11 @@ erroneamente al menos un gen diferencialmente expresado va en aumento,
 y si no se realiza algún tipo de ajuste el número de falsos
 positivos será tanto más alto cuantos más genes estemos
 analizando.</p>
-<p>Hay muchas formas de intentar controlar estas probabilidades de error y puede verse un excelente revisión en Dudoit <span class="citation"><a href="#ref-Dudoit:2003" role="doc-biblioref">Dudoit, Shaffer, and Boldrick</a> (<a href="#ref-Dudoit:2003" role="doc-biblioref">2003</a>)</span>).</p>
+<p>Hay muchas formas de intentar controlar estas probabilidades de error y puede verse un excelente revisión en Dudoit <span class="citation">Dudoit, Shaffer, and Boldrick (<a href="#ref-Dudoit:2003">2003</a>)</span>).</p>
 <p>De forma simplificada consideramos las dos aproximaciones más utilizadas.</p>
 <p>Una posibilidad es mirar de controlar la probabilidad de obtener
 <em>al menos un falso positivo</em> o “Family-wise-error-rate
-(FWER).” El más popular de estos métodos de control es la
+(FWER)”. El más popular de estos métodos de control es la
 corrección de Bonferroni, consistente en multiplicar el p–valor por
 el número de tests realizados. La misma Dudoit y muchos otros
 autores han desarrollado variantes de los métodos clásicos de
@@ -644,30 +655,30 @@ apropiado.</p>
 usando el paquete <tt>multtest</tt> de Bioconductor para ajustar por
 los métodos de Bonferroni (FWER), Benjamini &amp; Hochberg (FDR) o
 Benjamini &amp; Yekutieli (BY, FDR).</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="chapDEG.html#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">require</span>(multtest))</span>
-<span id="cb36-2"><a href="chapDEG.html#cb36-2" aria-hidden="true" tabindex="-1"></a>procs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Bonferroni&quot;</span>,<span class="st">&quot;BH&quot;</span>, <span class="st">&quot;BY&quot;</span>)</span>
-<span id="cb36-3"><a href="chapDEG.html#cb36-3" aria-hidden="true" tabindex="-1"></a>adjPvalues <span class="ot">&lt;-</span> <span class="fu">mt.rawp2adjp</span>(teststat<span class="sc">$</span>p.value, procs)</span>
-<span id="cb36-4"><a href="chapDEG.html#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(adjPvalues)</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="chapDEG.html#cb36-1" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">require</span>(multtest))</span>
+<span id="cb36-2"><a href="chapDEG.html#cb36-2" tabindex="-1"></a>procs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Bonferroni&quot;</span>,<span class="st">&quot;BH&quot;</span>, <span class="st">&quot;BY&quot;</span>)</span>
+<span id="cb36-3"><a href="chapDEG.html#cb36-3" tabindex="-1"></a>adjPvalues <span class="ot">&lt;-</span> <span class="fu">mt.rawp2adjp</span>(teststat<span class="sc">$</span>p.value, procs)</span>
+<span id="cb36-4"><a href="chapDEG.html#cb36-4" tabindex="-1"></a><span class="fu">names</span>(adjPvalues)</span></code></pre></div>
 <pre><code>## [1] &quot;adjp&quot;    &quot;index&quot;   &quot;h0.ABH&quot;  &quot;h0.TSBH&quot;</code></pre>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="chapDEG.html#cb38-1" aria-hidden="true" tabindex="-1"></a>ranked.adjusted<span class="ot">&lt;-</span><span class="fu">cbind</span>(ranked, adjPvalues<span class="sc">$</span>adjp)</span>
-<span id="cb38-2"><a href="chapDEG.html#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(ranked.adjusted)</span></code></pre></div>
-<pre><code>##              statistic        dm      p.value         rawp   Bonferroni
-## 1449383_at   -48.61014 -2.044928 3.276616e-13 3.276616e-13 3.359842e-09
-## 1451421_a_at -40.72173 -1.445182 1.909283e-12 1.909283e-12 1.957778e-08
-## 1415929_at   -39.77036 -0.812879 2.415238e-12 2.415238e-12 2.476585e-08
-## 1450826_a_at  37.62239  5.147992 4.193941e-12 4.193941e-12 4.300467e-08
-## 1448303_at   -31.92365 -2.283765 2.140612e-11 2.140612e-11 2.194983e-07
-## 1418645_at   -28.74611 -4.126867 6.044555e-11 6.044555e-11 6.198087e-07
-##                        BH           BY
-## 1449383_at   3.359842e-09 3.296908e-08
-## 1451421_a_at 8.255283e-09 8.100651e-08
-## 1415929_at   8.255283e-09 8.100651e-08
-## 1450826_a_at 1.075117e-08 1.054978e-07
-## 1448303_at   4.389966e-08 4.307737e-07
-## 1418645_at   1.033014e-07 1.013665e-06</code></pre>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="chapDEG.html#cb38-1" tabindex="-1"></a>ranked.adjusted<span class="ot">&lt;-</span><span class="fu">cbind</span>(ranked, adjPvalues<span class="sc">$</span>adjp)</span>
+<span id="cb38-2"><a href="chapDEG.html#cb38-2" tabindex="-1"></a><span class="fu">head</span>(ranked.adjusted)</span></code></pre></div>
+<pre><code>##              statistic       dm    p.value       rawp Bonferroni         BH
+## 1449383_at     -48.610 -2.04493 3.2766e-13 3.2766e-13 3.3598e-09 3.3598e-09
+## 1451421_a_at   -40.722 -1.44518 1.9093e-12 1.9093e-12 1.9578e-08 8.2553e-09
+## 1415929_at     -39.770 -0.81288 2.4152e-12 2.4152e-12 2.4766e-08 8.2553e-09
+## 1450826_a_at    37.622  5.14799 4.1939e-12 4.1939e-12 4.3005e-08 1.0751e-08
+## 1448303_at     -31.924 -2.28376 2.1406e-11 2.1406e-11 2.1950e-07 4.3900e-08
+## 1418645_at     -28.746 -4.12687 6.0446e-11 6.0446e-11 6.1981e-07 1.0330e-07
+##                      BY
+## 1449383_at   3.2969e-08
+## 1451421_a_at 8.1007e-08
+## 1415929_at   8.1007e-08
+## 1450826_a_at 1.0550e-07
+## 1448303_at   4.3077e-07
+## 1418645_at   1.0137e-06</code></pre>
 <p>Si seleccionamos los genes en base a su p–valor ajustado por ejemplo por le método de Banjamini y Yekutieli se obtienen los siguientes genes</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="chapDEG.html#cb40-1" aria-hidden="true" tabindex="-1"></a>selectedAdjusted<span class="ot">&lt;-</span>ranked.adjusted[ranked.adjusted<span class="sc">$</span>BY<span class="sc">&lt;</span><span class="fl">0.001</span>,]</span>
-<span id="cb40-2"><a href="chapDEG.html#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(selectedAdjusted)</span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="chapDEG.html#cb40-1" tabindex="-1"></a>selectedAdjusted<span class="ot">&lt;-</span>ranked.adjusted[ranked.adjusted<span class="sc">$</span>BY<span class="sc">&lt;</span><span class="fl">0.001</span>,]</span>
+<span id="cb40-2"><a href="chapDEG.html#cb40-2" tabindex="-1"></a><span class="fu">nrow</span>(selectedAdjusted)</span></code></pre></div>
 <pre><code>## [1] 420</code></pre>
 </div>
 <div id="modelos-lineales-para-la-selección-de-genes-limma" class="section level2" number="6.5">
@@ -684,7 +695,7 @@ usados en estadística y ha sido popularizado en el campo de microarrays gracias
 el paquete <tt>limma</tt> que se ha convertido en la herramiente más utilizada para el análisis de microarrays.</p>
 <div id="el-modelo-lineal-general" class="section level3" number="6.5.1">
 <h3><span class="header-section-number">6.5.1</span> El modelo lineal general</h3>
-<p>El modelo lineal (ver por ejemplo Faraway, <span class="citation"><a href="#ref-Faraway:2004" role="doc-biblioref">Faraway</a> (<a href="#ref-Faraway:2004" role="doc-biblioref">2004</a>)</span>) es un marco general para la modelización y el análisis de
+<p>El modelo lineal (ver por ejemplo Faraway, <span class="citation">Faraway (<a href="#ref-Faraway:2004">2004</a>)</span>) es un marco general para la modelización y el análisis de
 datos estadística.</p>
 <p>EL método consiste en asumir una relación lineal entre los valores observados de una variable <em>respuesta</em> y las
 condiciones experimentales. A partir de aquí se obtienen estimadores para los parámetros del modelo y de sus errores
@@ -708,7 +719,7 @@ un par de ellas.</p>
 <h4><span class="header-section-number">6.5.2.1</span> Ejemplo 1: Experimento “Swirl–Zebrafish”</h4>
 <p>Swirl es una mutación puntual que provoca defectos en la organización del embrión en desarrollo a lo largo de su eje
 dorsal-ventral. Como resultado, algunos tipos celulares se reducen y otros se expanden. Un objetivo de este trabajo fue
-identificar los genes con expresión alterada en el mutante Swirl en comparación con “wild zebrafish.”</p>
+identificar los genes con expresión alterada en el mutante Swirl en comparación con “wild zebrafish”.</p>
 <ol style="list-style-type: decimal">
 <li>El diseño experimental para este estudio fue el siguiente:</li>
 </ol>
@@ -752,8 +763,9 @@ identificar los genes con expresión alterada en el mutante Swirl en comparació
 <li>El modelo lineal derivado del diseño anterior fue:</li>
 </ol>
 <ul>
-<li>El parámetro de interés es: <span class="math inline">\(\alpha= \mathbf{E}\left (log\frac{S}{W}\right )\)</span> .</li>
-<li>Las muestras 1 y 3 estan marcadas con : S (Verde=“Green”) y W (Rojo=“Red”), y las muestras 2 y 4 son “dye-swapped.”</li>
+<li>El parámetro de interés es: <span class="math inline">\(\alpha=
+\mathbf{E}\left (log\frac{S}{W}\right )\)</span> .</li>
+<li>Las muestras 1 y 3 estan marcadas con : S (Verde=“Green”) y W (Rojo=“Red”), y las muestras 2 y 4 son “dye-swapped”.</li>
 <li>El modelo, <span class="math inline">\(\mathbf{y=X\alpha+\varepsilon}\)</span>, es:</li>
 </ul>
 <p><span class="math display">\[
@@ -808,7 +820,7 @@ comparaciones son las de mayor interés.</p>
 <li>Array de un color: hibridar mutantes y “wild types” separadamente.</li>
 </ul>
 <ul>
-<li>Permite la comparación directa de Mutantes vs “Wild.”</li>
+<li>Permite la comparación directa de Mutantes vs “Wild”.</li>
 <li>Número de parámetros a estimar es 3, relación intuitiva
 entre el número de parámetros y mutantes.</li>
 <li>Las comparaciones de Mutante vs Mutante son menos eficientes.</li>
@@ -867,7 +879,7 @@ y_6
 \alpha_3
 \end{array}
 \right)
- + \left(
++ \left(
 \begin{array}{r}
 \varepsilon_1 \\
 \varepsilon_2 \\
@@ -907,7 +919,9 @@ y_6
 \alpha_1= \mathbf{E}\left (log\frac{M_1}{M_2}\right ),\
 \alpha_2= \mathbf{E}\left (log\frac{M_2}{M_3}\right ).
 \]</span>
-<span class="math inline">\(\alpha_3\)</span> no es necesaria: <span class="math inline">\(\log \left( \frac{M_1}{M_3}\right )=\log\left(\frac{M_1}{M_2}\right )-\log\left(\frac{M_2}{M_3}\right)\)</span>.</p></li>
+<span class="math inline">\(\alpha_3\)</span> no es necesaria: <span class="math inline">\(\log \left( \frac{M_1}{M_3}\right
+)=\log\left(\frac{M_1}{M_2}\right
+)-\log\left(\frac{M_2}{M_3}\right)\)</span>.</p></li>
 <li><p><em>Contrastes</em>: Algunas de las comparaciones deseadas son precisamente los parámetros.
 <span class="math display">\[\begin{array}{ccc}
 \beta_1 &amp;=&amp; \alpha_1,\\
@@ -940,7 +954,7 @@ y_6
 \alpha_2 \\
 \end{array}
 \right)
- + \left(
++ \left(
 \begin{array}{r}
 \varepsilon_1 \\
 \varepsilon_2 \\
@@ -1027,7 +1041,7 @@ y_8
 \alpha_4
 \end{array}
 \right)
- + \left(
++ \left(
 \begin{array}{r}
 \varepsilon_1 \\
 \varepsilon_2 \\
@@ -1250,7 +1264,7 @@ y_{12}
 \alpha_4
 \end{array}
 \right)
- + \left(
++ \left(
 \begin{array}{r}
 \varepsilon_1 \\
 \varepsilon_2 \\
@@ -1264,7 +1278,7 @@ y_{12}
 \right)
 \]</span></p>
 <p><span class="math display">\[
- \left(
+\left(
 \begin{array}{r}
 \beta_1^1 \\
 \beta_2^1 \\
@@ -1293,13 +1307,15 @@ y_{12}
 <span class="math display">\[
 \mathbf{E(y_g)=X\alpha_g},\quad \text{var}(y_g)=W_g\sigma_g,
 \]</span>
-es posible usar <em>la teoría estándar del modelo lineal</em> (ver <span class="citation">(<a href="#ref-faraway:2004" role="doc-biblioref"><strong>faraway:2004?</strong></a>)</span>)
+es posible usar <em>la teoría estándar del modelo lineal</em> (ver <span class="citation">(<a href="#ref-faraway:2004"><strong>faraway:2004?</strong></a>)</span>)
 para obtener:</p>
 <ul>
 <li>Estimación de los parámetros: <span class="math inline">\(\hat \alpha_g( \approx \mathbf{\alpha})\)</span>.</li>
-<li>Desviación estándar de las estimaciones: <span class="math inline">\(\hat \sigma_g=s_g( \approx \sigma)\)</span>.</li>
+<li>Desviación estándar de las estimaciones: <span class="math inline">\(\hat \sigma_g=s_g( \approx
+\sigma)\)</span>.</li>
 <li>Error estándar de las estimaciones:<span class="math inline">\(\widehat {\text{var}\hat \alpha_g}=V_g\,s_g^2\)</span>.
-Estas estimaciones son la base para realizar inferencia sobre <span class="math inline">\(\alpha\)</span> i.e. test <span class="math inline">\(H_0:\ \alpha =0?\)</span>, basado en el hecho que:
+Estas estimaciones son la base para realizar inferencia sobre <span class="math inline">\(\alpha\)</span> i.e. test <span class="math inline">\(H_0:\ \alpha
+=0?\)</span>, basado en el hecho que:
 <span class="math display">\[
 t_{gj}=\frac{\alpha_{gj}}{s_g\sqrt{v_{gj}}}\sim \text{Distribución de Student}.
 \]</span>
@@ -1317,17 +1333,17 @@ parametrización se ha adoptado, a pesar de que distintas parametrizaciones pied
 </ul>
 <p>Por otro lado hay que tener en cuenta que, si las suposiciones no se cumplen, entonces las conclusiones deben tomarse con precaución.</p>
 <p>Y lo que es peor, aún siendo válidas las suposiciones del modelo los resultados pueden verse afectados por el tamaño de la muestra de forma que, en muestras pequeñas donde pueden haber variaciones más grandes es fácil que se obtengan valores <span class="math inline">\(t\)</span> no significativos o, por el contrario, excesivamente significativos (si la variación es muy reducida).</p>
-<p>La metodología desarrollada por Smyth (<span class="citation"><a href="#ref-Smyth:2005" role="doc-biblioref">Smyth, Michaud, and Scott</a> (<a href="#ref-Smyth:2005" role="doc-biblioref">2005</a>)</span>) basada en los resultados de L”onsted &amp; Speed (<span class="citation"><a href="#ref-Speed:2003" role="doc-biblioref">Speed</a> (<a href="#ref-Speed:2003" role="doc-biblioref">2003</a>)</span>) está dirigida a abordar cómo hacer frente a estas debilidades.</p>
+<p>La metodología desarrollada por Smyth (<span class="citation">Smyth, Michaud, and Scott (<a href="#ref-Smyth:2005">2005</a>)</span>) basada en los resultados de L”onsted &amp; Speed (<span class="citation">Speed (<a href="#ref-Speed:2003">2003</a>)</span>) está dirigida a abordar cómo hacer frente a estas debilidades.</p>
 </div>
 </div>
 <div id="modelos-lineales-para-microarrays" class="section level3" number="6.5.5">
 <h3><span class="header-section-number">6.5.5</span> Modelos lineales para Microarrays</h3>
-<p>Smyth (<span class="citation"><a href="#ref-Smyth:2005" role="doc-biblioref">Smyth, Michaud, and Scott</a> (<a href="#ref-Smyth:2005" role="doc-biblioref">2005</a>)</span>) considera el problema de la identificación de genes que se expresan diferencialmente en las condiciones
+<p>Smyth (<span class="citation">Smyth, Michaud, and Scott (<a href="#ref-Smyth:2005">2005</a>)</span>) considera el problema de la identificación de genes que se expresan diferencialmente en las condiciones
 especificadas en el diseño de experimentos de microarrays. Como hemos dicho repetídamente la variabilidad de los valores
 de expresión difiere entre genes, pero la naturaleza paralela de la inferencia en microarrays sugiere la posibilidad de usar
 la información <em>de todos los genes a la vez</em> para mejorar la estimación de los parámetros, lo que puede llevar a
 una inferencia más fiable.</p>
-<p>Básicamente lo que propone Smyth (<span class="citation"><a href="#ref-Smyth:2005" role="doc-biblioref">Smyth, Michaud, and Scott</a> (<a href="#ref-Smyth:2005" role="doc-biblioref">2005</a>)</span>) es una solución en tres pasos:</p>
+<p>Básicamente lo que propone Smyth (<span class="citation">Smyth, Michaud, and Scott (<a href="#ref-Smyth:2005">2005</a>)</span>) es una solución en tres pasos:</p>
 <ul>
 <li>Se plantea el problema como un model lineal con una componente bayesiana ya que se supone que los mismos parámetros a
 estimar son variables (no constantes) con distribuciones <em>prior</em> que se estimaran a partir de la información de todos los
@@ -1338,8 +1354,8 @@ estos estimadores tienen un comportamiento robusto incluso para pequeño número
 frente a la de que no lo esté y se asocia este valor denominado estadístico <span class="math inline">\(B\)</span> con un estadístico <span class="math inline">\(t\)</span> moderado y su
 p–valor.
 <span class="math display">\[
- B=\log \frac{P[\text{Afectado}|M_{ij}]}{P[\text{No
- Afectado}|M_{ij}]},
+B=\log \frac{P[\text{Afectado}|M_{ij}]}{P[\text{No
+Afectado}|M_{ij}]},
 \]</span>
 gen=i <span class="math inline">\((i=1...N)\)</span>, réplica=j <span class="math inline">\((j=1,...,n)\)</span>.</li>
 </ul>
@@ -1370,13 +1386,13 @@ gen esté diferencialmente expresado. A mayor valor negativo, más probable es q
 ## attr(,&quot;contrasts&quot;)$lev
 ## [1] &quot;contr.treatment&quot;</code></pre>
 <p>Usando los nombres de las columnas de la matriz de diseño creamos los contrastes</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="chapDEG.html#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(limma)</span>
-<span id="cb43-2"><a href="chapDEG.html#cb43-2" aria-hidden="true" tabindex="-1"></a>cont.matrix <span class="ot">&lt;-</span> <span class="fu">makeContrasts</span> (</span>
-<span id="cb43-3"><a href="chapDEG.html#cb43-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">LPS.in.AGED=</span>(Aged.LPS<span class="sc">-</span>Aged.MED),</span>
-<span id="cb43-4"><a href="chapDEG.html#cb43-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">LPS.in.YOUNG=</span>(Young.LPS<span class="sc">-</span>Young.MED),</span>
-<span id="cb43-5"><a href="chapDEG.html#cb43-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">AGE=</span>(Aged.MED<span class="sc">-</span>Young.MED),</span>
-<span id="cb43-6"><a href="chapDEG.html#cb43-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">levels=</span>design)</span>
-<span id="cb43-7"><a href="chapDEG.html#cb43-7" aria-hidden="true" tabindex="-1"></a>cont.matrix</span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="chapDEG.html#cb43-1" tabindex="-1"></a><span class="fu">require</span>(limma)</span>
+<span id="cb43-2"><a href="chapDEG.html#cb43-2" tabindex="-1"></a>cont.matrix <span class="ot">&lt;-</span> <span class="fu">makeContrasts</span> (</span>
+<span id="cb43-3"><a href="chapDEG.html#cb43-3" tabindex="-1"></a>      <span class="at">LPS.in.AGED=</span>(Aged.LPS<span class="sc">-</span>Aged.MED),</span>
+<span id="cb43-4"><a href="chapDEG.html#cb43-4" tabindex="-1"></a>      <span class="at">LPS.in.YOUNG=</span>(Young.LPS<span class="sc">-</span>Young.MED),</span>
+<span id="cb43-5"><a href="chapDEG.html#cb43-5" tabindex="-1"></a>      <span class="at">AGE=</span>(Aged.MED<span class="sc">-</span>Young.MED),</span>
+<span id="cb43-6"><a href="chapDEG.html#cb43-6" tabindex="-1"></a>      <span class="at">levels=</span>design)</span>
+<span id="cb43-7"><a href="chapDEG.html#cb43-7" tabindex="-1"></a>cont.matrix</span></code></pre></div>
 <pre><code>##            Contrasts
 ## Levels      LPS.in.AGED LPS.in.YOUNG AGE
 ##   Aged.LPS            1            0   0
@@ -1397,27 +1413,27 @@ utilizan para ordenar los genes de mas a menos diferencialmente
 expresados.</p>
 <p>A fin de controlar el porcentaje de falsos positivos que puedan resultar del alto numero de contrastes realizados simultaneamente
 los p–valores se ajustan de forma que tengamos control sobre la tasa de falsos positivos utilizando el metodo
-de Benjamini y Hochberg (<span class="citation"><a href="#ref-Benjamini&amp;Hochberg95" role="doc-biblioref">Benjamini and Hochberg</a> (<a href="#ref-Benjamini&amp;Hochberg95" role="doc-biblioref">1995</a>)</span>).</p>
+de Benjamini y Hochberg (<span class="citation">Benjamini and Hochberg (<a href="#ref-Benjamini&amp;Hochberg95">1995</a>)</span>).</p>
 <p>La funcion <tt>topTable</tt> genera para cada contraste una lista de genes
 ordenados de mas a menos diferencialmente expresados.</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="chapDEG.html#cb45-1" aria-hidden="true" tabindex="-1"></a>topTab_LPS.in.AGED <span class="ot">&lt;-</span> <span class="fu">topTable</span> (fit.main, <span class="at">number=</span><span class="fu">nrow</span>(fit.main), <span class="at">coef=</span><span class="st">&quot;LPS.in.AGED&quot;</span>, <span class="at">adjust=</span><span class="st">&quot;fdr&quot;</span>)</span>
-<span id="cb45-2"><a href="chapDEG.html#cb45-2" aria-hidden="true" tabindex="-1"></a>topTab_LPS.in.YOUNG <span class="ot">&lt;-</span> <span class="fu">topTable</span> (fit.main, <span class="at">number=</span><span class="fu">nrow</span>(fit.main), <span class="at">coef=</span><span class="st">&quot;LPS.in.YOUNG&quot;</span>, <span class="at">adjust=</span><span class="st">&quot;fdr&quot;</span>)</span>
-<span id="cb45-3"><a href="chapDEG.html#cb45-3" aria-hidden="true" tabindex="-1"></a>topTab_AGE  <span class="ot">&lt;-</span> <span class="fu">topTable</span> (fit.main, <span class="at">number=</span><span class="fu">nrow</span>(fit.main) , <span class="at">coef=</span><span class="st">&quot;AGE&quot;</span>, <span class="at">adjust=</span><span class="st">&quot;fdr&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="chapDEG.html#cb45-1" tabindex="-1"></a>topTab_LPS.in.AGED <span class="ot">&lt;-</span> <span class="fu">topTable</span> (fit.main, <span class="at">number=</span><span class="fu">nrow</span>(fit.main), <span class="at">coef=</span><span class="st">&quot;LPS.in.AGED&quot;</span>, <span class="at">adjust=</span><span class="st">&quot;fdr&quot;</span>)</span>
+<span id="cb45-2"><a href="chapDEG.html#cb45-2" tabindex="-1"></a>topTab_LPS.in.YOUNG <span class="ot">&lt;-</span> <span class="fu">topTable</span> (fit.main, <span class="at">number=</span><span class="fu">nrow</span>(fit.main), <span class="at">coef=</span><span class="st">&quot;LPS.in.YOUNG&quot;</span>, <span class="at">adjust=</span><span class="st">&quot;fdr&quot;</span>)</span>
+<span id="cb45-3"><a href="chapDEG.html#cb45-3" tabindex="-1"></a>topTab_AGE  <span class="ot">&lt;-</span> <span class="fu">topTable</span> (fit.main, <span class="at">number=</span><span class="fu">nrow</span>(fit.main) , <span class="at">coef=</span><span class="st">&quot;AGE&quot;</span>, <span class="at">adjust=</span><span class="st">&quot;fdr&quot;</span>)</span></code></pre></div>
 <p>Se puede visualizar los resultados mediante un <tt>volcano plot</tt> que, en este caso, representa en abscisas los cambios de expresión en escala logarítmica
 y en ordenadas el estadístico <span class="math inline">\(B\)</span> en vez de el “menos logaritmo” del p-valor.</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="chapDEG.html#cb46-1" aria-hidden="true" tabindex="-1"></a>coefnum <span class="ot">=</span> <span class="dv">1</span></span>
-<span id="cb46-2"><a href="chapDEG.html#cb46-2" aria-hidden="true" tabindex="-1"></a>opt <span class="ot">&lt;-</span> <span class="fu">par</span>(<span class="at">cex.lab =</span> <span class="fl">0.7</span>)</span>
-<span id="cb46-3"><a href="chapDEG.html#cb46-3" aria-hidden="true" tabindex="-1"></a><span class="fu">volcanoplot</span>(fit.main, <span class="at">coef=</span>coefnum, <span class="at">highlight=</span><span class="dv">10</span>, <span class="at">names=</span>fit.main<span class="sc">$</span>ID,</span>
-<span id="cb46-4"><a href="chapDEG.html#cb46-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">main=</span><span class="fu">paste</span>(<span class="st">&quot;Differentially expressed genes&quot;</span>,<span class="fu">colnames</span>(cont.matrix)[coefnum], <span class="at">sep=</span><span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>))</span>
-<span id="cb46-5"><a href="chapDEG.html#cb46-5" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="chapDEG.html#cb46-1" tabindex="-1"></a>coefnum <span class="ot">=</span> <span class="dv">1</span></span>
+<span id="cb46-2"><a href="chapDEG.html#cb46-2" tabindex="-1"></a>opt <span class="ot">&lt;-</span> <span class="fu">par</span>(<span class="at">cex.lab =</span> <span class="fl">0.7</span>)</span>
+<span id="cb46-3"><a href="chapDEG.html#cb46-3" tabindex="-1"></a><span class="fu">volcanoplot</span>(fit.main, <span class="at">coef=</span>coefnum, <span class="at">highlight=</span><span class="dv">10</span>, <span class="at">names=</span>fit.main<span class="sc">$</span>ID,</span>
+<span id="cb46-4"><a href="chapDEG.html#cb46-4" tabindex="-1"></a>            <span class="at">main=</span><span class="fu">paste</span>(<span class="st">&quot;Differentially expressed genes&quot;</span>,<span class="fu">colnames</span>(cont.matrix)[coefnum], <span class="at">sep=</span><span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>))</span>
+<span id="cb46-5"><a href="chapDEG.html#cb46-5" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>))</span></code></pre></div>
 <p><img src="Analisis_de_Datos_de_Microarrays_y_otras_Omicas_files/figure-html/volcano1-1.png" width="672" /></p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="chapDEG.html#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(opt)</span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="chapDEG.html#cb47-1" tabindex="-1"></a><span class="fu">par</span>(opt)</span></code></pre></div>
 
 </div>
 </div>
 </div>
 <h3> Referencias</h3>
-<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
 <div id="ref-Allison:2006a" class="csl-entry">
 Allison, David B, Xiangqin Cui, Grier P Page, and Mahyar Sabripour. 2006. <span>“Microarray Data Analysis: From Disarray to Consolidation and Consensus.”</span> <em>Nat Rev Genet</em> 7 (1): 55–65.
 </div>
@@ -1446,80 +1462,24 @@ Speed, T. 2003. <em><span class="nocase">Statistical Analysis of Gene Expression
 Tibshirani, R. 2006. <span>“<span class="nocase">A simple method for assessing sample sizes in microarray experiments</span>.”</span> <em>BMC Bioinformatics</em> 7 (1): 106.
 </div>
 </div>
-            </section>
+<p style="text-align: center;">
+<a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html"><button class="btn btn-default">Previous</button></a>
+<a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html"><button class="btn btn-default">Next</button></a>
+</p>
+</div>
+</div>
 
-          </div>
-        </div>
-      </div>
-<a href="exploración-de-los-datos-control-de-calidad-y-preprocesado.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="caso-estrógeno-selección-de-genes-diferencialmente-expresados-asociados-con-la-resistencia-a-estrógenos..html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
-    </div>
-  </div>
-<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
-<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+
+</div>
+
 <script>
-gitbook.require(["gitbook"], function(gitbook) {
-gitbook.start({
-"sharing": {
-"github": false,
-"facebook": true,
-"twitter": true,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": null,
-"text": null
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": null,
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "subsection"
-}
+
+// add bootstrap table styles to pandoc tables
+$(document).ready(function () {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
 });
-});
+
 </script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
 </body>
-
 </html>
